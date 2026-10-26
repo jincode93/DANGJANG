@@ -1,41 +1,80 @@
 ---
 name: review-eng
-description: DANGJANG 결과물을 시니어 엔지니어 관점에서 100점 만점으로 리뷰한다. 데이터 규칙, 엣지케이스와 실패 경로, 추천 로직의 타당성, 실현 가능성, 검증 가능성을 본다. "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng"에 쓴다.
-argument-hint: <리뷰할 파일 경로, 아티팩트 주소, 또는 "통합 데모">
+description: Engineering-manager review of a DANGJANG artifact (demo code, policy doc, PRD), adapted from gstack plan-eng-review. Runs a scope challenge, then architecture and data flow, code quality, tests, and performance, and maps failure modes with a critical-gap rule. Writes a Korean report to reviews/. Use for "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng".
+argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 ---
 
-# 엔지니어 리뷰
+<!-- Adapted from gstack plan-eng-review (MIT, Copyright (c) 2026 Garry Tan), commit 188e574. See .claude/skills/NOTICE.md. -->
 
-너는 이 기획을 받아서 실제로 만들 패션 커머스 회사의 시니어 엔지니어다. 특정 회사의 시스템을 전제하지 않고, 일반적인 커머스의 상품·주문 데이터를 쓴다고 본다. "이대로 만들면 어디서 틀리고, 무엇이 정해지지 않아 개발이 멈추나"를 판단한다.
-gstack `plan-eng-review`를 참고했다. 실패 경로를 끝까지 따라가고, 영향 범위와 되돌릴 수 있는지를 본다.
+# Engineering review
 
-## 진행
+You are the senior engineer who will build this for a general fashion commerce platform with ordinary product and order data. Find where it breaks and what is undecided enough to stop development.
 
-`docs/eval/review-process.md`의 순서를 따른다. 채점은 `docs/eval/rubric.md`의 **엔지니어 관점** 항목 E1~E5로 한다. 결과 파일의 관점 이름은 `eng`다.
+Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `eng`.
 
-## 엔지니어로서 보는 법
+## Evidence
 
-1. **코드를 근거로 본다.** 원본 코드(`prototype/README.md`의 위치)가 있으면 문서보다 코드에서 실제 동작을 확인한다. 문서와 코드가 다르면 그 차이 자체를 지적한다.
-2. **데이터 흐름을 따라간다.** 기준 옷 등록 → 저장 → 그룹 판정 → 상품과 비교 → 추천 사이즈 → 화면 표시. 각 단계에서 값이 비었거나, 틀렸거나, 바뀌면 무엇이 일어나는지 본다.
-3. **실패 경로마다 네 가지를 적는다.** 무엇이 원인인지, 언제 일어나는지, 코드가 어떻게 처리하는지, 사용자에게 무엇이 보이는지. 말없이 넘어가는 실패는 반드시 적는다.
-4. **영향 범위를 본다.** 값 하나가 틀렸을 때 화면 하나만 틀리는지, 그룹 전체 추천이 틀어지는지 구분한다.
-5. **근거 없는 숫자를 찾는다.** 가중치, 허용 오차(2cm, 4cm) 같은 값이 어디서 왔는지 확인한다. 근거가 없으면 E3에 반영한다.
-6. **확인 방법을 묻는다.** 동작이 맞다는 것을 무엇으로 확인할지(QA 시나리오, 측정 이벤트)가 있는지 본다.
+- When the prototype source is available (`prototype/README.md`), read the code. Code beats documents; when they disagree, the disagreement is a finding.
+- Cite `file:line` or a function name. Quote the requirement that motivates each finding.
+- Prototype-only stand-ins (fake payment, fake login, no server calls in the artifact) are `프로토타입 범위`: not penalized, but list what production needs under C4.
 
-## 결과 파일에 추가할 것
+## Thinking patterns (gstack eng-manager patterns, selected)
 
-"항목별 평가" 아래에 다음을 넣는다.
+- **Blast radius:** trace worst-case harm. One wrong value in a base garment skews every recommendation in its group.
+- **Reversibility:** prefer changes that are cheap to undo.
+- **Essential vs. accidental complexity:** is this a real problem or self-created?
+- **Boring by default:** proven approaches unless there is a reason.
+- **Make change easy first:** separate refactors from behavior changes.
+- **Explicit over clever.** Every behavior needs a check that would catch its regression.
+
+## Scope challenge (before rating; gstack Step 0)
+
+Answer in the report:
+
+1. What already solves each sub-problem (existing functions in the demo, platform data, known libraries)?
+2. What is the minimum change that achieves the goal? What can be deferred without blocking it?
+3. Complexity: count the screens, modules, and new data structures involved. Above 8 changed files or 2 new services, propose a smaller arrangement that keeps the same commitments.
+4. Search before building: for each new pattern (photo measurement, size matching), name the conventional approach and its known pitfalls.
+
+## Dimensions (rate each 0–10)
+
+| # | Dimension | gstack source | What a 10 looks like |
+|---|---|---|---|
+| E1 | Architecture and data flow | Section 1 Architecture, CEO Section 1 four paths | Data flow from registration → storage → group assignment → comparison → recommended size → display is diagrammed with all four paths: happy, missing input, empty input, upstream failure. Every stateful object has a state diagram with impossible transitions named (order: 주문 → 배송 완료 → 구매 확정 → 옷장에 담기 / 반품). |
+| E2 | Rules and edge cases | CEO Section 4 Data Flow & Interaction Edge Cases | Each input node has shadow paths: missing, wrong type or unit, out of range, duplicate, stale or partial. Interaction edge cases are covered: double submit, navigate away mid-entry, empty or very long closet, base garment changed or deleted. |
+| E3 | Code quality | Section 2 Code Quality | Logic is not duplicated across screens; errors are not swallowed; magic numbers (weights, the 2cm and 4cm thresholds) have a stated basis; no branch-heavy function without reason. |
+| E4 | Failure modes | Output "Failure modes", CEO Section 2 Error & Rescue Map | For every diagrammed path: a realistic failure, its handling, its test, and whether the user sees a clear message or nothing. |
+| E5 | Test plan | Section 3 Test review, CEO Section 6 | Every new flow has a happy-path, failure-path, and edge-case check. Answer: what check makes you confident shipping on a Friday night, and what would a hostile QA engineer try? For prototype work, a QA scenario list counts as the test plan. |
+| E6 | Feasibility and performance | Section 4 Performance, Distribution check | Production constraints are named: measurement data coverage, photo-measurement accuracy, order-data integration, privacy. Slow paths and large-closet behavior are estimated, or marked unknown. Never invent benchmarks. |
+
+## Required sections in the report
+
+Add these after the shared template's sections, in Korean:
 
 ```markdown
-## 실패 경로
-| 상황 | 원인 | 지금 처리 | 사용자에게 보이는 것 | 영향 범위 |
-|---|---|---|---|---|
+## 범위 점검
+- 이미 있는 것: ...
+- 최소한의 변경: ...
+- 복잡도: 화면 N개, 모듈 N개, 새 데이터 구조 N개 → <판단>
 
 ## 데이터 흐름
-<등록부터 추천 표시까지 단계를 화살표로 그린 짧은 ASCII 그림>
+<ASCII 그림: 정상 / 값 없음 / 빈 값 / 앞 단계 실패 경로>
+
+## 상태 그림
+<ASCII 그림: 주문과 옷장 상태, 일어나면 안 되는 전이>
+
+## 실패 경로
+| 경로 | 무엇이 잘못되나 | 지금 처리 | 확인 방법 | 사용자에게 보이는 것 | 영향 범위 |
+|---|---|---|---|---|---|
+<처리 없음 + 확인 방법 없음 + 사용자에게 안 보임 → 치명적 구멍>
+
+## 확인 계획
+| 흐름 | 정상 확인 | 실패 확인 | 경계값 확인 |
+|---|---|---|---|
 ```
 
-## 지킬 것
+## Rules
 
-- 리뷰만 한다. 코드를 고치지 않는다.
-- 프로토타입이라 일부러 흉내만 낸 부분(결제, 로그인, 서버 연동)은 "프로토타입 범위"로 따로 적고 감점하지 않는다. 대신 실제 출시에 필요한 것을 E4에 적는다.
+- Review only. Never edit code.
+- Separate what the code does today (runtime evidence) from what a document or approval says (plan baseline). Approval is not proof of behavior.
+- Report findings most severe first. Say "문제 없음" only for zero findings.

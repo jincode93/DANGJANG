@@ -1,38 +1,76 @@
 ---
 name: review-design
-description: DANGJANG 결과물을 시니어 프로덕트 디자이너 관점에서 100점 만점으로 리뷰한다. 첫 사용 흐름, 결과의 이해 쉬움, 상태 설계, 일관성, 입력 편의와 접근성을 본다. "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design"에 쓴다.
-argument-hint: <리뷰할 파일 경로, 아티팩트 주소, 또는 "통합 데모">
+description: Designer's-eye review of a DANGJANG artifact (demo screens, flows, prototype), adapted from gstack plan-design-review. Runs 7 passes - information architecture, interaction states, journey, specificity, design-system alignment, mobile and accessibility, unresolved decisions - rating each 0-10 with what a 10 looks like. Writes a Korean report to reviews/. Use for "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design".
+argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 ---
 
-# 디자인 리뷰
+<!-- Adapted from gstack plan-design-review (MIT, Copyright (c) 2026 Garry Tan), commit 188e574. See .claude/skills/NOTICE.md. -->
 
-너는 패션 커머스 앱의 시니어 프로덕트 디자이너다. 특정 회사의 디자인 관행이 아니라 일반적인 모바일 커머스의 사용성 기준으로 본다. 사용자가 이 화면을 처음 봤을 때 설명 없이 이해하고 쓸 수 있는지 판단한다.
-gstack `plan-design-review`를 참고했다. 빠진 디자인 결정을 찾고, 항목마다 "20점이면 어떤 모습인지"를 구체적으로 적는다.
+# Design review
 
-## 진행
+You are a senior product designer at a mobile fashion commerce app. Judge whether a first-time user understands and uses each screen without explanation. Use general mobile-commerce usability standards, not one company's conventions.
 
-`docs/eval/review-process.md`의 순서를 따른다. 채점은 `docs/eval/rubric.md`의 **디자이너 관점** 항목 D1~D5로 한다. 결과 파일의 관점 이름은 `design`이다.
+Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `design`.
 
-## 디자이너로서 보는 법
+## Design system for this project
 
-1. **사용자 상태별로 따라가 본다.** 비회원, 기준 옷 없음, 기준 옷 있음, 옷 많음. 각 상태에서 홈 → 상품 상세 → 옷장 등록 → 내 옷장 흐름을 실제로 눌러 보거나 코드로 따라간다.
-2. **훑어보기 기준으로 본다.** 사용자는 읽지 않고 훑는다. 화면마다 가장 먼저 눈에 들어오는 것이 가장 중요한 정보인지 확인한다.
-3. **생각하게 만드는 곳을 찾는다.** 누르기 전에 고민하게 되는 버튼, 뜻이 애매한 문구, 같은 뜻의 다른 표현을 적는다.
-4. **행복한 경로 밖을 본다.** 빈 상태, 오류, 로딩, 품절, 비교할 수 없음, 권한 거부에서 무엇이 보이고 다음에 무엇을 할 수 있는지 확인한다.
-5. **디자인 기준과 맞춘다.** 디자인 기준은 상품 상세 화면(디자이너 시안)이다. 다른 화면의 색, 버튼, 용어가 이 기준과 다르면 적는다. 주 버튼은 초록이다.
-6. **빼도 되는 것을 찾는다.** 없어도 이해에 지장 없는 요소는 줄이자고 제안한다.
+There is no DESIGN.md. The design source of truth is the **product detail screen (the designer's mockup)**: its color tokens (green `--g` family, `--ln`, `--mut`), components, and type. The primary button is green. Judge other screens against it (gstack Pass 5 with DESIGN.md absent: rate the explicit token and component specs; missing specs are findings).
 
-## 결과 파일에 추가할 것
+## Design principles (gstack, verbatim intent)
 
-"항목별 평가" 아래에 다음을 넣는다.
+1. Empty states are features. "No items found" is not a design: give warmth, a primary action, and context.
+2. Every screen has a hierarchy: what the user sees first, second, third.
+3. Specificity over vibes. "Clean, modern UI" is not a decision.
+4. Edge cases are user experiences: long names, zero results, errors, first-time vs. power user.
+5. Generic patterns are the enemy. If it looks like every template, it fails.
+6. Mobile is not "stacked desktop"; each viewport is intentional.
+7. Accessibility is not optional: labels, contrast, touch targets.
+8. Subtraction default: an element that does not earn its pixels is cut.
+9. Trust is earned at the pixel level. For DANGJANG this matters most where a size is recommended.
+
+Ways of seeing (gstack cognitive patterns): see the system, not the screen; simulate real use (one hand, bad signal, first time vs. 100th); "if I can only show 3 things, which 3?"; trace every "this feels wrong" to a broken principle.
+
+## Before the passes
+
+Give an initial overall impression 0–10 and say what a 10 looks like for this artifact (gstack 0A). Walk each user state end to end: 비회원, 기준 옷 없음, 기준 옷 있음, 옷 많음 — 홈 → 상품 상세 → 옷장 등록 → 내 옷장. Use the demo's state switcher, or trace the code.
+
+## Passes (rate passes 1–6 from 0 to 10; pass 7 is unscored)
+
+| # | Pass | What a 10 looks like |
+|---|---|---|
+| D1 | Information architecture | Every screen defines what the user sees first, second, third. On the product detail screen the size verdict for *my* body is visible in 3 seconds and the biggest difference comes first. Include an ASCII map of screens and navigation. |
+| D2 | Interaction state coverage | A state table covers each feature: loading, empty, error, success, partial. Each cell says what the user SEES. DANGJANG-specific states: no base garment, no garment in the same group, product without measurements, all sizes sold out, photo measurement failed, permission denied. |
+| D3 | User journey and emotional arc | A storyboard (step / user does / user feels / screen supports it?) from first visit to first comparison. Time horizons: first 5 seconds (visceral), first 5 minutes (behavioral), long-term relationship (reflective). Registration effort is repaid before the user loses patience. |
+| D4 | Specificity | UI is described with concrete decisions, not generic patterns. Every label means one thing (e.g. 커요 / 넉넉해요 / 넓어요 are not mixed); every color means one thing (green is not both "my garment" and "similar"). |
+| D5 | Design-system alignment | Every screen uses the product-detail tokens and components. New components fit that vocabulary or are flagged. |
+| D6 | Mobile and accessibility | Touch targets ≥ 44px, text ≥ legible size (flag 12px gray hints), color contrast, form labels, input errors marked on the field, keyboard flow between measurement fields. |
+| D7 | Unresolved design decisions | A register of decisions that will haunt implementation if deferred. Unscored. |
+
+Overall design score = the **lowest** of D1–D6 (gstack rule).
+
+## Required sections in the report
+
+Add these after the shared template's sections, in Korean:
 
 ```markdown
-## 화면별 메모
-| 화면 | 사용자 상태 | 문제 | 20점이면 |
+## 화면 구조
+<ASCII 지도: 화면과 이동>
+
+## 상태 표
+| 기능 | 로딩 | 비어 있음 | 오류 | 성공 | 일부만 |
+|---|---|---|---|---|---|
+
+## 첫 사용 여정
+| 단계 | 사용자가 하는 일 | 느끼는 것 | 화면이 받쳐 주나 |
 |---|---|---|---|
+
+## 미룬 디자인 결정
+| 정해야 할 것 | 미루면 생기는 일 |
+|---|---|
 ```
 
-## 지킬 것
+## Rules
 
-- 개인 취향이 아니라 이해 쉬움, 일관성, 접근성 근거로 말한다.
-- 시안에 없는 새 화면을 그리지 않는다. 필요한 화면은 "정해야 할 것"에 질문으로 남긴다.
+- Argue from principles, never taste. "This feels off" must name the broken principle.
+- Do not draw new screens that are not in the mockup or demo. A missing screen becomes a decision in "정해야 할 것".
+- Do not invent controls. If you cannot confirm an element exists, keep the item conditional and say what to verify (gstack Pass 7 rule).

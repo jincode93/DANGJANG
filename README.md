@@ -28,7 +28,7 @@
 
 ## AI로 일하는 방식
 
-CEO, 디자이너, 엔지니어 관점의 리뷰를 Claude Code 스킬로 만들어 두었다. 결과물이 나올 때마다 같은 루브릭으로 채점하고, 점수 변화를 `reviews/scores.csv`에 쌓는다.
+CEO, 디자이너, 엔지니어 관점의 리뷰를 Claude Code 스킬로 만들어 두었다. [gstack](https://github.com/garrytan/gstack)(MIT)의 `plan-ceo-review`, `plan-design-review`, `plan-eng-review`를 기획·프로토타입 리뷰에 맞게 고친 것이다(출처: `.claude/skills/NOTICE.md`). 결과물이 나올 때마다 같은 기준으로 차원별 0~10점을 매기고, 점수 변화를 `reviews/scores.csv`에 쌓는다.
 
 ```
 /review-ceo 통합 데모
