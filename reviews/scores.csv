@@ -1,2 +1,4 @@
 date,target,version,reviewer,headline,average,critical_gaps,decisions,d1,d2,d3,d4,d5,d6,d7,verdict,file
 2026-10-26,통합 데모,demo-v14,ceo,2,4.7,4,7,7,6,4,5,4,5,2,rethink,reviews/2026-10-26-ceo-demo-v14.md
+2026-10-26,통합 데모,demo-v14,eng,2,3.3,6,6,4,3,4,3,2,4,,rethink,reviews/2026-10-26-eng-demo-v14.md
+2026-10-26,통합 데모,demo-v14,design,3,4.2,3,7,6,5,4,4,3,3,,rethink,reviews/2026-10-26-design-demo-v14.md
