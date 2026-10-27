@@ -19,6 +19,7 @@
 | 보고 싶은 것 | 위치 |
 |---|---|
 | 제품 맥락과 결정 | `CLAUDE.md`, `logs/decision-log.md` |
+| 서비스 정책 | `docs/policy/서비스-정책.md` |
 | 리서치 근거 (설문 24명, 인터뷰 5명, 페르소나, 경쟁사) | `docs/research/README.md` |
 | 프로젝트 일정과 멘토링 기록 | `docs/timeline.md`, `docs/mentoring/` |
 | 평가 기준 | `docs/eval/rubric.md` |

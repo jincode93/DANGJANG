@@ -49,6 +49,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 - 디자인 기준은 상품 상세 화면(디자이너 시안)이다. 주 버튼은 초록.
 
 결정 이력과 이유: `logs/decision-log.md`
+서비스가 어떻게 동작해야 하는지 전체 정책: `docs/policy/서비스-정책.md` (데모와 다르면 이 문서가 기준)
 
 ## 용어
 
@@ -68,6 +69,7 @@ README.md                 포트폴리오 첫 페이지
 docs/research/            팀 리서치 근거 (README가 목차)
 docs/mentoring/           멘토링 기록
 docs/timeline.md          프로젝트 일정
+docs/policy/              서비스 정책과 결정지
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
 docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
 prototype/                데모 위치와 버전 기록
