@@ -48,7 +48,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 | 아직 정하지 않은 것, 초안 값 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
 
-데모(아티팩트)가 정책과 다르면 정책이 기준이다. `docs/policy/서비스-정책.md`와 `결정지-2026-10-26-추천규칙.md`는 기록용이다.
+데모(아티팩트)가 정책과 다르면 정책이 기준이다. 결정마다 검토한 선택지는 `logs/decisions/`에 있다.
 
 ## 폴더
 
@@ -59,7 +59,7 @@ docs/prd.md               무엇을 왜 만드나
 docs/glossary.md          용어집
 docs/ux.md                UX·디자인 기준
 docs/open-questions.md    검토할 것
-docs/policy/              정책 (README가 목차. 서비스-정책.md와 결정지는 기록용)
+docs/policy/              정책 (README가 목차)
 docs/research/            팀 리서치 근거 (README가 목차)
 docs/mentoring/           멘토링 기록
 docs/timeline.md          프로젝트 일정
@@ -68,7 +68,8 @@ docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따�
 prototype/                데모 위치와 버전 기록
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
 reviews/scores.csv        리뷰 점수 누적 기록
-logs/decision-log.md      결정 기록
+logs/decision-log.md      결정 기록 (한 줄 요약)
+logs/decisions/           결정마다 검토한 선택지와 이유
 logs/time-log.md          작업 시간 기록
 .claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처)
 ```

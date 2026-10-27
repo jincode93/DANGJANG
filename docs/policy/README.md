@@ -28,4 +28,4 @@ DANGJANG이 어떻게 동작해야 하는지 정한 규칙이다. 확정된 규�
 
 - 용어: [`docs/glossary.md`](../glossary.md)
 - 아직 정하지 않은 것: [`docs/open-questions.md`](../open-questions.md)
-- 새 구조로 옮기기 전의 정책: [서비스-정책.md](서비스-정책.md), [결정지-2026-10-26-추천규칙.md](결정지-2026-10-26-추천규칙.md). 정책은 모두 새 문서로 옮겼다(10/27). 이 두 문서는 기록으로만 남긴다.
+- 결정 이유: `logs/decision-log.md`, 검토한 선택지: `logs/decisions/`
