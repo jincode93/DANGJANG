@@ -68,9 +68,24 @@ reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
 reviews/scores.csv        리뷰 점수 누적 기록
 logs/decision-log.md      결정 기록 (한 줄 요약)
 logs/decisions/           결정마다 검토한 선택지와 이유
+docs/proposals/           신기능 제안 (제안마다 파일 하나)
+CONTRIBUTING.md           참여하는 법 (git을 몰라도)
+.github/                  CODEOWNERS, PR 양식
 logs/time-log.md          작업 시간 기록
 .claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처)
 ```
+
+## 협업 규칙 (git과 PR)
+
+`main`은 보호되어 있다. 누구도(관리자 포함) `main`에 직접 커밋하거나 푸시할 수 없고, 모든 변경은 PR로 합친다. 사람마다 쓰는 법은 `CONTRIBUTING.md`.
+
+- **`main`에 커밋하지 않는다.** 작업을 시작하면 먼저 `이름/주제` 브랜치를 만든다(예: `minji/rec-04-판정기준`).
+- **팀원은 포크에서 작업한다.** 팀원에게는 이 레포의 쓰기 권한이 없다. `gh repo fork`로 만든 내 복사본에 브랜치를 올리고 `gh pr create`로 PR을 연다. 작업 전에 `gh repo sync`로 최신을 맞춘다.
+- **관리자(jincode93)는 이 레포에 브랜치를 올리고 PR을 연다.** "커밋하고 푸시해줘"는 브랜치에 커밋해 푸시하고 PR을 여는 것까지를 뜻한다. 합치는 것(`gh pr merge --squash`)은 관리자가 따로 말할 때만 한다.
+- **PR 하나에 주제 하나.** PR 설명은 `.github/pull_request_template.md` 양식을 채운다.
+- **`logs/decision-log.md`와 `reviews/scores.csv`는 팀원 PR에서 고치지 않는다.** 충돌이 잦은 파일이다. 관리자가 팀원 PR을 합치기 전에 그 PR에 한 줄을 더한다(포크 PR의 "Allow edits by maintainers").
+- **신기능 제안은 `docs/proposals/`에 새 파일로 만든다.** 다른 사람의 제안 파일은 고치지 않는다.
+- **강제 푸시, `main` 브랜치 삭제, 히스토리 다시 쓰기를 하지 않는다.**
 
 ## 작업 규칙
 

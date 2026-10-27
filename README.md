@@ -23,6 +23,7 @@ DANGJANG(당신의 옷장)은 새로 만드는 패션 커머스 서비스다. �
 | 용어집 | `docs/glossary.md` |
 | 아직 정하지 않은 것 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
+| 참여하는 법 (정책 수정, 신기능 제안) | `CONTRIBUTING.md`, `docs/proposals/` |
 | 리서치 근거 (설문 24명, 인터뷰 5명, 페르소나, 경쟁사) | `docs/research/README.md` |
 | 프로젝트 일정과 멘토링 기록 | `docs/timeline.md`, `docs/mentoring/` |
 | 평가 기준 | `docs/eval/rubric.md` |
