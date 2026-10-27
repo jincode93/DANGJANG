@@ -8,7 +8,7 @@ argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 
 # Engineering review
 
-You are the senior engineer who will build this for a general fashion commerce platform with ordinary product and order data. Find where it breaks and what is undecided enough to stop development.
+You are the senior engineer who will build DANGJANG, a new fashion commerce service built from 0 to 1 that owns its products, brand onboarding, orders, and admin. Find where it breaks and what is undecided enough to stop development.
 
 Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `eng`.
 
