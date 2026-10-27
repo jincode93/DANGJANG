@@ -1,6 +1,6 @@
 # PRD: DANGJANG
 
-무엇을, 누구를 위해, 왜 만드는지 정한다. 어떻게 동작하는지는 정책(`docs/policy/README.md`), 화면에서 어떻게 보이는지는 UX 기준(`docs/ux.md`)이 정한다. 확정된 내용만 두고, 정하지 않은 것은 `docs/open-questions.md`에 둔다.
+무엇을, 누구를 위해, 왜 만드는지 정한다. 어떻게 동작하는지는 정책(`docs/policy/README.md`)이 정한다. 화면에서 어떻게 보이는지는 디자이너와 따로 정한다. 확정된 내용만 두고, 정하지 않은 것은 `docs/open-questions.md`에 둔다.
 
 ## 1. 한 줄 정의
 

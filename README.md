@@ -21,7 +21,6 @@ DANGJANG(당신의 옷장)은 새로 만드는 패션 커머스 서비스다. �
 | 무엇을 왜 만드나 (문제, 타깃, 지표, 범위) | `docs/prd.md` |
 | 서비스 정책 (기본 정책 → 대상과 상태 → 기능 정책) | `docs/policy/README.md` |
 | 용어집 | `docs/glossary.md` |
-| UX·디자인 기준 | `docs/ux.md` |
 | 아직 정하지 않은 것 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
 | 리서치 근거 (설문 24명, 인터뷰 5명, 페르소나, 경쟁사) | `docs/research/README.md` |

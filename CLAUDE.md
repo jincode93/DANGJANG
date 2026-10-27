@@ -44,7 +44,6 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 | 무엇을 왜 만드나 (문제, 타깃, 지표, 범위) | `docs/prd.md` |
 | 서비스가 어떻게 동작하나 (규칙, ID로 가리킴) | `docs/policy/README.md`에서 시작. 01 기본 정책, 02 대상과 상태, 03 기능 정책 |
 | 용어의 뜻 | `docs/glossary.md` |
-| 화면에서 어떻게 보이나 | `docs/ux.md` |
 | 아직 정하지 않은 것, 초안 값 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
 
@@ -57,7 +56,6 @@ CLAUDE.md                 이 파일
 README.md                 포트폴리오 첫 페이지
 docs/prd.md               무엇을 왜 만드나
 docs/glossary.md          용어집
-docs/ux.md                UX·디자인 기준
 docs/open-questions.md    검토할 것
 docs/policy/              정책 (README가 목차)
 docs/research/            팀 리서치 근거 (README가 목차)
