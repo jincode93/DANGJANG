@@ -37,8 +37,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          # 직접 실행이면 그 PR을 main과 합친 상태를 받는다 (PR 이벤트일 때의 기본값과 같은 상태)
-          ref: ${{ inputs.pr && format('refs/pull/{0}/merge', inputs.pr) || '' }}
+
+      # 직접 실행이면 main 위에 그 PR의 제안서만 얹는다.
+      # refs/pull/N/merge는 예전 main 기준으로 남아 있을 수 있어 쓰지 않는다 (스킬이 없는 상태로 돌았던 적 있음).
+      - name: PR의 제안서 가져오기 (직접 실행일 때)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git fetch --depth 1 origin "pull/${{ inputs.pr }}/head"
+          git checkout FETCH_HEAD -- docs/proposals/
+
+      - name: 시작 시각 기록
+        run: echo "REVIEW_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
 
       - name: Claude로 제안서 검토
         env:
@@ -51,6 +60,16 @@ jobs:
             --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue edit:*),Bash(gh issue comment:*)" \
             --add-dir "$RUNNER_TEMP" \
             --max-turns 50
+
+      # Claude는 멈춰도 성공으로 끝나므로, 이번 실행에서 PR 댓글이 달렸는지 확인한다.
+      - name: 검토 댓글 확인
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          n=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" \
+                --jq ".[] | select(.user.login == \"github-actions[bot]\" and .updated_at >= \"$REVIEW_START\") | .id" | wc -l)
+          if [ "$n" -eq 0 ]; then echo "::error::PR #$PR_NUMBER 에 검토 댓글이 달리지 않았어요. 위 Claude 출력을 확인하세요."; exit 1; fi
 
   # 제안 PR이 main에 머지되면 기능 이슈를 "상태: 제안" → "상태: 실험 중"으로 바꾼다. Claude는 쓰지 않는다.
   mark-experimenting:
