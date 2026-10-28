@@ -2,7 +2,7 @@
 
 DANGJANG(당신의 옷장)은 새로 만드는 패션 커머스 서비스다. 다른 패션 커머스와의 차별점은 옷장이다. 잘 맞는 내 옷을 옷장에 등록하면, 사기 전에 상품의 부위별 핏을 그 옷과 비교해 알려 준다.
 
-- 데모: https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4
+- 데모: https://dangjang-prototype.vercel.app
 - KAI10 이커머스1팀 팀 프로젝트 · 최종 발표 2026-11-05
 
 ## 문제
