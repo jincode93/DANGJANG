@@ -2,7 +2,8 @@
 
 ## 통합 데모
 
-- 주소: Vercel 연결 뒤 여기에 적는다. (그 전까지는 아티팩트 https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4, 서버 기능 없음)
+- 주소: https://dangjang-prototype.vercel.app (`main`에 합치면 자동 배포, PR마다 미리보기 주소가 생김)
+- 예전 아티팩트(https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4)는 v13에서 멈춤. 서버 기능이 없어 링크 읽기·캡처 찾기가 예시 값으로만 동작한다
 - 팀 프로토타입 4개(`src/home.html`, `detail.html`, `reg.html`, `closet.html`)를 `build.py`로 합쳐서 만든다.
 - 서버(`api/`, `lib/`)는 옷장 등록 담당 팀원의 데모(Artemis-ignis/dangjang-demo, 2026-10-28 `fe2cb70`)에서 가져왔다. 우리 Vercel에서 돌아가고, 다른 사람의 서버나 계정에 기대지 않는다. 환경 변수와 API 키는 없다.
 

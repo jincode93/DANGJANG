@@ -19,7 +19,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 
 ## 지금 데모에 있는 것
 
-- 통합 데모: https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4
+- 통합 데모: https://dangjang-prototype.vercel.app (원본 코드 `prototype/`, `main`에 합치면 자동 배포, PR마다 미리보기 주소가 생김)
 - 팀 프로토타입 4개(홈, 상품 상세, 옷장 등록, 내 옷장)를 하나로 이은 앱. 결제와 로그인은 흉내만 낸다.
 
 | 화면 | 하는 일 |
@@ -47,7 +47,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 | 아직 정하지 않은 것, 초안 값 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
 
-데모(아티팩트)가 정책과 다르면 정책이 기준이다. 결정마다 검토한 선택지는 `logs/decisions/`에 있다.
+데모가 정책과 다르면 정책이 기준이다. 결정마다 검토한 선택지는 `logs/decisions/`에 있다.
 
 ## 폴더
 
