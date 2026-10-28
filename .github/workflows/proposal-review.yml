@@ -7,7 +7,7 @@ name: 신기능 제안 자동 검토
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    paths: ["docs/proposals/**"]
+    paths: ["docs/proposals/**", "!docs/proposals/README.md"]   # 안내문만 바뀐 PR은 검토하지 않는다
   # 이미 열린 PR을 다시 검토할 때: Actions 탭 → 신기능 제안 자동 검토 → Run workflow (또는 gh workflow run proposal-review.yml -f pr=번호)
   workflow_dispatch:
     inputs:
