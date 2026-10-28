@@ -31,7 +31,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 
 사용자 상태: 계정(비회원/회원), 옷장(옷 없음/있음), 상품마다 비교 상태(기준 옷 있음/자동 비교/기준 옷 없음) 세 축으로 나눈다. 정의는 `docs/policy/02-대상과-상태.md`.
 
-현재 추천 로직: 사이즈마다 `Σ |상품 − 기준 옷| × 가중치`를 계산해 가장 작은 사이즈를 추천한다. 1·2번째 칸은 가중치 1.3, 나머지는 1. 품절 사이즈는 뺀다. 부위 차이가 2cm 이내면 "비슷해요", 4cm를 넘으면 "커요/작아요"다.
+데모의 현재 추천 로직: 사이즈마다 `Σ |상품 − 기준 옷| × 가중치`를 계산해 점수가 가장 낮은 사이즈를 추천한다. 1·2번째 칸은 가중치 1.3, 나머지는 1. 품절 사이즈는 뺀다. 부위 차이가 2cm 이내면 "비슷해요", 4cm를 넘으면 "커요/작아요"다. 정책과 다른 점: 가중치는 칸 순서가 아니라 부위 이름(품 부위)에 붙이고(REC-03), 품절 사이즈도 계산에 넣어 가장 잘 맞는 사이즈가 품절이면 그대로 알린다(REC-06).
 
 아직 풀리지 않은 문제 목록: `reviews/2026-10-26-출시수준-점검목록.md`
 
@@ -62,6 +62,7 @@ docs/research/            팀 리서치 근거 (README가 목차)
 docs/mentoring/           멘토링 기록
 docs/timeline.md          프로젝트 일정
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
+docs/eval/proposal-rubric.md  신기능 제안 평가 기준 (PR 자동 검토와 /review-proposal이 읽음)
 docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
 prototype/                데모 위치와 버전 기록
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
@@ -70,9 +71,9 @@ logs/decision-log.md      결정 기록 (한 줄 요약)
 logs/decisions/           결정마다 검토한 선택지와 이유
 docs/proposals/           신기능 제안 (제안마다 파일 하나)
 CONTRIBUTING.md           참여하는 법 (git을 몰라도)
-.github/                  CODEOWNERS, PR 양식
+.github/                  CODEOWNERS, PR 양식, 제안서 자동 검토 워크플로
 logs/time-log.md          작업 시간 기록
-.claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처)
+.claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처), review-proposal (제안서용)
 ```
 
 ## 협업 규칙 (git과 PR)
