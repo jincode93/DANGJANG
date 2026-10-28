@@ -1,0 +1,37 @@
+# 신기능 제안 PR에 자동 검토 댓글을 단다. 기준: docs/eval/proposal-rubric.md
+# 필요한 비밀값: CLAUDE_CODE_OAUTH_TOKEN (레포 관리자가 claude 터미널에서 /install-github-app 으로 등록)
+name: 신기능 제안 자동 검토
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ["docs/proposals/**"]
+
+concurrency:
+  group: proposal-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # 공개 레포라 외부 포크 PR에서는 돌리지 않는다. 팀원은 같은 레포 브랜치로 PR을 연다.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            .claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다.
+            대상: PR #${{ github.event.pull_request.number }} (레포 ${{ github.repository }})
+          claude_args: |
+            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*)"
+            --max-turns 40
