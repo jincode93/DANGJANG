@@ -1,0 +1,1 @@
+당장 아이콘 세트 SVG 406개(203종 × Line·Fill). 파일 이름은 `<이름>.svg`(Line)와 `<이름>-fill.svg`(Fill). 24×24, 선 1.8px, round cap/join. 잉크는 `black-60`(#777777)으로, 라이트·다크 어느 바탕에서도 보이도록 중간 회색으로 고정했다. `<img>`로 넣으면 색이 바뀌지 않으므로, 화면에서는 컴포넌트 `Icon`처럼 인라인 SVG + `currentColor`로 쓴다. Figma에서는 가져온 뒤 선·면 색을 `text-primary`로 바꿔 쓴다.

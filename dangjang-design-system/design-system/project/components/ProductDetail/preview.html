@@ -1,0 +1,91 @@
+<!-- @dsCard group="Showcase" page width=960 height=960 subtitle="컴포넌트로 조립한 상품 상세 화면 예시(템플릿)" -->
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><style>
+html,body{margin:0;background:var(--bg)}
+.pd{width:960px;box-sizing:border-box;padding:var(--space-8) 40px 40px;display:flex;flex-direction:column;gap:var(--space-6);color:var(--text-primary);font-family:var(--font-sans)}
+.pd>header h2{margin:0;font:700 22px/30px var(--font-sans);letter-spacing:-0.01em}
+.pd>header p{margin:var(--space-1) 0 0;font:400 13px/18px var(--font-sans);color:var(--text-secondary)}
+.row{display:flex;justify-content:center;gap:56px;padding:var(--space-8) 0;border-radius:var(--radius-md);background:var(--bg-subtle)}
+.col{display:flex;flex-direction:column;align-items:center;gap:var(--space-3)}
+.col>span{font:600 13px/18px var(--font-sans);color:var(--text-secondary)}
+.phone{position:relative;width:360px;height:740px;overflow:hidden;border-radius:28px;background:var(--bg);box-shadow:0 0 0 8px var(--inverse-bg)}
+.scroll{position:absolute;inset:0;bottom:84px;overflow:hidden}
+.top{display:flex;align-items:center;justify-content:space-between;height:var(--header-height);padding:0 var(--space-1)}
+.top div{display:flex}
+.hero{height:200px;background:var(--bg-subtle);display:grid;place-items:center;color:var(--text-tertiary)}
+.hero svg{width:64px;height:64px;stroke-width:1.2}
+.info{display:flex;flex-direction:column;gap:var(--space-1);padding:var(--space-4) var(--space-gutter)}
+.info .brand{font:600 13px/18px var(--font-sans);color:var(--text-secondary)}
+.info h1{margin:0;font:700 22px/30px var(--font-sans);letter-spacing:-0.01em}
+.info .price{display:flex;gap:var(--space-2);font:700 18px/26px var(--font-sans);font-variant-numeric:tabular-nums}
+.info .price em{font-style:normal;color:var(--danger)}
+.band{height:var(--space-section);background:var(--bg-subtle)}
+.cmp{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-4) var(--space-gutter)}
+.cmp h2{margin:0;font:700 18px/26px var(--font-sans)}
+.bar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:var(--space-2);padding:var(--space-4) var(--space-gutter);background:var(--bg);box-shadow:inset 0 1px 0 var(--line)}
+.bar .dj-icon-btn{flex:none;width:52px;height:52px;border-radius:var(--radius-md);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.sheet-wrap{position:absolute;inset:0;display:flex;align-items:flex-end;background:var(--dim)}
+.sheet-wrap .dj-sheet{max-height:none}
+.parts{display:flex;flex-direction:column;gap:var(--space-2)}
+</style></head><body>
+<div class="pd">
+  <header><h2>템플릿 · 상품 상세</h2><p>헤더, 상품 정보, 기준 옷 비교, 하단 고정 버튼을 시스템 컴포넌트만으로 조립했어요. 상품과 수치는 예시예요.</p></header>
+  <div class="row">
+
+    <div class="col"><span>① 상세 · 비교 결과</span>
+      <div class="phone">
+        <div class="scroll">
+          <div class="top">
+            <button class="dj-icon-btn" aria-label="뒤로 가기"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div><button class="dj-icon-btn" aria-label="공유하기"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 8.5 12 4l4.5 4.5"/><path d="M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13"/></svg></button><button class="dj-icon-btn" aria-label="장바구니"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg></button></div>
+          </div>
+          <div class="hero" aria-hidden="true"><svg class="dj-icon" viewBox="0 0 24 24"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div>
+          <div class="info">
+            <span class="brand">DJ STUDIO</span>
+            <h1>세미오버 코튼 셔츠</h1>
+            <span class="price"><em>18%</em>48,900원</span>
+          </div>
+          <div class="band"></div>
+          <div class="cmp">
+            <h2>내 옷과 비교</h2>
+            <div class="dj-ref"><div class="dj-thumb"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div><div class="dj-meta"><span class="dj-eyebrow">기준 옷</span><span class="dj-name">오버핏 코튼 셔츠 · M</span><span class="dj-sub">어깨 46 · 가슴 58cm</span></div><button class="dj-btn dj-btn--text">교체하기</button></div>
+            <div class="dj-summary" role="group" aria-label="M 사이즈 비교 요약"><div><b class="dj-fit--match">3</b><span class="dj-fit--match">비슷해요</span></div><div><b class="dj-fit--loose">1</b><span class="dj-fit--loose">넉넉해요</span></div><div><b class="dj-fit--tight">1</b><span class="dj-fit--tight">부족해요</span></div></div>
+          </div>
+        </div>
+        <div class="bar">
+          <button class="dj-icon-btn" aria-label="찜하기"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5s-7.5-4.3-7.5-9.7A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5c0 5.4-7.5 9.7-7.5 9.7z"/></svg></button>
+          <button class="dj-btn dj-btn--primary dj-btn--block">구매하기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col"><span>② 구매하기 → 사이즈 고르기</span>
+      <div class="phone">
+        <div class="scroll" aria-hidden="true">
+          <div class="top"><span class="dj-icon-btn"><svg class="dj-icon" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></div>
+          <div class="hero"><svg class="dj-icon" viewBox="0 0 24 24"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div>
+        </div>
+        <div class="sheet-wrap">
+          <div class="dj-sheet" role="dialog" aria-label="사이즈 고르기">
+            <span class="dj-grip"></span>
+            <h3>사이즈 고르기</h3>
+            <div class="dj-row" role="radiogroup" aria-label="사이즈">
+              <button class="dj-size" role="radio" aria-checked="false">S</button>
+              <button class="dj-size dj-size--rec" role="radio" aria-checked="true">M<small>추천</small></button>
+              <button class="dj-size" role="radio" aria-checked="false">L</button>
+              <button class="dj-size dj-size--soldout" role="radio" aria-checked="false" aria-disabled="true">XL</button>
+            </div>
+            <div class="parts">
+              <span class="dj-fit dj-fit--match"><svg class="dj-icon dj-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>어깨 비슷해요 <span class="dj-delta">±1cm</span></span>
+              <span class="dj-fit dj-fit--loose"><svg class="dj-icon dj-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>총장 넉넉해요 <span class="dj-delta">+3cm</span></span>
+              <span class="dj-fit dj-fit--tight"><svg class="dj-icon dj-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>가슴 부족해요 <span class="dj-delta">−2cm</span></span>
+            </div>
+            <button class="dj-btn dj-btn--primary dj-btn--block">M 구매하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body></html>

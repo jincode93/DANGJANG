@@ -64,6 +64,7 @@ docs/timeline.md          프로젝트 일정
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
 docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
 prototype/                데모 위치와 버전 기록
+dangjang-design-system/   디자인 시스템 소스와 아이콘 (HANDOFF.md부터 읽음)
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
 reviews/scores.csv        리뷰 점수 누적 기록
 logs/decision-log.md      결정 기록 (한 줄 요약)

@@ -1,0 +1,32 @@
+<!-- @dsCard height=300 -->
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><style>
+html,body{margin:0;background:var(--bg)}
+.cover{position:relative;width:960px;height:300px;overflow:hidden;background:var(--bg)}
+.art{position:absolute;inset:0}
+.b-green{fill:var(--primary)}
+.b-slab{fill:var(--text-primary)}
+.b-tint{fill:var(--primary-70);rx:var(--radius-md)}
+.tile{rx:var(--radius-sm)}
+.t-g{fill:var(--primary)}
+.t-k{fill:var(--text-primary)}
+.t-t{fill:var(--primary-70)}
+.t-l{fill:var(--line)}
+.txt{position:absolute;left:40px;bottom:36px;max-width:440px;display:flex;flex-direction:column;gap:12px}
+.name{margin:0;font:700 64px/0.95 var(--font-sans);letter-spacing:-0.03em;color:var(--text-primary)}
+.tag{margin:0;font:400 14px/20px var(--font-sans);color:var(--text-secondary)}
+</style></head><body>
+<div class="cover">
+<svg class="art" viewBox="0 0 960 300" width="960" height="300" aria-hidden="true">
+<!-- blocks: primary-00 256x200 (bleeds top), text-primary slab 160x300 (bleeds top/right), primary-70 128x100, white-40 via line 64x64
+     arrangement: one tall slab at the right edge with a green block and a tint stacked beside it, all right of x=480
+     pattern: geometric, modular — size-chip tiles (36px, radius-sm) on an 8px gap (space-2), like the size chips the app is built around
+     steps & radii: space-2 8px gap, 36+8=44 pitch (touch-min), radius-sm 8px, radius-md 12px on the tint -->
+<rect class="b-green" x="608" y="-12" width="192" height="212"/>
+<rect class="b-slab" x="800" y="-12" width="172" height="324"/>
+<rect class="b-tint" x="672" y="200" width="128" height="100"/>
+<rect class="tile t-g" x="496" y="200" width="36" height="36"/><rect class="tile t-l" x="540" y="200" width="36" height="36"/><rect class="tile t-k" x="584" y="200" width="36" height="36"/><rect class="tile t-l" x="628" y="200" width="36" height="36"/><rect class="tile t-l" x="496" y="244" width="36" height="36"/><rect class="tile t-g" x="540" y="244" width="36" height="36"/><rect class="tile t-l" x="584" y="244" width="36" height="36"/><rect class="tile t-t" x="628" y="244" width="36" height="36"/>
+</svg>
+<div class="txt"><h1 class="name">당장<br>디자인 시스템</h1><p class="tag">내 옷장의 잘 맞는 옷 한 벌이 사이즈표가 돼요.</p></div>
+</div>
+</body></html>

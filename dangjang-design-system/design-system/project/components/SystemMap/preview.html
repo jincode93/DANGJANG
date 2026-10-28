@@ -1,0 +1,113 @@
+<!-- @dsCard group="Showcase" page width=960 height=1180 subtitle="한눈에 보는 당장 디자인 시스템: 숫자, 아토믹 구조, 두 테마" -->
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><style>
+html,body{margin:0;background:var(--bg)}
+.sm{width:960px;box-sizing:border-box;padding:var(--space-8) 40px 40px;display:flex;flex-direction:column;gap:40px;color:var(--text-primary);font-family:var(--font-sans)}
+.hero{display:flex;flex-direction:column;align-items:center;gap:var(--space-6);padding-top:var(--space-4)}
+.sel{position:relative;padding:var(--space-3) var(--space-6);border:1px dashed var(--primary-text)}
+.sel i{position:absolute;width:8px;height:8px;background:var(--bg);border:1.5px solid var(--primary-text)}
+.sel i:nth-child(1){left:-5px;top:-5px}.sel i:nth-child(2){right:-5px;top:-5px}.sel i:nth-child(3){left:-5px;bottom:-5px}.sel i:nth-child(4){right:-5px;bottom:-5px}
+.sel h1{margin:0;font:700 72px/1 var(--font-sans);letter-spacing:-0.03em}
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:var(--radius-full);background:var(--primary);color:var(--on-primary);font:600 12px/16px var(--font-sans);white-space:nowrap}
+.sel .pill{position:absolute;right:-12px;top:-14px;transform:translateX(100%)}
+.tags{display:flex;gap:var(--space-4);font:600 13px/18px var(--font-sans);color:var(--primary-text)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{display:flex;flex-direction:column;gap:2px;padding:var(--space-4) var(--space-4)}
+.stats div+div{box-shadow:inset 1px 0 0 var(--line)}
+.stats b{font:700 28px/38px var(--font-sans);letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+.stats span{font:400 13px/18px var(--font-sans);color:var(--text-secondary)}
+.sec{display:flex;flex-direction:column;gap:var(--space-4)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4)}
+.sec-h h2{margin:0;font:700 22px/30px var(--font-sans);letter-spacing:-0.01em}
+.sec-h p{margin:0;font:400 13px/18px var(--font-sans);color:var(--text-secondary)}
+.atomic{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)}
+.lv{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-md);background:var(--bg-subtle)}
+.lv header{display:flex;flex-direction:column;gap:var(--space-1)}
+.lv header .pill{align-self:flex-start}
+.lv h3{margin:0;font:700 18px/26px var(--font-sans)}
+.lv p{margin:0;font:400 13px/18px var(--font-sans);color:var(--text-secondary)}
+.lv ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.lv li{font:600 12px/16px var(--font-sans);padding:4px 8px;border-radius:var(--radius-xs);background:var(--bg);color:var(--text-secondary)}
+.demo{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-3);border-radius:var(--radius-sm);background:var(--bg);border:1px dashed var(--line-strong);min-height:132px;justify-content:center}
+.demo .dj-ref{padding:var(--space-3);gap:var(--space-2)}
+.demo .dj-ref .dj-thumb{width:40px;height:40px}
+.demo .dj-tabbar{height:var(--tabbar-height)}
+.mini-sheet{border-radius:var(--radius-sm);overflow:hidden;background:var(--dim);padding-top:var(--space-6)}
+.mini-sheet .dj-sheet{padding:var(--space-2) var(--space-3) var(--space-3);gap:var(--space-2);max-height:none}
+.mini-sheet h3{font:700 15px/22px var(--font-sans)}
+.tpl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tpl span{height:20px;border-radius:var(--radius-xs);background:var(--bg-subtle)}
+.tpl .big{grid-column:1/-1;height:52px}
+.tpl .cta{grid-column:1/-1;height:16px;background:var(--primary)}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+.th{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-6) var(--space-gutter);border-radius:var(--radius-md);background:var(--bg);color:var(--text-primary);border:1px solid var(--line)}
+.th .cap{font:600 12px/16px var(--font-sans);color:var(--text-tertiary)}
+</style></head><body>
+<div class="sm">
+  <section class="hero">
+    <div class="sel"><i></i><i></i><i></i><i></i><h1>당장 디자인 시스템</h1><span class="pill">아토믹 디자인</span></div>
+    <div class="tags"><span>토큰</span><span>컴포넌트</span><span>아이콘</span><span>라이트·다크</span></div>
+  </section>
+
+  <section class="stats" aria-label="시스템 규모">
+    <div><b>49</b><span>컬러 토큰</span></div>
+    <div><b>8</b><span>텍스트 스타일</span></div>
+    <div><b>11</b><span>컴포넌트</span></div>
+    <div><b>203</b><span>아이콘 (Line·Fill 406개)</span></div>
+    <div><b>2</b><span>테마</span></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>아토믹 구조</h2><p>작은 단위를 모아 화면을 만들어요. 판정과 기준 옷이 모든 단계에 들어가요.</p></div>
+    <div class="atomic">
+      <div class="lv">
+        <header><span class="pill">Atoms</span><h3>원자</h3><p>더 나눌 수 없는 가장 작은 단위</p></header>
+        <div class="demo">
+          <div class="dj-row"><button class="dj-btn dj-btn--primary" style="min-height:36px;padding:0 12px;font-size:13px">비교하기</button><button class="dj-chip" aria-pressed="true">상의</button></div>
+          <div class="dj-row"><button class="dj-size" style="min-width:44px;height:40px" aria-checked="false">S</button><button class="dj-size dj-size--rec" style="min-width:44px;height:40px" aria-checked="true">M</button></div>
+          <span class="dj-fit dj-fit--match" style="font-size:13px"><svg class="dj-icon dj-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>어깨 비슷해요</span>
+        </div>
+        <ul><li>Icon</li><li>Button</li><li>Chip</li><li>SizeChip</li><li>FitResult</li></ul>
+      </div>
+      <div class="lv">
+        <header><span class="pill">Molecules</span><h3>분자</h3><p>원자 몇 개가 모여 하나의 정보를 전달</p></header>
+        <div class="demo">
+          <div class="dj-ref"><div class="dj-thumb"><svg class="dj-icon dj-icon--md" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div><div class="dj-meta"><span class="dj-eyebrow">기준 옷</span><span class="dj-name" style="font-size:13px;line-height:18px">오버핏 셔츠 · M</span></div></div>
+          <div class="dj-toast" style="padding:10px 12px;font-size:13px;line-height:18px;box-shadow:none">옷장에 저장했어요</div>
+        </div>
+        <ul><li>TextField</li><li>ReferenceCloth</li><li>ProductCard</li><li>Toast</li></ul>
+      </div>
+      <div class="lv">
+        <header><span class="pill">Organisms</span><h3>유기체</h3><p>화면의 한 영역을 맡는 큰 묶음</p></header>
+        <div class="demo" style="padding:0;overflow:hidden;justify-content:flex-end;gap:0">
+          <div class="mini-sheet"><div class="dj-sheet"><span class="dj-grip"></span><h3>사이즈 고르기</h3><div class="dj-row"><button class="dj-size" style="min-width:40px;height:32px;font-size:13px">S</button><button class="dj-size" style="min-width:40px;height:32px;font-size:13px" aria-checked="true">M</button><button class="dj-size" style="min-width:40px;height:32px;font-size:13px">L</button></div></div></div>
+        </div>
+        <ul><li>BottomSheet</li><li>TabBar</li></ul>
+      </div>
+      <div class="lv">
+        <header><span class="pill">Templates</span><h3>템플릿</h3><p>유기체를 배치한 화면의 뼈대</p></header>
+        <div class="demo"><div class="tpl" aria-hidden="true"><span class="big"></span><span></span><span></span><span></span><span class="big" style="height:28px"></span><span class="cta"></span></div></div>
+        <ul><li>ProductDetail</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>라이트·다크 모드</h2><p>같은 역할 토큰을 쓰면 테마가 바뀌어도 대비 기준(글자 4.5:1)을 지켜요.</p></div>
+    <div class="themes">
+      <div class="th" data-theme="light">
+        <span class="cap">Light · bg white-00</span>
+        <div class="dj-ref"><div class="dj-thumb"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div><div class="dj-meta"><span class="dj-eyebrow">기준 옷</span><span class="dj-name">오버핏 코튼 셔츠 · M</span><span class="dj-sub">어깨 46 · 가슴 58 · 총장 74cm</span></div></div>
+        <div class="dj-summary"><div><b class="dj-fit--match">3</b><span class="dj-fit--match">비슷해요</span></div><div><b class="dj-fit--loose">1</b><span class="dj-fit--loose">넉넉해요</span></div><div><b class="dj-fit--tight">1</b><span class="dj-fit--tight">부족해요</span></div></div>
+        <button class="dj-btn dj-btn--primary dj-btn--block">구매하기</button>
+      </div>
+      <div class="th" data-theme="dark">
+        <span class="cap">Dark · bg black-00</span>
+        <div class="dj-ref"><div class="dj-thumb"><svg class="dj-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg></div><div class="dj-meta"><span class="dj-eyebrow">기준 옷</span><span class="dj-name">오버핏 코튼 셔츠 · M</span><span class="dj-sub">어깨 46 · 가슴 58 · 총장 74cm</span></div></div>
+        <div class="dj-summary"><div><b class="dj-fit--match">3</b><span class="dj-fit--match">비슷해요</span></div><div><b class="dj-fit--loose">1</b><span class="dj-fit--loose">넉넉해요</span></div><div><b class="dj-fit--tight">1</b><span class="dj-fit--tight">부족해요</span></div></div>
+        <button class="dj-btn dj-btn--primary dj-btn--block">구매하기</button>
+      </div>
+    </div>
+  </section>
+</div>
+</body></html>
