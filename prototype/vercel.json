@@ -1,0 +1,1 @@
+{ "buildCommand": "python3 build.py && python3 build.py --test", "outputDirectory": "public", "headers": [{ "source": "/(.*)", "headers": [{ "key": "Permissions-Policy", "value": "camera=(self)" }, { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }, { "key": "Cross-Origin-Embedder-Policy", "value": "credentialless" }] }] }
