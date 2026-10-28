@@ -1,5 +1,6 @@
 # 신기능 제안 PR에 자동 검토 댓글을 단다. 기준: docs/eval/proposal-rubric.md
 # 필요한 비밀값: CLAUDE_CODE_OAUTH_TOKEN (레포 관리자가 claude 터미널에서 /install-github-app 으로 등록)
+# claude-code-action은 한글 브랜치 이름을 거부해서(팀 규칙: 이름/한글주제) Claude Code를 직접 실행한다.
 name: 신기능 제안 자동 검토
 
 on:
@@ -20,18 +21,19 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - uses: anthropics/claude-code-action@v1
-        with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: |
-            .claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다.
-            대상: PR #${{ github.event.pull_request.number }} (레포 ${{ github.repository }})
-          claude_args: |
-            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*)"
+      - name: Claude로 제안서 검토
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          npx -y @anthropic-ai/claude-code -p \
+            ".claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다. 대상: PR #${PR_NUMBER} (레포 ${GITHUB_REPOSITORY}). 댓글 본문 파일은 ${RUNNER_TEMP} 아래에 쓴다." \
+            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*)" \
+            --add-dir "$RUNNER_TEMP" \
             --max-turns 40
