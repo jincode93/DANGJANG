@@ -62,6 +62,7 @@ docs/research/            팀 리서치 근거 (README가 목차)
 docs/mentoring/           멘토링 기록
 docs/timeline.md          프로젝트 일정
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
+docs/eval/proposal-rubric.md  신기능 제안 평가 기준 (PR 자동 검토와 /review-proposal이 읽음)
 docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
 prototype/                데모 위치와 버전 기록
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
@@ -70,9 +71,9 @@ logs/decision-log.md      결정 기록 (한 줄 요약)
 logs/decisions/           결정마다 검토한 선택지와 이유
 docs/proposals/           신기능 제안 (제안마다 파일 하나)
 CONTRIBUTING.md           참여하는 법 (git을 몰라도)
-.github/                  CODEOWNERS, PR 양식
+.github/                  CODEOWNERS, PR 양식, 제안서 자동 검토 워크플로
 logs/time-log.md          작업 시간 기록
-.claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처)
+.claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처), review-proposal (제안서용)
 ```
 
 ## 협업 규칙 (git과 PR)
