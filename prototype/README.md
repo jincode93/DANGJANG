@@ -3,7 +3,6 @@
 ## 통합 데모
 
 - 주소: Vercel 연결 뒤 여기에 적는다. (그 전까지는 아티팩트 https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4, 서버 기능 없음)
-- 유저테스트판: 같은 주소 뒤에 `/test.html`
 - 팀 프로토타입 4개(`src/home.html`, `detail.html`, `reg.html`, `closet.html`)를 `build.py`로 합쳐서 만든다.
 - 서버(`api/`, `lib/`)는 옷장 등록 담당 팀원의 데모(Artemis-ignis/dangjang-demo, 2026-10-28 `fe2cb70`)에서 가져왔다. 우리 Vercel에서 돌아가고, 다른 사람의 서버나 계정에 기대지 않는다. 환경 변수와 API 키는 없다.
 
@@ -12,8 +11,8 @@
 | 경로 | 내용 |
 |---|---|
 | `src/*.html` | 팀 프로토타입 원본. `build.py`가 화면·동작 단위로 골라 합친다 |
-| `build.py` | 합치기. `public/index.html`(웹), `layr.html`(아티팩트용)을 만든다. `--test`면 유저테스트판(`public/test.html`, `layr-test.html`) |
-| `*.js`, `*.css` | 합칠 때 더하는 공통 코드 (후기, 주문, 상세 v2, 유저테스트 모드, DANGJANG 디자인) |
+| `build.py` | 합치기. `public/index.html`(웹), `layr.html`(아티팩트용)을 만든다 |
+| `*.js`, `*.css` | 합칠 때 더하는 공통 코드 (후기, 주문, 상세 v2, DANGJANG 디자인) |
 | `api/` | 서버 기능 4개. `ping` 서버 확인, `product` 상품 링크 읽기, `find` 구매내역 캡처로 상품 찾기, `img` 상품 사진 중계 |
 | `lib/` | 서버 공용 코드 (쇼핑몰 읽기, 상품 표준화·검사) |
 | `test/` | `lib/catalog.js` 시험 |
@@ -26,7 +25,7 @@
 
 ```bash
 cd prototype
-python3 build.py && python3 build.py --test
+python3 build.py
 node dev.mjs            # http://127.0.0.1:8792
 node test/catalog.test.mjs
 ```
@@ -51,4 +50,4 @@ Vercel → Add New → Project → `jincode93/DANGJANG` Import → Root Director
 | 2026-10-22 | v1 | 팀 프로토타입 4개(홈, 상품 상세, 옷장 등록, 내 옷장)를 하나로 합침 |
 | 2026-10-26 | v12 | '핏 기다리는 옷' 삭제. 구매 확정 뒤 "옷장에 담을까요?" 흐름 추가 |
 | 2026-10-26 | v13 | 서비스 이름 DANGJANG. 스플래시, 로그인 시트, 홈 헤더, 추천 섹션을 피그마 시안으로 반영 |
-| 2026-10-28 | v14 | 원본을 레포로 옮김. 서버를 붙여 상품 링크 읽기·구매내역 캡처 찾기가 실제로 동작. Vercel 배포 준비 |
+| 2026-10-28 | v14 | 원본을 레포로 옮김. Maze 유저테스트 모드(`--test`)를 뺌. 서버를 붙여 상품 링크 읽기·구매내역 캡처 찾기가 실제로 동작. Vercel 배포 준비 |

@@ -1,11 +1,11 @@
 /* ── 스냅·후기 (시연용 예시) ──
    무신사 후기 형식(키 · 몸무게 · 평소 사이즈 · 구매 사이즈 · 사이즈 평가 · 짧은 소감)을 본떠 새로 쓴 예시예요. 실제 후기를 옮겨 오지 않았어요.
    상품마다 RV_RUNS(작게 나옴 -1 · 정사이즈 0 · 크게 나옴 +1)로 평가 경향을 정하고, 씨앗값이 고정된 난수로 매번 같은 후기를 만들어요.
-   p14는 후기가 "작게 나와요" 쪽으로 쏠린 예시. 유저테스트 조건용 데이터(신상 후기 2개 등)는 testmode.js 에 있음 */
+   p14는 후기가 "작게 나와요" 쪽으로 쏠린 예시. */
 const RV_FIT = ['작아요', '딱 맞아요', '커요'];
 const RV_RUNS = { p16: 1, p1: 1, p4: 1, p12: 1, p13: -1, p14: -1 };
 const RV_N = { p15: 28, p14: 26 }; // 목록에 보여 줄 예시 후기 수 (기본 18). 화면의 후기 수는 상품의 rev 값
-const RV_ONLY = {}; // 고정 후기만 있는 상품 (신상). 유저테스트 빌드에서 채움 (testmode.js)
+const RV_ONLY = {}; // 고정 후기만 있는 상품 (신상)
 const RV_FIX = { // 맨 앞에 고정하는 후기
   p15: [
     { id: 'jh***', h: 177, w: 71, u: 'L', b: 'L', fit: 1, star: 5, len: '적당해요', text: '평소 L 입는데 L 샀어요. 어깨선 딱 맞고 기장은 빼 입기 좋은 정도예요. 원단이 생각보다 두툼해서 가을에 셔츠 하나로 입기 좋아요' },
@@ -84,7 +84,7 @@ function rvBars(list) {
   return `<div class="rv-bars">${RV_FIT.map((t, k) => `<div class="rv-bar f${k} ${s[k] === mx ? 'top' : ''}"><span>${t}</span><i><b style="width:${s[k]}%"></b></i><em class="num">${s[k]}%</em></div>`).join('')}</div>`;
 }
 const rvScore = (p) => `<div class="rv-score"><b class="num">${p.rate}</b><span>${rvStars(Math.round(p.rate))}</span><small>후기 ${won(p.rev)}개</small></div>`;
-const rvBase = (p) => S.user && !(typeof TEST !== 'undefined' && TEST && TEST.nocmp) ? baseFor(p) : null; // 내 평소 사이즈 = 이 종류 기준 옷의 사이즈
+const rvBase = (p) => S.user ? baseFor(p) : null; // 내 평소 사이즈 = 이 종류 기준 옷의 사이즈
 function revSection(p) { // 상품 상세의 스냅·후기 영역
   const list = reviewsOf(p), b = rvBase(p), few = list.length < 5, mine = b ? list.filter((r) => r.u === b.size) : [];
   const head = `<div class="pd-title"><h2>스냅·후기<span class="rv-cnt num">${won(p.rev)}</span></h2>${list.length ? `<button class="pd-sub hit" data-a="revAll" data-x="${p.id}" style="display:flex;align-items:center">전체 보기${I.chev}</button>` : ''}</div>`;

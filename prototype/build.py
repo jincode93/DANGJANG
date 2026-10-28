@@ -7,14 +7,11 @@
 - 옷장 등록(reg): 옷 등록 전체 + 측정 엔진 · 사진 촬영 모듈
 - 나머지(장바구니 이전 공통 화면)는 등록 버전을 바탕으로 둠 (가장 최근 공통 뼈대)
 실행: python3 build.py  →  layr.html (팀 통합본)
-      python3 build.py --test  →  layr-test.html (Maze 유저테스트용: 가상 인물 하늘 · 무신사 기준 상품 · 테스트 모드 · 완료 코드)
 """
 import re
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-TEST_BUILD = '--test' in sys.argv  # 유저테스트용 추가분은 이 스위치가 켜졌을 때만 들어감
 SRC = {k: (ROOT / 'src' / f'{n}.html').read_text() for k, n in
        [('d', 'detail'), ('c', 'closet'), ('r', 'reg'), ('h', 'home')]}
 
@@ -149,17 +146,6 @@ DPROD = DPROD.replace("id: 'p1'", "id: 'p16'").replace("cat: 'outer', tag: '패�
 P = re.sub(r"(  \{ id: 'p\d+'.*?(?=\n  \{ id:|\n\];))", lambda m: bottom5(m.group(1)) if "cat: 'bottom'" in m.group(1) else m.group(1), u('h', 'P'), flags=re.S)
 P = sub(P, 'const P = [\n', 'const P = [\n  ' + DPROD + ',\n')
 
-if TEST_BUILD:
-    # 유저테스트 후기 조건: p11 신상(후기 2개, 실측 추가해 비교 가능하게) · p15 후기 많음
-    P = sub(P, "rate: 4.6, rev: 1532, sizes: null, list: ['S', 'M', 'L'], out: [] }", "rate: 4.5, rev: 2, sizes: { S: [64, 47, 57, 59], M: [66, 49, 59, 60], L: [68, 51, 62, 61] }, out: [] }")
-    P = sub(P, "rate: 4.7, rev: 745,", "rate: 4.7, rev: 1286,")
-    P = sub(P, "rate: 4.7, rev: 2876,", "rate: 4.5, rev: 2,")  # p12 오버핏 롱슬리브 티: 유저테스트 '후기 적음' 조건
-    TEST_JS = (ROOT / 'testmode.js').read_text()
-    # 유저테스트 '후기 많음' 기준 상품: 무신사 상품 2149254(베이식 긴소매 티셔츠 2팩)와 같은 실측 · 가격 · 후기 수.
-    # 사진 · 후기 문장은 무신사 것을 쓰지 않고 기존 예시 사진(tee2)과 예시 후기로 채움. 실측 출처: musinsa.com/products/2149254 (2026-10-22 확인)
-    P = sub(P, "\n];", "\n  { id: 'p17', img: 'tee2', brand: 'BRAND P', name: '베이식 긴소매 티셔츠 2팩', cat: 'top', sub: '긴팔 티셔츠', tag: '티셔츠', price: 39800, dc: 0, rate: 4.9, rev: 80881,\n"
-            "    colors: ['브라운/블랙', '화이트/블랙', '화이트/멜란지 그레이', '블랙/멜란지 그레이'], spec: [['성별', '남녀공용'], ['소재', '면 100%'], ['핏', '레귤러 핏']],\n"
-            "    sizes: { S: [67.5, 46.5, 51, 56], M: [69, 48.5, 53.5, 58], L: [70.5, 50, 56, 59], XL: [72, 51.5, 58.5, 60], '2XL': [73, 53, 61, 60.5], '3XL': [74, 54.5, 63.5, 61] }, out: [] },\n];")
 RV_JS, RV_ACT = (ROOT / 'reviews.js').read_text().split('//@@ACTIONS')
 V2P = u('d2', 'P')
 V2S = {('p16' if pid == 'p1' else pid): sz for pid, sz in re.findall(r"\{ id: '(p\d+)'.*?sizes: (\{[^}]*\}|null)", V2P, re.S)}
@@ -184,17 +170,6 @@ PRESETS = re.sub(r"  empty: \(\) => .*?\n", '', PRESETS)
 PRESETS = sub(PRESETS, '  nobase:', "  empty: () => PRESETS.nobase(),\n  nobase:")
 assert "m: [40, 30, 32, 104]" not in PRESETS
 PRESETS = sub(PRESETS, "name: '코튼 초어 재킷', cat: 'outer',", "name: '코튼 초어 재킷', cat: 'outer', base: true,")
-if TEST_BUILD:
-    # 유저테스트 가상 인물 '하늘' (176cm · 70kg · 평소 상의 L): 기준 옷이 정해져 있어 과제마다 정답 사이즈가 있음
-    PRESETS = sub(PRESETS, "  many: () =>", '''  persona: () => ({ user: { name: '하늘' }, closet: [
-    item({ name: '화이트 긴팔 티셔츠', cat: 'top', sub: '긴팔 티셔츠', size: 'L', m: [70, 49, 55, 59], fit: 'good', base: true, src: '직접 입력' }),
-    item({ pid: 'p2', brand: 'BRAND B', img: 'base', name: '옥스퍼드 버튼다운 셔츠', cat: 'top', sub: '긴팔 셔츠', size: 'L', m: [74, 50, 58, 60], fit: 'good', subBase: true, src: '상품 링크' }),
-    item({ pid: 'p7', brand: 'BRAND G', img: 'tee', name: '헤비웨이트 티셔츠', cat: 'top', sub: '반팔 티셔츠', size: 'L', m: [71, 53, 58, 23], fit: 'good', src: '구매내역 캡처' }),
-    item({ img: 'denim', name: '와이드 데님', cat: 'bottom', sub: '긴바지', size: '30', m: [40, 30, 32, 76, 104], fit: 'good', base: true, src: 'A4 촬영' }),
-    item({ pid: 'p3', brand: 'BRAND C', img: 'jacket', name: '코튼 초어 재킷', cat: 'outer', sub: '점퍼/자켓', size: 'M', m: [70, 48, 58, 60], fit: 'good', base: true, src: 'Layr 구매' }),
-  ] }),
-  many: () =>''')  # 아우터 기준 옷 = 초어 재킷 (상세 버전 예시와 같게)
-
 RESET = u('c', 'reset')
 RESET = sub(RESET, 'S = { preset, ', "S = { preset, recent: ['셔츠', '패딩', '데님 자켓'], ")
 RESET = sub(RESET, "nav = [{ s: FOCUS ? 'closet' : 'home', p: {} }];", "nav = [{ s: 'home', p: {} }];")
@@ -212,8 +187,6 @@ DETAIL = u('d2', 'SCR.detail')
 DETAIL = sub(DETAIL, '<span class="pd-bimg"><img src="${IMG[base.img]}" alt=""></span>', '<span class="pd-bimg">${cutPic(base)}</span>')  # 사진 없는 옷은 치수 실루엣 (내 옷장)
 DETAIL = re.sub(r'<section class="dsec" id="s_rev">.*?</section>', '${revSection(p)}', DETAIL, count=1, flags=re.S)  # 스냅·후기 → 후기 화면 (reviews.js)
 assert '${revSection(p)}' in DETAIL
-if TEST_BUILD:
-    DETAIL = sub(DETAIL, 'SCR.detail = (pp) => {\n', 'SCR.detail = (pp) => {\n  if (TEST && TEST.nocmp) pp.nob = true; // 유저테스트 기준 조건: 내 옷 비교 없이 사이즈표만\n')
 DETAIL = sub(DETAIL, '<em>기준</em>', "<em>${base.subBase && base.sub === p.sub ? base.sub + ' 기준' : '기준'}</em>")
 # 1단계 변환: 사이즈표 · 도식은 v2 그룹 칸(gArr), 문구 · 개수는 통합본 칸 그대로 (detail2.js)
 i0, i1 = DETAIL.index('  const TH = PART_N;'), DETAIL.index("  let cmp = '';")
@@ -252,7 +225,7 @@ RENDER = sub(RENDER, "const b0 = app.querySelector('.body');", "const b0 = view.
 RENDER = sub(RENDER, 'app.innerHTML = h;', 'view.innerHTML = h;')
 RENDER = sub(RENDER, "const b = app.querySelector('.body');", "const b = view.querySelector('.body');")
 RENDER = sub(RENDER, "document.getElementById('failBtn').classList.toggle('on', S.failNext);",
-             "const fb = document.getElementById('failBtn'); if (fb) fb.classList.toggle('on', S.failNext);\n  setTimeout(bindRacks);" + ("\n  if (TEST) testAfter();" if TEST_BUILD else ""))
+             "const fb = document.getElementById('failBtn'); if (fb) fb.classList.toggle('on', S.failNext);\n  setTimeout(bindRacks);")
 
 # 홈: 홈 밖으로 가던 버튼(데모에서는 막혀 있던 것)을 실제 화면으로 연결
 HOME_FIX = [
@@ -446,11 +419,7 @@ for name in R:
     elif name in ('reset(',):
         out.append(CLOSET['scenario'])
         out.append(CLOSET['focusGo'])
-        if TEST_BUILD:
-            add(TEST_JS.rstrip())
-            add('if (!testStart()) { ' + u('r', name).strip() + ' }\ntestLinks();')
-        else:
-            add(u('r', name))
+        add(u('r', name))
     else:
         add(ureg(name))
 
@@ -676,24 +645,7 @@ TOKENS = """
 .pd-bimg img { object-fit:contain } .pd-bimg svg.tpl { width:100%; height:100%; padding:4px } .pd-bimg .rkno { display:flex; width:100%; height:100%; align-items:center; justify-content:center; color:#B5B5B5 }
 """
 CSS_TXT += TOKENS + (ROOT / 'reviews.css').read_text() + (ROOT / 'dj.css').read_text()
-TEST_CSS = '''
-/* 유저테스트 모드 (testmode.js) */
-body.testmode #demo, body.testmode #demoToggle { display:none !important }
-@media (max-width:760px) { body.testmode #phoneWrap { height:100dvh } }
-body.testmode.nocmp .pd-tg, body.testmode.nocmp .pd-hchip { display:none !important }
-#testLinks { display:grid; gap:10px }
-.tcode { display:block; width:100%; margin-top:14px; height:48px; border:1px solid var(--ln); border-radius:10px; text-align:center; font:700 17px ui-monospace,Menlo,monospace; letter-spacing:.02em; color:#121212; background:#F6F6F6 }
-#testLinks .tl { display:grid; gap:4px; font-size:12.5px }
-#testLinks .tlr { display:flex; gap:4px }
-#testLinks input { flex:1; min-width:0; height:30px; padding:0 8px; border:1px solid var(--pgLine); border-radius:7px; background:transparent; color:var(--pgInk); font:12px ui-monospace,Menlo,monospace }
-#testLinks button { flex:none; height:30px; padding:0 9px; border:1px solid var(--pgLine); border-radius:7px; font-size:12px; font-weight:600 }
-'''
-if TEST_BUILD:
-    CSS_TXT += TEST_CSS
-
 # ── 데모 패널 ──
-SHELL_TEST_BOX = '    <div class="box"><b>유저테스트 링크</b><p class="note" style="margin-bottom:8px">아티팩트 주소 뒤에 붙여 Maze 과제 링크로 써요. 데모 패널이 숨겨지고 그 화면에서 시작해요. 미리 보기 뒤에 데모로 돌아오려면 새로고침</p><div id="testLinks"></div></div>'
-SHELL_PERSONA = '\n      <button data-d="p:persona" class="wide">유저테스트 가상 인물 · 하늘</button>'
 SHELL = """<div id="page">
   <button id="demoToggle" data-d="toggle"><span>데모 설정 · <span id="nowShort">홈</span></span><span>▾</span></button>
   <aside id="demo">
@@ -702,7 +654,7 @@ SHELL = """<div id="page">
     <div class="box"><b>지금 위치 · 흐름도</b><div class="now" id="now">-</div></div>
     <div class="box"><b>사용자 상태</b><div class="btns" id="presets">
       <button data-d="p:guest">비회원</button><button data-d="p:nobase">회원 · 기준 옷 없음</button>
-      <button data-d="p:full">회원 · 기준 옷 있음</button><button data-d="p:many">회원 · 옷 많음</button>@@PERSONA_BTN@@
+      <button data-d="p:full">회원 · 기준 옷 있음</button><button data-d="p:many">회원 · 옷 많음</button>
     </div></div>
     <div class="box"><b>상황 만들기</b><div class="btns">
       <button data-d="deliver" class="wide">주문한 옷 배송 완료 보내기</button>
@@ -718,22 +670,19 @@ SHELL = """<div id="page">
       <button data-d="c:item">옷 상세 정보</button><button data-d="c:baseChange">기준 옷 바꾸기</button><button data-d="c:sub">세부 종류 기준</button>
       <button data-d="c:edit">정보 수정</button><button data-d="c:editCat">종류 바꾸기</button><button data-d="c:photo">사진 추가</button><button data-d="c:del">기준 옷 삭제</button>
     </div></div>
-@@TEST_BOX@@
     <p class="note">상품 사진은 AI 생성 이미지, 브랜드명 · 가격 · 치수는 예시예요. 결제 · 로그인은 흉내만 내요. 사진 촬영 등록은 앨범 사진으로 실제 측정이 돌아가요. 무신사 링크 · 구매내역 캡처 읽기는 이 데모의 서버(/api)로 실제로 돌아가요. 서버가 없는 곳(아티팩트)에서 열면 예시 값으로 채워져요</p>
   </aside>
   <div id="phoneWrap"><div id="phone"><div id="app"></div></div></div>
 </div>"""
-SHELL = SHELL.replace('@@PERSONA_BTN@@', SHELL_PERSONA if TEST_BUILD else '').replace('@@TEST_BOX@@', SHELL_TEST_BOX if TEST_BUILD else '')
 
 HTML = ('<title>DANGJANG 통합 데모</title>\n<style>\n' + CSS_TXT + '\n</style>\n\n' + SHELL + '\n\n<script>\n' + MAIN + '\n</script>\n' +
         ''.join('<script>' + s + '</script>\n' for s in EXTRA))
-OUT = 'layr-test' if TEST_BUILD else 'layr'
-(ROOT / f'{OUT}.html').write_text(HTML)
-print(f'{OUT}.html  {len(HTML.encode()) / 1e6:.2f} MB · 이미지 {len(IMGS)}장 · 동작 {len(A_SRC)}개')
+(ROOT / 'layr.html').write_text(HTML)
+print(f'layr.html  {len(HTML.encode()) / 1e6:.2f} MB · 이미지 {len(IMGS)}장 · 동작 {len(A_SRC)}개')
 
 # 웹 배포용: 아티팩트가 게시할 때 씌우는 기본 틀을 흉내 냄
 SKEL = ('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
         '<style>:root{color-scheme:light;box-sizing:border-box}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}'
         'img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n')
 (ROOT / 'public').mkdir(exist_ok=True)  # Vercel이 올리는 폴더 (vercel.json)
-(ROOT / 'public' / ('test.html' if TEST_BUILD else 'index.html')).write_text(SKEL + HTML + '</body></html>')
+(ROOT / 'public' / 'index.html').write_text(SKEL + HTML + '</body></html>')
