@@ -1,11 +1,12 @@
-# 신기능 제안 PR에 자동 검토 댓글을 단다. 기준: docs/eval/proposal-rubric.md
+# 신기능 제안 PR을 자동 검토해 기능별 이슈([신기능] 기능이름)에 기록하고, PR에는 요약만 단다.
+# 기준과 형식: docs/eval/proposal-rubric.md
 # 필요한 비밀값: CLAUDE_CODE_OAUTH_TOKEN (레포 관리자가 claude 터미널에서 /install-github-app 으로 등록)
 # claude-code-action은 한글 브랜치 이름을 거부해서(팀 규칙: 이름/한글주제) Claude Code를 직접 실행한다.
 name: 신기능 제안 자동 검토
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
     paths: ["docs/proposals/**"]
 
 concurrency:
@@ -15,12 +16,13 @@ concurrency:
 jobs:
   review:
     # 공개 레포라 외부 포크 PR에서는 돌리지 않는다. 팀원은 같은 레포 브랜치로 PR을 연다.
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
       pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +35,31 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           npx -y @anthropic-ai/claude-code -p \
-            ".claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다. 대상: PR #${PR_NUMBER} (레포 ${GITHUB_REPOSITORY}). 댓글 본문 파일은 ${RUNNER_TEMP} 아래에 쓴다." \
-            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*)" \
+            ".claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다. 대상: PR #${PR_NUMBER} (레포 ${GITHUB_REPOSITORY}). 본문 파일은 ${RUNNER_TEMP} 아래에 쓴다." \
+            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue edit:*),Bash(gh issue comment:*)" \
             --add-dir "$RUNNER_TEMP" \
-            --max-turns 40
+            --max-turns 50
+
+  # 제안 PR이 main에 머지되면 기능 이슈를 "상태: 제안" → "상태: 실험 중"으로 바꾼다. Claude는 쓰지 않는다.
+  mark-experimenting:
+    if: github.event.action == 'closed' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$GH_REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+            | grep '^docs/proposals/.*\.md$' | grep -v '/README\.md$' \
+            | while IFS= read -r f; do
+                name=$(basename "$f" .md)
+                n=$(gh issue list --state open --label "신기능" --label "상태: 제안" --search "in:title $name" --json number,title \
+                      | jq -r --arg t "[신기능] $name" '.[] | select(.title == $t) | .number' | head -1)
+                if [ -z "$n" ]; then echo "상태: 제안 인 이슈 없음: $name"; continue; fi
+                gh issue edit "$n" --remove-label "상태: 제안" --add-label "상태: 실험 중"
+                gh issue comment "$n" --body "제안 PR #$PR_NUMBER 이 머지돼서 상태를 실험 중으로 바꿨어요. 이후 개선 PR도 이 이슈에서 검토가 이어집니다."
+              done
