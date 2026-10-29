@@ -333,16 +333,8 @@ function recOf(p, base) {
 }
 const deltaOf = (p, base, k) => p.sizes[k].map((v, i) => v && base.m[i] ? +(v - base.m[i]).toFixed(1) : 0); // 기준 옷에 없는 칸은 비교에서 뺌
 function describe(p, base, k) {
-  const d = deltaOf(p, base, k), parts = partsOf(p);
-  const W = { 소매부리: ['넓고', '좁고'], 암홀: ['넓고', '좁고'], 전체소매: ['길고', '짧고'], 엉덩이: ['넓고', '좁고'], 밑단: ['넓고', '좁고'], 총장: ['길고', '짧고'], 소매: ['길고', '짧고'], 밑위: ['길고', '짧고'], 어깨: ['넓고', '좁고'], 가슴: ['넉넉하고', '타이트하고'], 허리: ['넉넉하고', '타이트하고'], 허벅지: ['넓고', '좁고'] };
-  const END = { 길고: '길어요', 짧고: '짧아요', 넓고: '넓어요', 좁고: '좁아요', 넉넉하고: '넉넉해요', 타이트하고: '타이트해요' };
-  const big = d.map((v, i) => [Math.abs(v), i]).filter(([a]) => a >= 1).sort((a, b) => b[0] - a[0]).slice(0, 2);
-  const kind = base.sub || CAT[p.cat];
-  if (!big.length) return `${k} 사이즈는 내 ${kind}와 거의 같아요`;
-  const ph = big.map(([a, i]) => [parts[i], a, W[parts[i]][d[i] > 0 ? 0 : 1]]);
-  const last = ph[ph.length - 1];
-  const head = ph.slice(0, -1).map(([n, a, w]) => `${n} ${a}cm ${w}, `).join('');
-  return `${k} 사이즈는 내 ${kind}보다<br>${head}${last[0]} ${last[1]}cm ${END[last[2]]}`;
+  const kind = base.sub || CAT[p.cat], s = partLine(p, deltaOf(p, base, k));
+  return s ? `${k} 사이즈는 내 ${kind}와 비교하면<br>${s}` : `${k} 사이즈는 내 ${kind}와 비슷해요`;
 }
 const fmtD = (v) => v === 0 ? '0' : (v > 0 ? '+' : '−') + Math.abs(v);
 
@@ -717,21 +709,17 @@ function guideLine(ms) {
 const LONG = { 엉덩이: '엉덩이단면', 밑단: '밑단단면', 암홀: '암홀', 소매부리: '소매부리단면', 인심: '인심', 전체소매: '전체소매길이', 총장: '총기장', 어깨: '어깨단면', 가슴: '가슴단면', 소매: '소매길이', 허리: '허리단면', 밑위: '밑위', 허벅지: '허벅지단면' };
 const TOL = 2;
 const fitOf = (v) => Math.abs(v) <= TOL ? 'eq' : v > 0 ? 'big' : 'small';
+const WIDE = new Set(['가슴', '어깨', '암홀', '밑단', '소매부리', '허리', '엉덩이', '허벅지']); // 품 부위 (CAT-06). 사이즈 판정은 이 부위로만 (REC-04-1)
+const FIT_W = { big: '넉넉해요', small: '부족해요' }; // 부위별 판정 (REC-04)
+const partLine = (p, d) => d.map((v, i) => [Math.abs(v), i]).filter(([a]) => a > TOL).sort((a, b) => b[0] - a[0]).slice(0, 2).map(([a, i]) => `${partsOf(p)[i]} ${d[i] > 0 ? '+' : '\u2212'}${a}cm ${FIT_W[fitOf(d[i])]}`).join(', ');
 function fitWord(p, base, k) {
-  const out = deltaOf(p, base, k).filter((v) => fitOf(v) !== 'eq'); if (!out.length) return '비슷해요';
+  const parts = partsOf(p), out = deltaOf(p, base, k).filter((v, i) => WIDE.has(parts[i]) && fitOf(v) !== 'eq'); if (!out.length) return '비슷해요';
   const big = out.some((v) => v > 0), small = out.some((v) => v < 0), mx = Math.max(...out.map(Math.abs));
   if (big && small) return '부위별로 달라요';
   return small ? (mx > TOL * 2 ? '작아요' : '살짝 작아요') : (mx > TOL * 2 ? '커요' : '살짝 커요');
 }
 function summaryOf(p, base, k) {
-  const d = deltaOf(p, base, k), parts = partsOf(p);
-  const W = { 소매부리: ['넓고', '좁고'], 암홀: ['넓고', '좁고'], 전체소매: ['길고', '짧고'], 엉덩이: ['넓고', '좁고'], 밑단: ['넓고', '좁고'], 총장: ['길고', '짧고'], 소매: ['길고', '짧고'], 밑위: ['길고', '짧고'], 어깨: ['넓고', '좁고'], 가슴: ['넓고', '좁고'], 허리: ['넓고', '좁고'], 허벅지: ['넓고', '좁고'] };
-  const END = { 길고: '길어요', 짧고: '짧아요', 넓고: '넓어요', 좁고: '좁아요' };
-  const big = d.map((v, i) => [Math.abs(v), i]).filter(([a]) => a > TOL).sort((a, b) => b[0] - a[0]).slice(0, 2);
-  if (!big.length) return `${k} · 모든 부위가 ${TOL}cm 이내로 비슷해요`;
-  const ph = big.map(([a, i]) => `${parts[i]} ${a}cm ${W[parts[i]][d[i] > 0 ? 0 : 1]}`);
-  ph[ph.length - 1] = ph[ph.length - 1].replace(/(길고|짧고|넓고|좁고)$/, (m) => END[m]);
-  return `${k} · ${ph.join(', ')}`;
+  return `${k} · ${partLine(p, deltaOf(p, base, k)) || '모든 부위가 비슷해요'}`;
 }
 SCR.detail = (pp) => {
   const p = PB[pp.id], j = judge(p), keys = sizeKeys(p), parts = partsOf(p), ph = p.photos || { hero: p.img };
@@ -765,7 +753,7 @@ SCR.detail = (pp) => {
     const fill = (a, b) => a.map((v, i) => v ?? b[i] ?? ref[i]); // 도식은 빈 부위를 반대쪽 옷 값 → 원본 기준 치수로 채워 그림 (뱃지는 안 붙음)
     const fig = flatFig(subOf(p), [{ m: fill(gb, gm), role: 'base' }, { m: fill(gm, gb), role: 'prod' }], { d: gd, parts });
     const s = summaryOf(p, base, view), cut = s.indexOf(' · ');
-    cmp = `<div class="pd-txt"><div class="pd-head">${view} 사이즈는 ${fitWord(p, base, view) === '비슷해요' ? '내 기준 옷과 <em class="eq">비슷해요</em>' : `내 기준 옷보다 <em>${fitWord(p, base, view)}</em>`}</div>
+    cmp = `<div class="pd-txt"><div class="pd-head">${view} 사이즈는 ${((w) => w === '비슷해요' ? '내 기준 옷과 <em class="eq">비슷해요</em>' : w === '부위별로 달라요' ? `내 기준 옷과 <em>${w}</em>` : `내 기준 옷보다 <em>${w}</em>`)(fitWord(p, base, view))}</div>
       <p class="pd-sum">${s.slice(cut + 3)}.</p>
       <div class="pd-cnt">${[['비슷해요', gd.filter((v) => v != null && fitOf(v) === 'eq').length, 'eq'], ['넉넉해요', gd.filter((v) => v != null && fitOf(v) === 'big').length, ''], ['부족해요', gd.filter((v) => v != null && fitOf(v) === 'small').length, 'lack']].map(([l, n, c]) => `<span class="${c}"><b>${n}<small>곳</small></b>${l}</span>`).join('')}</div></div>
       <div class="pd-stage">${fig}<div class="pd-legend"><span><i class="dash"></i>내 기준 옷 · ${base.name} ${base.size}</span><span><i class="solid"></i>이 상품 ${view}</span></div></div>
