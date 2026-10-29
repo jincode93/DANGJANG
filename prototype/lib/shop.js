@@ -4,7 +4,7 @@ const UA = 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, 
 const MAX_HTML = 3_000_000, MAX_IMG = 6_000_000;
 const SIZE_WORDS = /(총장|기장|어깨|가슴|소매|허리|밑위|허벅지|엉덩이|힙|밑단|암홀|인심|총길이)/;
 
-// 호출 제한: 1분에 상품 읽기 40번 · 상품 찾기 20번 · 사진 120번까지 (남용 방지. 서버가 여러 대면 각 서버에서 대략적으로 막음)
+// 호출 제한: 1분에 상품 읽기 40번 · 상품 찾기 20번 · 사진 600번까지 (데모 상품 사진도 이 중계로 보여 줌: 목록을 내리면 한 번에 수십 장) (남용 방지. 서버가 여러 대면 각 서버에서 대략적으로 막음)
 const HITS = new Map();
 function limited(req, kind, max) {
   const ip = String(req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'local').split(',')[0].trim(), key = kind + '|' + ip, now = Date.now();
@@ -134,7 +134,7 @@ export async function product(req) {
 }
 
 export async function img(req) {
-  if (limited(req, 'img', 120)) return new Response('too many', { status: 429 });
+  if (limited(req, 'img', 600)) return new Response('too many', { status: 429 });
   const u = safeUrl(new URL(req.url).searchParams.get('url'));
   if (!u) return new Response('bad url', { status: 400 });
   const r = await get(u.href, { accept: 'image/avif,image/webp,image/*,*/*;q=0.8', referer: u.origin + '/' }).catch(() => null);
@@ -142,7 +142,7 @@ export async function img(req) {
   const ct = r.headers.get('content-type') || '';
   if (!/^image\/(jpeg|png|webp|gif|avif)/i.test(ct)) return new Response('not an image', { status: 415 });
   const buf = await r.arrayBuffer(); if (buf.byteLength > MAX_IMG) return new Response('too large', { status: 413 });
-  return new Response(buf, { headers: { 'content-type': ct, 'cache-control': 'public, max-age=86400', 'x-content-type-options': 'nosniff' } });
+  return new Response(buf, { headers: { 'content-type': ct, 'cache-control': 'public, max-age=86400, s-maxage=604800', 'x-content-type-options': 'nosniff' } });
 }
 
 
