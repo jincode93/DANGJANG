@@ -529,13 +529,8 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 .bcard .bt { font-size:12px; color:var(--mut) }
 .bcard b { font-size:24px; font-weight:700; color:var(--g); margin-top:6px; line-height:1.1 }
 .bcard small { font-size:11.5px; color:var(--mut) }
-.pcard { width:140px }
-.pcard .img { height:168px }
-.pfit { margin-top:6px; font-size:12px; font-weight:600; color:var(--g); line-height:1.35 }
 .bcard small.ok { color:var(--g); font-weight:600 }
 .bcard small.ng { color:var(--sale); font-weight:600 }
-.pfit b { font-weight:700 }
-.pfit span { display:block; margin-top:2px; font-size:11.5px; font-weight:500; color:var(--mut) }
 #app { --ink:var(--text-primary); --ink2:#3A3A3A; --sub:#8A8A8A; --mut:var(--text-tertiary); --ln:var(--line); --gray:var(--bg-subtle); --fit:#27C45B; --fitw:var(--primary-subtle); --g:#27C45B; --gw:var(--primary-subtle); --sale:var(--discount); --ok:#14804A; color:var(--text-primary); letter-spacing:-.03em }
 .hdr { height:56px; padding:0 20px }
 .pad { padding:0 20px }
@@ -592,19 +587,6 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #demo h1 i { font-size:22px }
 #phone { position:relative }
 .btn { background:var(--g) } /* 주 버튼은 상세 시안처럼 초록 (보조 버튼은 .btn.line) */
-/* 홈 · 옷장 기준 랭킹 상품: 비교할 기준 옷 드롭다운 */
-.simdd { position:relative; margin:12px 20px 0; z-index:8 }
-.simbox { display:flex; align-items:center; gap:10px; width:100%; height:52px; padding:0 14px 0 10px; border:1px solid var(--ln); border-radius:12px; background:#fff; text-align:left }
-.simdd.open .simbox { border-color:var(--ink) } .simarr { margin-left:auto; display:flex; color:var(--ink); transition:transform .15s } .simdd.open .simarr { transform:rotate(180deg) }
-.simpic { width:32px; height:32px; border-radius:8px; overflow:hidden; flex:none; background:var(--bg-subtle); display:flex; align-items:center; justify-content:center }
-.simpic img { width:100%; height:100%; object-fit:contain } .simpic svg.tpl { width:100%; height:100%; padding:3px } .simpic .rkno { display:flex; color:#B5B5B5 }
-.simtx { display:grid; gap:2px; min-width:0; line-height:1.25 } .simtx b { font-size:14px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .simtx small { font-size:12px; color:var(--mut) }
-.simlist { position:absolute; left:0; right:0; top:calc(100% + 4px); background:#fff; border:1px solid var(--ln); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); overflow:hidden; padding:4px 0 }
-.simopt { display:flex; align-items:center; gap:10px; width:100%; height:56px; padding:0 14px 0 10px; text-align:left }
-.simopt:hover { background:var(--bg-subtle) } .simopt.on { background:var(--gw) } .simopt.on .simtx b { color:var(--g); font-weight:700 }
-.simchk { margin-left:auto; display:flex; color:var(--g) } .simchk .ic { width:20px!important; height:20px!important }
-.simdd + .hscroll { margin-top:12px }
-.simnone { margin:12px 20px 0; padding:18px 16px; border-radius:12px; background:var(--bg-subtle); text-align:center; font-size:13.5px; color:var(--mut); line-height:1.5 }
 .pd-bimg img { object-fit:contain } .pd-bimg svg.tpl { width:100%; height:100%; padding:4px } .pd-bimg .rkno { display:flex; width:100%; height:100%; align-items:center; justify-content:center; color:#B5B5B5 }
 /* ── 스냅·후기 (상세 시안 토큰: --g · --gw · --ln · --mut) ── */
 .rv .pd-title h2 { display:flex; align-items:baseline; gap:6px } .rv-cnt { font-size:14px; font-weight:500; color:var(--mut) }
@@ -653,21 +635,6 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 .scrolled .hsrch { display:flex }
 .totop { position:absolute; right:16px; bottom:100px; z-index:19; width:44px; height:44px; border-radius:50%; background:#fff; border:1px solid var(--ln); box-shadow:0 4px 12px rgba(0,0,0,.08); color:var(--ink); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .2s }
 .scrolled .totop { opacity:1; pointer-events:auto }
-.simsec { position:relative; align-items:center }
-.simsec .simi { display:flex; align-items:center; gap:4px; font-size:12.5px; color:var(--mut); white-space:nowrap }
-.simtip { position:absolute; right:16px; top:calc(100% + 8px); z-index:13; background:var(--g); color:#fff; font-size:12px; font-weight:500; line-height:1.5; padding:12px 36px 12px 12px; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12) }
-.simtip::before { content:''; position:absolute; right:14px; top:-5px; width:10px; height:10px; background:var(--g); transform:rotate(45deg) }
-.simtip button { position:absolute; right:4px; top:4px; width:24px; height:24px; color:#fff; display:flex; align-items:center; justify-content:center }
-.simtip button svg { width:8px; height:8px }
-.simbox { height:68px }
-.simpic { width:44px; height:44px }
-.simtx b { font-size:15px; font-weight:500 } .simtx small { font-size:13px }
-.pcard .br { font-weight:400; color:var(--mut) }
-.pcard .nm { white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; color:var(--ink); line-height:1.4; margin-top:2px }
-.pcard .price { margin-top:4px }
-.szchip { display:inline-flex; align-items:center; height:20px; padding:0 6px; margin-top:8px; border-radius:4px; background:var(--gray); color:var(--mut); font-size:11px }
-.pcard .pfit { margin-top:8px }
-.pmore { flex:none; display:flex; align-items:center; gap:2px; padding:0 20px 0 12px; height:168px; font-size:14px; color:var(--mut); white-space:nowrap }
 .htabs { position:sticky; top:56px; z-index:9 } /* 홈을 내려도 추천 · 랭킹 · 세일 탭은 헤더 아래 고정 */
 
 
@@ -679,15 +646,12 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 /* 상품 카드: 피그마 home_01 (이미지 5:6 · 브랜드 12 · 상품명 13 두 줄 · 가격 14 굵게) */
 .hscroll { gap:8px }
 .grid2 { gap:16px 8px }
-.card .img, .grid2 .card .img, .pcard .img, .rcard .img, .dcard .img, .mcard .img { height:auto; aspect-ratio:5/6; border-radius:4px; background:var(--bg-subtle) }
+.card .img, .grid2 .card .img, .rcard .img, .dcard .img, .mcard .img { height:auto; aspect-ratio:5/6; border-radius:4px; background:var(--bg-subtle) }
 .card .img img { width:100%; height:100%; object-fit:cover }
 .card .br { margin-top:10px !important; font-size:12px; font-weight:400; line-height:14px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 .card .nm { margin:4px 0 6px; font-size:13px; line-height:19.5px; height:39px; color:var(--ink); white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
 .card .price { margin-top:0 !important; font-size:14px; font-weight:700; line-height:17px; color:var(--ink) }
 .card .price em { margin-right:4px; color:var(--sale) }
-.card .szchip { margin-top:8px }
-.card .pfit { margin-top:10px; font-size:12px; line-height:1 }
-.pmore { height:auto; aspect-ratio:auto; align-self:flex-start; min-height:168px }
 /* 스냅·후기 사진 */
 .rv-snaps { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:16px -20px 4px; padding:0 20px }
 .rv-snaps::-webkit-scrollbar { display:none }
@@ -808,7 +772,7 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app .li { padding:0 20px; font-size:15px }
 
 /* 뱃지 · 라벨: 모서리 4, 11/600 */
-#app :is(.chipf, .chipg, .chipr, .szchip) { border-radius:4px; font-size:11px; font-weight:600 }
+#app :is(.chipf, .chipg, .chipr) { border-radius:4px; font-size:11px; font-weight:600 }
 #app .chipf { background:var(--primary); color:var(--on-primary) }
 #app .chipg { background:var(--bg-subtle); color:var(--text-secondary) }
 
@@ -820,7 +784,6 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app .card .br { color:var(--text-tertiary) }
 #app .card .nm { color:var(--text-primary) }
 #app .card .price em, #app .price em { color:var(--discount) }
-#app .pfit { color:var(--primary-text); font-weight:600 }
 
 /* 판정 색 */
 #app :is(.pd-tbl td.small, .pd-cnt .lack b, .rv-fit.f0, .rv-spec dd.f0) { color:var(--fit-tight) }
@@ -830,7 +793,7 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
    썸네일 모서리 8 · 브랜드·상품명 500 · 가격만 700 · 상품명은 최대 2줄 말줄임(높이 고정 없음)
    한 줄에 나란한 카드는 그리드·플렉스 행 높이가 가장 긴 카드(2줄)에 맞춰진다 */
 #app .card { display:flex; flex-direction:column; text-align:left }
-#app .card .img, #app .grid2 .card .img, #app :is(.pcard, .rcard, .dcard, .mcard) .img { height:auto; aspect-ratio:5/6; border-radius:8px; background:var(--bg-subtle); flex:none }
+#app .card .img, #app .grid2 .card .img, #app :is(.rcard, .dcard, .mcard) .img { height:auto; aspect-ratio:5/6; border-radius:8px; background:var(--bg-subtle); flex:none }
 #app .card .br { margin-top:10px !important; font-size:12px; line-height:14px; font-weight:500; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 #app .card .nm { height:auto; margin:4px 0 0; font-size:13px; line-height:19.5px; font-weight:500; color:var(--text-primary); white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis }
 #app .card .price { margin-top:6px !important; font-size:14px; line-height:17px; font-weight:700; color:var(--text-primary); font-variant-numeric:tabular-nums }
