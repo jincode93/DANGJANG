@@ -1,1 +1,1 @@
-{ "name": "dangjang-prototype", "private": true, "type": "module", "engines": { "node": ">=20" } }
+{"name":"dangjang-prototype","private":true,"type":"module","engines":{"node":">=20"},"dependencies":{"@vercel/blob":"^2.8.2"}}
