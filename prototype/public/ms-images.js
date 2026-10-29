@@ -295,6 +295,8 @@ const MSFLAT = {
 "r174": "https://image.msscdn.net/images/prd_img/20260607/6622016/detail_6622016_17890540614166_500.jpg",
 "r170": "https://image.msscdn.net/images/prd_img/20260511/6450040/detail_6450040_17846190974846_500.jpg",
 "r167": "https://image.msscdn.net/images/goods_img/20260521/6529512/6529512_17795234535435_500.jpg",
+"r16": "https://image.msscdn.net/images/prd_img/20260729/6948031/detail_6948031_17881536831366_500.jpg",
+"r21": "https://image.msscdn.net/images/prd_img/20260811/7048539/detail_7048539_17872762491121_500.jpg",
 "r15": "https://image.msscdn.net/images/prd_img/20261027/7634613/detail_7634613_17931178601902_500.jpg",
 "r198": "https://image.msscdn.net/images/prd_img/20260726/6925049/detail_6925049_17853721679247_500.png",
 "r100": "https://image.msscdn.net/images/goods_img/20261026/7619747/7619747_17930632243181_500.jpg",
