@@ -1,4 +1,5 @@
-# 신기능 제안 PR을 자동 검토해 기능별 이슈([신기능] 기능이름)에 기록하고, PR에는 요약만 단다.
+# 신기능 제안 PR을 사업·디자인·개발·정책 네 관점으로 자동 검토해 기능별 이슈([신기능] 기능이름)에 기록하고, PR에는 요약만 단다.
+# 네 관점은 한 실행 안에서 서브에이전트로 동시에 돈다(review-proposal 스킬).
 # 기준과 형식: docs/eval/proposal-rubric.md
 # 필요한 비밀값: CLAUDE_CODE_OAUTH_TOKEN (레포 관리자가 claude 터미널에서 /install-github-app 으로 등록)
 # claude-code-action은 한글 브랜치 이름을 거부해서(팀 규칙: 이름/한글주제) Claude Code를 직접 실행한다.
@@ -28,7 +29,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       contents: read
       pull-requests: write
@@ -57,9 +58,9 @@ jobs:
         run: |
           npx -y @anthropic-ai/claude-code -p \
             ".claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다. 대상: PR #${PR_NUMBER} (레포 ${GITHUB_REPOSITORY}). 본문 파일은 ${RUNNER_TEMP} 아래에 쓴다." \
-            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue edit:*),Bash(gh issue comment:*)" \
+            --allowedTools "Agent,Task,Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue edit:*),Bash(gh issue comment:*)" \
             --add-dir "$RUNNER_TEMP" \
-            --max-turns 50
+            --max-turns 80
 
       # Claude는 멈춰도 성공으로 끝나므로, 이번 실행에서 PR 댓글이 달렸는지 확인한다.
       - name: 검토 댓글 확인
