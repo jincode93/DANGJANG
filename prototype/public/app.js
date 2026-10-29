@@ -968,8 +968,6 @@ SCR.fit = (pp) => {
 };
 
 /* 옷장 (E) */
-const CB = ['img/63f0fd60a66e.png', 'img/ab1e544af71e.png', 'img/fe388d0a71ab.png', 'img/3bb98b08ef88.png'];
-const cbook = () => `<button class="cbook" data-a="cbook"><b>나만의 코디북 만들기${I.chev}</b><small>등록한 옷으로 코디하고 공유해요!</small><img src="${CB[0]}" alt="" style="right:29px;top:12px;width:72px;height:86px"><img src="${CB[1]}" alt="" style="right:46px;top:0;width:70px;height:70px"><img src="${CB[2]}" alt="" style="right:99px;top:25px;width:45px;height:55px"><img src="${CB[3]}" alt="" style="right:19px;top:3px;width:43px;height:52px"></button>`;
 const HOOK = '<svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#8C8880" stroke-width="1.8" stroke-linecap="round"><path d="M13 9.5a3 3 0 1 0-3-3"/><path d="M13 9.5V12L3 20.5h20L13 12"/></svg>';
 SCR.closet = (pp = {}) => {
   if (!S.user) return { node: '⑤ 내 옷장 · 로그인? → 아니오', navOn: 'closet', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>로그인하고 내 옷장 만들기</h4><p>가진 옷을 등록하면 새 옷과 겹쳐서 비교해 드려요</p><button class="btn" style="margin-top:22px" data-a="closetLogin">로그인하기</button></div>` };
@@ -997,7 +995,7 @@ SCR.closet = (pp = {}) => {
     <div class="ctabs">${CATS.map((c) => `<button class="${c.k === t ? 'on' : ''}" data-a="closetTab" data-x="${c.k}">${c.label} ${ofCat(c.k).length}</button>`).join('')}</div>
     ${waitReg ? `<button data-a="go" data-x="regFit" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;justify-content:space-between;align-items:center;border-radius:10px;background:var(--fitw);padding:12px 14px;font-size:14px"><span><b>등록 대기 ${waitReg}벌</b> · 확인하면 옷장에 담겨요</span>${I.chev}</button>` : ''}
     ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>처음 등록한 잘 맞는 ${CAT[t]}가 기준 옷이 되고,<br>${CAT[t]} 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
-    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${cbook()}
+    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}
     ${!baseOf(t) ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${CAT[t]}가 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
     ${good.length ? rack('good', good, (c) => `${!sv && c.subBase ? c.sub + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
     <div style="height:90px"></div>`}` };
@@ -1493,7 +1491,6 @@ const A = {
   editClear() { const i = document.getElementById('ename'); i.value = ''; i.focus() },
   editBase() { const d = syncEdit(), c = S.closet.find((q) => q.id === cur().p.id); if (c.base) { toast('다른 옷을 기준으로 정하면 바뀌어요'); return } d.base = !d.base; render() },
   edTool(x) { toast(x === 'paste' ? '시연에서는 옷 등록 › 캡처 · 링크에서 사이즈표를 읽어요' : '시연에서는 옷 등록 › 사진 촬영에서 측정해요') },
-  cbook() { toast('코디북은 준비 중이에요') },
   saveEdit(id) {
     const c = S.closet.find((q) => q.id === id), d = syncEdit(), m = d.m.map((v) => +v || 0);
     if (!d.size) { toast('사이즈를 골라 주세요'); render(); return }
