@@ -290,11 +290,14 @@ const MSDET = {
 "https://image.msscdn.net/images/2026/10/19/a3561a63420d4d81b003ce8b338e61cb.jpg"
 ]
 };
+// 옷장용 바닥컷의 무신사 원본 주소. 화면은 디자이너가 손본 사진(사진 저장소 img/flat_*.jpg)을 쓴다
 const MSFLAT = {
 "r177": "https://image.msscdn.net/images/goods_img/20260907/7264111/7264111_17892905485833_500.jpg",
 "r174": "https://image.msscdn.net/images/prd_img/20260607/6622016/detail_6622016_17890540614166_500.jpg",
 "r170": "https://image.msscdn.net/images/prd_img/20260511/6450040/detail_6450040_17846190974846_500.jpg",
 "r167": "https://image.msscdn.net/images/goods_img/20260521/6529512/6529512_17795234535435_500.jpg",
+"r16": "https://image.msscdn.net/images/prd_img/20260729/6948031/detail_6948031_17881536831366_500.jpg",
+"r21": "https://image.msscdn.net/images/prd_img/20260811/7048539/detail_7048539_17872762491121_500.jpg",
 "r15": "https://image.msscdn.net/images/prd_img/20261027/7634613/detail_7634613_17931178601902_500.jpg",
 "r198": "https://image.msscdn.net/images/prd_img/20260726/6925049/detail_6925049_17853721679247_500.png",
 "r100": "https://image.msscdn.net/images/goods_img/20261026/7619747/7619747_17930632243181_500.jpg",

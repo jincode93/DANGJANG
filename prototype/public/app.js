@@ -232,8 +232,8 @@ for (const p of P) { const d = MSIMG[p.id]; if (d) { IMG0['ms_' + p.id] = msImg(
   const f = MSFIX[p.id]; if (f) { p.name = f[0]; if (f.length > 1) { p.dc = f[1]; p.sp = f[2]; p.price = f[1] ? Math.round(f[2] / (1 - f[1] / 100) / 100) * 100 : f[2]; } } }
 // 무신사 상세 이미지 (앞쪽 2장) · 옷장용 바닥컷 (누끼, 배경 #f6f6f6)
 for (const p of P) { const d = MSDET[p.id]; if (d) p.det = d.map((u, i) => { const k = 'det_' + p.id + '_' + i; IMG0[k] = msImg(u); return k; }); }
-for (const k in MSFLAT) IMG0['flat_' + k] = msImg(MSFLAT[k]);
-const FLAT_SWAP = {"p4": "r44", "p2": "r15", "r101": "r100", "r172": "r167", "r197": "r196", "r39": "r36"}; // 바닥컷이 없는 옷은 바닥컷 있는 같은 종류 상품으로
+for (const k in MSFLAT) IMG0['flat_' + k] = `/api/asset?name=img/flat_${k}.jpg`; // 디자이너가 손본 바닥컷 (배경 #f6f6f6, 색상 칩 지움). 원본 주소는 MSFLAT
+const FLAT_SWAP = {"p4": "r44", "p2": "r15", "p1": "r16", "r22": "r21", "r101": "r100", "r172": "r167", "r197": "r196", "r39": "r36"}; // 바닥컷이 없는 옷은 바닥컷 있는 같은 종류 상품으로
 const PB = Object.fromEntries(P.map((p) => [p.id, p]));
 const won = (n) => n.toLocaleString('ko-KR');
 const sale = (p) => p.sp || Math.round(p.price * (100 - p.dc) / 100 / 100) * 100;
@@ -271,7 +271,23 @@ const PRESETS = {
     item({ brand: '에잇세컨즈', name: '스트라이프 셔츠 스카이 블루', cat: 'top', sub: '긴팔 셔츠', size: 'L', m: [74, 50, 58, 60], fit: 'good', src: '직접 입력' }),
     item({ img: 'denim_i', sub: '긴바지', brand: '무신사 스탠다드 우먼', name: '우먼즈 에센셜 커브드 데님 팬츠 [딥 인디고]', cat: 'bottom', size: '30', m: [40, 30, 31.5, 75, 103], fit: 'good', src: '상품 링크' }),
     item({ img: 'slacks_n', sub: '긴바지', brand: '네이비얼', name: '투턱 퓨어 울 슬랙스', cat: 'bottom', size: '30', m: [41, 30, 32, 76, 104], fit: 'good', src: 'A4 촬영' }),
-    item({ brand: '노스페이스', name: 'NJ3NS50A 남성 눕시 온볼 패딩 자켓 BLACK', cat: 'outer', sub: '숏패딩', size: 'L', m: [68, 54, 66, 64], fit: 'good', src: '직접 입력' })); return f },
+    item({ brand: '노스페이스', name: 'NJ3NS50A 남성 눕시 온볼 패딩 자켓 BLACK', cat: 'outer', sub: '숏패딩', size: 'L', m: [68, 54, 66, 64], fit: 'good', src: '직접 입력' }),
+    // 사진 없는 옷: 세부 종류 15종 × 색 케이스 (이름에 색이 없으면 기본 #979797)
+    item({ name: '베이직 롱슬리브 티셔츠', cat: 'top', sub: '긴팔 티셔츠', g: true, size: 'L', m: [72, 50, 57, 60, 54, 11, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '린넨 셔츠 화이트', cat: 'top', sub: '긴팔 셔츠', g: true, size: 'L', m: [74, 50, 58, 60, 56, 12, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '오버핏 반팔 티셔츠 옐로우', cat: 'top', sub: '반팔 티셔츠', g: true, size: 'L', m: [71, 55, 19, 23, 54, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '하와이안 반팔 셔츠 그린', cat: 'top', sub: '반팔 셔츠', g: true, size: 'L', m: [73, 56, 20, 24, 55, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '기모 후드티 핑크', cat: 'top', sub: '후드티', g: true, size: 'L', m: [70, 54, 60, 58, 50, 11, 27], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 브이넥 가디건 버건디', cat: 'outer', sub: '가디건', g: true, size: 'L', m: [66, 50, 56, 60, 52, 11, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '나일론 블루종 네이비', cat: 'outer', sub: '점퍼/자켓', g: true, size: 'L', m: [68, 52, 60, 62, 58, 13, 27], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 숏코트 카멜', cat: 'outer', sub: '숏코트', g: true, size: 'L', m: [80, 49, 59, 62, 58, 14, 28], fit: 'good', src: '직접 입력' }),
+    item({ name: '캐시미어 롱코트 차콜', cat: 'outer', sub: '롱코트', g: true, size: 'L', m: [110, 49, 60, 63, 62, 15, 28], fit: 'good', src: '직접 입력' }),
+    item({ name: '크롭 숏패딩 라벤더', cat: 'outer', sub: '숏패딩', g: true, size: 'L', m: [62, 54, 64, 62, 62, 14, 29], fit: 'good', src: '직접 입력' }),
+    item({ name: '구스다운 롱패딩 카키', cat: 'outer', sub: '롱패딩', g: true, size: 'L', m: [112, 55, 66, 64, 66, 15, 30], fit: 'good', src: '직접 입력' }),
+    item({ name: '와이드 코듀로이 팬츠 브라운', cat: 'bottom', sub: '긴바지', g: true, size: '30', m: [104, 40, 52, 32, 30, 22], fit: 'good', src: '직접 입력' }),
+    item({ name: '데님 쇼츠 블루', cat: 'bottom', sub: '반바지', g: true, size: '30', m: [46, 40, 53, 32, 30, 29], fit: 'good', src: '직접 입력' }),
+    item({ name: '플리츠 롱스커트 베이지', cat: 'bottom', sub: '긴치마', g: true, size: 'M', m: [85, 35, 50, 65], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 미니스커트 레드', cat: 'bottom', sub: '짧은 치마', g: true, size: 'M', m: [45, 35, 48, 55], fit: 'good', src: '직접 입력' })); return f },
 };
 /* ── 상태 ── */
 let S;
@@ -1192,25 +1208,33 @@ const TB = { // 몸판 실루엣 (긴팔 · 반팔 · 아우터 · 긴 아우터
 const dot = (x, ys) => ys.map((y) => `<circle cx="${x}" cy="${y}" r="1.8"/>`).join('');
 // [색, 실루엣 path들, 디테일 선, 디테일 점]
 const TPL_ICON = {
-  'tee-l': ['#C8A84E', TB.l, 'M42 22Q50 28 58 22'],
-  'shirt-l': ['#BFDDF5', TB.l, 'M39 20L44 30L50 24L56 30L61 20M50 24V82', dot(50, [40, 54, 68])],
-  'tee-s': ['#C8A84E', TB.s, 'M42 24Q50 30 58 24'],
-  'shirt-s': ['#BFDDF5', TB.s, 'M39 22L44 32L50 26L56 32L61 22M50 26V80', dot(50, [42, 55, 68])],
-  hoodie: ['#CDB8F0', TB.l + 'M35 24Q34 8 50 8Q66 8 65 24Q58 30 50 30Q42 30 35 24Z', 'M43 21Q50 26 57 21M38 70L41 61H59L62 70'],
-  cardigan: ['#7C1A2B', TB.o, 'M39 18L50 46L61 18M50 46V84', dot(50, [54, 64, 74])],
-  jacket: ['#D9261C', TB.o + 'M39 21V12H61V21Z', 'M50 12V84M30 77H70'],
-  'coat-s': ['#D8C6A0', TB.o, 'M39 18L35 28L41 30L50 50M61 18L65 28L59 30L50 50M50 50V84', dot(54, [58, 70])],
-  'coat-l': ['#7C1A2B', TB.ol, 'M39 12L35 22L41 24L50 46M61 12L65 22L59 24L50 46M50 46V92', dot(54, [54, 66, 78])],
-  'pad-s': ['#CDB8F0', 'M37 18V10H63V18L78 22Q87 40 91 64L79 69L71 46V84H29V46L21 69L9 64Q13 40 22 22Z', 'M50 10V84M29 34H71M29 50H71M29 66H71M15 46L24 44M85 46L76 44'],
-  'pad-l': ['#F3D98A', 'M37 10V4H63V10L76 14Q84 32 88 56L77 60L70 36V94H30V36L23 60L12 56Q16 32 24 14Z', 'M50 4V94M30 26H70M30 42H70M30 58H70M30 74H70'],
-  'pants-l': ['#BFDDF5', 'M30 10H70V18L78 90H58L50 42L42 90H22L30 18Z', 'M30 18H70M50 18V34'],
-  'pants-s': ['#F3D98A', 'M30 24H70V32L80 72H58L50 50L42 72H20L30 32Z', 'M30 32H70M50 32V46'],
-  'skirt-l': ['#D9261C', 'M34 10H66V18L78 92H22L34 18Z', 'M34 18H66M44 18L40 92M56 18L60 92'],
-  'skirt-s': ['#CDB8F0', 'M33 26H67V34L78 74H22L33 34Z', 'M33 34H67M44 34L41 74M56 34L59 74'],
+  'tee-l': [TB.l, 'M42 22Q50 28 58 22'],
+  'shirt-l': [TB.l, 'M39 20L44 30L50 24L56 30L61 20M50 24V82', dot(50, [40, 54, 68])],
+  'tee-s': [TB.s, 'M42 24Q50 30 58 24'],
+  'shirt-s': [TB.s, 'M39 22L44 32L50 26L56 32L61 22M50 26V80', dot(50, [42, 55, 68])],
+  hoodie: [TB.l + 'M35 24Q34 8 50 8Q66 8 65 24Q58 30 50 30Q42 30 35 24Z', 'M43 21Q50 26 57 21M38 70L41 61H59L62 70'],
+  cardigan: [TB.o, 'M39 18L50 46L61 18M50 46V84', dot(50, [54, 64, 74])],
+  jacket: [TB.o + 'M39 21V12H61V21Z', 'M50 12V84M30 77H70'],
+  'coat-s': [TB.o, 'M39 18L35 28L41 30L50 50M61 18L65 28L59 30L50 50M50 50V84', dot(54, [58, 70])],
+  'coat-l': [TB.ol, 'M39 12L35 22L41 24L50 46M61 12L65 22L59 24L50 46M50 46V92', dot(54, [54, 66, 78])],
+  'pad-s': ['M37 18V10H63V18L78 22Q87 40 91 64L79 69L71 46V84H29V46L21 69L9 64Q13 40 22 22Z', 'M50 10V84M29 34H71M29 50H71M29 66H71M15 46L24 44M85 46L76 44'],
+  'pad-l': ['M37 10V4H63V10L76 14Q84 32 88 56L77 60L70 36V94H30V36L23 60L12 56Q16 32 24 14Z', 'M50 4V94M30 26H70M30 42H70M30 58H70M30 74H70'],
+  'pants-l': ['M30 10H70V18L78 90H58L50 42L42 90H22L30 18Z', 'M30 18H70M50 18V34'],
+  'pants-s': ['M30 24H70V32L80 72H58L50 50L42 72H20L30 32Z', 'M30 32H70M50 32V46'],
+  'skirt-l': ['M34 10H66V18L78 92H22L34 18Z', 'M34 18H66M44 18L40 92M56 18L60 92'],
+  'skirt-s': ['M33 26H67V34L78 74H22L33 34Z', 'M33 34H67M44 34L41 74M56 34L59 74'],
 };
+// 상품명에 색 이름이 있으면 그 색, 없으면 기본 #979797 (앞에 있는 규칙이 먼저)
+const NAME_COL = [[/스카이\s*블루|sky\s*blue|라이트\s*블루|light\s*blue/i, '#A9CBEA'], [/차콜|charcoal|건메탈|gunmetal/i, '#4A4A4D'], [/블랙|black|흑청/i, '#2B2B2B'],
+  [/화이트|white|아이보리|ivory|크림|cream|오프\s*화이트/i, '#E6E3DC'], [/네이비|navy|인디고|indigo/i, '#2E3A5C'], [/그레이|grey|gray|회색|멜란지|melange/i, '#9A9CA0'],
+  [/버건디|burgundy|와인|wine/i, '#7C1A2B'], [/레드|red(?!uce)|빨강/i, '#D9261C'], [/핑크|pink/i, '#EDB3C3'], [/브라운|brown|초콜릿|chocolate|반다이크|tobacco|타바코|모카/i, '#7A5236'],
+  [/베이지|beige|오트밀|oatmeal|카멜|camel|샌드|sand|토프|taupe|탄\b/i, '#D3BF9C'], [/카키|khaki|올리브|olive|mud|머드/i, '#7C7A4C'], [/그린|green|forest|포레스트|틸|teal/i, '#3F7A5A'],
+  [/블루|blue|데님|denim/i, '#5B83B8'], [/옐로우|yellow|머스타드|mustard|버터/i, '#E8C860'], [/퍼플|purple|라벤더|lavender|바이올렛/i, '#B9A3E3']];
+const nameCol = (c) => (NAME_COL.find(([r]) => r.test(c.name || '')) || [])[1] || '#979797';
 function tplSvg(c) {
-  const [col, sil, det = '', dots = ''] = TPL_ICON[subOf(c)] || TPL_ICON['tee-l'];
-  return `<svg class="tpl" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="${sil}" fill="${col}" stroke="${col}" stroke-width="5" stroke-linejoin="round"/><g fill="none" stroke="#000" stroke-opacity=".14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${det}"/></g><g fill="#000" fill-opacity=".18">${dots}</g></svg>`;
+  const [sil, det = '', dots = ''] = TPL_ICON[subOf(c)] || TPL_ICON['tee-l'], col = nameCol(c);
+  const dark = parseInt(col.slice(1, 3), 16) * .3 + parseInt(col.slice(3, 5), 16) * .59 + parseInt(col.slice(5, 7), 16) * .11 < 110, ink = dark ? '#fff' : '#000', op = dark ? .28 : .16;
+  return `<svg class="tpl" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="${sil}" fill="${col}" stroke="${col}" stroke-width="5" stroke-linejoin="round"/><g fill="none" stroke="${ink}" stroke-opacity="${op}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${det}"/></g><g fill="${ink}" fill-opacity="${op + .04}">${dots}</g></svg>`;
 }
 let dragEnd = 0;
 function bindRacks() {
