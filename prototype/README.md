@@ -17,7 +17,7 @@
 | `public/app.css` | 화면 스타일. 색·간격은 토큰(`var(--…)`)으로 |
 | `public/app.js` | 화면과 동작 전부 (홈, 상품 상세, 구매, 옷장, 옷 등록, 마이) |
 | `public/measure.js`, `module.js` | 사진 측정 엔진과 사진 촬영·캡처 등록 창 |
-| `public/ms-images.js` | 무신사 상품 사진 주소 목록 (썸네일 229 · 상세 26 · 옷장 바닥컷 14) |
+| `public/ms-images.js` | 무신사 상품 사진 주소 목록 (썸네일 229 · 상세 26 · 옷장 바닥컷 16) |
 | `api/` | 서버 기능 5개. `ping` 서버 확인, `product` 상품 링크 읽기, `find` 구매내역 캡처로 상품 찾기, `img` 쇼핑몰 사진 중계, `asset` 데모 자체 사진 |
 | `lib/` | 서버 공용 코드 (쇼핑몰 읽기, 상품 표준화·검사) |
 | `test/` | `lib/catalog.js` 시험 |
@@ -55,7 +55,7 @@ node test/catalog.test.mjs
 | 사진 | 어디에 | 화면이 받는 길 |
 |---|---|---|
 | 무신사 상품 사진 | 무신사 (`public/ms-images.js`에 주소만) | `/api/img?url=…` 중계 |
-| 데모 자체 사진 39장: 예시 상품(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob private 저장소 `dangjang-prototype-blob` | `/api/asset?name=img/hero.jpg` |
+| 데모 자체 사진 43장: 예시 상품 · 코디북 배너(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob private 저장소 `dangjang-prototype-blob` | `/api/asset?name=img/hero.jpg` |
 
 데모 사진을 더하거나 바꿀 때: `npx vercel blob put 파일 --pathname img/이름.jpg --access private --force` 로 올리고, `public/app.js`의 `IMG0`·`CUT`·`SAMPLE`에 `/api/asset?name=…` 주소를 적는다. 저장소는 Development · Preview · Production 세 환경 모두에 연결되어 있어야 로컬에서도 읽고 올릴 수 있다.
 
