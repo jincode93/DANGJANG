@@ -1,0 +1,127 @@
+/* 신기능 #19 내 옷이랑 맞춰 보기. 원본: 팀원(juribb) 데모의 ⑧ 코디 스타일. 색은 디자인 시스템 토큰으로
+   바닥 자체의 색(배경 5색, 바닥 위 점선 · 흰 글씨)은 꾸미기 재료라 그대로 둠 */
+.cf-entry { display:flex; align-items:center; gap:12px; width:calc(100% - 32px); margin:10px 16px 0; padding:12px 14px; border-radius:var(--radius-md); background:var(--bg-subtle); text-align:left; color:var(--ink) }
+.cf-entry > span { flex:1; min-width:0 } .cf-entry b { display:block; font-size:14px } .cf-entry small { display:block; font-size:12px; color:var(--sub); margin-top:2px }
+#app { --floor:#BAB4AA; --floorLine:rgba(255,255,255,.8); --note:#FFF4EC; --noteTx:#B5440A; --warm:#FBF3E8 }
+.cf-cartbar { display:flex; align-items:center; gap:12px; width:calc(100% - 32px); margin:6px 16px 4px; padding:12px; border-radius:12px; background:var(--bg-subtle); border:1px solid #E6E6E3; text-align:left; color:var(--ink) }
+.cf-cartbar.off { background:var(--gray); color:var(--sub) }
+.cf-cartbar.off small { color:var(--sub) }
+.cf-cbth { display:flex; flex:none }
+.cf-cbth img { width:34px; height:40px; object-fit:contain; filter:drop-shadow(0 3px 4px rgba(40,32,20,.3)) }
+.cf-cbth img + img { margin-left:-12px }
+.cf-cbtx { flex:1; min-width:0 }
+.cf-cbtx b { display:block; font-size:14px; letter-spacing:-.02em }
+.cf-cbtx small { display:block; font-size:12px; color:var(--ink2); margin-top:2px }
+.cf-cbgo { flex:none; height:32px; padding:0 12px; border-radius:16px; background:var(--bg); color:var(--ink); font-size:12.5px; font-weight:700; display:flex; align-items:center }
+.cf-rech { display:flex; align-items:baseline; gap:8px; margin-top:18px } .cf-rech b { font-size:15px } .cf-rech small { font-size:12px; color:var(--sub) }
+.cf-recs { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin-top:10px; padding-bottom:2px } .cf-recs::-webkit-scrollbar { display:none }
+.cf-rec { flex:none; width:128px; display:flex; flex-direction:column; gap:3px; text-align:left; background:var(--bg) }
+.cf-rec .img { width:128px; height:150px; border-radius:8px; overflow:hidden; background:var(--gray); margin-bottom:4px } .cf-rec .img img { width:100%; height:100%; object-fit:cover }
+.cf-rec b { font-size:12.5px; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.cf-rec .pr { font-size:13px; font-weight:800 }
+.cf-rec .why { display:flex; flex-wrap:wrap; gap:3px; margin-top:2px } .cf-rec .why i { font-style:normal; font-size:10.5px; font-weight:600; padding:2px 6px; border-radius:4px; background:var(--gray); color:var(--ink2) }
+.cf-rec .why i:first-child { background:var(--fitw); color:var(--fit) }
+.cf-recnone { margin-top:10px; padding:14px; border-radius:10px; background:var(--gray); font-size:13px; color:var(--sub) }
+.cf-rgb { display:flex; flex-direction:column; gap:6px; flex:none } .cf-regcta .cf-rgb button.ln { background:var(--bg); color:var(--ink); border:1px solid var(--line) }
+.cf-vhead { padding:4px 20px 10px } .cf-vhead b { font-size:20px; font-weight:800; letter-spacing:-.03em }
+.cf-vfloor { display:block; width:100%; position:relative; padding:0; background:none; text-align:left }
+.cf-vedit { position:absolute; right:28px; bottom:12px; height:30px; padding:0 12px; border-radius:15px; background:rgba(17,17,17,.72); color:#fff; font-size:12.5px; font-weight:700; display:inline-flex; align-items:center; gap:4px }
+.cf-vedit svg { width:14px; height:14px }
+.cf-vlist { padding:0 20px; display:grid; gap:8px }
+.cf-vrow { display:flex; align-items:center; gap:12px; padding:10px 12px; border:1px solid #EBEBEB; border-radius:12px; background:var(--bg); text-align:left; width:100% }
+.cf-vrow .th { width:48px; height:56px; border-radius:8px; background:var(--floor); display:flex; align-items:center; justify-content:center; overflow:hidden; flex:none } .cf-vrow .th img { max-width:44px; max-height:52px; object-fit:contain }
+.cf-vrow .tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px } .cf-vrow small { font-size:11.5px; color:var(--sub) } .cf-vrow small em { font-style:normal; color:var(--fit); font-weight:700 }
+.cf-vrow b { font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap } .cf-vrow .tx > span { font-size:12.5px; color:var(--ink2) } .cf-vrow .go { color:var(--text-tertiary); font-size:20px }
+.cf-menu { display:grid } .cf-menu button { height:52px; text-align:left; font-size:15px; font-weight:600; border-bottom:1px solid var(--line) } .cf-menu button:last-child { border:0 } .cf-menu .del { color:#D93A3A }
+.cf-dirty { font-size:12px; font-weight:700; color:var(--fit); background:var(--fitw); padding:3px 8px; border-radius:10px }
+.cf-panel { margin-top:16px; padding-top:4px; border-top:8px solid var(--gray) }
+.cf-ptabs { padding:12px 20px 4px } .cf-ptabs button small { font-weight:500; opacity:.75 }
+.cf-row { margin-top:12px } .cf-rowh { padding:0 20px 8px; font-size:14px; font-weight:800 } .cf-rowh small { font-weight:500; font-size:12px; color:var(--sub); margin-left:4px }
+.cf-mine > button { position:relative }
+.cf-on { position:absolute; left:4px; top:4px; font-size:10px; font-weight:700; color:#fff; background:var(--ink); border-radius:4px; padding:1px 5px; font-style:normal }
+.cf-prods { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:0 20px 2px; align-items:flex-start } .cf-prods::-webkit-scrollbar { display:none }
+.cf-pc { flex:none; width:104px; display:flex; flex-direction:column; gap:2px; text-align:left; background:var(--bg) }
+.cf-pc .img { position:relative; width:104px; height:124px; border-radius:8px; overflow:hidden; background:var(--gray); border:2px solid transparent; margin-bottom:3px } .cf-pc.on .img { border-color:var(--ink) }
+.cf-pc .img img { width:100%; height:100%; object-fit:cover }
+.cf-pc .tg { font-size:11px; font-weight:700; color:var(--fit) }
+.cf-pc b { font-size:12px; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.cf-pc .pr { font-size:12.5px; font-weight:800 }
+.cf-pc .why { display:flex; flex-wrap:wrap; gap:3px; margin-top:2px } .cf-pc .why i { font-style:normal; font-size:10px; font-weight:600; padding:1px 5px; border-radius:4px; background:var(--gray); color:var(--ink2) } .cf-pc .why i:first-child { background:var(--fitw); color:var(--fit) }
+.cf-sep { flex:none; align-self:stretch; display:flex; flex-direction:column; align-items:center; gap:6px; padding:0 2px } .cf-sep::before { content:''; flex:1; width:1px; background:#E3E3E3 } .cf-sep i { font-style:normal; font-size:11px; font-weight:700; color:var(--sub); writing-mode:vertical-rl; letter-spacing:2px } .cf-sep::after { content:''; flex:1; width:1px; background:#E3E3E3 }
+.cf-regcta { display:flex; align-items:center; gap:12px; margin:12px 20px 0; padding:12px 14px; border-radius:10px; background:var(--fitw) }
+.cf-regcta > div { flex:1; min-width:0 }
+.cf-regcta b { display:block; font-size:14px }
+.cf-regcta small { display:block; font-size:12.5px; color:var(--ink2); margin-top:2px; line-height:1.4 }
+.cf-regcta button { flex:none; height:36px; padding:0 14px; border-radius:8px; background:var(--ink); color:var(--bg); font-size:13px; font-weight:700 }
+.cf-floor { position:relative; margin:8px 20px 0; width:350px; border-radius:14px; background:var(--floor); overflow:hidden }
+.cf-it { position:absolute; transform:translateX(-50%); display:block; padding:0; border:0; background:none }
+.cf-it img { height:100%; width:auto; max-width:none; display:block; filter:drop-shadow(0 6px 7px rgba(40,32,20,.28)) }
+.cf-it.ph img { border-radius:8px; filter:none; box-shadow:0 6px 14px rgba(40,32,20,.28) }
+.cf-card small.cf-incart { color:var(--fit); font-weight:600 }
+button.cf-it:focus-visible, .cf-slot:focus-visible { outline:2px solid #fff; outline-offset:3px; border-radius:6px }
+.cf-floor.live .cf-it { cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none }
+.cf-it.drag { z-index:5; cursor:grabbing }
+.cf-it.drag img { filter:drop-shadow(0 14px 16px rgba(40,32,20,.38)) }
+.cf-floor.lt .cf-slot { border-color:rgba(0,0,0,.22); color:rgba(0,0,0,.45); background:rgba(255,255,255,.35) }
+.cf-bgs { display:flex; align-items:center; gap:10px; margin:4px 20px 0; font-size:13px; color:var(--sub) }
+.cf-bgs > button:not(.cf-reset) { width:26px; height:26px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12) }
+.cf-bgs > button.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink) }
+.cf-pick { position:relative; width:30px; height:30px; flex:none; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--ink2); background:var(--bg); box-shadow:inset 0 0 0 1px var(--line); cursor:pointer }
+.cf-pick.on { background:var(--pk); color:#fff; box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink) }
+.cf-pick input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; border:0; padding:0 }
+.cf-pick:focus-within { outline:2px solid var(--ink); outline-offset:2px }
+.cf-bgs .cf-reset { margin-left:auto; font-size:12.5px; font-weight:700; color:var(--ink2); text-decoration:underline; text-underline-offset:3px }
+.cf-tag { position:absolute; left:50%; top:-8px; transform:translateX(-50%); background:var(--fit); color:var(--on-primary); font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; white-space:nowrap }
+.cf-slot { position:absolute; transform:translateX(-50%); border:1.5px dashed var(--floorLine); border-radius:12px; color:#fff; font-size:13px; font-weight:700; background:rgba(255,255,255,.12) }
+.cf-scale { display:flex; justify-content:space-between; gap:8px; margin:8px 20px 0; font-size:12px; color:var(--sub) }
+.cf-addouter { font-size:12px; font-weight:700; color:var(--ink2); text-decoration:underline; text-underline-offset:3px }
+.cf-scale .num { font-variant-numeric:tabular-nums; color:var(--ink2) }
+.cf-mtabs { display:flex; gap:6px; padding:0 20px 10px }
+.cf-mtabs button { height:32px; padding:0 14px; border-radius:16px; font-size:13px; font-weight:700; background:var(--gray); color:var(--ink2) }
+.cf-mtabs button.on { background:var(--ink); color:var(--bg) }
+.cf-mine { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:0 20px }
+.cf-mine::-webkit-scrollbar { display:none }
+.cf-mine > button { flex:none; width:64px; height:76px; border-radius:10px; background:var(--floor); display:flex; align-items:center; justify-content:center; border:2px solid transparent }
+.cf-mine > button.on { border-color:var(--ink) }
+.cf-mine > button img { max-width:54px; max-height:66px; object-fit:contain }
+.cf-mine > .cf-mreg { width:76px; background:var(--bg); border:1.5px dashed var(--line); font-size:12px; font-weight:700; color:var(--ink2); line-height:1.3 }
+.cf-lbl { display:block; font-size:14px; font-weight:700; margin-top:18px }
+.cf-lbl small { font-size:12px; font-weight:500; color:var(--sub); margin-left:4px }
+.cf-tin { display:flex; gap:8px; margin-top:8px }
+.cf-tin input { flex:1; min-width:0; height:46px; padding:0 14px; border:1px solid var(--line); border-radius:8px; font-size:15px; font-weight:600 }
+.cf-tin input:focus { outline:none; border-color:var(--ink) }
+.cf-tin button { flex:none; height:46px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--bg); font-size:13px; font-weight:700; color:var(--ink2) }
+.cf-hint { font-size:12px; color:var(--sub); margin-top:6px }
+.cf-os { margin-top:14px; padding:14px 0 4px; border-top:1px solid var(--line) }
+.cf-osh { display:flex; gap:12px; align-items:center }
+.cf-osh img { width:56px; height:68px; object-fit:cover; border-radius:6px; background:var(--gray); flex:none }
+.cf-osh small { display:block; font-size:12px; color:var(--sub) } .cf-osh b { display:block; font-size:14px; margin-top:1px } .cf-osh span { display:block; font-size:14px; font-weight:800; margin-top:4px }
+.cf-osl { font-size:13px; font-weight:700; margin-top:14px } .cf-osl small { font-weight:500; color:var(--sub); margin-left:4px }
+.cf-oss button { height:auto; min-height:38px; padding:6px 14px; border-radius:10px; display:inline-flex; flex-direction:column; align-items:center; justify-content:center; line-height:1.25; position:relative }
+.cf-oss button small { font-size:11px; font-weight:500; opacity:.75 }
+.cf-oss button em { position:absolute; top:-7px; right:-4px; font-style:normal; font-size:10px; font-weight:700; background:var(--fit); color:var(--on-primary); border-radius:8px; padding:1px 5px }
+.cf-oss button:disabled { opacity:.4; text-decoration:line-through }
+.cf-osq { display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:13px; font-weight:700 }
+.cf-ost { display:flex; justify-content:space-between; align-items:center; margin:16px 0 10px; padding-top:14px; border-top:1px solid var(--line); font-size:14px } .cf-ost b { font-size:18px }
+.cf-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px }
+.cf-tags button { height:34px; padding:0 13px; border-radius:17px; background:var(--gray); color:var(--ink2); font-size:13.5px; font-weight:600 }
+.cf-tags button.on { background:var(--ink); color:var(--bg) }
+.cf-card small.cf-ctags { color:var(--ink2); font-weight:600 }
+.cf-vtags { display:flex; gap:6px; flex-wrap:wrap; margin:12px 20px 0 }
+.cf-vtags span { font-size:13px; font-weight:600; color:var(--ink2); background:var(--gray); padding:5px 10px; border-radius:14px }
+.cf-pend { display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; padding:0 20px }
+.cf-pi { flex:none; width:104px; text-align:left }
+.cf-pi .img { width:104px; height:124px; border-radius:8px; position:relative }
+.cf-pi .img span { position:absolute; left:6px; top:6px; background:var(--bg); font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:5px; color:var(--fit) }
+.cf-pi p { font-size:12px; margin-top:6px; line-height:1.35; color:var(--ink2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 10px; padding:0 20px; align-items:start }
+.cf-card { text-align:left; cursor:pointer; min-width:0 }
+.cf-mini { width:170px; border-radius:12px; overflow:hidden; position:relative; background:var(--floor) }
+.cf-mini > div { position:absolute; left:0; top:0; transform-origin:0 0 }
+.cf-mini .cf-floor { margin:0; border-radius:0 }
+.cf-card b { display:block; font-size:14px; margin-top:7px }
+.cf-card small { display:block; font-size:11.5px; color:var(--sub); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.cf-add { border:1.5px dashed var(--line); border-radius:12px; color:var(--sub); font-size:14px; font-weight:700; min-height:180px }
+.cf-th { width:62px; height:72px; border-radius:8px; background:var(--floor); display:flex; align-items:center; justify-content:center; flex:none }
+.cf-th img { max-width:54px; max-height:66px; object-fit:contain }
+.toast button.tl { color:#9DB4FF; font-weight:700; margin-left:8px; white-space:nowrap }
