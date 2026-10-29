@@ -1,7 +1,7 @@
 /* ── 신기능 #17 내 옷 기준 추천: 홈 추천 섹션 · 랭킹 "기준 옷" 필터 ──
    제안서 docs/proposals/내-옷-기준-추천.md (PR #7) · 이슈 https://github.com/jincode93/DANGJANG/issues/17
    원본: 팀원(juribb) 데모 claude.ai/artifact/SQxjvVpb7hYjDT2DcxTcYu (통합 데모 v14 복제본). 규칙은 그대로 옮기고, 완료본과 맞물리는 곳만 고침
-     - 토글 둘: 홈 추천(basefit-home) · 랭킹 필터(basefit-rank). 고른 기준 옷(S.simB)은 둘이 같이 씀
+     - 홈 추천과 랭킹 필터는 토글 하나. 고른 기준 옷(S.simB)은 둘이 같이 씀
      - 홈 섹션 모양은 완료본 v15(피그마 home_01 · home_02)에 있던 것을 그대로 옮김. 그 섹션은 완료본에서 뺐음
      - 공통 규칙: 상세와 같은 계산(recOf, 품절 사이즈 빼고)의 추천 사이즈 판정이 '비슷해요'인 상품만, 퍼센트 없음(REC-05)
      - 랭킹 순위 숫자는 필터 전 그 목록의 순위 (데모는 전체 상품 순위)
@@ -37,17 +37,6 @@ document.getElementById('app').addEventListener('click', (e) => {
   e.stopPropagation(); e.preventDefault(); S.simDD = false; saveY(); render();
 }, true);
 
-DJ.feature({
-  id: 'basefit-home', issue: 17, name: '내 옷 기준 추천 · 홈', proposal: 'docs/proposals/내-옷-기준-추천.md',
-  actions: {
-    simOpen() { S.simDD = !S.simDD; saveY(); render() },
-    simPick(id) { S.simB = id; S.simDD = false; saveY(); render() },
-    simTip() { S.simTip = !S.simTip; render() },
-    simAll(id) { const b = S.closet.find((c) => c.id === id); S.simB = id; replace('home', { t: '랭킹', rc: CAT[b.cat], rs: SUB[b.cat].includes(b.sub) ? b.sub : '전체', rm: 1 }) }, // 그 옷이 선택된 랭킹
-  },
-  slots: { 'home.rec': homeRec },
-});
-
 /* 랭킹 탭: 기준 옷 칩 · 시트. p.rm = 켬, 비교할 옷은 rankBase */
 // 홈 · 시트에서 고른 옷이 지금 1 · 2뎁스와 맞으면 그 옷, 아니면 그 종류 기준 옷 중 맞는 상품이 가장 많은 옷. 없으면 필터가 풀림
 function rankBase(list, p) {
@@ -57,8 +46,12 @@ function rankBase(list, p) {
   return bs.find((c) => c.id === S.simB) || bs.sort((a, b) => hit(b) - hit(a))[0] || null;
 }
 DJ.feature({
-  id: 'basefit-rank', issue: 17, name: '내 옷 기준 추천 · 랭킹 필터', proposal: 'docs/proposals/내-옷-기준-추천.md',
+  id: 'basefit', issue: 17, name: '내 옷 기준 추천', proposal: 'docs/proposals/내-옷-기준-추천.md',
   actions: {
+    simOpen() { S.simDD = !S.simDD; saveY(); render() },
+    simPick(id) { S.simB = id; S.simDD = false; saveY(); render() },
+    simTip() { S.simTip = !S.simTip; render() },
+    simAll(id) { const b = S.closet.find((c) => c.id === id); S.simB = id; replace('home', { t: '랭킹', rc: CAT[b.cat], rs: SUB[b.cat].includes(b.sub) ? b.sub : '전체', rm: 1 }) }, // 그 옷이 선택된 랭킹
     rankBaseOpen() {
       if (!S.user) { need('로그인하면 내 기준 옷과 맞는 상품만 볼 수 있어요', () => { closeOv(); A.rankBaseOpen() }); return }
       const p = cur().p, ck = CATK.find((c) => CAT[c] === p.rc);
@@ -74,6 +67,7 @@ DJ.feature({
     rankReg(ck) { closeOv(); startReg(ck || null, 'home') },
   },
   slots: {
+    'home.rec': homeRec,
     'rank.filter': (list, p) => {
       const b = rankBase(list, p); S.rankB = b && b.id; // 시트에서 선택 표시용
       return `<div class="rsel">${b ? `<span class="fchip on"><button class="fct" data-a="rankBaseOpen"><span class="simpic">${cutPic(b)}</span><span>${b.name}</span></button><button class="fchx" data-a="rankAll" aria-label="기준 옷 해제">${I.close}</button></span>`
