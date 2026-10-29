@@ -1,0 +1,125 @@
+/* 신기능 #15 코디북. 원본: 팀원 데모 source/app.html 의 패션북 스타일. 색은 디자인 시스템 토큰으로
+   코디 판 자체의 색(종이 바탕 #F4F0E6, 메모지 #FFF8C7 등)은 판 꾸미기 재료라 그대로 둠 */
+/* ── 패션북 ── */
+.bk-st { position:absolute; left:0; top:0; width:358px; height:440px; transform-origin:0 0 }
+.bk { position:relative; width:100%; aspect-ratio:358 / 440; border-radius:16px; overflow:hidden; touch-action:pan-y; background-image:radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size:14px 14px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05) }
+.bk-title { position:absolute; left:16px; top:12px; font:600 34px/1 'Caveat','Nanum Pen Script','Segoe Script','Bradley Hand',cursive; letter-spacing:-.01em; color:#1D2B45; transform:rotate(-3deg); transform-origin:left top; z-index:1; pointer-events:none }
+.bk-title small { display:block; font:600 20px/1 'Nanum Pen Script','Caveat',cursive; color:#6B7280; margin-top:4px }
+.bk-e { position:absolute; touch-action:none; cursor:grab; user-select:none; -webkit-user-select:none }
+.bk-e.sel { outline:1.5px dashed var(--primary); outline-offset:4px; border-radius:4px }
+.bk-e.item img, .bk-e.item svg, .bk-e.stk svg { width:100%; height:auto; display:block; pointer-events:none }
+.bk-e.item { filter:drop-shadow(0 5px 7px rgba(0,0,0,.2)) }
+.bk-e.item .rkno { display:flex; justify-content:center; padding:20px 0 }
+.bk-e.stk { filter:drop-shadow(0 2px 2px rgba(0,0,0,.15)) }
+.bk-e.memo { font-weight:600; line-height:1.15; white-space:nowrap }
+.bk-e.memo.paper { padding:5px 11px 6px; background:#FFF8C7; box-shadow:0 3px 6px rgba(0,0,0,.14); border-radius:2px }
+.bk-fonts { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; max-height:150px; overflow-y:auto }
+.bk-fonts button { height:38px; padding:0 14px; border-radius:19px; border:1px solid #DDD; font-size:17px; background:#fff }
+.bk-fonts button.on { background:var(--ink); color:#fff; border-color:var(--ink) }
+.bk-cols { display:flex; gap:10px; margin-top:14px }
+.bk-cols button { width:30px; height:30px; border-radius:50%; border:1px solid var(--white-50); flex:none }
+.bk-cols button.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink) }
+.bk-ptg { display:flex; align-items:center; justify-content:space-between; width:100%; height:44px; margin-top:6px; font-size:14px; font-weight:600 }
+.bk-ptg i { width:42px; height:24px; border-radius:12px; background:var(--white-50); position:relative; transition:background .15s }
+.bk-ptg i::after { content:''; position:absolute; left:2px; top:2px; width:20px; height:20px; border-radius:50%; background:#fff; transition:left .15s }
+.bk-ptg.on i { background:var(--g) }
+.bk-ptg.on i::after { left:20px }
+.bk-stks { grid-template-columns:repeat(4,1fr) !important; max-height:360px; overflow-y:auto }
+.bk-stks button { height:66px !important; font-size:11px !important }
+.bk-stks button svg { height:28px !important }
+.bk-sel { min-height:46px; display:flex; gap:6px; padding:12px 16px 0; overflow-x:auto; scrollbar-width:none }
+.bk-sel button, .bk-add button { flex:none; height:34px; padding:0 13px; border-radius:17px; font-size:13px; font-weight:700; background:var(--gray); color:var(--ink2); display:flex; align-items:center; gap:4px }
+.bk-sel button.pri { background:var(--ink); color:#fff }
+.bk-sel button.del { color:var(--sale) }
+.bk-sel .hint { font-size:12.5px; color:var(--sub); height:34px; display:flex; align-items:center }
+.bk-add { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:12px 16px 0 }
+.bk-add button { height:46px; border-radius:10px; justify-content:center; border:1px solid var(--line); background:#fff; color:var(--ink) }
+.bk-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--line) }
+.bk-row .img { width:44px; height:52px; border-radius:6px; flex:none }
+.bk-row .img img { object-fit:contain }
+.bk-row .i { flex:1; min-width:0 }
+.bk-row .i b { display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.bk-row .i span { font-size:12px; color:var(--sub) }
+.bk-row button.s { flex:none; height:32px; padding:0 12px; border-radius:16px; font-size:12.5px; font-weight:700; border:1px solid var(--white-50) }
+.bk-pick { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px; max-height:330px; overflow-y:auto }
+.bk-pick button { position:relative; height:96px; border-radius:8px; background:var(--gray); padding:6px; border:2px solid transparent }
+.bk-pick button.on { border-color:var(--ink) }
+.bk-pick button .img { width:100%; height:100%; background:none }
+.bk-pick button .img img { object-fit:contain }
+.bk-pick button i { position:absolute; right:4px; top:4px; width:18px; height:18px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-style:normal; font-size:11px }
+.bk-stks { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px }
+.bk-stks button { height:76px; border-radius:10px; background:var(--gray); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; font-size:12px; color:var(--ink2) }
+.bk-stks button svg { height:30px; width:auto; max-width:60px }
+.bk-bgs { display:flex; gap:10px; margin-top:12px }
+.bk-bgs button { width:44px; height:44px; border-radius:50%; border:1px solid var(--white-50); position:relative }
+.bk-bgs button.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink) }
+.bk-sim { display:flex; gap:10px; margin:14px -16px 0; padding:0 16px 4px; overflow-x:auto; scrollbar-width:none }
+.bk-sim .df { display:block; font-size:11px; color:var(--sub); margin-top:4px }
+.bk-sim button { flex:none; width:118px; min-width:0; text-align:left }
+.bk-sim .img { height:150px; border-radius:6px }
+.bk-sim .pc { display:inline-flex; align-items:center; height:20px; padding:0 6px; border-radius:4px; background:var(--fitw); color:var(--fit); font-size:11px; font-weight:700; margin-top:6px }
+.bk-promo { margin:26px 16px 0; padding:14px; border-radius:14px; background:#F4F0E6; display:flex; align-items:center; gap:12px; text-align:left }
+.bk-promo .th { position:relative; width:92px; height:76px; flex:none }
+.bk-promo .th span { position:absolute; width:46px; height:70px; top:3px; display:flex; align-items:center; filter:drop-shadow(0 3px 4px rgba(0,0,0,.2)) }
+.bk-promo .th span img, .bk-promo .th span svg { width:100%; height:100%; object-fit:contain; display:block }
+.bk-promo b { display:block; font-size:15px; letter-spacing:-.02em }
+.bk-promo small { display:block; font-size:12.5px; color:var(--ink2); margin-top:3px; line-height:1.45 }
+.bk-ban { display:flex; align-items:center; gap:12px; margin:14px 16px 0; padding:12px 14px; width:calc(100% - 32px); border-radius:12px; background:#F4F0E6; text-align:left }
+.bk-ban .th { position:relative; width:74px; height:56px; flex:none }
+.bk-ban .th span { position:absolute; width:38px; height:52px; top:2px; display:flex; align-items:center; filter:drop-shadow(0 2px 3px rgba(0,0,0,.2)) }
+.bk-ban .th span img, .bk-ban .th span svg { width:100%; height:100%; object-fit:contain; display:block }
+.bk-ban .t { flex:1; min-width:0 }
+.bk-ban .t b { display:block; font-size:15px; letter-spacing:-.02em }
+.bk-ban .t small { display:block; font-size:12.5px; color:var(--ink2); margin-top:2px; line-height:1.4 }
+.bk-chip { display:inline-flex; align-items:center; height:24px; padding:0 9px; border-radius:12px; background:var(--gray); font-size:12px; color:var(--ink2); margin:0 6px 6px 0 }
+.bk-tp { padding:6px 16px 28px }
+.bk-tp .bk-tt { font-size:17px; margin:8px 0 14px; text-align:left }
+.bk-tp .bk-tg { display:grid; grid-template-columns:1fr 1fr; gap:18px 12px }
+.bk-tp .bk-tg button { display:flex; flex-direction:column; align-items:stretch; gap:3px; text-align:left; padding:0; min-width:0 }
+.bk-tp .bk-tg .bk { border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,.12); pointer-events:none }
+.bk-tp .bk-tg b { font-size:14.5px; margin-top:8px; letter-spacing:-.01em }
+.bk-tp .bk-tg small { font-size:12px; color:var(--sub); font-weight:400 }
+.bk-tpl { position:absolute; inset:0; padding:18px 14px 14px; display:flex; flex-direction:column; gap:10px; background:inherit; z-index:3 }
+.bk-tt { font-size:15px; font-weight:800; letter-spacing:-.02em; text-align:center; color:var(--text-secondary) }
+.bk-tg { display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1; min-height:0 }
+.bk-tg button { display:flex; flex-direction:column; align-items:center; gap:6px; min-height:0; text-align:center; font-size:13px; font-weight:600 }
+.bk-tg .pv { position:relative; flex:1; min-height:0; aspect-ratio:358 / 440; max-width:100%; overflow:hidden; border-radius:10px; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.08) }
+.bk-tg .pv img { position:absolute; height:auto; filter:drop-shadow(0 2px 3px rgba(0,0,0,.18)) }
+.bk-empty { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; color:#9A9488; font-size:14px; line-height:1.55; pointer-events:none; padding:0 40px }
+.bkg { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 12px; padding:6px 16px 24px }
+.bkc .th { display:block; width:100%; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08) }
+.bkc .th .bk { border-radius:14px; box-shadow:none; pointer-events:none }
+.bkc .mt { display:flex; align-items:flex-start; gap:4px; margin-top:8px }
+.bkc .nm { flex:1; min-width:0; text-align:left }
+.bkc .nm b { display:block; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.bkc .nm small { font-size:12px; color:var(--sub) }
+.bk-h::after { content:""; position:absolute; inset:-12px }
+.toast.bkt { bottom:auto; padding:9px 14px }
+.tour { position:absolute; inset:0; z-index:85 }
+.tdim { position:absolute; inset:0; background:rgba(0,0,0,.62) }
+.tspot { position:absolute; border-radius:12px; box-shadow:0 0 0 2px var(--primary); pointer-events:none }
+.tbub { position:absolute; left:16px; right:16px; background:#fff; border-radius:16px; padding:14px 16px 12px; box-shadow:0 10px 30px rgba(0,0,0,.28) }
+.tbub .th { display:flex; justify-content:space-between; align-items:center }
+.tbub .tc { font-size:12px; font-weight:800; color:#fff; background:var(--primary); border-radius:10px; padding:2px 9px }
+.tbub .tskip { font-size:13px; color:var(--sub); padding:6px 4px }
+.tbub b { display:block; font-size:17px; font-weight:800; margin-top:8px; letter-spacing:-.02em }
+.tbub p { font-size:14px; color:var(--ink2); line-height:1.5; margin-top:4px }
+.tbub .tf { display:flex; justify-content:space-between; align-items:center; margin-top:12px }
+.tbub .tdots i { display:inline-block; width:6px; height:6px; border-radius:3px; background:var(--white-50); margin-right:5px }
+.tbub .tdots i.on { background:var(--primary); width:16px }
+.tbub .tn { height:40px; padding:0 22px; border-radius:10px; background:var(--ink); color:#fff; font-weight:700; font-size:14.5px }
+.tbub .tar { position:absolute; width:16px; height:16px; background:#fff; transform:rotate(45deg) }
+.bk-none { display:grid; justify-items:center; gap:4px; padding:18px 12px; border:1.5px dashed var(--white-50); border-radius:12px; text-align:center }
+.bk-none .ei { color:var(--text-tertiary) } .bk-none b { font-size:15px } .bk-none span { font-size:13px; color:var(--sub) }
+.bk-none button { margin-top:8px; height:40px; padding:0 18px; border:1px solid var(--white-50); border-radius:10px; font-size:14px; font-weight:700; background:#fff } /* 패션북: 캔버스와 도구줄 사이 */
+.bk-add { padding-top:40px !important }
+.bk-row .s, .bk-sel button, .bk-add button { min-height:38px }
+.bk-h { position:absolute; right:-15px; bottom:-15px; width:24px; height:24px; border-radius:50%; background:var(--primary); border:2.5px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3); touch-action:none; cursor:nwse-resize }
+.bkc { position:relative }
+.bkc .shr { position:absolute; top:8px; right:8px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.92); box-shadow:0 1px 5px rgba(0,0,0,.18); display:flex; align-items:center; justify-content:center; color:var(--ink); z-index:2 }
+.bkc .ck { position:absolute; top:10px; left:10px; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.92); border:2px solid var(--white-70); display:flex; align-items:center; justify-content:center; z-index:2; pointer-events:none; color:#fff }
+.bkc.on .ck { background:var(--ink); border-color:var(--ink) }
+.bkc.on .th { outline:2.5px solid var(--ink); outline-offset:-2px }
+.bkc .mn { flex:none; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:var(--sub) }
+.toast:has(.tundo) { display:flex; align-items:center; gap:12px } /* 꺼져 있을 때 완료본 알림 모양은 그대로 */
+.toast .tundo { margin-left:auto; flex:none; color:var(--primary-30); font-weight:700; padding:6px 4px }
