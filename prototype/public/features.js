@@ -2,7 +2,7 @@
    기능 하나 = features/기능/feature.js 한 파일(+ feature.css). index.html에 그 파일을 한 줄씩 넣는다
    DJ.feature({ id, issue, name, proposal, screens, actions, slots, after, start, panel })
      screens · actions  새 화면(SCR) · 새 동작(A). 완료본에 이미 있는 이름이면 멈춘다 (덮어쓰기 금지)
-     slots              완료본이 열어 둔 자리에 끼울 HTML: 'closet.top' · 'my.menu' · 'reg.done'
+     slots              완료본이 열어 둔 자리에 끼울 HTML: 'closet.top' · 'my.menu' · 'reg.done' · 'cart.top'
      after()            화면을 다 그린 뒤 · start()  앱을 열 때 (켜져 있을 때만)
      panel              오른쪽 패널 테스트 버튼 [['이름', () => {…}], …]. 손으로 하기 번거로운 상태만
    켠 기능은 주소 ?f=id,id 에 남는다. 기본은 모두 꺼짐

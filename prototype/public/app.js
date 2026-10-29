@@ -934,7 +934,7 @@ SCR.review = (pp) => {
       ${rvPh(r) ? `<div class="rv-dph">${[0, 1].map((k) => `<span>${rvImg(p, r, k)}</span>`).join('')}</div>` : ''}
       <button class="rv-help ${on ? 'on' : ''}" data-a="revHelp" data-x="${key}">도움돼요 <span class="num">${r.help + (on ? 1 : 0)}</span></button></div>` };
 };
-SCR.cart = () => ({ node: '② 장바구니', bar: S.cart.length ? `<button class="btn" data-a="cartOrder">${won(S.cart.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0))}원 주문하기</button>` : '', body: `${hdrBack('장바구니')}
+SCR.cart = () => ({ node: '② 장바구니', bar: S.cart.length ? `<button class="btn" data-a="cartOrder">${won(S.cart.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0))}원 주문하기</button>` : '', body: `${hdrBack('장바구니')}${S.cart.length ? slot('cart.top') : ''}
   ${S.cart.length ? S.cart.map((c, i) => { const p = PB[c.pid]; return `<div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)"><div class="img" style="width:76px;height:92px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="flex:1;min-width:0"><div class="br">${p.brand}</div><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub);margin-top:3px">${c.color ? c.color + ' / ' : '사이즈 '}${c.size} · ${c.qty || 1}개</div><div class="price" style="margin-top:6px">${won(sale(p) * (c.qty || 1))}원</div></div><button data-a="cartDel" data-x="${i}" style="align-self:flex-start;color:var(--sub)">${I.close}</button></div>` }).join('')
     : `<div class="empty"><div class="big">${I.bag}</div><h4>장바구니가 비어 있어요</h4><p>마음에 드는 옷을 담아 보세요</p></div>`}
   ${S.cart.length && !S.user ? '<div class="p" style="font-size:12.5px;color:var(--sub)">비회원 장바구니는 이 기기에만 저장돼요. 가입하면 계정으로 합쳐져요</div>' : ''}` });
