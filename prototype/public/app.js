@@ -423,38 +423,12 @@ function lazyBind() {
 const saleCard = (p) => card(p);
 const miniCard = (p) => card(p);
 
-/* ── 개인화: 랭킹 상품 중 내 기준 옷과 실측이 비슷한 상품 ──
-   부위별 차이 0cm = 100%, 5cm 이상 = 0%로 바꿔 평균 낸 값. 가장 비슷한 사이즈 기준, 70% 이상만 보여줘요.
-   회원 데이터 없이 상품 사이즈표만으로 계산해요. 이미 옷장에 있는 상품은 빼요 */
-const simPct = (x, b, k) => { const d = x.sizes[k].map((v, i) => v && b.m[i] ? Math.abs(v - b.m[i]) : null).filter((v) => v != null); return d.length ? Math.round(d.reduce((a, v) => a + Math.max(0, 1 - v / 5), 0) / d.length * 100) : 0; }; // 두 옷 모두 잰 부위만
-function simFit() {
-  const bases = S.closet.filter((c) => c.base); if (!bases.length) return '';
-  const b = bases.find((c) => c.id === S.simB) || bases[0], open = !!S.simDD;
-  const rank = P.slice().sort((x, y) => y.rev - x.rev).map((x) => x.id), owned = S.closet.map((c) => c.pid);
-  const same = (x) => b.sub ? x.sub === b.sub : x.cat === b.cat; // 같은 2뎁스끼리, 기준 옷에 2뎁스가 없으면 같은 1뎁스
-  const items = rank.map((id) => PB[id]).filter((x) => x.sizes && !owned.includes(x.id) && x.cat === b.cat && grpOf(x) === grpOf(b) && same(x)).map((x) => {
-    const best = Object.keys(x.sizes).map((k) => ({ k, pct: simPct(x, b, k) })).sort((m, n) => n.pct - m.pct)[0];
-    return { x, k: best.k, pct: best.pct };
-  }).filter((e) => e.pct >= 70);
-  const row = (c) => `<span class="simpic">${cutPic(c)}</span><span class="simtx"><b>${c.name} ${c.size}</b><small>${c.sub || CAT[c.cat]}</small></span>`;
-  return `<div class="sec"><h3>${S.user.name}님 옷장 기준으로 골랐어요</h3></div>
-  <p class="psub">비교할 내 옷을 고르면, 랭킹 상품 중 실측이 가까운 상품을 보여 드려요</p>
-  <div class="simdd ${open ? 'open' : ''}"><button class="simbox" data-a="simOpen" aria-expanded="${open}">${row(b)}<span class="simarr">${I.down}</span></button>
-    ${open ? `<div class="simlist" role="listbox">${bases.map((c) => `<button class="simopt ${c.id === b.id ? 'on' : ''}" role="option" aria-selected="${c.id === b.id}" data-a="simPick" data-x="${c.id}">${row(c)}${c.id === b.id ? `<span class="simchk">${I.check}</span>` : ''}</button>`).join('')}</div>` : ''}</div>
-  ${items.length ? `<div class="hscroll">${items.map(({ x, k, pct }) => `<button class="card pcard" data-a="detail" data-x="${x.id}"><div class="img"><img src="${IMG[x.img]}" alt=""></div><div class="br" style="margin-top:8px">${x.brand}</div><div class="nm">${x.name}</div><div class="price">${x.dc ? `<em>${x.dc}%</em>` : ''}${won(sale(x))}원</div><div class="pfit"><b>${pct}%</b> 비슷해요<span>${k} 사이즈 · 내 ${b.name.split(' ').pop()} 기준</span></div></button>`).join('')}</div>`
-    : `<div class="simnone">아직 이 옷과 실측이 가까운 ${b.sub || CAT[b.cat]} 랭킹 상품이 없어요</div>`}`;
-}
-// 목록이 펼쳐진 동안 바깥을 누르면 목록만 닫음 (다른 버튼은 눌리지 않음)
-document.getElementById('app').addEventListener('click', (e) => {
-  if (!S.simDD || e.target.closest('.simdd')) return;
-  e.stopPropagation(); e.preventDefault(); S.simDD = false; saveY(); render();
-}, true);
 function tabRec(base, todo, mine) {
   return `<button class="img" style="position:relative;height:250px;width:100%;display:block" data-a="detail" data-x="p3"><img src="${IMG.jacket}" style="object-position:50% 40%"><div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,0) 65%)"></div>
     <div style="position:absolute;left:20px;bottom:24px;color:#FFFFFF;text-align:left"><div style="font-size:11px;font-weight:700;letter-spacing:.12em">COLLECTION</div><div style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-top:6px">MEA 26 FW<br>SEASON OPEN</div></div></button>
   ${base.length ? '' : regCard()}
   ${dlvCard()}
-  ${base.length ? simFit() : ''}
+  ${slot('home.rec')}
   <div class="sec"><h3>인기 상품</h3></div>
   ${lazyGrid('pop', P.slice().sort((a, b) => b.rate * b.rev - a.rate * a.rev).slice(0, 100), (x) => card(x))}
   <div style="height:16px"></div>`;
@@ -466,8 +440,8 @@ function tabRank(p) {
   if (rp === '실시간') list.sort((a, b) => b.rev - a.rev); else if (rp === '일간') list.sort((a, b) => b.dc * 100 + b.rev / 100 - (a.dc * 100 + a.rev / 100)); else list.sort((a, b) => b.rate - a.rate || b.rev - a.rev);
   return `<div class="tabs ctabs rtabs">${['전체'].concat(CATK.map((c) => CAT[c])).map((x) => `<button class="${x === rc ? 'on' : ''}" data-a="rankCat" data-x="${x}">${x}</button>`).join('')}</div>
   ${ck ? `<div class="chips">${['전체'].concat(SUB[ck]).map((x) => `<button class="chip ${x === rs ? 'on' : ''}" data-a="rankSub" data-x="${x}">${x}</button>`).join('')}</div>` : ''}
-  <div class="rhead"><div class="seg2">${['실시간', '일간', '주간'].map((x) => `<button class="${x === rp ? 'on' : ''}" data-a="rankPeriod" data-x="${x}">${x}</button>`).join('')}</div><span class="rtime">10월 21일 14:00 기준</span></div>
-  ${list.length ? `${lazyGrid(`rank:${rc}:${rs}:${rp}`, list.slice(0, 200), (x, i) => rankCard(x, i + 1), 'grid3r')}` : `<div class="rempty">아직 ${rs} 상품이 없어요</div>`}`;
+  <div class="rhead"><div class="seg2">${['실시간', '일간', '주간'].map((x) => `<button class="${x === rp ? 'on' : ''}" data-a="rankPeriod" data-x="${x}">${x}</button>`).join('')}</div><span class="rtime">10월 21일 14:00 기준</span></div>${slot('rank.filter', list, p)}
+  ${slot('rank.list', list, p) || (list.length ? `${lazyGrid(`rank:${rc}:${rs}:${rp}`, list.slice(0, 200), (x, i) => rankCard(x, i + 1), 'grid3r')}` : `<div class="rempty">아직 ${rs} 상품이 없어요</div>`)}`;
 }
 function tabSale(p) {
   const min = +(p.sm || 0);
@@ -496,7 +470,7 @@ SCR.home = (p) => {
   const base = ['top', 'bottom', 'outer'].map((c) => baseOf(c)).filter(Boolean);
   const mine = base.length ? P.filter((x) => judge(x).n === 5) : [];
   const st = S.user ? (base.length ? '기준 옷 있음' : '기준 옷 없음') : '비회원';
-  const node = t === '추천' ? (base.length ? '① 홈 · 추천 · 기준 옷 있음 · 옷장 기준으로 고른 랭킹 상품' : `① 홈 · 추천 · ${st} · 슬라이드 아래 등록 카드`) : `① 홈 · ${t} 탭`;
+  const node = t === '추천' ? (base.length ? '① 홈 · 추천 · 기준 옷 있음' : `① 홈 · 추천 · ${st} · 슬라이드 아래 등록 카드`) : `① 홈 · ${t} 탭`;
   const body = t === '랭킹' ? tabRank(p) : t === '세일' ? tabSale(p) : t === '기획전' ? tabExh() : t === '이벤트' ? tabEvt() : tabRec(base, null, mine);
   return { node, navOn: 'home', fab: `<button class="totop" data-a="toTop" aria-label="맨 위로">${ICO_UP}</button>`, body: `
   <div class="hdr"><span>${LOGO()}</span><span class="icons"><button class="hsrch" data-a="findGo" aria-label="검색">${I.search}</button><button data-a="go" data-x="notis" aria-label="알림">${I.bell}${S.notis.some((n) => !n.read) ? '<span class="cnt" style="background:var(--sale);min-width:8px;height:8px;top:0;right:0;padding:0"></span>' : ''}</button>${cartBtn()}</span></div>
@@ -1740,8 +1714,6 @@ const A = {
   rankPeriod(x) { replace('home', Object.assign({}, cur().p, { rp: x })) },
   saleMin(x) { saveY(); cur().p.sm = +x; render() },
   coupon() { if (S.cpGot) return; const give = () => { closeOv(); S.cpGot = true; toast('쿠폰을 받았어요'); render() }; if (!S.user) { need('로그인하면 쿠폰을 받을 수 있어요', give); return } give() },
-  simOpen() { S.simDD = !S.simDD; saveY(); render() },
-  simPick(id) { S.simB = id; S.simDD = false; saveY(); render() },
 };
 Object.assign(A, {
   revAll(x) { const [id, m] = x.split('|'); go('reviews', { id, mine: m === 'mine' }) },
@@ -1753,30 +1725,10 @@ Object.assign(A, {
 });
 /* ── DANGJANG 브랜드 · 홈 디자인 (2026-10-26 피그마 login · home_01 · home_02) ── */
 const LOGO = (c = '#06BC51', w = 112) => `<svg class="logo" width="${w}" height="${w * 22 / 112}" viewBox="0 0 112 22" fill="${c}" role="img" aria-label="DANGJANG"><path d="M107.213 14.0809H105.625V10.2151H112V17.1267C112 20.7114 109.081 22 105.509 22C101.936 22 98.9003 20.7114 98.9003 17.1267V4.87327C98.9003 1.28861 101.819 0 105.392 0C108.964 0 111.883 1.28861 111.883 4.87327V7.28648H106.98V5.64643C106.98 4.7327 106.302 4.24068 105.392 4.24068C104.481 4.24068 103.804 4.7327 103.804 5.64643V16.3536C103.804 17.2673 104.598 17.7593 105.509 17.7593C106.419 17.7593 107.213 17.2673 107.213 16.3536V14.0809Z"/><path d="M92.8378 0.468583H97.5079V21.5314H92.8378L89.0783 10.8711V21.5314H84.4082V0.468583H89.0783L92.8378 11.2226V0.468583Z"/><path d="M78.4728 17.9936H74.9469L74.5032 21.5314H69.6229L72.5884 0.468583H80.8546L83.8668 21.5314H78.9398L78.4728 17.9936ZM77.9358 13.7764L76.7215 4.14697L75.4839 13.7764H77.9358Z"/><path d="M64.1814 16.3067V0.468583H69.085V17.1267C69.085 20.7114 66.2829 22 62.7103 22C59.161 22 56.6858 20.7114 56.6858 17.1267V13.9638H61.7062V16.3067C61.7062 17.2204 62.0331 17.7593 62.9438 17.7593C63.8544 17.7593 64.1814 17.2204 64.1814 16.3067Z"/><path d="M50.9907 14.0809H49.4029V10.2151H55.7776V17.1267C55.7776 20.7114 52.8588 22 49.2861 22C45.7135 22 42.6779 20.7114 42.6779 17.1267V4.87327C42.6779 1.2886 45.5967 0 49.1694 0C52.742 0 55.6609 1.2886 55.6609 4.87327V7.28647H50.7572V5.64643C50.7572 4.73269 50.0801 4.24068 49.1694 4.24068C48.2587 4.24068 47.5815 4.73269 47.5815 5.64643V16.3536C47.5815 17.2673 48.3755 17.7593 49.2861 17.7593C50.1968 17.7593 50.9907 17.2673 50.9907 16.3536V14.0809Z"/><path d="M36.6155 0.468583H41.2856V21.5314H36.6155L32.856 10.8711V21.5314H28.1859V0.468583H32.856L36.6155 11.2226V0.468583Z"/><path d="M22.2499 17.9936H18.7239L18.2803 21.5314H13.4L16.3655 0.468583H24.6317L27.6439 21.5314H22.7169L22.2499 17.9936ZM21.7128 13.7764L20.4986 4.14696L19.261 13.7764H21.7128Z"/><path d="M12.983 5.15442V16.8456C12.983 20.0554 11.3718 21.5314 8.31284 21.5314H0V0.468583H8.31284C11.3718 0.468583 12.983 1.94462 12.983 5.15442ZM8.19608 15.6038V6.41959C8.19608 5.41214 7.89252 4.80298 6.77169 4.80298H4.90364V17.2204H6.77169C7.89252 17.2204 8.19608 16.6113 8.19608 15.6038Z"/></svg>`;
-const ICO_INFO = '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#C4C4C4"/><path d="M8 4v5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.6" r="1" fill="#fff"/></svg>';
 const ICO_UP = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>';
-// 홈 추천: 내 옷장 기준 옷과 실측이 가까운 랭킹 상품 (home_01 · home_02)
-function simFit() {
-  const bases = S.closet.filter((c) => c.base); if (!bases.length) return '';
-  const b = bases.find((c) => c.id === S.simB) || bases[0], open = !!S.simDD;
-  const rank = P.slice().sort((x, y) => y.rev - x.rev).map((x) => x.id), owned = S.closet.map((c) => c.pid);
-  const same = (x) => b.sub ? x.sub === b.sub : x.cat === b.cat; // 같은 2뎁스끼리, 기준 옷에 2뎁스가 없으면 같은 1뎁스
-  const items = rank.map((id) => PB[id]).filter((x) => x.sizes && !owned.includes(x.id) && x.cat === b.cat && grpOf(x) === grpOf(b) && same(x)).map((x) => {
-    const best = Object.keys(x.sizes).map((k) => ({ k, pct: simPct(x, b, k) })).sort((m, n) => n.pct - m.pct)[0];
-    return { x, k: best.k, pct: best.pct };
-  }).filter((e) => e.pct >= 70);
-  const row = (c) => `<span class="simpic">${cutPic(c)}</span><span class="simtx"><b>${c.name}</b><small>${CAT[c.cat]} · ${c.size} Size</small></span>`;
-  return `<div class="sec simsec"><h3>${S.user.name}님 옷장 기준으로 골랐어요</h3><button class="simi" data-a="simTip">랭킹 상품 기준${ICO_INFO}</button>
-    ${S.simTip ? `<div class="simtip" role="tooltip">비교할 내 옷을 고르면 랭킹 상품 중<br>실측이 가까운 상품을 보여드려요.<button data-a="simTip" aria-label="닫기"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.8 8L0 7.2L3.2 4L0 0.8L0.8 0L4 3.2L7.2 0L8 0.8L4.8 4L8 7.2L7.2 8L4 4.8L0.8 8Z" fill="white"/></svg></button></div>` : ''}</div>
-  <div class="simdd ${open ? 'open' : ''}"><button class="simbox" data-a="simOpen" aria-expanded="${open}">${row(b)}<span class="simarr">${I.down}</span></button>
-    ${open ? `<div class="simlist" role="listbox">${bases.map((c) => `<button class="simopt ${c.id === b.id ? 'on' : ''}" role="option" aria-selected="${c.id === b.id}" data-a="simPick" data-x="${c.id}">${row(c)}${c.id === b.id ? `<span class="simchk">${I.check}</span>` : ''}</button>`).join('')}</div>` : ''}</div>
-  ${items.length ? `<div class="hscroll">${items.map(({ x, k, pct }) => `<button class="card pcard" data-a="detail" data-x="${x.id}"><div class="img"><img src="${IMG[x.img]}" alt=""></div>${cardBody(x)}<span class="szchip">${CAT[x.cat]} · ${k} Size</span><div class="pfit">${pct}% 비슷해요</div></button>`).join('')}${items.length > 6 ? `<button class="pmore" data-a="homeTab" data-x="랭킹">전체보기${I.chev}</button>` : ''}</div>`
-    : `<div class="simnone">아직 이 옷과 실측이 가까운 ${b.sub || CAT[b.cat]} 랭킹 상품이 없어요</div>`}`;
-}
 // 홈을 내리면 검색창 대신 헤더 돋보기 · 맨 위로 버튼 (home_02)
 document.addEventListener('scroll', (e) => { const b = e.target; if (b.classList && b.classList.contains('body')) b.parentElement.classList.toggle('scrolled', b.scrollTop > 120) }, true);
 Object.assign(A, {
-  simTip() { S.simTip = !S.simTip; render() },
   toTop() { const b = document.querySelector('#view .body'); if (b) b.scrollTo({ top: 0, behavior: 'smooth' }) },
 });
 /* ── 구매 이후 (2026-10-26 팀 결정) ──
