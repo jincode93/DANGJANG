@@ -55,7 +55,7 @@ node test/catalog.test.mjs
 | 사진 | 어디에 | 화면이 받는 길 |
 |---|---|---|
 | 무신사 상품 사진 | 무신사 (`public/ms-images.js`에 주소만) | `/api/img?url=…` 중계 |
-| 데모 자체 사진 59장: 예시 상품 · 코디북 배너 · 옷장 바닥컷(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob private 저장소 `dangjang-prototype-blob` | `/api/asset?name=img/hero.jpg` |
+| 데모 자체 사진 55장: 예시 상품 · 옷장 바닥컷(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob private 저장소 `dangjang-prototype-blob` | `/api/asset?name=img/hero.jpg` |
 
 데모 사진을 더하거나 바꿀 때: `npx vercel blob put 파일 --pathname img/이름.jpg --access private --force` 로 올리고, `public/app.js`의 `IMG0`·`CUT`·`SAMPLE`에 `/api/asset?name=…` 주소를 적는다. 저장소는 Development · Preview · Production 세 환경 모두에 연결되어 있어야 로컬에서도 읽고 올릴 수 있다.
 
