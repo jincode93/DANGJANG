@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DANGJANG 통합 데모</title>
+<style>:root{color-scheme:light;box-sizing:border-box}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="page">
+  <button id="demoToggle" data-d="toggle"><span>데모 설정 · <span id="nowShort">홈</span></span><span>▾</span></button>
+  <aside id="demo">
+    <h1><i>DANGJANG</i> 데모</h1>
+    <p class="lead">팀 프로토타입 4개(홈 · 상품 상세 · 옷장 등록 · 내 옷장)를 하나로 이은 시연용 앱이에요. 화면을 직접 눌러 보고, 아래에서 사용자 상태를 바꿔 갈림길을 확인해요</p>
+    <div class="box"><b>지금 위치 · 흐름도</b><div class="now" id="now">-</div></div>
+    <div class="box"><b>사용자 상태</b><div class="btns" id="presets">
+      <button data-d="p:guest">비회원</button><button data-d="p:nobase">회원 · 기준 옷 없음</button>
+      <button data-d="p:full">회원 · 기준 옷 있음</button><button data-d="p:many">회원 · 옷 많음</button>
+    </div></div>
+    <div class="box"><b>상황 만들기</b><div class="btns">
+      <button data-d="deliver" class="wide">주문한 옷 배송 완료 보내기</button>
+      <button data-d="failpay" id="failBtn">다음 결제 실패</button><button data-d="popup">오늘 팝업 다시</button>
+      <button data-d="x:nophoto" class="wide">사진 없는 옷 추가</button>
+      <button data-d="restart" class="wide">처음부터 (앱 열기)</button>
+    </div></div>
+    <div class="box"><b>흐름 바로가기</b><div class="flows">
+      <button data-d="f:home">① 홈</button><button data-d="f:detail">② 상품 상세</button><button data-d="f:order">③ 구매</button>
+      <button data-d="f:reg">④ 옷 등록</button><button data-d="f:photo">④ 사진 촬영 등록</button><button data-d="f:closet">⑤ 내 옷장</button><button data-d="f:my">⑥ 마이</button><button data-d="f:login">⑦ 로그인</button>
+    </div></div>
+    <div class="box"><b>내 옷장 바로가기</b><div class="flows">
+      <button data-d="c:item">옷 상세 정보</button><button data-d="c:baseChange">기준 옷 바꾸기</button><button data-d="c:sub">세부 종류 기준</button>
+      <button data-d="c:edit">정보 수정</button><button data-d="c:editCat">종류 바꾸기</button><button data-d="c:photo">사진 추가</button><button data-d="c:del">기준 옷 삭제</button>
+    </div></div>
+
+    <p class="note">상품 사진은 AI 생성 이미지, 브랜드명 · 가격 · 치수는 예시예요. 결제 · 로그인은 흉내만 내요. 사진 촬영 등록은 앨범 사진으로 실제 측정이 돌아가요. 무신사 링크 · 구매내역 캡처 읽기는 서버가 필요해서 이 데모에서는 예시 값으로 채워져요 (실제 동작은 naran-demo.vercel.app)</p>
+  </aside>
+  <div id="phoneWrap"><div id="phone"><div id="app"></div></div></div>
+</div>
+<script src="app.js"></script>
+<script src="measure.js"></script>
+<script src="module.js"></script>
+</body>
+</html>
