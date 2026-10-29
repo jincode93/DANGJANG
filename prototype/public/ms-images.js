@@ -290,6 +290,7 @@ const MSDET = {
 "https://image.msscdn.net/images/2026/10/19/a3561a63420d4d81b003ce8b338e61cb.jpg"
 ]
 };
+// 옷장용 바닥컷의 무신사 원본 주소. 화면은 디자이너가 손본 사진(사진 저장소 img/flat_*.jpg)을 쓴다
 const MSFLAT = {
 "r177": "https://image.msscdn.net/images/goods_img/20260907/7264111/7264111_17892905485833_500.jpg",
 "r174": "https://image.msscdn.net/images/prd_img/20260607/6622016/detail_6622016_17890540614166_500.jpg",
