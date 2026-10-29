@@ -37,10 +37,18 @@
     <p class="note">상품 이름 · 브랜드 · 가격 · 사진은 무신사 랭킹 상품(2026-10-29)을 시연용으로 썼고, 치수는 예시예요. 결제 · 로그인은 흉내만 내요. 사진 촬영 등록은 앨범 사진으로 실제 측정이 돌아가요. 무신사 링크 · 구매내역 캡처 읽기는 이 데모의 서버(/api)로 실제로 돌아가요</p>
   </aside>
   <div id="phoneWrap"><div id="phone"><div id="app"></div></div></div>
+  <button id="featToggle"><span>신기능 · <span id="featCount">모두 꺼짐</span></span><span>▾</span></button>
+  <aside id="features">
+    <div class="box"><b>신기능 (결정 전)</b><p class="note">아직 도입을 정하지 않은 기능이에요. 켜면 완료본 위에 붙고, 끄면 사라져요. 켠 상태는 주소에 남아 그대로 공유돼요</p></div>
+    <div class="flist"></div>
+  </aside>
 </div>
 <script src="ms-images.js"></script>
+<script src="features.js"></script>
 <script src="app.js"></script>
 <script src="measure.js"></script>
 <script src="module.js"></script>
+<!-- 신기능: 한 줄에 하나 (features/기능/feature.js). 빼려면 이 줄과 폴더를 지운다 -->
+<script>DJ.ready()</script>
 </body>
 </html>
