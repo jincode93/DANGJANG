@@ -232,7 +232,7 @@ for (const p of P) { const d = MSIMG[p.id]; if (d) { IMG0['ms_' + p.id] = msImg(
   const f = MSFIX[p.id]; if (f) { p.name = f[0]; if (f.length > 1) { p.dc = f[1]; p.sp = f[2]; p.price = f[1] ? Math.round(f[2] / (1 - f[1] / 100) / 100) * 100 : f[2]; } } }
 // 무신사 상세 이미지 (앞쪽 2장) · 옷장용 바닥컷 (누끼, 배경 #f6f6f6)
 for (const p of P) { const d = MSDET[p.id]; if (d) p.det = d.map((u, i) => { const k = 'det_' + p.id + '_' + i; IMG0[k] = msImg(u); return k; }); }
-for (const k in MSFLAT) IMG0['flat_' + k] = msImg(MSFLAT[k]);
+for (const k in MSFLAT) IMG0['flat_' + k] = `/api/asset?name=img/flat_${k}.jpg`; // 디자이너가 손본 바닥컷 (배경 #f6f6f6, 색상 칩 지움). 원본 주소는 MSFLAT
 const FLAT_SWAP = {"p4": "r44", "p2": "r15", "p1": "r16", "r22": "r21", "r101": "r100", "r172": "r167", "r197": "r196", "r39": "r36"}; // 바닥컷이 없는 옷은 바닥컷 있는 같은 종류 상품으로
 const PB = Object.fromEntries(P.map((p) => [p.id, p]));
 const won = (n) => n.toLocaleString('ko-KR');
