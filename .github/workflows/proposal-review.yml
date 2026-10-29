@@ -1,0 +1,96 @@
+# 신기능 제안 PR을 자동 검토해 기능별 이슈([신기능] 기능이름)에 기록하고, PR에는 요약만 단다.
+# 기준과 형식: docs/eval/proposal-rubric.md
+# 필요한 비밀값: CLAUDE_CODE_OAUTH_TOKEN (레포 관리자가 claude 터미널에서 /install-github-app 으로 등록)
+# claude-code-action은 한글 브랜치 이름을 거부해서(팀 규칙: 이름/한글주제) Claude Code를 직접 실행한다.
+name: 신기능 제안 자동 검토
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths: ["docs/proposals/**", "!docs/proposals/README.md"]   # 안내문만 바뀐 PR은 검토하지 않는다
+  # 이미 열린 PR을 다시 검토할 때: Actions 탭 → 신기능 제안 자동 검토 → Run workflow (또는 gh workflow run proposal-review.yml -f pr=번호)
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "검토할 PR 번호"
+        required: true
+        type: number
+
+concurrency:
+  group: proposal-review-${{ github.event.pull_request.number || inputs.pr }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # 공개 레포라 외부 포크 PR에서는 자동으로 돌리지 않는다. 팀원은 같은 레포 브랜치로 PR을 연다.
+    # 직접 실행은 쓰기 권한이 있는 사람만 할 수 있다.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # 직접 실행이면 main 위에 그 PR의 제안서만 얹는다.
+      # refs/pull/N/merge는 예전 main 기준으로 남아 있을 수 있어 쓰지 않는다 (스킬이 없는 상태로 돌았던 적 있음).
+      - name: PR의 제안서 가져오기 (직접 실행일 때)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git fetch --depth 1 origin "pull/${{ inputs.pr }}/head"
+          git checkout FETCH_HEAD -- docs/proposals/
+
+      - name: 시작 시각 기록
+        run: echo "REVIEW_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
+      - name: Claude로 제안서 검토
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          npx -y @anthropic-ai/claude-code -p \
+            ".claude/skills/review-proposal/SKILL.md 를 읽고 PR 모드로 따른다. 대상: PR #${PR_NUMBER} (레포 ${GITHUB_REPOSITORY}). 본문 파일은 ${RUNNER_TEMP} 아래에 쓴다." \
+            --allowedTools "Read,Glob,Grep,Write,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue edit:*),Bash(gh issue comment:*)" \
+            --add-dir "$RUNNER_TEMP" \
+            --max-turns 50
+
+      # Claude는 멈춰도 성공으로 끝나므로, 이번 실행에서 PR 댓글이 달렸는지 확인한다.
+      - name: 검토 댓글 확인
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          n=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" \
+                --jq ".[] | select(.user.login == \"github-actions[bot]\" and .updated_at >= \"$REVIEW_START\") | .id" | wc -l)
+          if [ "$n" -eq 0 ]; then echo "::error::PR #$PR_NUMBER 에 검토 댓글이 달리지 않았어요. 위 Claude 출력을 확인하세요."; exit 1; fi
+
+  # 제안 PR이 main에 머지되면 기능 이슈를 "상태: 제안" → "상태: 실험 중"으로 바꾼다. Claude는 쓰지 않는다.
+  mark-experimenting:
+    if: github.event.action == 'closed' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$GH_REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+            | grep '^docs/proposals/.*\.md$' | grep -v '/README\.md$' \
+            | while IFS= read -r f; do
+                name=$(basename "$f" .md)
+                n=$(gh issue list --state open --label "신기능" --label "상태: 제안" --search "in:title $name" --json number,title \
+                      | jq -r --arg t "[신기능] $name" '.[] | select(.title == $t) | .number' | head -1)
+                if [ -z "$n" ]; then echo "상태: 제안 인 이슈 없음: $name"; continue; fi
+                gh issue edit "$n" --remove-label "상태: 제안" --add-label "상태: 실험 중"
+                gh issue comment "$n" --body "제안 PR #$PR_NUMBER 이 머지돼서 상태를 실험 중으로 바꿨어요. 이후 개선 PR도 이 이슈에서 검토가 이어집니다."
+              done
