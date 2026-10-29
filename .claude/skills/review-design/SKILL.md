@@ -14,7 +14,7 @@ Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, r
 
 ## Design system for this project
 
-There is no DESIGN.md. The design source of truth is the **product detail screen (the designer's mockup)**: its color tokens (green `--g` family, `--ln`, `--mut`), components, and type. The primary button is green. Judge other screens against it (gstack Pass 5 with DESIGN.md absent: rate the explicit token and component specs; missing specs are findings).
+The design source of truth is `design-system/README.md` (a copy of the designer's design system): role tokens in `design-system/tokens.json`, components in `design-system/components/` (`.dj-*`), copy rules (해요체, the two verdict word sets, cm differences with U+2212), the icon set in `design-system/icons/`, and the accessibility notes. Judge every screen against it (gstack Pass 5 with DESIGN.md present). Raw color values, non-token spacing, other fonts or icon sets, and components that duplicate a `.dj-*` one are findings. Where the design system's wording differs from `docs/policy/`, the policy wins; list the mismatch under D7. The prototype has not been migrated yet (it still uses `--g`, `--ln`, `--mut` and Pretendard), so report migration gaps per screen rather than re-scoring them as new problems each time.
 
 ## Design principles (gstack, verbatim intent)
 
@@ -42,7 +42,7 @@ Give an initial overall impression 0–10 and say what a 10 looks like for this 
 | D2 | Interaction state coverage | A state table covers each feature: loading, empty, error, success, partial. Each cell says what the user SEES. DANGJANG-specific states: no base garment, no garment in the same group, product without measurements, all sizes sold out, photo measurement failed, permission denied. |
 | D3 | User journey and emotional arc | A storyboard (step / user does / user feels / screen supports it?) from first visit to first comparison. Time horizons: first 5 seconds (visceral), first 5 minutes (behavioral), long-term relationship (reflective). Registration effort is repaid before the user loses patience. |
 | D4 | Specificity | UI is described with concrete decisions, not generic patterns. Every label means one thing (e.g. 커요 / 넉넉해요 / 넓어요 are not mixed); every color means one thing (green is not both "my garment" and "similar"). |
-| D5 | Design-system alignment | Every screen uses the product-detail tokens and components. New components fit that vocabulary or are flagged. |
+| D5 | Design-system alignment | Every screen uses `design-system/` tokens, components, copy rules, and icons. New components fit that vocabulary or are flagged. |
 | D6 | Mobile and accessibility | Touch targets ≥ 44px, text ≥ legible size (flag 12px gray hints), color contrast, form labels, input errors marked on the field, keyboard flow between measurement fields. |
 | D7 | Unresolved design decisions | A register of decisions that will haunt implementation if deferred. Unscored. |
 
