@@ -1,0 +1,58 @@
+/* 신기능 #17 내 옷 기준 추천. 홈 섹션 스타일은 완료본 app.css에서 그대로 옮김 */
+.pcard { width:140px }
+.pcard .img { height:168px }
+.pfit { margin-top:6px; font-size:12px; font-weight:600; color:var(--g); line-height:1.35 }
+.pfit b { font-weight:700 }
+.pfit span { display:block; margin-top:2px; font-size:11.5px; font-weight:500; color:var(--mut) }
+/* 홈 · 기준 옷 드롭다운과 상품 줄 */
+.simdd { position:relative; margin:12px 20px 0; z-index:8 }
+.simbox { display:flex; align-items:center; gap:10px; width:100%; height:52px; padding:0 14px 0 10px; border:1px solid var(--ln); border-radius:12px; background:#fff; text-align:left }
+.simdd.open .simbox { border-color:var(--ink) } .simarr { margin-left:auto; display:flex; color:var(--ink); transition:transform .15s } .simdd.open .simarr { transform:rotate(180deg) }
+.simpic { width:32px; height:32px; border-radius:8px; overflow:hidden; flex:none; background:var(--bg-subtle); display:flex; align-items:center; justify-content:center }
+.simpic img { width:100%; height:100%; object-fit:contain } .simpic svg.tpl { width:100%; height:100%; padding:3px } .simpic .rkno { display:flex; color:#B5B5B5 }
+.simtx { display:grid; gap:2px; min-width:0; line-height:1.25 } .simtx b { font-size:14px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .simtx small { font-size:12px; color:var(--mut) }
+.simlist { position:absolute; left:0; right:0; top:calc(100% + 4px); background:#fff; border:1px solid var(--ln); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); overflow:hidden; padding:4px 0 }
+.simopt { display:flex; align-items:center; gap:10px; width:100%; height:56px; padding:0 14px 0 10px; text-align:left }
+.simopt:hover { background:var(--bg-subtle) } .simopt.on { background:var(--gw) } .simopt.on .simtx b { color:var(--g); font-weight:700 }
+.simchk { margin-left:auto; display:flex; color:var(--g) } .simchk .ic { width:20px!important; height:20px!important }
+.simdd + .hscroll { margin-top:12px }
+.simnone { margin:12px 20px 0; padding:18px 16px; border-radius:12px; background:var(--bg-subtle); text-align:center; font-size:13.5px; color:var(--mut); line-height:1.5 }
+.simsec { position:relative; align-items:center }
+.simsec .simi { display:flex; align-items:center; gap:4px; font-size:12.5px; color:var(--mut); white-space:nowrap }
+.simtip { position:absolute; right:16px; top:calc(100% + 8px); z-index:13; background:var(--g); color:#fff; font-size:12px; font-weight:500; line-height:1.5; padding:12px 36px 12px 12px; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12) }
+.simtip::before { content:''; position:absolute; right:14px; top:-5px; width:10px; height:10px; background:var(--g); transform:rotate(45deg) }
+.simtip button { position:absolute; right:4px; top:4px; width:24px; height:24px; color:#fff; display:flex; align-items:center; justify-content:center }
+.simtip button svg { width:8px; height:8px }
+.simbox { height:68px }
+.simpic { width:44px; height:44px }
+.simtx b { font-size:15px; font-weight:500 } .simtx small { font-size:13px }
+.pcard .br { font-weight:400; color:var(--mut) }
+.pcard .nm { white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; color:var(--ink); line-height:1.4; margin-top:2px }
+.pcard .price { margin-top:4px }
+.szchip { display:inline-flex; align-items:center; height:20px; padding:0 6px; margin-top:8px; border-radius:4px; background:var(--gray); color:var(--mut); font-size:11px }
+.pcard .pfit { margin-top:8px }
+.pmore { flex:none; display:flex; align-items:center; gap:2px; padding:0 20px 0 12px; height:168px; font-size:14px; color:var(--mut); white-space:nowrap }
+.card .szchip { margin-top:8px }
+.card .pfit { margin-top:10px; font-size:12px; line-height:1 }
+.pmore { height:auto; aspect-ratio:auto; align-self:flex-start; min-height:168px }
+#app .pfit { color:var(--primary-text); font-weight:600 }
+/* 랭킹 · 기준 옷 칩과 시트 (원본: 주리 데모) */
+.rsel { display:flex; align-items:center; gap:8px; padding:0 20px 14px }
+.fchip { flex:none; display:flex; align-items:center; gap:4px; height:36px; padding:0 12px; border-radius:18px; border:1px solid var(--ln); background:#fff; font-size:13.5px; font-weight:500; color:var(--ink); white-space:nowrap }
+.fchip svg { width:15px!important; height:15px!important; flex:none }
+.fchip.on { flex:0 1 auto; min-width:0; gap:0; padding:0 4px 0 0; border-color:var(--g); background:var(--gw); font-weight:600 }
+.fchip.on .fct { display:flex; align-items:center; gap:6px; min-width:0; height:34px; padding-left:5px; font-weight:600; color:var(--ink) }
+.fchip.on .fct span:last-child { overflow:hidden; text-overflow:ellipsis }
+.fchip.on .simpic { width:24px; height:24px; border-radius:50% }
+.fchip .fchx { display:flex; align-items:center; justify-content:center; width:30px; height:34px; margin-left:-2px }
+.fchip .fchx svg { width:18px!important; height:18px!important; padding:4px; border-radius:50%; background:var(--g); color:#fff; stroke-width:3 }
+.rsh-d { margin:-4px 0 10px; font-size:13px; color:var(--mut); line-height:1.45 }
+.rro { display:flex; align-items:center; gap:12px; width:100%; min-height:52px; padding:8px 0; border-bottom:1px solid var(--ln); font-size:14.5px; color:var(--ink); text-align:left }
+.rro .simpic { width:40px; height:48px; border-radius:6px }
+.rro b { display:block; font-weight:500 } .rro.on b { font-weight:700 }
+.rro small { display:block; margin-top:3px; font-size:12px; color:var(--mut) }
+.rrad { margin-left:auto; width:22px; height:22px; border-radius:50%; border:1.5px solid var(--ln); flex:none }
+.rro.on .rrad { border:7px solid var(--g) }
+.rsh-add { display:flex; align-items:center; justify-content:center; width:100%; height:48px; margin-top:14px; border:1px solid var(--ln); border-radius:12px; font-size:14px; font-weight:600; color:var(--ink) }
+.rempty .rall { display:block; margin:12px auto 0; height:36px; padding:0 14px; border:1px solid var(--ln); border-radius:18px; font-size:13px; color:var(--ink); background:#fff }
+.rcard .pfit { margin-top:6px }
