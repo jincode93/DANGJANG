@@ -996,7 +996,7 @@ SCR.closet = (pp = {}) => {
     <div class="ctabs">${CATS.map((c) => `<button class="${c.k === t ? 'on' : ''}" data-a="closetTab" data-x="${c.k}">${c.label} ${ofCat(c.k).length}</button>`).join('')}</div>
     ${waitReg ? `<button data-a="go" data-x="regFit" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;justify-content:space-between;align-items:center;border-radius:10px;background:var(--fitw);padding:12px 14px;font-size:14px"><span><b>등록 대기 ${waitReg}벌</b> · 확인하면 옷장에 담겨요</span>${I.chev}</button>` : ''}
     ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>처음 등록한 잘 맞는 ${CAT[t]}가 기준 옷이 되고,<br>${CAT[t]} 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
-    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${slot('closet.top') || cbook()}
+    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${slot('closet.top')}
     ${!baseOf(t) ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${CAT[t]}가 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
     ${good.length ? rack('good', good, (c) => `${!sv && c.subBase ? c.sub + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
     <div style="height:90px"></div>`}` };
@@ -1062,8 +1062,6 @@ function srvRow(row, cat) { // 판매처 실측표 한 줄 → 우리 부위 순
   for (const [name, v] of Object.entries(row || {})) { if (/전체 ?소매/.test(name)) out._full = '소매'; if (/소매 ?부리/.test(name) && out.소매부리 == null) out.소매부리 = v; if (/암홀/.test(name) && out.암홀 == null) out.암홀 = v; }
   return out;
 }
-const CB = ['/api/asset?name=img/cbook_0.png', '/api/asset?name=img/cbook_1.png', '/api/asset?name=img/cbook_2.png', '/api/asset?name=img/cbook_3.png']; // 내 옷장 위 코디북 배너 옷 그림
-const cbook = () => `<button class="cbook" data-a="cbook"><b>나만의 코디북 만들기${I.chev}</b><small>등록한 옷으로 코디하고 공유해요!</small><img src="${CB[0]}" alt="" style="right:29px;top:12px;width:72px;height:86px"><img src="${CB[1]}" alt="" style="right:46px;top:0;width:70px;height:70px"><img src="${CB[2]}" alt="" style="right:99px;top:25px;width:45px;height:55px"><img src="${CB[3]}" alt="" style="right:19px;top:3px;width:43px;height:52px"></button>`;
 const picBtn = (pp) => `<label style="display:block;margin-top:6px;height:30px;line-height:28px;border:1px solid var(--line);border-radius:15px;text-align:center;font-size:12.5px;font-weight:600">${pp.own ? '다른 사진으로' : pp.noPic ? '사진 올리기' : '사진 바꾸기'}<input type="file" accept="image/*" hidden onchange="linkImg(this)"></label>`;
 function linkImg(inp) { // 상품 사진 대신 내가 고른 사진을 옷장 그림으로 (모델컷 대신 옷만 나온 사진 등)
   const f = inp.files && inp.files[0]; if (!f) return; const pp = cur().p, im = new Image(), u = URL.createObjectURL(f);
@@ -1683,7 +1681,6 @@ const A = {
   },
   bpOk() { const c = S.ov.sel, b = baseFor(PB[S.ov.pid]); closeOv(); if (b && b.id === c) render(); else A.pickBase(c) },
   rackRef(id) { const box = app.querySelector('.rkbox[data-rack$=":good"]'), card = box && box.querySelector(`.rk[data-id="${id}"]`); if (card && +card.dataset.i !== S.rack[box.dataset.rack]) box.rackTo(+card.dataset.i); else A.item(id) },
-  cbook() { toast('코디북은 준비 중이에요') },
   closetSub(x) { replace('closet', { t: cur().p.t, s: x }) },
   rackTap(x) { if (Date.now() - dragEnd < 300) return; const [k, i, id] = x.split('|'), box = app.querySelector(`.rkbox[data-rack="${k}"]`); if (+i === S.rack[k]) A.item(id); else box.rackTo(+i) },
   editCat(k) {

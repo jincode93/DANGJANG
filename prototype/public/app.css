@@ -941,11 +941,6 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app .cchips { display:flex; gap:6px; padding:8px 20px; overflow-x:auto; scrollbar-width:none }
 #app .cchips button { flex:none; padding:12px; border-radius:8px; border:1px solid var(--line); font-size:13px; line-height:1; font-weight:500; color:var(--text-primary); background:var(--bg) }
 #app .cchips button.on { background:var(--primary); border-color:var(--primary); color:var(--on-primary); font-weight:600 }
-#app .cbook { position:relative; display:block; width:100%; height:80px; background:var(--bg-subtle); overflow:hidden; text-align:left }
-#app .cbook b { position:absolute; left:20px; top:18px; display:flex; align-items:center; font-size:15px; font-weight:600; color:#000 }
-#app .cbook b svg { width:16px; height:16px }
-#app .cbook small { position:absolute; left:20px; top:46px; font-size:13px; font-weight:500; color:var(--text-tertiary) }
-#app .cbook img { position:absolute; object-fit:cover }
 .rkrod, .rkh, .rkf { display:none }
 .rkbox { height:322px; margin-top:20px }
 .rk { top:0; left:calc(50% - 75px); width:150px; height:180px; transform-origin:50% 50%; border-radius:12px; background:var(--bg-subtle); padding:16px; align-items:center; overflow:hidden }
