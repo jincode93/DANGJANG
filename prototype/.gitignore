@@ -1,2 +1,8 @@
 # 배포 때 ../design-system에서 복사해 오는 폴더
 public/design-system/
+# Vercel CLI 연결 정보와 키 (레포에 올리지 않음)
+.vercel/
+.env*.local
+node_modules/
+.vercel
+.env*

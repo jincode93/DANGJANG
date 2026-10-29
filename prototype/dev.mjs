@@ -3,6 +3,7 @@
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.dirname(fileURLToPath(import.meta.url)), PUB = path.join(ROOT, 'public');
 const port = +process.argv[2] || 8792;
+try { process.loadEnvFile(path.join(ROOT, '.env.local')); } catch { } // 사진 저장소(Blob) 인증: vercel env pull .env.local 로 받음
 // vercel.json 빌드와 같게: 디자인 시스템(토큰 · 글꼴)을 public/design-system으로 복사
 fs.rmSync(path.join(PUB, 'design-system'), { recursive: true, force: true }); fs.cpSync(path.join(ROOT, '..', 'design-system'), path.join(PUB, 'design-system'), { recursive: true });
 // vercel.json 과 같은 헤더 (카메라 허용 + 교차 출처 격리: AI 옷 분할이 여러 코어를 씀)
