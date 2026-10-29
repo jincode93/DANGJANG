@@ -46,7 +46,11 @@ If a lens fails or returns something outside the format, run that one lens again
 2. Compute each lens score (the rubric's averaging rule) from the lens's item scores; do not trust a lens's own arithmetic.
 3. Apply the verdict table.
 4. Apply the merge rules: dedupe, route "다른 관점에 넘길 것", list 관점 충돌, pick at most three "이것만 채우면" items across all lenses.
-5. Do not change a lens's scores or reasoning. If a citation does not match the proposal, keep it and add "확인 필요".
+5. **Check before you write.** For each "이것만 채우면" item and each "개발 막힘" policy question, open every source it cites (the policy text for each ID, the proposal line, the code `file:line`) and confirm the claim. Also check any fact two lenses state differently (e.g. one says three entry points, another four). Then:
+   - Claim confirmed → keep it.
+   - Claim wrong → drop the item and pick the next one, or rewrite it to match the source. If an item depended on a policy that does not apply (wrong scope, e.g. REC-06 for a home feature that follows REC-10), drop it.
+   - Two lenses disagree → keep the version the source supports, in both places.
+   Do not change any lens's item scores. Everywhere else in the lens results, add "확인 필요" to a citation you noticed does not match, without rewriting it.
 
 ## Output
 
