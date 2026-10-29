@@ -7,6 +7,8 @@
 - 팀 프로토타입 4개(`src/home.html`, `detail.html`, `reg.html`, `closet.html`)를 `build.py`로 합쳐서 만든다.
 - 서버(`api/`, `lib/`)는 옷장 등록 담당 팀원의 데모(Artemis-ignis/dangjang-demo, 2026-10-28 `fe2cb70`)에서 가져왔다. 우리 Vercel에서 돌아가고, 다른 사람의 서버나 계정에 기대지 않는다. 환경 변수와 API 키는 없다.
 
+- 디자인은 아직 `design-system/`을 적용하기 전이다(색 이름 `--g` 등, 글꼴 Pretendard). 적용은 화면별로 따로 PR을 올린다.
+
 ## 폴더
 
 | 경로 | 내용 |

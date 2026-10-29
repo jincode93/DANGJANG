@@ -46,6 +46,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목).
 | 용어의 뜻 | `docs/glossary.md` |
 | 아직 정하지 않은 것, 초안 값 | `docs/open-questions.md` |
 | 결정 이력과 이유 | `logs/decision-log.md` |
+| 화면 디자인 규칙 (토큰, 컴포넌트, 문구, 아이콘) | `design-system/README.md`. 원본은 디자이너의 아티팩트, 레포는 가져오기 PR로 맞춘다 |
 
 데모가 정책과 다르면 정책이 기준이다. 결정마다 검토한 선택지는 `logs/decisions/`에 있다.
 
@@ -64,7 +65,8 @@ docs/timeline.md          프로젝트 일정
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
 docs/eval/proposal-rubric.md  신기능 제안 평가 기준 (PR 자동 검토와 /review-proposal이 읽음)
 docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
-prototype/                데모 위치와 버전 기록
+design-system/            디자인 시스템 복사본 (원본은 디자이너 아티팩트, 손으로 고치지 않음)
+prototype/                데모 원본 코드, 위치와 버전 기록
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번
 reviews/scores.csv        리뷰 점수 누적 기록
 logs/decision-log.md      결정 기록 (한 줄 요약)
@@ -97,6 +99,8 @@ logs/time-log.md          작업 시간 기록
 
 ## 작업 규칙
 
+- 화면을 만들거나 고칠 때(프로토타입, 신기능)는 `design-system/README.md`를 먼저 읽는다. 색·간격·글꼴·모서리·그림자는 토큰(`var(--…)`)만 쓰고 값을 직접 쓰지 않는다. 있는 컴포넌트(`.dj-*`)를 먼저 쓰고, 아이콘은 `design-system/icons/`만 쓴다. 디자인 시스템과 정책의 문구가 다르면 정책이 기준이고, 다른 점을 사용자에게 알린다.
+- `design-system/`은 가져오기 PR에서만 바꾼다. "디자인 시스템 최신으로 가져와 줘"는 `design-system/README.md`의 "가져오는 법"을 따른다.
 - 문서는 쉬운 한국어로 쓴다. 짧은 문장, 능동형.
 - 수치는 표본이 작으므로 비율보다 "몇 명 중 몇 명"으로 쓴다. 설문은 팀 공식 기준인 유효 24명으로 쓴다.
 - 이 레포는 공개 레포다. 인터뷰 참여자는 실명 대신 인터뷰이 A~E로 쓴다.

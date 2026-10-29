@@ -1,0 +1,1423 @@
+[
+{
+"name": "arrow-up",
+"ko": "위로",
+"group": "방향",
+"line": "<path d=\"M12 20V4M5 11l7-7 7 7\"/>",
+"fill": "<path d=\"M12 20V4M5 11l7-7 7 7\"/>"
+},
+{
+"name": "arrow-down",
+"ko": "아래로",
+"group": "방향",
+"line": "<path d=\"M12 4v16M5 13l7 7 7-7\"/>",
+"fill": "<path d=\"M12 4v16M5 13l7 7 7-7\"/>"
+},
+{
+"name": "arrow-left",
+"ko": "이전",
+"group": "방향",
+"line": "<path d=\"M20 12H4m6-6-6 6 6 6\"/>",
+"fill": "<path d=\"M20 12H4m6-6-6 6 6 6\"/>"
+},
+{
+"name": "arrow-right",
+"ko": "다음",
+"group": "방향",
+"line": "<path d=\"M4 12h16m-6-6 6 6-6 6\"/>",
+"fill": "<path d=\"M4 12h16m-6-6 6 6-6 6\"/>"
+},
+{
+"name": "arrow-up-right",
+"ko": "바로가기",
+"group": "방향",
+"line": "<path d=\"M7 17 17 7M8 7h9v9\"/>",
+"fill": "<path d=\"M7 17 17 7M8 7h9v9\"/>"
+},
+{
+"name": "arrow-down-left",
+"ko": "들어오기",
+"group": "방향",
+"line": "<path d=\"M17 7 7 17M16 17H7V8\"/>",
+"fill": "<path d=\"M17 7 7 17M16 17H7V8\"/>"
+},
+{
+"name": "arrow-up-down",
+"ko": "정렬",
+"group": "방향",
+"line": "<path d=\"M8 20V4M4 8l4-4 4 4M16 4v16M12 16l4 4 4-4\"/>",
+"fill": "<path d=\"M8 20V4M4 8l4-4 4 4M16 4v16M12 16l4 4 4-4\"/>"
+},
+{
+"name": "arrow-left-right",
+"ko": "주고받기",
+"group": "방향",
+"line": "<path d=\"M4 8h16M16 4l4 4-4 4M20 16H4M8 12l-4 4 4 4\"/>",
+"fill": "<path d=\"M4 8h16M16 4l4 4-4 4M20 16H4M8 12l-4 4 4 4\"/>"
+},
+{
+"name": "arrow-uturn-left",
+"ko": "되돌리기",
+"group": "방향",
+"line": "<path d=\"M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11\"/>",
+"fill": "<path d=\"M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11\"/>"
+},
+{
+"name": "arrow-uturn-right",
+"ko": "다시 하기",
+"group": "방향",
+"line": "<path d=\"M15 14l5-5-5-5M20 9H9.5a5.5 5.5 0 0 0 0 11H13\"/>",
+"fill": "<path d=\"M15 14l5-5-5-5M20 9H9.5a5.5 5.5 0 0 0 0 11H13\"/>"
+},
+{
+"name": "refresh",
+"ko": "새로고침",
+"group": "방향",
+"line": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4v4h-4\"/>",
+"fill": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4v4h-4\"/>"
+},
+{
+"name": "undo",
+"ko": "되감기",
+"group": "방향",
+"line": "<path d=\"M4.5 12a7.5 7.5 0 1 0 2.2-5.3\"/><path d=\"M4.5 4v4h4\"/>",
+"fill": "<path d=\"M4.5 12a7.5 7.5 0 1 0 2.2-5.3\"/><path d=\"M4.5 4v4h4\"/>"
+},
+{
+"name": "chevron-up",
+"ko": "접기",
+"group": "방향",
+"line": "<path d=\"M5 15l7-7 7 7\"/>",
+"fill": "<path d=\"M5 15l7-7 7 7\"/>"
+},
+{
+"name": "chevron-down",
+"ko": "펼치기",
+"group": "방향",
+"line": "<path d=\"M5 9l7 7 7-7\"/>",
+"fill": "<path d=\"M5 9l7 7 7-7\"/>"
+},
+{
+"name": "chevron-left",
+"ko": "뒤로",
+"group": "방향",
+"line": "<path d=\"M15 5l-7 7 7 7\"/>",
+"fill": "<path d=\"M15 5l-7 7 7 7\"/>"
+},
+{
+"name": "chevron-right",
+"ko": "더 보기",
+"group": "방향",
+"line": "<path d=\"M9 5l7 7-7 7\"/>",
+"fill": "<path d=\"M9 5l7 7-7 7\"/>"
+},
+{
+"name": "chevron-up-sm",
+"ko": "접기 (작게)",
+"group": "방향",
+"line": "<path d=\"M8 14l4-4 4 4\"/>",
+"fill": "<path d=\"M8 14l4-4 4 4\"/>"
+},
+{
+"name": "chevron-down-sm",
+"ko": "펼치기 (작게)",
+"group": "방향",
+"line": "<path d=\"M8 10l4 4 4-4\"/>",
+"fill": "<path d=\"M8 10l4 4 4-4\"/>"
+},
+{
+"name": "chevron-left-sm",
+"ko": "뒤로 (작게)",
+"group": "방향",
+"line": "<path d=\"M14 8l-4 4 4 4\"/>",
+"fill": "<path d=\"M14 8l-4 4 4 4\"/>"
+},
+{
+"name": "chevron-right-sm",
+"ko": "더 보기 (작게)",
+"group": "방향",
+"line": "<path d=\"M10 8l4 4-4 4\"/>",
+"fill": "<path d=\"M10 8l4 4-4 4\"/>"
+},
+{
+"name": "caret-down",
+"ko": "드롭다운",
+"group": "방향",
+"line": "<path d=\"M7.5 10h9L12 15z\" fill=\"currentColor\"/>",
+"fill": "<path d=\"M7.5 10h9L12 15z\" fill=\"currentColor\"/>"
+},
+{
+"name": "caret-up",
+"ko": "올리기",
+"group": "방향",
+"line": "<path d=\"M7.5 14h9L12 9z\" fill=\"currentColor\"/>",
+"fill": "<path d=\"M7.5 14h9L12 9z\" fill=\"currentColor\"/>"
+},
+{
+"name": "play",
+"ko": "재생",
+"group": "방향",
+"line": "<path d=\"M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5z\"/>",
+"fill": "<path d=\"M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5z\" fill=\"currentColor\"/>"
+},
+{
+"name": "enter",
+"ko": "입력",
+"group": "방향",
+"line": "<path d=\"M9 10l-5 5 5 5M4 15h11a5 5 0 0 0 5-5V4\"/>",
+"fill": "<path d=\"M9 10l-5 5 5 5M4 15h11a5 5 0 0 0 5-5V4\"/>"
+},
+{
+"name": "expand",
+"ko": "크게 보기",
+"group": "방향",
+"line": "<path d=\"M14 4h6v6M10 20H4v-6M20 4l-6 6M4 20l6-6\"/>",
+"fill": "<path d=\"M14 4h6v6M10 20H4v-6M20 4l-6 6M4 20l6-6\"/>"
+},
+{
+"name": "collapse",
+"ko": "작게 보기",
+"group": "방향",
+"line": "<path d=\"M20 10h-6V4M4 14h6v6M14 10l6-6M10 14l-6 6\"/>",
+"fill": "<path d=\"M20 10h-6V4M4 14h6v6M14 10l6-6M10 14l-6 6\"/>"
+},
+{
+"name": "external",
+"ko": "외부 링크",
+"group": "방향",
+"line": "<path d=\"M13 4h7v7M20 4l-9 9\"/><path d=\"M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10\"/>",
+"fill": "<path d=\"M13 4h7v7M20 4l-9 9\"/><path d=\"M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10\"/>"
+},
+{
+"name": "download",
+"ko": "내려받기",
+"group": "방향",
+"line": "<path d=\"M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14\"/>",
+"fill": "<path d=\"M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14\"/>"
+},
+{
+"name": "upload",
+"ko": "올리기",
+"group": "방향",
+"line": "<path d=\"M12 15V4M7.5 8.5 12 4l4.5 4.5M5 20h14\"/>",
+"fill": "<path d=\"M12 15V4M7.5 8.5 12 4l4.5 4.5M5 20h14\"/>"
+},
+{
+"name": "to-top",
+"ko": "맨 위로",
+"group": "방향",
+"line": "<path d=\"M5 4h14M12 20V8M7 13l5-5 5 5\"/>",
+"fill": "<path d=\"M5 4h14M12 20V8M7 13l5-5 5 5\"/>"
+},
+{
+"name": "login",
+"ko": "로그인",
+"group": "방향",
+"line": "<path d=\"M14 4h4.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H14M4 12h11M11 8l4 4-4 4\"/>",
+"fill": "<path d=\"M14 4h4.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H14M4 12h11M11 8l4 4-4 4\"/>"
+},
+{
+"name": "logout",
+"ko": "로그아웃",
+"group": "방향",
+"line": "<path d=\"M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10M9 12h11M16 8l4 4-4 4\"/>",
+"fill": "<path d=\"M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10M9 12h11M16 8l4 4-4 4\"/>"
+},
+{
+"name": "plus",
+"ko": "추가",
+"group": "행동",
+"line": "<path d=\"M12 5v14M5 12h14\"/>",
+"fill": "<path d=\"M12 5v14M5 12h14\"/>"
+},
+{
+"name": "plus-sm",
+"ko": "추가 (작게)",
+"group": "행동",
+"line": "<path d=\"M12 7.5v9M7.5 12h9\"/>",
+"fill": "<path d=\"M12 7.5v9M7.5 12h9\"/>"
+},
+{
+"name": "plus-circle",
+"ko": "추가 (원)",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>",
+"fill": "<mask id=\"plus-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 8.5v7M8.5 12h7\" stroke=\"#000\"/></mask><g mask=\"url(#plus-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "plus-square",
+"ko": "추가 (사각)",
+"group": "행동",
+"line": "<rect x=\"3.5\" y=\"3.5\" width=\"17\" height=\"17\" rx=\"4\"/><path d=\"M12 8.5v7M8.5 12h7\"/>",
+"fill": "<mask id=\"plus-square-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 8.5v7M8.5 12h7\" stroke=\"#000\"/></mask><g mask=\"url(#plus-square-f-m)\"><rect x=\"3.5\" y=\"3.5\" width=\"17\" height=\"17\" rx=\"4\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "minus",
+"ko": "빼기",
+"group": "행동",
+"line": "<path d=\"M5 12h14\"/>",
+"fill": "<path d=\"M5 12h14\"/>"
+},
+{
+"name": "minus-circle",
+"ko": "빼기 (원)",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M8.5 12h7\"/>",
+"fill": "<mask id=\"minus-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M8.5 12h7\" stroke=\"#000\"/></mask><g mask=\"url(#minus-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "close",
+"ko": "닫기",
+"group": "행동",
+"line": "<path d=\"M6 6l12 12M18 6 6 18\"/>",
+"fill": "<path d=\"M6 6l12 12M18 6 6 18\"/>"
+},
+{
+"name": "close-circle",
+"ko": "지우기",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M9.3 9.3l5.4 5.4M14.7 9.3l-5.4 5.4\"/>",
+"fill": "<mask id=\"close-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9.3 9.3l5.4 5.4M14.7 9.3l-5.4 5.4\" stroke=\"#000\"/></mask><g mask=\"url(#close-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "check",
+"ko": "완료",
+"group": "행동",
+"line": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>",
+"fill": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>"
+},
+{
+"name": "check-circle",
+"ko": "완료 (원)",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M8.3 12.3l2.5 2.5 5-5\"/>",
+"fill": "<mask id=\"check-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M8.3 12.3l2.5 2.5 5-5\" stroke=\"#000\"/></mask><g mask=\"url(#check-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "search",
+"ko": "검색",
+"group": "행동",
+"line": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4 4\"/>",
+"fill": "<circle cx=\"11\" cy=\"11\" r=\"6.5\" fill=\"currentColor\"/><path d=\"M16 16l4 4\"/>"
+},
+{
+"name": "filter",
+"ko": "필터",
+"group": "행동",
+"line": "<path d=\"M4 7h9m4 0h3M4 17h3m4 0h9\"/><circle cx=\"15\" cy=\"7\" r=\"2\"/><circle cx=\"9\" cy=\"17\" r=\"2\"/>",
+"fill": "<circle cx=\"15\" cy=\"7\" r=\"2\" fill=\"currentColor\"/><circle cx=\"9\" cy=\"17\" r=\"2\" fill=\"currentColor\"/><path d=\"M4 7h9m4 0h3M4 17h3m4 0h9\"/>"
+},
+{
+"name": "more",
+"ko": "더보기 메뉴",
+"group": "행동",
+"line": "<circle cx=\"5\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"19\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<circle cx=\"5\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"19\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/>"
+},
+{
+"name": "more-vertical",
+"ko": "더보기 (세로)",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"5\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"19\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<circle cx=\"12\" cy=\"5\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"19\" r=\"1.6\" fill=\"currentColor\" stroke=\"none\"/>"
+},
+{
+"name": "more-circle",
+"ko": "더보기 (원)",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"8\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"16\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"more-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"8\" cy=\"12\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/><circle cx=\"16\" cy=\"12\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#more-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "menu",
+"ko": "메뉴",
+"group": "행동",
+"line": "<path d=\"M4 6h16M4 12h16M4 18h16\"/>",
+"fill": "<path d=\"M4 6h16M4 12h16M4 18h16\"/>"
+},
+{
+"name": "list",
+"ko": "목록",
+"group": "행동",
+"line": "<path d=\"M9 6h11M9 12h11M9 18h11\"/><circle cx=\"4.5\" cy=\"6\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"4.5\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"4.5\" cy=\"18\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<path d=\"M9 6h11M9 12h11M9 18h11\"/><circle cx=\"4.5\" cy=\"6\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"4.5\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"4.5\" cy=\"18\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/>"
+},
+{
+"name": "list-check",
+"ko": "할 일",
+"group": "행동",
+"line": "<path d=\"M4 6h16M4 12h9M4 18h7M14 17l2.5 2.5L21 15\"/>",
+"fill": "<path d=\"M4 6h16M4 12h9M4 18h7M14 17l2.5 2.5L21 15\"/>"
+},
+{
+"name": "grid",
+"ko": "격자 보기",
+"group": "행동",
+"line": "<rect x=\"4\" y=\"4\" width=\"6.5\" height=\"6.5\" rx=\"1.5\"/><rect x=\"13.5\" y=\"4\" width=\"6.5\" height=\"6.5\" rx=\"1.5\"/><rect x=\"4\" y=\"13.5\" width=\"6.5\" height=\"6.5\" rx=\"1.5\"/><rect x=\"13.5\" y=\"13.5\" width=\"6.5\" height=\"6.5\" rx=\"1.5\"/>",
+"fill": "<rect x=\"4\" y=\"4\" width=\"6.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"13.5\" y=\"4\" width=\"6.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"4\" y=\"13.5\" width=\"6.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"13.5\" y=\"13.5\" width=\"6.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/>"
+},
+{
+"name": "edit",
+"ko": "수정",
+"group": "행동",
+"line": "<path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13 7l4 4\"/>",
+"fill": "<mask id=\"edit-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M13 7l4 4\" stroke=\"#000\"/></mask><g mask=\"url(#edit-f-m)\"><path d=\"M4 20h4L19 9l-4-4L4 16z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "write",
+"ko": "글쓰기",
+"group": "행동",
+"line": "<path d=\"M15 4l4 4-9 9H6v-4z\"/><path d=\"M4 20.5h16\"/>",
+"fill": "<path d=\"M15 4l4 4-9 9H6v-4z\" fill=\"currentColor\"/><path d=\"M4 20.5h16\"/>"
+},
+{
+"name": "eraser",
+"ko": "지우개",
+"group": "행동",
+"line": "<path d=\"M14.4 4.6l5 5-8.2 8.2H7.6L4.6 14.8a1.5 1.5 0 0 1 0-2.1z\"/><path d=\"M9.6 9.4l5 5\"/><path d=\"M12 20h8\"/>",
+"fill": "<mask id=\"eraser-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9.6 9.4l5 5\" stroke=\"#000\"/></mask><g mask=\"url(#eraser-f-m)\"><path d=\"M14.4 4.6l5 5-8.2 8.2H7.6L4.6 14.8a1.5 1.5 0 0 1 0-2.1z\" fill=\"currentColor\"/></g><path d=\"M12 20h8\"/>"
+},
+{
+"name": "trash",
+"ko": "삭제",
+"group": "행동",
+"line": "<path d=\"M4 6.5h16M9.5 6.5V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.5\"/><path d=\"M6 6.5l1 12.6a1.5 1.5 0 0 0 1.5 1.4h7a1.5 1.5 0 0 0 1.5-1.4l1-12.6z\"/><path d=\"M10 10.5v6M14 10.5v6\"/>",
+"fill": "<mask id=\"trash-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M10 10.5v6M14 10.5v6\" stroke=\"#000\"/></mask><g mask=\"url(#trash-f-m)\"><path d=\"M6 6.5l1 12.6a1.5 1.5 0 0 0 1.5 1.4h7a1.5 1.5 0 0 0 1.5-1.4l1-12.6z\" fill=\"currentColor\"/></g><path d=\"M4 6.5h16M9.5 6.5V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.5\"/>"
+},
+{
+"name": "copy",
+"ko": "복사",
+"group": "행동",
+"line": "<rect x=\"8\" y=\"8\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8\"/>",
+"fill": "<rect x=\"8\" y=\"8\" width=\"12\" height=\"12\" rx=\"2\" fill=\"currentColor\"/><path d=\"M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8\"/>"
+},
+{
+"name": "share",
+"ko": "공유",
+"group": "행동",
+"line": "<path d=\"M12 4v11M7.5 8.5 12 4l4.5 4.5\"/><path d=\"M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13\"/>",
+"fill": "<path d=\"M12 4v11M7.5 8.5 12 4l4.5 4.5\"/><path d=\"M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13\"/>"
+},
+{
+"name": "share-nodes",
+"ko": "공유 (안드로이드)",
+"group": "행동",
+"line": "<circle cx=\"17.5\" cy=\"6\" r=\"2.5\"/><circle cx=\"6.5\" cy=\"12\" r=\"2.5\"/><circle cx=\"17.5\" cy=\"18\" r=\"2.5\"/><path d=\"M8.7 10.8l6.6-3.6M8.7 13.2l6.6 3.6\"/>",
+"fill": "<circle cx=\"17.5\" cy=\"6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"6.5\" cy=\"12\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"17.5\" cy=\"18\" r=\"2.5\" fill=\"currentColor\"/><path d=\"M8.7 10.8l6.6-3.6M8.7 13.2l6.6 3.6\"/>"
+},
+{
+"name": "link",
+"ko": "링크",
+"group": "행동",
+"line": "<path d=\"M10 14a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.4 1.4\"/><path d=\"M14 10a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.4-1.4\"/>",
+"fill": "<path d=\"M10 14a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.4 1.4\"/><path d=\"M14 10a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.4-1.4\"/>"
+},
+{
+"name": "attach",
+"ko": "첨부",
+"group": "행동",
+"line": "<path d=\"M19 11.5l-6.9 6.9a4.5 4.5 0 0 1-6.4-6.4l7.4-7.4a3 3 0 0 1 4.2 4.2l-7.3 7.3a1.5 1.5 0 0 1-2.1-2.1l6.5-6.5\"/>",
+"fill": "<path d=\"M19 11.5l-6.9 6.9a4.5 4.5 0 0 1-6.4-6.4l7.4-7.4a3 3 0 0 1 4.2 4.2l-7.3 7.3a1.5 1.5 0 0 1-2.1-2.1l6.5-6.5\"/>"
+},
+{
+"name": "send",
+"ko": "보내기",
+"group": "행동",
+"line": "<path d=\"M20 4 3.8 10.3a.6.6 0 0 0 0 1.1l6.4 2.4 2.4 6.4a.6.6 0 0 0 1.1 0z\"/><path d=\"M10.2 13.8 15 9\"/>",
+"fill": "<mask id=\"send-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M10.2 13.8 15 9\" stroke=\"#000\"/></mask><g mask=\"url(#send-f-m)\"><path d=\"M20 4 3.8 10.3a.6.6 0 0 0 0 1.1l6.4 2.4 2.4 6.4a.6.6 0 0 0 1.1 0z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "scissors",
+"ko": "자르기",
+"group": "행동",
+"line": "<circle cx=\"6.5\" cy=\"7\" r=\"2.5\"/><circle cx=\"6.5\" cy=\"17\" r=\"2.5\"/><path d=\"M8.6 8.4 20 17M8.6 15.6 20 7\"/>",
+"fill": "<circle cx=\"6.5\" cy=\"7\" r=\"2.5\"/><circle cx=\"6.5\" cy=\"17\" r=\"2.5\"/><path d=\"M8.6 8.4 20 17M8.6 15.6 20 7\"/>"
+},
+{
+"name": "crop",
+"ko": "다듬기",
+"group": "행동",
+"line": "<path d=\"M7 3v12.5A1.5 1.5 0 0 0 8.5 17H21M3 7h12.5A1.5 1.5 0 0 1 17 8.5V21\"/>",
+"fill": "<path d=\"M7 3v12.5A1.5 1.5 0 0 0 8.5 17H21M3 7h12.5A1.5 1.5 0 0 1 17 8.5V21\"/>"
+},
+{
+"name": "pin",
+"ko": "고정",
+"group": "행동",
+"line": "<path d=\"M9 4h6l-1 5 3 3v1.5H7V12l3-3z\"/><path d=\"M12 13.5V20\"/>",
+"fill": "<path d=\"M9 4h6l-1 5 3 3v1.5H7V12l3-3z\" fill=\"currentColor\"/><path d=\"M12 13.5V20\"/>"
+},
+{
+"name": "bookmark",
+"ko": "저장",
+"group": "행동",
+"line": "<path d=\"M6.5 4h11a1 1 0 0 1 1 1v15l-6.5-4.5L5.5 20V5a1 1 0 0 1 1-1z\"/>",
+"fill": "<path d=\"M6.5 4h11a1 1 0 0 1 1 1v15l-6.5-4.5L5.5 20V5a1 1 0 0 1 1-1z\" fill=\"currentColor\"/>"
+},
+{
+"name": "flag",
+"ko": "신고",
+"group": "행동",
+"line": "<path d=\"M5 4.5h12.5l-2.5 4 2.5 4H5z\"/><path d=\"M5 4v16\"/>",
+"fill": "<path d=\"M5 4.5h12.5l-2.5 4 2.5 4H5z\" fill=\"currentColor\"/><path d=\"M5 4v16\"/>"
+},
+{
+"name": "settings",
+"ko": "설정",
+"group": "행동",
+"line": "<path d=\"M17.97 9.71L20.44 10.36L20.44 13.64L17.97 14.29L17.85 14.60L19.13 16.81L16.81 19.13L14.60 17.85L14.29 17.97L13.64 20.44L10.36 20.44L9.71 17.97L9.40 17.85L7.19 19.13L4.87 16.81L6.15 14.60L6.03 14.29L3.56 13.64L3.56 10.36L6.03 9.71L6.15 9.40L4.87 7.19L7.19 4.87L9.40 6.15L9.71 6.03L10.36 3.56L13.64 3.56L14.29 6.03L14.60 6.15L16.81 4.87L19.13 7.19L17.85 9.40z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>",
+"fill": "<mask id=\"settings-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\" stroke=\"#000\"/></mask><g mask=\"url(#settings-f-m)\"><path d=\"M17.97 9.71L20.44 10.36L20.44 13.64L17.97 14.29L17.85 14.60L19.13 16.81L16.81 19.13L14.60 17.85L14.29 17.97L13.64 20.44L10.36 20.44L9.71 17.97L9.40 17.85L7.19 19.13L4.87 16.81L6.15 14.60L6.03 14.29L3.56 13.64L3.56 10.36L6.03 9.71L6.15 9.40L4.87 7.19L7.19 4.87L9.40 6.15L9.71 6.03L10.36 3.56L13.64 3.56L14.29 6.03L14.60 6.15L16.81 4.87L19.13 7.19L17.85 9.40z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "wrench",
+"ko": "도구",
+"group": "행동",
+"line": "<path d=\"M14.7 4a4.6 4.6 0 0 0-4.4 6.1l-5.6 5.6a1.9 1.9 0 0 0 2.7 2.7l5.6-5.6A4.6 4.6 0 0 0 19.1 8l-2.7 2.6-2.4-.6-.6-2.4L16 4.9a4.6 4.6 0 0 0-1.3-.9z\"/>",
+"fill": "<path d=\"M14.7 4a4.6 4.6 0 0 0-4.4 6.1l-5.6 5.6a1.9 1.9 0 0 0 2.7 2.7l5.6-5.6A4.6 4.6 0 0 0 19.1 8l-2.7 2.6-2.4-.6-.6-2.4L16 4.9a4.6 4.6 0 0 0-1.3-.9z\" fill=\"currentColor\"/>"
+},
+{
+"name": "lock",
+"ko": "잠금",
+"group": "행동",
+"line": "<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/><path d=\"M12 14.5v2\"/>",
+"fill": "<mask id=\"lock-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 14.5v2\" stroke=\"#000\"/></mask><g mask=\"url(#lock-f-m)\"><rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\" fill=\"currentColor\"/></g><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/>"
+},
+{
+"name": "unlock",
+"ko": "잠금 해제",
+"group": "행동",
+"line": "<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V8a4 4 0 0 1 7.7-1.5\"/><path d=\"M12 14.5v2\"/>",
+"fill": "<mask id=\"unlock-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 14.5v2\" stroke=\"#000\"/></mask><g mask=\"url(#unlock-f-m)\"><rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\" fill=\"currentColor\"/></g><path d=\"M8 10.5V8a4 4 0 0 1 7.7-1.5\"/>"
+},
+{
+"name": "eye",
+"ko": "보기",
+"group": "행동",
+"line": "<path d=\"M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>",
+"fill": "<mask id=\"eye-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"3\" stroke=\"#000\"/></mask><g mask=\"url(#eye-f-m)\"><path d=\"M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "eye-off",
+"ko": "숨기기",
+"group": "행동",
+"line": "<path d=\"M9.9 5.8A9.6 9.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M14.1 14.2a3 3 0 0 1-4.3-4.3M6.6 6.7C3.9 8.4 2.5 12 2.5 12S6 18.5 12 18.5c1.9 0 3.6-.6 5-1.5M4 4l16 16\"/>",
+"fill": "<path d=\"M9.9 5.8A9.6 9.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M14.1 14.2a3 3 0 0 1-4.3-4.3M6.6 6.7C3.9 8.4 2.5 12 2.5 12S6 18.5 12 18.5c1.9 0 3.6-.6 5-1.5M4 4l16 16\"/>"
+},
+{
+"name": "translate",
+"ko": "번역",
+"group": "행동",
+"line": "<path d=\"M4 6h9M8.5 4v2M11 6c-.8 3.5-3.3 6.3-6.5 7.5M6.5 9c1 2 2.8 3.7 5 4.5M12.5 20l3.5-8 3.5 8M13.6 17.5h4.8\"/>",
+"fill": "<path d=\"M4 6h9M8.5 4v2M11 6c-.8 3.5-3.3 6.3-6.5 7.5M6.5 9c1 2 2.8 3.7 5 4.5M12.5 20l3.5-8 3.5 8M13.6 17.5h4.8\"/>"
+},
+{
+"name": "keyboard",
+"ko": "키보드",
+"group": "행동",
+"line": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M7 10h.01M10.3 10h.01M13.7 10h.01M17 10h.01M8 14h8\"/>",
+"fill": "<mask id=\"keyboard-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M7 10h.01M10.3 10h.01M13.7 10h.01M17 10h.01M8 14h8\" stroke=\"#000\"/></mask><g mask=\"url(#keyboard-f-m)\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "backspace",
+"ko": "지우기 (키)",
+"group": "행동",
+"line": "<path d=\"M8.5 5H19a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 19 19H8.5L3 12z\"/><path d=\"M11 9.5l5 5M16 9.5l-5 5\"/>",
+"fill": "<mask id=\"backspace-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M11 9.5l5 5M16 9.5l-5 5\" stroke=\"#000\"/></mask><g mask=\"url(#backspace-f-m)\"><path d=\"M8.5 5H19a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 19 19H8.5L3 12z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "at",
+"ko": "멘션",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"3.5\"/><path d=\"M15.5 12v1.5a2.5 2.5 0 0 0 5 0V12a8.5 8.5 0 1 0-3.3 6.7\"/>",
+"fill": "<circle cx=\"12\" cy=\"12\" r=\"3.5\"/><path d=\"M15.5 12v1.5a2.5 2.5 0 0 0 5 0V12a8.5 8.5 0 1 0-3.3 6.7\"/>"
+},
+{
+"name": "hash",
+"ko": "태그",
+"group": "행동",
+"line": "<path d=\"M9.5 4 8 20M16 4l-1.5 16M4.5 9h15M4 15h15\"/>",
+"fill": "<path d=\"M9.5 4 8 20M16 4l-1.5 16M4.5 9h15M4 15h15\"/>"
+},
+{
+"name": "percent",
+"ko": "할인",
+"group": "행동",
+"line": "<path d=\"M18.5 5.5l-13 13\"/><circle cx=\"7\" cy=\"7\" r=\"2.3\"/><circle cx=\"17\" cy=\"17\" r=\"2.3\"/>",
+"fill": "<circle cx=\"7\" cy=\"7\" r=\"2.3\" fill=\"currentColor\"/><circle cx=\"17\" cy=\"17\" r=\"2.3\" fill=\"currentColor\"/><path d=\"M18.5 5.5l-13 13\"/>"
+},
+{
+"name": "ban",
+"ko": "차단",
+"group": "행동",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M6 6l12 12\"/>",
+"fill": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M6 6l12 12\"/>"
+},
+{
+"name": "wand",
+"ko": "자동 완성",
+"group": "행동",
+"line": "<path d=\"M4 20 14.5 9.5\"/><path d=\"M17.5 3.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z\"/><path d=\"M10 4l.6 1.2 1.2.6-1.2.6L10 7.6l-.6-1.2-1.2-.6 1.2-.6z\"/>",
+"fill": "<path d=\"M17.5 3.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z\" fill=\"currentColor\"/><path d=\"M10 4l.6 1.2 1.2.6-1.2.6L10 7.6l-.6-1.2-1.2-.6 1.2-.6z\" fill=\"currentColor\"/><path d=\"M4 20 14.5 9.5\"/>"
+},
+{
+"name": "sparkle",
+"ko": "추천",
+"group": "행동",
+"line": "<path d=\"M11 3.5c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5 3.9-.6 5.9-2.6 6.5-6.5z\"/><path d=\"M18 15.5c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3z\"/>",
+"fill": "<path d=\"M11 3.5c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5 3.9-.6 5.9-2.6 6.5-6.5z\" fill=\"currentColor\"/><path d=\"M18 15.5c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3z\" fill=\"currentColor\"/>"
+},
+{
+"name": "scan",
+"ko": "스캔",
+"group": "행동",
+"line": "<path d=\"M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16\"/><path d=\"M4 12h16\"/>",
+"fill": "<path d=\"M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16\"/><path d=\"M4 12h16\"/>"
+},
+{
+"name": "info",
+"ko": "안내",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 11v5\"/><circle cx=\"12\" cy=\"8\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"info-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 11v5\" stroke=\"#000\"/><circle cx=\"12\" cy=\"8\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#info-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "question",
+"ko": "도움말",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M9.7 9.6a2.4 2.4 0 1 1 3.3 2.2c-.6.3-1 .8-1 1.5v.4\"/><circle cx=\"12\" cy=\"16.6\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"question-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9.7 9.6a2.4 2.4 0 1 1 3.3 2.2c-.6.3-1 .8-1 1.5v.4\" stroke=\"#000\"/><circle cx=\"12\" cy=\"16.6\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#question-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "alert",
+"ko": "알림 (느낌표)",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7.5V13\"/><circle cx=\"12\" cy=\"16.3\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"alert-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 7.5V13\" stroke=\"#000\"/><circle cx=\"12\" cy=\"16.3\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#alert-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "warning",
+"ko": "주의",
+"group": "상태",
+"line": "<path d=\"M10.7 5.2a1.5 1.5 0 0 1 2.6 0l6.9 12.3a1.5 1.5 0 0 1-1.3 2.2H5.1a1.5 1.5 0 0 1-1.3-2.2z\"/><path d=\"M12 10v4\"/><circle cx=\"12\" cy=\"16.8\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"warning-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 10v4\" stroke=\"#000\"/><circle cx=\"12\" cy=\"16.8\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#warning-f-m)\"><path d=\"M10.7 5.2a1.5 1.5 0 0 1 2.6 0l6.9 12.3a1.5 1.5 0 0 1-1.3 2.2H5.1a1.5 1.5 0 0 1-1.3-2.2z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "verified",
+"ko": "인증",
+"group": "상태",
+"line": "<path d=\"M12.00 3.20L13.92 4.85L16.40 4.38L17.23 6.77L19.62 7.60L19.15 10.08L20.80 12.00L19.15 13.92L19.62 16.40L17.23 17.23L16.40 19.62L13.92 19.15L12.00 20.80L10.08 19.15L7.60 19.62L6.77 17.23L4.38 16.40L4.85 13.92L3.20 12.00L4.85 10.08L4.38 7.60L6.77 6.77L7.60 4.38L10.08 4.85z\"/><path d=\"M8.6 12.2l2.3 2.3 4.5-4.5\"/>",
+"fill": "<mask id=\"verified-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M8.6 12.2l2.3 2.3 4.5-4.5\" stroke=\"#000\"/></mask><g mask=\"url(#verified-f-m)\"><path d=\"M12.00 3.20L13.92 4.85L16.40 4.38L17.23 6.77L19.62 7.60L19.15 10.08L20.80 12.00L19.15 13.92L19.62 16.40L17.23 17.23L16.40 19.62L13.92 19.15L12.00 20.80L10.08 19.15L7.60 19.62L6.77 17.23L4.38 16.40L4.85 13.92L3.20 12.00L4.85 10.08L4.38 7.60L6.77 6.77L7.60 4.38L10.08 4.85z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "shield",
+"ko": "보호",
+"group": "상태",
+"line": "<path d=\"M12 3.5 19 6v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6z\"/>",
+"fill": "<path d=\"M12 3.5 19 6v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6z\" fill=\"currentColor\"/>"
+},
+{
+"name": "shield-check",
+"ko": "안전결제",
+"group": "상태",
+"line": "<path d=\"M12 3.5 19 6v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6z\"/><path d=\"M8.8 12l2.2 2.2 4.2-4.2\"/>",
+"fill": "<mask id=\"shield-check-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M8.8 12l2.2 2.2 4.2-4.2\" stroke=\"#000\"/></mask><g mask=\"url(#shield-check-f-m)\"><path d=\"M12 3.5 19 6v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "bell",
+"ko": "알림",
+"group": "상태",
+"line": "<path d=\"M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z\"/><path d=\"M10 20.5a2 2 0 0 0 4 0\"/>",
+"fill": "<path d=\"M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z\" fill=\"currentColor\"/><path d=\"M10 20.5a2 2 0 0 0 4 0\"/>"
+},
+{
+"name": "bell-off",
+"ko": "알림 끄기",
+"group": "상태",
+"line": "<path d=\"M6 16.5V11a6 6 0 0 1 9.6-4.8M18 11v5.5l1.5 1.5H8M10 20.5a2 2 0 0 0 4 0M4 4l16 16\"/>",
+"fill": "<path d=\"M6 16.5V11a6 6 0 0 1 9.6-4.8M18 11v5.5l1.5 1.5H8M10 20.5a2 2 0 0 0 4 0M4 4l16 16\"/>"
+},
+{
+"name": "star",
+"ko": "별점",
+"group": "상태",
+"line": "<path d=\"M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8z\"/>",
+"fill": "<path d=\"M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8z\" fill=\"currentColor\"/>"
+},
+{
+"name": "heart",
+"ko": "찜",
+"group": "상태",
+"line": "<path d=\"M12 19.5s-7.5-4.3-7.5-9.7A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5c0 5.4-7.5 9.7-7.5 9.7z\"/>",
+"fill": "<path d=\"M12 19.5s-7.5-4.3-7.5-9.7A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5c0 5.4-7.5 9.7-7.5 9.7z\" fill=\"currentColor\"/>"
+},
+{
+"name": "thumb-up",
+"ko": "좋아요",
+"group": "상태",
+"line": "<path d=\"M7.5 10.5v9.5H5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1z\"/><path d=\"M7.5 10.5 11 4.2a1.7 1.7 0 0 1 3.1 1.2L13.4 9h5.1a1.7 1.7 0 0 1 1.7 2l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H7.5z\"/>",
+"fill": "<path d=\"M7.5 10.5v9.5H5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1z\" fill=\"currentColor\"/><path d=\"M7.5 10.5 11 4.2a1.7 1.7 0 0 1 3.1 1.2L13.4 9h5.1a1.7 1.7 0 0 1 1.7 2l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H7.5z\" fill=\"currentColor\"/>"
+},
+{
+"name": "thumb-down",
+"ko": "별로예요",
+"group": "상태",
+"line": "<g transform=\"matrix(1 0 0 -1 0 24)\"><path d=\"M7.5 10.5v9.5H5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1z\"/></g><g transform=\"matrix(1 0 0 -1 0 24)\"><path d=\"M7.5 10.5 11 4.2a1.7 1.7 0 0 1 3.1 1.2L13.4 9h5.1a1.7 1.7 0 0 1 1.7 2l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H7.5z\"/></g>",
+"fill": "<g transform=\"matrix(1 0 0 -1 0 24)\"><path d=\"M7.5 10.5v9.5H5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1z\" fill=\"currentColor\"/></g><g transform=\"matrix(1 0 0 -1 0 24)\"><path d=\"M7.5 10.5 11 4.2a1.7 1.7 0 0 1 3.1 1.2L13.4 9h5.1a1.7 1.7 0 0 1 1.7 2l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H7.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "crown",
+"ko": "인기",
+"group": "상태",
+"line": "<path d=\"M4 8l4 3.5L12 5l4 6.5L20 8l-1.5 10h-13z\"/>",
+"fill": "<path d=\"M4 8l4 3.5L12 5l4 6.5L20 8l-1.5 10h-13z\" fill=\"currentColor\"/>"
+},
+{
+"name": "trophy",
+"ko": "랭킹",
+"group": "상태",
+"line": "<path d=\"M7 4h10v5a5 5 0 0 1-10 0z\"/><path d=\"M7 6H4.5v1.5A3.5 3.5 0 0 0 8 11M17 6h2.5v1.5A3.5 3.5 0 0 1 16 11M12 14v3.5M8.5 20h7\"/>",
+"fill": "<path d=\"M7 4h10v5a5 5 0 0 1-10 0z\" fill=\"currentColor\"/><path d=\"M7 6H4.5v1.5A3.5 3.5 0 0 0 8 11M17 6h2.5v1.5A3.5 3.5 0 0 1 16 11M12 14v3.5M8.5 20h7\"/>"
+},
+{
+"name": "flame",
+"ko": "급상승",
+"group": "상태",
+"line": "<path d=\"M12 20.5c3.6 0 6-2.5 6-6 0-4.5-3.5-6.3-4-10.5-2.5 1.6-4 4.2-4 6.8-1-.5-1.7-1.5-2-2.7-1.3 1.5-2 3.5-2 5.6 0 3.8 2.4 6.8 6 6.8z\"/>",
+"fill": "<path d=\"M12 20.5c3.6 0 6-2.5 6-6 0-4.5-3.5-6.3-4-10.5-2.5 1.6-4 4.2-4 6.8-1-.5-1.7-1.5-2-2.7-1.3 1.5-2 3.5-2 5.6 0 3.8 2.4 6.8 6 6.8z\" fill=\"currentColor\"/>"
+},
+{
+"name": "bolt",
+"ko": "빠른",
+"group": "상태",
+"line": "<path d=\"M13.5 3.5 5.5 13.5H12l-1.5 7 8-10H12z\"/>",
+"fill": "<path d=\"M13.5 3.5 5.5 13.5H12l-1.5 7 8-10H12z\" fill=\"currentColor\"/>"
+},
+{
+"name": "bulb",
+"ko": "팁",
+"group": "상태",
+"line": "<path d=\"M12 3.5a6 6 0 0 0-3.5 10.9v2.1h7v-2.1A6 6 0 0 0 12 3.5z\"/><path d=\"M9.5 20h5\"/>",
+"fill": "<path d=\"M12 3.5a6 6 0 0 0-3.5 10.9v2.1h7v-2.1A6 6 0 0 0 12 3.5z\" fill=\"currentColor\"/><path d=\"M9.5 20h5\"/>"
+},
+{
+"name": "clock",
+"ko": "시간",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7.5V12l3 2\"/>",
+"fill": "<mask id=\"clock-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 7.5V12l3 2\" stroke=\"#000\"/></mask><g mask=\"url(#clock-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "timer",
+"ko": "타이머",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"13\" r=\"7.5\"/><path d=\"M12 9.5V13l2.5 1.5\"/><path d=\"M9.5 3h5M18.5 6.5l1 1\"/>",
+"fill": "<mask id=\"timer-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 9.5V13l2.5 1.5\" stroke=\"#000\"/></mask><g mask=\"url(#timer-f-m)\"><circle cx=\"12\" cy=\"13\" r=\"7.5\" fill=\"currentColor\"/></g><path d=\"M9.5 3h5M18.5 6.5l1 1\"/>"
+},
+{
+"name": "calendar",
+"ko": "날짜",
+"group": "상태",
+"line": "<rect x=\"4\" y=\"5.5\" width=\"16\" height=\"14.5\" rx=\"2.5\"/><path d=\"M8 3.5v4M16 3.5v4\"/><path d=\"M4 10h16\"/>",
+"fill": "<mask id=\"calendar-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M4 10h16\" stroke=\"#000\"/></mask><g mask=\"url(#calendar-f-m)\"><rect x=\"4\" y=\"5.5\" width=\"16\" height=\"14.5\" rx=\"2.5\" fill=\"currentColor\"/></g><path d=\"M8 3.5v4M16 3.5v4\"/>"
+},
+{
+"name": "calendar-check",
+"ko": "예약 완료",
+"group": "상태",
+"line": "<rect x=\"4\" y=\"5.5\" width=\"16\" height=\"14.5\" rx=\"2.5\"/><path d=\"M8 3.5v4M16 3.5v4\"/><path d=\"M4 10h16M9 14.8l2 2 4-4\"/>",
+"fill": "<mask id=\"calendar-check-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M4 10h16M9 14.8l2 2 4-4\" stroke=\"#000\"/></mask><g mask=\"url(#calendar-check-f-m)\"><rect x=\"4\" y=\"5.5\" width=\"16\" height=\"14.5\" rx=\"2.5\" fill=\"currentColor\"/></g><path d=\"M8 3.5v4M16 3.5v4\"/>"
+},
+{
+"name": "sun",
+"ko": "라이트 모드",
+"group": "상태",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4\"/>",
+"fill": "<circle cx=\"12\" cy=\"12\" r=\"4\" fill=\"currentColor\"/><path d=\"M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4\"/>"
+},
+{
+"name": "moon",
+"ko": "다크 모드",
+"group": "상태",
+"line": "<path d=\"M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z\"/>",
+"fill": "<path d=\"M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z\" fill=\"currentColor\"/>"
+},
+{
+"name": "fingerprint",
+"ko": "본인 인증",
+"group": "상태",
+"line": "<path d=\"M6 6.2A8 8 0 0 1 20 12M4.3 9.3A8 8 0 0 0 4 12v1M8 19.5c.7-1.9 1-4 1-6.5a3 3 0 0 1 6 0c0 2.8-.4 5.3-1.2 7.5M12 12.5c0 3-.5 5.6-1.5 7.8M19.7 15.5c-.3 1.2-.6 2.3-1.1 3.3M6.4 16.6c.4-1.2.6-2.4.6-3.6a5 5 0 0 1 9-3\"/>",
+"fill": "<path d=\"M6 6.2A8 8 0 0 1 20 12M4.3 9.3A8 8 0 0 0 4 12v1M8 19.5c.7-1.9 1-4 1-6.5a3 3 0 0 1 6 0c0 2.8-.4 5.3-1.2 7.5M12 12.5c0 3-.5 5.6-1.5 7.8M19.7 15.5c-.3 1.2-.6 2.3-1.1 3.3M6.4 16.6c.4-1.2.6-2.4.6-3.6a5 5 0 0 1 9-3\"/>"
+},
+{
+"name": "chat",
+"ko": "채팅",
+"group": "소통",
+"line": "<path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\"/>",
+"fill": "<path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\" fill=\"currentColor\"/>"
+},
+{
+"name": "chat-dots",
+"ko": "대화 중",
+"group": "소통",
+"line": "<path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\"/><circle cx=\"8.5\" cy=\"10.5\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"10.5\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"10.5\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"chat-dots-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"8.5\" cy=\"10.5\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"12\" cy=\"10.5\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"10.5\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#chat-dots-f-m)\"><path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "chat-check",
+"ko": "답변 완료",
+"group": "소통",
+"line": "<path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\"/><path d=\"M9 10.5l2 2 4-4\"/>",
+"fill": "<mask id=\"chat-check-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9 10.5l2 2 4-4\" stroke=\"#000\"/></mask><g mask=\"url(#chat-check-f-m)\"><path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "chat-alert",
+"ko": "문의",
+"group": "소통",
+"line": "<path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\"/><path d=\"M12 7.5V11\"/><circle cx=\"12\" cy=\"13.6\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"chat-alert-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 7.5V11\" stroke=\"#000\"/><circle cx=\"12\" cy=\"13.6\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#chat-alert-f-m)\"><path d=\"M6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8A2.5 2.5 0 0 1 6.5 4z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "chat-off",
+"ko": "채팅 끄기",
+"group": "소통",
+"line": "<path d=\"M8 4h9.5A2.5 2.5 0 0 1 20 6.5v8c0 .7-.3 1.3-.7 1.8M16 17h-5l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8c0-.6.2-1.1.5-1.5M4 4l16 16\"/>",
+"fill": "<path d=\"M8 4h9.5A2.5 2.5 0 0 1 20 6.5v8c0 .7-.3 1.3-.7 1.8M16 17h-5l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5v-8c0-.6.2-1.1.5-1.5M4 4l16 16\"/>"
+},
+{
+"name": "mail",
+"ko": "메일",
+"group": "소통",
+"line": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2\"/><path d=\"M4 7l8 6 8-6\"/>",
+"fill": "<mask id=\"mail-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M4 7l8 6 8-6\" stroke=\"#000\"/></mask><g mask=\"url(#mail-f-m)\"><rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "phone",
+"ko": "전화",
+"group": "소통",
+"line": "<path d=\"M7.6 3.6 5 4.6C4 5 3.6 6 4 7a18.5 18.5 0 0 0 13 13c1 .4 2-.1 2.4-1.1l1-2.6-4.1-2-2 2a13 13 0 0 1-4.7-4.7l2-2z\"/>",
+"fill": "<path d=\"M7.6 3.6 5 4.6C4 5 3.6 6 4 7a18.5 18.5 0 0 0 13 13c1 .4 2-.1 2.4-1.1l1-2.6-4.1-2-2 2a13 13 0 0 1-4.7-4.7l2-2z\" fill=\"currentColor\"/>"
+},
+{
+"name": "megaphone",
+"ko": "공지",
+"group": "소통",
+"line": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h2.5l9 4V4.5l-9 4H5a1 1 0 0 0-1 1z\"/><path d=\"M7.5 15.5 8.5 20M19.5 10v4\"/>",
+"fill": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h2.5l9 4V4.5l-9 4H5a1 1 0 0 0-1 1z\" fill=\"currentColor\"/><path d=\"M7.5 15.5 8.5 20M19.5 10v4\"/>"
+},
+{
+"name": "mic",
+"ko": "음성",
+"group": "소통",
+"line": "<rect x=\"9\" y=\"3.5\" width=\"6\" height=\"11\" rx=\"3\"/><path d=\"M6 11.5a6 6 0 0 0 12 0M12 17.5v3\"/>",
+"fill": "<rect x=\"9\" y=\"3.5\" width=\"6\" height=\"11\" rx=\"3\" fill=\"currentColor\"/><path d=\"M6 11.5a6 6 0 0 0 12 0M12 17.5v3\"/>"
+},
+{
+"name": "mic-off",
+"ko": "음소거",
+"group": "소통",
+"line": "<rect x=\"9\" y=\"3.5\" width=\"6\" height=\"11\" rx=\"3\"/><path d=\"M6 11.5a6 6 0 0 0 9.5 4.9M18 11.5c0 .6-.1 1.2-.3 1.7M12 17.5v3M4 4l16 16\"/>",
+"fill": "<rect x=\"9\" y=\"3.5\" width=\"6\" height=\"11\" rx=\"3\"/><path d=\"M6 11.5a6 6 0 0 0 9.5 4.9M18 11.5c0 .6-.1 1.2-.3 1.7M12 17.5v3M4 4l16 16\"/>"
+},
+{
+"name": "volume",
+"ko": "소리",
+"group": "소통",
+"line": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h3l5 4V4.5l-5 4H5a1 1 0 0 0-1 1z\"/><path d=\"M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11\"/>",
+"fill": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h3l5 4V4.5l-5 4H5a1 1 0 0 0-1 1z\" fill=\"currentColor\"/><path d=\"M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11\"/>"
+},
+{
+"name": "volume-off",
+"ko": "소리 끄기",
+"group": "소통",
+"line": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h3l5 4V4.5l-5 4H5a1 1 0 0 0-1 1z\"/><path d=\"M16.5 9.5l4 5M20.5 9.5l-4 5\"/>",
+"fill": "<path d=\"M4 9.5v5a1 1 0 0 0 1 1h3l5 4V4.5l-5 4H5a1 1 0 0 0-1 1z\" fill=\"currentColor\"/><path d=\"M16.5 9.5l4 5M20.5 9.5l-4 5\"/>"
+},
+{
+"name": "headphone",
+"ko": "고객센터",
+"group": "소통",
+"line": "<path d=\"M4 15v-3a8 8 0 0 1 16 0v3\"/><rect x=\"4\" y=\"14\" width=\"4.5\" height=\"6.5\" rx=\"1.5\"/><rect x=\"15.5\" y=\"14\" width=\"4.5\" height=\"6.5\" rx=\"1.5\"/>",
+"fill": "<rect x=\"4\" y=\"14\" width=\"4.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"15.5\" y=\"14\" width=\"4.5\" height=\"6.5\" rx=\"1.5\" fill=\"currentColor\"/><path d=\"M4 15v-3a8 8 0 0 1 16 0v3\"/>"
+},
+{
+"name": "quote",
+"ko": "인용",
+"group": "소통",
+"line": "<path d=\"M4.5 11.5h5v6h-5z\"/><path d=\"M4.5 11.5c0-3 1.3-5 4-6\"/><path d=\"M14.5 11.5h5v6h-5z\"/><path d=\"M14.5 11.5c0-3 1.3-5 4-6\"/>",
+"fill": "<path d=\"M4.5 11.5h5v6h-5z\" fill=\"currentColor\"/><path d=\"M14.5 11.5h5v6h-5z\" fill=\"currentColor\"/><path d=\"M4.5 11.5c0-3 1.3-5 4-6\"/><path d=\"M14.5 11.5c0-3 1.3-5 4-6\"/>"
+},
+{
+"name": "user",
+"ko": "마이",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"8.5\" r=\"3.5\"/><path d=\"M5 20a7 7 0 0 1 14 0z\"/>",
+"fill": "<circle cx=\"12\" cy=\"8.5\" r=\"3.5\" fill=\"currentColor\"/><path d=\"M5 20a7 7 0 0 1 14 0z\" fill=\"currentColor\"/>"
+},
+{
+"name": "user-circle",
+"ko": "프로필",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"12\" cy=\"10\" r=\"2.8\"/><path d=\"M7 17.6a6 6 0 0 1 10 0\"/>",
+"fill": "<mask id=\"user-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"10\" r=\"2.8\" stroke=\"#000\"/><path d=\"M7 17.6a6 6 0 0 1 10 0\" stroke=\"#000\"/></mask><g mask=\"url(#user-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "user-plus",
+"ko": "친구 추가",
+"group": "사람",
+"line": "<circle cx=\"10\" cy=\"8.5\" r=\"3.5\"/><path d=\"M3.5 20a6.5 6.5 0 0 1 13 0z\"/><path d=\"M19 8v6M16 11h6\"/>",
+"fill": "<circle cx=\"10\" cy=\"8.5\" r=\"3.5\" fill=\"currentColor\"/><path d=\"M3.5 20a6.5 6.5 0 0 1 13 0z\" fill=\"currentColor\"/><path d=\"M19 8v6M16 11h6\"/>"
+},
+{
+"name": "user-search",
+"ko": "사람 찾기",
+"group": "사람",
+"line": "<circle cx=\"10\" cy=\"8\" r=\"3.5\"/><path d=\"M3.5 20a6.5 6.5 0 0 1 8.5-6.2\"/><circle cx=\"17\" cy=\"16\" r=\"2.5\"/><path d=\"M19 18l2 2\"/>",
+"fill": "<circle cx=\"10\" cy=\"8\" r=\"3.5\" fill=\"currentColor\"/><path d=\"M3.5 20a6.5 6.5 0 0 1 8.5-6.2\"/><circle cx=\"17\" cy=\"16\" r=\"2.5\"/><path d=\"M19 18l2 2\"/>"
+},
+{
+"name": "users",
+"ko": "친구",
+"group": "사람",
+"line": "<circle cx=\"9\" cy=\"8.5\" r=\"3.2\"/><path d=\"M3 20a6 6 0 0 1 12 0z\"/><path d=\"M15.5 5.5a3.2 3.2 0 0 1 0 6.2M17.5 14a6 6 0 0 1 3.5 6\"/>",
+"fill": "<circle cx=\"9\" cy=\"8.5\" r=\"3.2\" fill=\"currentColor\"/><path d=\"M3 20a6 6 0 0 1 12 0z\" fill=\"currentColor\"/><path d=\"M15.5 5.5a3.2 3.2 0 0 1 0 6.2M17.5 14a6 6 0 0 1 3.5 6\"/>"
+},
+{
+"name": "group",
+"ko": "모임",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"8\" r=\"2.8\"/><path d=\"M7.5 18.5a4.5 4.5 0 0 1 9 0z\"/><circle cx=\"5.5\" cy=\"10.5\" r=\"2\"/><circle cx=\"18.5\" cy=\"10.5\" r=\"2\"/><path d=\"M2.5 18a3.5 3.5 0 0 1 3.5-3.5M21.5 18a3.5 3.5 0 0 0-3.5-3.5\"/>",
+"fill": "<circle cx=\"12\" cy=\"8\" r=\"2.8\" fill=\"currentColor\"/><path d=\"M7.5 18.5a4.5 4.5 0 0 1 9 0z\" fill=\"currentColor\"/><circle cx=\"5.5\" cy=\"10.5\" r=\"2\"/><circle cx=\"18.5\" cy=\"10.5\" r=\"2\"/><path d=\"M2.5 18a3.5 3.5 0 0 1 3.5-3.5M21.5 18a3.5 3.5 0 0 0-3.5-3.5\"/>"
+},
+{
+"name": "hand-point",
+"ko": "탭하기",
+"group": "사람",
+"line": "<path d=\"M9 11.5V5a1.5 1.5 0 0 1 3 0v5.2l5 .8a2 2 0 0 1 1.7 2.3l-.8 4.6A2.5 2.5 0 0 1 15.4 20H11a3 3 0 0 1-2.3-1.1L5.5 15a1.6 1.6 0 0 1 2.3-2.2L9 14z\"/>",
+"fill": "<path d=\"M9 11.5V5a1.5 1.5 0 0 1 3 0v5.2l5 .8a2 2 0 0 1 1.7 2.3l-.8 4.6A2.5 2.5 0 0 1 15.4 20H11a3 3 0 0 1-2.3-1.1L5.5 15a1.6 1.6 0 0 1 2.3-2.2L9 14z\" fill=\"currentColor\"/>"
+},
+{
+"name": "smile",
+"ko": "좋아요 (표정)",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.5 14a4 4 0 0 0 7 0\"/>",
+"fill": "<mask id=\"smile-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><path d=\"M8.5 14a4 4 0 0 0 7 0\" stroke=\"#000\"/></mask><g mask=\"url(#smile-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "sad",
+"ko": "아쉬워요",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.5 16.2a4 4 0 0 1 7 0\"/>",
+"fill": "<mask id=\"sad-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><path d=\"M8.5 16.2a4 4 0 0 1 7 0\" stroke=\"#000\"/></mask><g mask=\"url(#sad-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "meh",
+"ko": "보통이에요",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9 15h6\"/>",
+"fill": "<mask id=\"meh-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><path d=\"M9 15h6\" stroke=\"#000\"/></mask><g mask=\"url(#meh-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "surprised",
+"ko": "놀라워요",
+"group": "사람",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"15\" r=\"1.5\"/>",
+"fill": "<mask id=\"surprised-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"12\" cy=\"15\" r=\"1.5\" stroke=\"#000\"/></mask><g mask=\"url(#surprised-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "face-scan",
+"ko": "얼굴 인식",
+"group": "사람",
+"line": "<path d=\"M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9.5 14.5a3.5 3.5 0 0 0 5 0\"/>",
+"fill": "<path d=\"M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16\"/><circle cx=\"9\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9.5 14.5a3.5 3.5 0 0 0 5 0\"/>"
+},
+{
+"name": "camera",
+"ko": "촬영",
+"group": "미디어·문서",
+"line": "<path d=\"M4 8.5A1.5 1.5 0 0 1 5.5 7h2.3l1.5-2h5.4l1.5 2h2.3A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\"/>",
+"fill": "<mask id=\"camera-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\" stroke=\"#000\"/></mask><g mask=\"url(#camera-f-m)\"><path d=\"M4 8.5A1.5 1.5 0 0 1 5.5 7h2.3l1.5-2h5.4l1.5 2h2.3A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "video",
+"ko": "동영상",
+"group": "미디어·문서",
+"line": "<rect x=\"3\" y=\"6.5\" width=\"13\" height=\"11\" rx=\"2\"/><path d=\"M16 10.5l5-3v9l-5-3z\"/>",
+"fill": "<rect x=\"3\" y=\"6.5\" width=\"13\" height=\"11\" rx=\"2\" fill=\"currentColor\"/><path d=\"M16 10.5l5-3v9l-5-3z\" fill=\"currentColor\"/>"
+},
+{
+"name": "image",
+"ko": "사진",
+"group": "미디어·문서",
+"line": "<rect x=\"3.5\" y=\"4.5\" width=\"17\" height=\"15\" rx=\"2\"/><circle cx=\"8.5\" cy=\"9.5\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M4 17l4.5-4.5 3 3 3.5-3.5L20 17\"/>",
+"fill": "<mask id=\"image-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"8.5\" cy=\"9.5\" r=\"1.5\" fill=\"#000\" stroke=\"none\"/><path d=\"M4 17l4.5-4.5 3 3 3.5-3.5L20 17\" stroke=\"#000\"/></mask><g mask=\"url(#image-f-m)\"><rect x=\"3.5\" y=\"4.5\" width=\"17\" height=\"15\" rx=\"2\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "images",
+"ko": "사진 여러 장",
+"group": "미디어·문서",
+"line": "<rect x=\"7\" y=\"7\" width=\"13.5\" height=\"12.5\" rx=\"2\"/><path d=\"M17 4.5H5.5a2 2 0 0 0-2 2V16\"/><circle cx=\"11.3\" cy=\"11\" r=\"1.3\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M7.5 17.5l3.5-3.5 2.5 2.5 3-3 4 4\"/>",
+"fill": "<mask id=\"images-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"11.3\" cy=\"11\" r=\"1.3\" fill=\"#000\" stroke=\"none\"/><path d=\"M7.5 17.5l3.5-3.5 2.5 2.5 3-3 4 4\" stroke=\"#000\"/></mask><g mask=\"url(#images-f-m)\"><rect x=\"7\" y=\"7\" width=\"13.5\" height=\"12.5\" rx=\"2\" fill=\"currentColor\"/></g><path d=\"M17 4.5H5.5a2 2 0 0 0-2 2V16\"/>"
+},
+{
+"name": "play-circle",
+"ko": "영상 재생",
+"group": "미디어·문서",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M10.3 8.8v6.4l5-3.2z\"/>",
+"fill": "<mask id=\"play-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M10.3 8.8v6.4l5-3.2z\" stroke=\"#000\"/></mask><g mask=\"url(#play-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "music",
+"ko": "음악",
+"group": "미디어·문서",
+"line": "<path d=\"M9 17.5V5.5l10-2v12\"/><circle cx=\"6.5\" cy=\"17.5\" r=\"2.5\"/><circle cx=\"16.5\" cy=\"15.5\" r=\"2.5\"/>",
+"fill": "<circle cx=\"6.5\" cy=\"17.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"16.5\" cy=\"15.5\" r=\"2.5\" fill=\"currentColor\"/><path d=\"M9 17.5V5.5l10-2v12\"/>"
+},
+{
+"name": "document",
+"ko": "문서",
+"group": "미디어·문서",
+"line": "<path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\"/><path d=\"M13.5 3.5v5h5\"/><path d=\"M8.5 13h7M8.5 16.5h5\"/>",
+"fill": "<mask id=\"document-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M13.5 3.5v5h5\" stroke=\"#000\"/><path d=\"M8.5 13h7M8.5 16.5h5\" stroke=\"#000\"/></mask><g mask=\"url(#document-f-m)\"><path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "document-plus",
+"ko": "문서 추가",
+"group": "미디어·문서",
+"line": "<path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\"/><path d=\"M13.5 3.5v5h5\"/><path d=\"M12 11.5v6M9 14.5h6\"/>",
+"fill": "<mask id=\"document-plus-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M13.5 3.5v5h5\" stroke=\"#000\"/><path d=\"M12 11.5v6M9 14.5h6\" stroke=\"#000\"/></mask><g mask=\"url(#document-plus-f-m)\"><path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "document-check",
+"ko": "문서 확인",
+"group": "미디어·문서",
+"line": "<path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\"/><path d=\"M13.5 3.5v5h5\"/><path d=\"M9 14.5l2 2 4-4\"/>",
+"fill": "<mask id=\"document-check-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M13.5 3.5v5h5\" stroke=\"#000\"/><path d=\"M9 14.5l2 2 4-4\" stroke=\"#000\"/></mask><g mask=\"url(#document-check-f-m)\"><path d=\"M6.5 3.5h7l5 5v11a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "folder",
+"ko": "폴더",
+"group": "미디어·문서",
+"line": "<path d=\"M3.5 6.5A1.5 1.5 0 0 1 5 5h4.5l2 2.5H19a1.5 1.5 0 0 1 1.5 1.5v9.5A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5z\"/>",
+"fill": "<path d=\"M3.5 6.5A1.5 1.5 0 0 1 5 5h4.5l2 2.5H19a1.5 1.5 0 0 1 1.5 1.5v9.5A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5z\" fill=\"currentColor\"/>"
+},
+{
+"name": "clipboard",
+"ko": "체크리스트",
+"group": "미디어·문서",
+"line": "<rect x=\"5.5\" y=\"5\" width=\"13\" height=\"15.5\" rx=\"1.5\"/><rect x=\"8.5\" y=\"3.5\" width=\"7\" height=\"3\" rx=\"1\"/><rect x=\"8.5\" y=\"3.5\" width=\"7\" height=\"3\" rx=\"1\"/><path d=\"M9 13.5l2 2 4-4\"/>",
+"fill": "<mask id=\"clipboard-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><rect x=\"8.5\" y=\"3.5\" width=\"7\" height=\"3\" rx=\"1\" stroke=\"#000\"/><path d=\"M9 13.5l2 2 4-4\" stroke=\"#000\"/></mask><g mask=\"url(#clipboard-f-m)\"><rect x=\"5.5\" y=\"5\" width=\"13\" height=\"15.5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"8.5\" y=\"3.5\" width=\"7\" height=\"3\" rx=\"1\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "article",
+"ko": "게시글",
+"group": "미디어·문서",
+"line": "<rect x=\"3.5\" y=\"4.5\" width=\"17\" height=\"15\" rx=\"2\"/><path d=\"M7 8.5h10M7 12h10M7 15.5h6\"/>",
+"fill": "<mask id=\"article-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M7 8.5h10M7 12h10M7 15.5h6\" stroke=\"#000\"/></mask><g mask=\"url(#article-f-m)\"><rect x=\"3.5\" y=\"4.5\" width=\"17\" height=\"15\" rx=\"2\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "book",
+"ko": "가이드",
+"group": "미디어·문서",
+"line": "<path d=\"M5.5 5.5a2 2 0 0 1 2-2h11v14h-11a2 2 0 0 0-2 2z\"/><path d=\"M5.5 19.5a2 2 0 0 0 2 1.5h11v-3.5\"/>",
+"fill": "<path d=\"M5.5 5.5a2 2 0 0 1 2-2h11v14h-11a2 2 0 0 0-2 2z\" fill=\"currentColor\"/><path d=\"M5.5 19.5a2 2 0 0 0 2 1.5h11v-3.5\"/>"
+},
+{
+"name": "book-open",
+"ko": "읽기",
+"group": "미디어·문서",
+"line": "<path d=\"M12 6.5C10.3 5.2 7.8 4.5 3.5 4.5v13c4.3 0 6.8.7 8.5 2 1.7-1.3 4.2-2 8.5-2v-13c-4.3 0-6.8.7-8.5 2z\"/><path d=\"M12 6.5v13\"/>",
+"fill": "<mask id=\"book-open-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 6.5v13\" stroke=\"#000\"/></mask><g mask=\"url(#book-open-f-m)\"><path d=\"M12 6.5C10.3 5.2 7.8 4.5 3.5 4.5v13c4.3 0 6.8.7 8.5 2 1.7-1.3 4.2-2 8.5-2v-13c-4.3 0-6.8.7-8.5 2z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "receipt",
+"ko": "영수증",
+"group": "미디어·문서",
+"line": "<path d=\"M5.5 3.5h13v17l-2.2-1.5-2.1 1.5-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5z\"/><path d=\"M9 8.5h6M9 12h6M9 15.5h3\"/>",
+"fill": "<mask id=\"receipt-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9 8.5h6M9 12h6M9 15.5h3\" stroke=\"#000\"/></mask><g mask=\"url(#receipt-f-m)\"><path d=\"M5.5 3.5h13v17l-2.2-1.5-2.1 1.5-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "align-left",
+"ko": "왼쪽 정렬",
+"group": "미디어·문서",
+"line": "<path d=\"M4 6h16M4 10h10M4 14h16M4 18h10\"/>",
+"fill": "<path d=\"M4 6h16M4 10h10M4 14h16M4 18h10\"/>"
+},
+{
+"name": "align-center",
+"ko": "가운데 정렬",
+"group": "미디어·문서",
+"line": "<path d=\"M4 6h16M7 10h10M4 14h16M7 18h10\"/>",
+"fill": "<path d=\"M4 6h16M7 10h10M4 14h16M7 18h10\"/>"
+},
+{
+"name": "align-right",
+"ko": "오른쪽 정렬",
+"group": "미디어·문서",
+"line": "<path d=\"M4 6h16M10 10h10M4 14h16M10 18h10\"/>",
+"fill": "<path d=\"M4 6h16M10 10h10M4 14h16M10 18h10\"/>"
+},
+{
+"name": "text",
+"ko": "글자 크기",
+"group": "미디어·문서",
+"line": "<path d=\"M3.5 18 8 6l4.5 12M5.2 14h5.6M20 12v6\"/><circle cx=\"17.2\" cy=\"15.4\" r=\"2.8\"/>",
+"fill": "<path d=\"M3.5 18 8 6l4.5 12M5.2 14h5.6M20 12v6\"/><circle cx=\"17.2\" cy=\"15.4\" r=\"2.8\"/>"
+},
+{
+"name": "chart-bar",
+"ko": "통계",
+"group": "미디어·문서",
+"line": "<path d=\"M4 20h16\"/><rect x=\"5.5\" y=\"11\" width=\"3\" height=\"6\" rx=\"1\"/><rect x=\"10.5\" y=\"6.5\" width=\"3\" height=\"10.5\" rx=\"1\"/><rect x=\"15.5\" y=\"13.5\" width=\"3\" height=\"3.5\" rx=\"1\"/>",
+"fill": "<rect x=\"5.5\" y=\"11\" width=\"3\" height=\"6\" rx=\"1\" fill=\"currentColor\"/><rect x=\"10.5\" y=\"6.5\" width=\"3\" height=\"10.5\" rx=\"1\" fill=\"currentColor\"/><rect x=\"15.5\" y=\"13.5\" width=\"3\" height=\"3.5\" rx=\"1\" fill=\"currentColor\"/><path d=\"M4 20h16\"/>"
+},
+{
+"name": "chart-line",
+"ko": "추이",
+"group": "미디어·문서",
+"line": "<path d=\"M4 4v14.5A1.5 1.5 0 0 0 5.5 20H20M7.5 15l4-4.5 3 2.5 5-6\"/>",
+"fill": "<path d=\"M4 4v14.5A1.5 1.5 0 0 0 5.5 20H20M7.5 15l4-4.5 3 2.5 5-6\"/>"
+},
+{
+"name": "cart",
+"ko": "장바구니",
+"group": "커머스",
+"line": "<path d=\"M3 4h2.2\"/><path d=\"M5.8 7.5h14.7l-1.7 7a1.5 1.5 0 0 1-1.5 1.2H8.7a1.5 1.5 0 0 1-1.5-1.2z\"/><path d=\"M5.2 4l.6 3.5\"/><circle cx=\"9\" cy=\"19.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"17\" cy=\"19.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<path d=\"M5.8 7.5h14.7l-1.7 7a1.5 1.5 0 0 1-1.5 1.2H8.7a1.5 1.5 0 0 1-1.5-1.2z\" fill=\"currentColor\"/><path d=\"M3 4h2.2\"/><path d=\"M5.2 4l.6 3.5\"/><circle cx=\"9\" cy=\"19.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"17\" cy=\"19.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>"
+},
+{
+"name": "bag",
+"ko": "쇼핑백",
+"group": "커머스",
+"line": "<path d=\"M5 8h14l-1 12H6z\"/><path d=\"M9 8V7a3 3 0 0 1 6 0v1\"/>",
+"fill": "<path d=\"M5 8h14l-1 12H6z\" fill=\"currentColor\"/><path d=\"M9 8V7a3 3 0 0 1 6 0v1\"/>"
+},
+{
+"name": "store",
+"ko": "상점",
+"group": "커머스",
+"line": "<path d=\"M4.5 4.5h15l1 4.5a2.5 2.5 0 0 1-4.5 1.5 2.7 2.7 0 0 1-4.5 0 2.7 2.7 0 0 1-4.5 0A2.5 2.5 0 0 1 3.5 9z\"/><path d=\"M5.5 12.5V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6.5M10 20v-4.5h4V20\"/>",
+"fill": "<path d=\"M4.5 4.5h15l1 4.5a2.5 2.5 0 0 1-4.5 1.5 2.7 2.7 0 0 1-4.5 0 2.7 2.7 0 0 1-4.5 0A2.5 2.5 0 0 1 3.5 9z\" fill=\"currentColor\"/><path d=\"M5.5 12.5V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6.5M10 20v-4.5h4V20\"/>"
+},
+{
+"name": "tag",
+"ko": "판매",
+"group": "커머스",
+"line": "<path d=\"M4 4h7.5L20 12.5 12.5 20 4 11.5z\"/><circle cx=\"8\" cy=\"8\" r=\"1.3\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"tag-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"8\" cy=\"8\" r=\"1.3\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#tag-f-m)\"><path d=\"M4 4h7.5L20 12.5 12.5 20 4 11.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "coupon",
+"ko": "쿠폰",
+"group": "커머스",
+"line": "<path d=\"M3.5 7A1.5 1.5 0 0 1 5 5.5h14A1.5 1.5 0 0 1 20.5 7v2.5a2.5 2.5 0 0 0 0 5V17a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 17v-2.5a2.5 2.5 0 0 0 0-5z\"/><path d=\"M14.5 6v2M14.5 11v2M14.5 16v2\"/>",
+"fill": "<mask id=\"coupon-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M14.5 6v2M14.5 11v2M14.5 16v2\" stroke=\"#000\"/></mask><g mask=\"url(#coupon-f-m)\"><path d=\"M3.5 7A1.5 1.5 0 0 1 5 5.5h14A1.5 1.5 0 0 1 20.5 7v2.5a2.5 2.5 0 0 0 0 5V17a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 17v-2.5a2.5 2.5 0 0 0 0-5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "gift",
+"ko": "선물",
+"group": "커머스",
+"line": "<rect x=\"4\" y=\"8\" width=\"16\" height=\"4\" rx=\"1\"/><path d=\"M5.5 12h13v7a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z\"/><path d=\"M12 8v12\"/><path d=\"M12 8C10.5 5 7.5 4.3 7.5 6.3 7.5 7.5 9 8 12 8zM12 8c1.5-3 4.5-3.7 4.5-1.7 0 1.2-1.5 1.7-4.5 1.7z\"/>",
+"fill": "<mask id=\"gift-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 8v12\" stroke=\"#000\"/></mask><g mask=\"url(#gift-f-m)\"><rect x=\"4\" y=\"8\" width=\"16\" height=\"4\" rx=\"1\" fill=\"currentColor\"/><path d=\"M5.5 12h13v7a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z\" fill=\"currentColor\"/></g><path d=\"M12 8C10.5 5 7.5 4.3 7.5 6.3 7.5 7.5 9 8 12 8zM12 8c1.5-3 4.5-3.7 4.5-1.7 0 1.2-1.5 1.7-4.5 1.7z\"/>"
+},
+{
+"name": "card",
+"ko": "카드",
+"group": "커머스",
+"line": "<rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"2\"/><path d=\"M3 10h18M6.5 15h3\"/>",
+"fill": "<mask id=\"card-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M3 10h18M6.5 15h3\" stroke=\"#000\"/></mask><g mask=\"url(#card-f-m)\"><rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"2\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "won",
+"ko": "원",
+"group": "커머스",
+"line": "<path d=\"M4.5 6l3 12 4.5-10 4.5 10 3-12M3.5 11h17M3.5 14h17\"/>",
+"fill": "<path d=\"M4.5 6l3 12 4.5-10 4.5 10 3-12M3.5 11h17M3.5 14h17\"/>"
+},
+{
+"name": "won-circle",
+"ko": "결제",
+"group": "커머스",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M7.6 8.3l1.8 7.2 2.6-5.8 2.6 5.8 1.8-7.2M7 11.5h10\"/>",
+"fill": "<mask id=\"won-circle-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M7.6 8.3l1.8 7.2 2.6-5.8 2.6 5.8 1.8-7.2M7 11.5h10\" stroke=\"#000\"/></mask><g mask=\"url(#won-circle-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "dollar",
+"ko": "달러",
+"group": "커머스",
+"line": "<path d=\"M12 3.5v17M16.5 7.5c-.8-1.3-2.5-2-4.5-2-2.6 0-4.5 1.3-4.5 3.2 0 4.7 9 2.3 9 6.8 0 2-1.9 3.3-4.5 3.3-2 0-3.8-.8-4.6-2.2\"/>",
+"fill": "<path d=\"M12 3.5v17M16.5 7.5c-.8-1.3-2.5-2-4.5-2-2.6 0-4.5 1.3-4.5 3.2 0 4.7 9 2.3 9 6.8 0 2-1.9 3.3-4.5 3.3-2 0-3.8-.8-4.6-2.2\"/>"
+},
+{
+"name": "truck",
+"ko": "배송",
+"group": "커머스",
+"line": "<path d=\"M3 6.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1V16H3z\"/><path d=\"M15 9.5h3.5L21 13v3h-6z\"/><circle cx=\"7\" cy=\"17.5\" r=\"2\"/><circle cx=\"17\" cy=\"17.5\" r=\"2\"/>",
+"fill": "<path d=\"M3 6.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1V16H3z\" fill=\"currentColor\"/><path d=\"M15 9.5h3.5L21 13v3h-6z\" fill=\"currentColor\"/><circle cx=\"7\" cy=\"17.5\" r=\"2\"/><circle cx=\"17\" cy=\"17.5\" r=\"2\"/>"
+},
+{
+"name": "box",
+"ko": "택배",
+"group": "커머스",
+"line": "<path d=\"M12 3.5 20 7.5v9l-8 4-8-4v-9z\"/><path d=\"M4 7.5l8 4 8-4M12 11.5v9\"/>",
+"fill": "<mask id=\"box-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M4 7.5l8 4 8-4M12 11.5v9\" stroke=\"#000\"/></mask><g mask=\"url(#box-f-m)\"><path d=\"M12 3.5 20 7.5v9l-8 4-8-4v-9z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "diamond",
+"ko": "프리미엄",
+"group": "커머스",
+"line": "<path d=\"M7 4.5h10l3.5 5L12 20 3.5 9.5z\"/><path d=\"M3.5 9.5h17M9.5 4.5 8 9.5l4 10.5 4-10.5-1.5-5\"/>",
+"fill": "<mask id=\"diamond-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M3.5 9.5h17M9.5 4.5 8 9.5l4 10.5 4-10.5-1.5-5\" stroke=\"#000\"/></mask><g mask=\"url(#diamond-f-m)\"><path d=\"M7 4.5h10l3.5 5L12 20 3.5 9.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "home",
+"ko": "홈",
+"group": "장소",
+"line": "<path d=\"M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z\"/><path d=\"M9.5 20v-5h5v5\"/>",
+"fill": "<mask id=\"home-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9.5 20v-5h5v5\" stroke=\"#000\"/></mask><g mask=\"url(#home-f-m)\"><path d=\"M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "home-plus",
+"ko": "동네 추가",
+"group": "장소",
+"line": "<path d=\"M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z\"/><path d=\"M12 11v6M9 14h6\"/>",
+"fill": "<mask id=\"home-plus-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M12 11v6M9 14h6\" stroke=\"#000\"/></mask><g mask=\"url(#home-plus-f-m)\"><path d=\"M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "building",
+"ko": "건물",
+"group": "장소",
+"line": "<path d=\"M5 20V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v15z\"/><path d=\"M15 9h3a1 1 0 0 1 1 1v10h-4z\"/><path d=\"M3.5 20h17\"/><path d=\"M8.5 8h3M8.5 11.5h3M8.5 15h3\"/>",
+"fill": "<mask id=\"building-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M8.5 8h3M8.5 11.5h3M8.5 15h3\" stroke=\"#000\"/></mask><g mask=\"url(#building-f-m)\"><path d=\"M5 20V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v15z\" fill=\"currentColor\"/><path d=\"M15 9h3a1 1 0 0 1 1 1v10h-4z\" fill=\"currentColor\"/></g><path d=\"M3.5 20h17\"/>"
+},
+{
+"name": "map",
+"ko": "지도",
+"group": "장소",
+"line": "<path d=\"M3.5 6.5 9 4.5l6 2 5.5-2v13L15 19.5l-6-2-5.5 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/>",
+"fill": "<mask id=\"map-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M9 4.5v13M15 6.5v13\" stroke=\"#000\"/></mask><g mask=\"url(#map-f-m)\"><path d=\"M3.5 6.5 9 4.5l6 2 5.5-2v13L15 19.5l-6-2-5.5 2z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "location",
+"ko": "위치",
+"group": "장소",
+"line": "<path d=\"M12 20.5s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0c0 5.1-6.5 10.5-6.5 10.5z\"/><circle cx=\"12\" cy=\"10\" r=\"2.3\"/>",
+"fill": "<mask id=\"location-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"10\" r=\"2.3\" stroke=\"#000\"/></mask><g mask=\"url(#location-f-m)\"><path d=\"M12 20.5s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0c0 5.1-6.5 10.5-6.5 10.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "compass",
+"ko": "둘러보기",
+"group": "장소",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M15.5 8.5l-2 5-5 2 2-5z\"/>",
+"fill": "<mask id=\"compass-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M15.5 8.5l-2 5-5 2 2-5z\" stroke=\"#000\"/></mask><g mask=\"url(#compass-f-m)\"><circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "globe",
+"ko": "전체 지역",
+"group": "장소",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M3.5 12h17M12 3.5c2.3 2.3 3.5 5.2 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.2-3.5-8.5S9.7 5.8 12 3.5z\"/>",
+"fill": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M3.5 12h17M12 3.5c2.3 2.3 3.5 5.2 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.2-3.5-8.5S9.7 5.8 12 3.5z\"/>"
+},
+{
+"name": "crosshair",
+"ko": "내 위치",
+"group": "장소",
+"line": "<circle cx=\"12\" cy=\"12\" r=\"7\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/><path d=\"M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3\"/>",
+"fill": "<circle cx=\"12\" cy=\"12\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"12\" r=\"7\"/><path d=\"M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3\"/>"
+},
+{
+"name": "navigation",
+"ko": "길찾기",
+"group": "장소",
+"line": "<path d=\"M20 4l-6.5 16-2.5-7-7-2.5z\"/>",
+"fill": "<path d=\"M20 4l-6.5 16-2.5-7-7-2.5z\" fill=\"currentColor\"/>"
+},
+{
+"name": "bike",
+"ko": "자전거",
+"group": "장소",
+"line": "<circle cx=\"6\" cy=\"16\" r=\"3.5\"/><circle cx=\"18\" cy=\"16\" r=\"3.5\"/><path d=\"M6 16l3.5-6.5h6L18 16M8.5 6.5h3M12 16l-2.5-6.5\"/>",
+"fill": "<circle cx=\"6\" cy=\"16\" r=\"3.5\"/><circle cx=\"18\" cy=\"16\" r=\"3.5\"/><path d=\"M6 16l3.5-6.5h6L18 16M8.5 6.5h3M12 16l-2.5-6.5\"/>"
+},
+{
+"name": "walk",
+"ko": "걷기",
+"group": "장소",
+"line": "<circle cx=\"13\" cy=\"4.8\" r=\"1.6\"/><path d=\"M9 20.5l2.3-6.5 2.2 2v4.5M11.3 14l1.2-5-3.5 1.6-1.5 2.4M12.5 9l2 2.5 3 .8\"/>",
+"fill": "<circle cx=\"13\" cy=\"4.8\" r=\"1.6\" fill=\"currentColor\"/><path d=\"M9 20.5l2.3-6.5 2.2 2v4.5M11.3 14l1.2-5-3.5 1.6-1.5 2.4M12.5 9l2 2.5 3 .8\"/>"
+},
+{
+"name": "accessible",
+"ko": "휠체어",
+"group": "장소",
+"line": "<circle cx=\"10\" cy=\"4.8\" r=\"1.6\"/><path d=\"M10 8v6h5l2.5 5M10 10.5h4.5M7.5 11.5a5 5 0 1 0 7.3 6.4\"/>",
+"fill": "<circle cx=\"10\" cy=\"4.8\" r=\"1.6\" fill=\"currentColor\"/><path d=\"M10 8v6h5l2.5 5M10 10.5h4.5M7.5 11.5a5 5 0 1 0 7.3 6.4\"/>"
+},
+{
+"name": "train",
+"ko": "지하철",
+"group": "장소",
+"line": "<rect x=\"5.5\" y=\"3.5\" width=\"13\" height=\"14\" rx=\"3\"/><path d=\"M5.5 10h13\"/><circle cx=\"9\" cy=\"13.8\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"13.8\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.5 17.5 7 20.5M15.5 17.5l1.5 3\"/>",
+"fill": "<mask id=\"train-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M5.5 10h13\" stroke=\"#000\"/><circle cx=\"9\" cy=\"13.8\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"15\" cy=\"13.8\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#train-f-m)\"><rect x=\"5.5\" y=\"3.5\" width=\"13\" height=\"14\" rx=\"3\" fill=\"currentColor\"/></g><path d=\"M8.5 17.5 7 20.5M15.5 17.5l1.5 3\"/>"
+},
+{
+"name": "car",
+"ko": "자동차",
+"group": "장소",
+"line": "<path d=\"M5 11l1.6-4.3A1.5 1.5 0 0 1 8 5.7h8a1.5 1.5 0 0 1 1.4 1L19 11v6H5z\"/><path d=\"M6.5 17v2.5M17.5 17v2.5\"/><path d=\"M5 11h14\"/><circle cx=\"8\" cy=\"14\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"16\" cy=\"14\" r=\"1.1\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"car-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M5 11h14\" stroke=\"#000\"/><circle cx=\"8\" cy=\"14\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/><circle cx=\"16\" cy=\"14\" r=\"1.1\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#car-f-m)\"><path d=\"M5 11l1.6-4.3A1.5 1.5 0 0 1 8 5.7h8a1.5 1.5 0 0 1 1.4 1L19 11v6H5z\" fill=\"currentColor\"/></g><path d=\"M6.5 17v2.5M17.5 17v2.5\"/>"
+},
+{
+"name": "rocket",
+"ko": "부스트",
+"group": "장소",
+"line": "<path d=\"M12 3c3 2 4.5 5 4.5 8.5V16h-9v-4.5C7.5 8 9 5 12 3z\"/><circle cx=\"12\" cy=\"10\" r=\"1.8\"/><path d=\"M7.5 13 5 15v3.5l2.5-1.5M16.5 13l2.5 2v3.5L16.5 17M10.5 19.5h3\"/>",
+"fill": "<mask id=\"rocket-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"12\" cy=\"10\" r=\"1.8\" stroke=\"#000\"/></mask><g mask=\"url(#rocket-f-m)\"><path d=\"M12 3c3 2 4.5 5 4.5 8.5V16h-9v-4.5C7.5 8 9 5 12 3z\" fill=\"currentColor\"/></g><path d=\"M7.5 13 5 15v3.5l2.5-1.5M16.5 13l2.5 2v3.5L16.5 17M10.5 19.5h3\"/>"
+},
+{
+"name": "mobile",
+"ko": "휴대폰",
+"group": "기기",
+"line": "<rect x=\"6.5\" y=\"3\" width=\"11\" height=\"18\" rx=\"2.5\"/><path d=\"M10.5 17.5h3\"/>",
+"fill": "<mask id=\"mobile-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M10.5 17.5h3\" stroke=\"#000\"/></mask><g mask=\"url(#mobile-f-m)\"><rect x=\"6.5\" y=\"3\" width=\"11\" height=\"18\" rx=\"2.5\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "laptop",
+"ko": "노트북",
+"group": "기기",
+"line": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"10\" rx=\"1.5\"/><path d=\"M3 18.5h18\"/>",
+"fill": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"10\" rx=\"1.5\" fill=\"currentColor\"/><path d=\"M3 18.5h18\"/>"
+},
+{
+"name": "bluetooth",
+"ko": "블루투스",
+"group": "기기",
+"line": "<path d=\"M7 7.5 17 16.5 12 21V3l5 4.5-10 9\"/>",
+"fill": "<path d=\"M7 7.5 17 16.5 12 21V3l5 4.5-10 9\"/>"
+},
+{
+"name": "gauge",
+"ko": "속도",
+"group": "기기",
+"line": "<path d=\"M4.5 17a8.5 8.5 0 1 1 15 0\"/><path d=\"M12 13l3.5-4\"/><circle cx=\"12\" cy=\"13\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<path d=\"M4.5 17a8.5 8.5 0 1 1 15 0\"/><path d=\"M12 13l3.5-4\"/><circle cx=\"12\" cy=\"13\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>"
+},
+{
+"name": "leaf",
+"ko": "친환경",
+"group": "사물",
+"line": "<path d=\"M5 19c0-8.5 5-14 15-14 0 10-5.5 15-14 15z\"/><path d=\"M5 19 13 11\"/>",
+"fill": "<mask id=\"leaf-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M5 19 13 11\" stroke=\"#000\"/></mask><g mask=\"url(#leaf-f-m)\"><path d=\"M5 19c0-8.5 5-14 15-14 0 10-5.5 15-14 15z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "paw",
+"ko": "반려동물",
+"group": "사물",
+"line": "<circle cx=\"5.8\" cy=\"11\" r=\"1.7\"/><circle cx=\"9.2\" cy=\"7\" r=\"1.7\"/><circle cx=\"14.8\" cy=\"7\" r=\"1.7\"/><circle cx=\"18.2\" cy=\"11\" r=\"1.7\"/><path d=\"M12 12.5c-2.6 0-5 3.2-5 5.3 0 1.5 1 2.2 2.4 2.2.9 0 1.7-.4 2.6-.4s1.7.4 2.6.4c1.4 0 2.4-.7 2.4-2.2 0-2.1-2.4-5.3-5-5.3z\"/>",
+"fill": "<circle cx=\"5.8\" cy=\"11\" r=\"1.7\" fill=\"currentColor\"/><circle cx=\"9.2\" cy=\"7\" r=\"1.7\" fill=\"currentColor\"/><circle cx=\"14.8\" cy=\"7\" r=\"1.7\" fill=\"currentColor\"/><circle cx=\"18.2\" cy=\"11\" r=\"1.7\" fill=\"currentColor\"/><path d=\"M12 12.5c-2.6 0-5 3.2-5 5.3 0 1.5 1 2.2 2.4 2.2.9 0 1.7-.4 2.6-.4s1.7.4 2.6.4c1.4 0 2.4-.7 2.4-2.2 0-2.1-2.4-5.3-5-5.3z\" fill=\"currentColor\"/>"
+},
+{
+"name": "food",
+"ko": "음식",
+"group": "사물",
+"line": "<path d=\"M7 3.5v17M4.5 3.5v4a2.5 2.5 0 0 0 5 0v-4M17 12v8.5\"/><path d=\"M17 3.5c-1.7 0-3 2-3 4.5s1.3 4 3 4 3-1.5 3-4-1.3-4.5-3-4.5z\"/>",
+"fill": "<path d=\"M17 3.5c-1.7 0-3 2-3 4.5s1.3 4 3 4 3-1.5 3-4-1.3-4.5-3-4.5z\" fill=\"currentColor\"/><path d=\"M7 3.5v17M4.5 3.5v4a2.5 2.5 0 0 0 5 0v-4M17 12v8.5\"/>"
+},
+{
+"name": "cafe",
+"ko": "카페",
+"group": "사물",
+"line": "<path d=\"M5 8.5h11v6a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z\"/><path d=\"M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5v2M12 3.5v2\"/>",
+"fill": "<path d=\"M5 8.5h11v6a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z\" fill=\"currentColor\"/><path d=\"M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5v2M12 3.5v2\"/>"
+},
+{
+"name": "fitness",
+"ko": "운동",
+"group": "사물",
+"line": "<rect x=\"4.5\" y=\"7\" width=\"3\" height=\"10\" rx=\"1\"/><rect x=\"16.5\" y=\"7\" width=\"3\" height=\"10\" rx=\"1\"/><path d=\"M7.5 12h9M2.5 9.5v5M21.5 9.5v5\"/>",
+"fill": "<rect x=\"4.5\" y=\"7\" width=\"3\" height=\"10\" rx=\"1\" fill=\"currentColor\"/><rect x=\"16.5\" y=\"7\" width=\"3\" height=\"10\" rx=\"1\" fill=\"currentColor\"/><path d=\"M7.5 12h9M2.5 9.5v5M21.5 9.5v5\"/>"
+},
+{
+"name": "palette",
+"ko": "꾸미기",
+"group": "사물",
+"line": "<path d=\"M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7h2a4 4 0 0 0 4-4c0-4.2-3.8-7.2-8.5-7.2z\"/><circle cx=\"7.5\" cy=\"12\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"9.5\" cy=\"8\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"14\" cy=\"7.5\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/>",
+"fill": "<mask id=\"palette-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"7.5\" cy=\"12\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/><circle cx=\"9.5\" cy=\"8\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/><circle cx=\"14\" cy=\"7.5\" r=\"1.2\" fill=\"#000\" stroke=\"none\"/></mask><g mask=\"url(#palette-f-m)\"><path d=\"M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7h2a4 4 0 0 0 4-4c0-4.2-3.8-7.2-8.5-7.2z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "brush",
+"ko": "인테리어",
+"group": "사물",
+"line": "<rect x=\"4\" y=\"3.5\" width=\"14\" height=\"5\" rx=\"1.5\"/><path d=\"M18 6h1.5a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H12v3.5\"/><rect x=\"10.5\" y=\"14.5\" width=\"3\" height=\"6\" rx=\"1\"/>",
+"fill": "<rect x=\"4\" y=\"3.5\" width=\"14\" height=\"5\" rx=\"1.5\" fill=\"currentColor\"/><rect x=\"10.5\" y=\"14.5\" width=\"3\" height=\"6\" rx=\"1\" fill=\"currentColor\"/><path d=\"M18 6h1.5a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H12v3.5\"/>"
+},
+{
+"name": "flask",
+"ko": "실험실",
+"group": "사물",
+"line": "<path d=\"M10.5 3.5V9L5 18.5a1.3 1.3 0 0 0 1.1 2h11.8a1.3 1.3 0 0 0 1.1-2L13.5 9V3.5z\"/><path d=\"M9 3.5h6\"/><path d=\"M7.5 15h9\"/>",
+"fill": "<mask id=\"flask-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M7.5 15h9\" stroke=\"#000\"/></mask><g mask=\"url(#flask-f-m)\"><path d=\"M10.5 3.5V9L5 18.5a1.3 1.3 0 0 0 1.1 2h11.8a1.3 1.3 0 0 0 1.1-2L13.5 9V3.5z\" fill=\"currentColor\"/></g><path d=\"M9 3.5h6\"/>"
+},
+{
+"name": "school",
+"ko": "학교",
+"group": "사물",
+"line": "<path d=\"M2.5 9.5 12 5l9.5 4.5L12 14z\"/><path d=\"M6.5 11.5V16c1.5 1.5 3.5 2.5 5.5 2.5s4-1 5.5-2.5v-4.5M21.5 9.5v5\"/>",
+"fill": "<path d=\"M2.5 9.5 12 5l9.5 4.5L12 14z\" fill=\"currentColor\"/><path d=\"M6.5 11.5V16c1.5 1.5 3.5 2.5 5.5 2.5s4-1 5.5-2.5v-4.5M21.5 9.5v5\"/>"
+},
+{
+"name": "sofa",
+"ko": "가구",
+"group": "사물",
+"line": "<path d=\"M4.5 12.5a1.5 1.5 0 0 1 3 0V14h9v-1.5a1.5 1.5 0 0 1 3 0V18h-15z\"/><path d=\"M6 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M6 18v2M18 18v2\"/>",
+"fill": "<path d=\"M4.5 12.5a1.5 1.5 0 0 1 3 0V14h9v-1.5a1.5 1.5 0 0 1 3 0V18h-15z\" fill=\"currentColor\"/><path d=\"M6 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M6 18v2M18 18v2\"/>"
+},
+{
+"name": "bed",
+"ko": "숙소",
+"group": "사물",
+"line": "<path d=\"M3.5 5v15M3.5 16.5h17V20M20.5 16.5V13a2 2 0 0 0-2-2h-8v5.5\"/><circle cx=\"7\" cy=\"11.5\" r=\"1.8\"/>",
+"fill": "<circle cx=\"7\" cy=\"11.5\" r=\"1.8\" fill=\"currentColor\"/><path d=\"M3.5 5v15M3.5 16.5h17V20M20.5 16.5V13a2 2 0 0 0-2-2h-8v5.5\"/>"
+},
+{
+"name": "sneaker",
+"ko": "신발",
+"group": "사물",
+"line": "<path d=\"M3.5 8.5c0-1 .8-1.5 1.7-1.2L8 8.5c1.2.5 2.5-.2 2.8-1.4l.2-.6 3 2.5c1.2 1 2.8 1.6 4.3 1.8 1.3.2 2.2 1.3 2.2 2.6v3.1H3.5z\"/><path d=\"M3.5 13.5h17\"/>",
+"fill": "<mask id=\"sneaker-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M3.5 13.5h17\" stroke=\"#000\"/></mask><g mask=\"url(#sneaker-f-m)\"><path d=\"M3.5 8.5c0-1 .8-1.5 1.7-1.2L8 8.5c1.2.5 2.5-.2 2.8-1.4l.2-.6 3 2.5c1.2 1 2.8 1.6 4.3 1.8 1.3.2 2.2 1.3 2.2 2.6v3.1H3.5z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "closet",
+"ko": "옷장",
+"group": "핏",
+"line": "<path d=\"M10 6a2 2 0 1 1 3 1.7c-.6.4-1 .9-1 1.6V10\"/><path d=\"M12 10 3.9 16.1a1.2 1.2 0 0 0 .7 2.1h14.8a1.2 1.2 0 0 0 .7-2.1z\"/>",
+"fill": "<path d=\"M12 10 3.9 16.1a1.2 1.2 0 0 0 .7 2.1h14.8a1.2 1.2 0 0 0 .7-2.1z\" fill=\"currentColor\"/><path d=\"M10 6a2 2 0 1 1 3 1.7c-.6.4-1 .9-1 1.6V10\"/>"
+},
+{
+"name": "shirt",
+"ko": "옷",
+"group": "핏",
+"line": "<path d=\"M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z\"/>",
+"fill": "<path d=\"M8.5 4 4 6.5l1.5 4L8 9.5V20h8V9.5l2.5 1 1.5-4L15.5 4a3.5 3.5 0 0 1-7 0z\" fill=\"currentColor\"/>"
+},
+{
+"name": "ruler",
+"ko": "실측",
+"group": "핏",
+"line": "<path d=\"M3.5 15.5 15.5 3.5l5 5-12 12z\"/><path d=\"M7.5 11.5l2 2M10.5 8.5l2 2M13.5 5.5l2 2\"/>",
+"fill": "<mask id=\"ruler-f-m\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"24\" height=\"24\"><rect width=\"24\" height=\"24\" fill=\"#fff\" stroke=\"none\"/><path d=\"M7.5 11.5l2 2M10.5 8.5l2 2M13.5 5.5l2 2\" stroke=\"#000\"/></mask><g mask=\"url(#ruler-f-m)\"><path d=\"M3.5 15.5 15.5 3.5l5 5-12 12z\" fill=\"currentColor\"/></g>"
+},
+{
+"name": "compare",
+"ko": "겹쳐 보기",
+"group": "핏",
+"line": "<rect x=\"4\" y=\"4\" width=\"11\" height=\"11\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"11\" height=\"11\" rx=\"2\"/>",
+"fill": "<rect x=\"9\" y=\"9\" width=\"11\" height=\"11\" rx=\"2\" fill=\"currentColor\"/><rect x=\"4\" y=\"4\" width=\"11\" height=\"11\" rx=\"2\"/>"
+},
+{
+"name": "swap",
+"ko": "기준 옷 교체",
+"group": "핏",
+"line": "<path d=\"M7 4 4 7l3 3M4 7h12M17 14l3 3-3 3M20 17H8\"/>",
+"fill": "<path d=\"M7 4 4 7l3 3M4 7h12M17 14l3 3-3 3M20 17H8\"/>"
+}
+]
