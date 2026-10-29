@@ -1046,3 +1046,31 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app .lgwhy { position:absolute; left:20px; right:20px; top:367px; text-align:center; font-size:14px; line-height:1.5; font-weight:500; color:rgba(255,255,255,.9) }
 #app .lgbtns { position:absolute; left:20px; right:20px; bottom:60px; display:grid; gap:12px }
 #app .lgb { width:100%; padding:16px 28px; border-radius:12px; font-size:16px; line-height:1.3; font-weight:600 }
+
+/* ── 신기능 패널 (features.js): 폰 오른쪽. 데모 패널과 같은 모양 ── */
+#features { width:300px; flex:0 1 300px; min-width:220px; align-self:center; display:grid; gap:14px; font-size:13.5px }
+#features .box { background:var(--pgCard); border:1px solid var(--pgLine); border-radius:14px; padding:12px }
+#features .box > b { display:block; font-size:11.5px; letter-spacing:.06em; color:var(--pgSub); margin-bottom:8px }
+#features .note { font-size:11.5px; color:var(--pgSub); line-height:1.5; margin:0 }
+#features .flist { display:grid; gap:10px }
+#features .fhead { display:flex; align-items:center; gap:8px }
+#features .fhead b { flex:1; min-width:0; font-size:15px; font-weight:700 }
+#features .iss { font:600 12px ui-monospace,Menlo,monospace; color:var(--pgSub); text-decoration:none }
+#features .iss:hover, #features .flinks a:hover { text-decoration:underline }
+#features .flinks { font-size:11.5px; color:var(--pgSub); margin-top:4px }
+#features .flinks a { color:inherit }
+#features .fsw { position:relative; width:40px; height:24px; flex:none; border-radius:12px; background:var(--pgLine); transition:background .15s }
+#features .fsw i { position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .15s }
+#features .fcard.on .fsw { background:var(--primary) } #features .fcard.on .fsw i { transform:translateX(16px) }
+#features .fsw:focus-visible { outline:2px solid var(--pgInk); outline-offset:2px }
+#features .btns { display:grid; gap:6px; margin-top:10px }
+#features .btns button { border:1px solid var(--pgLine); border-radius:9px; padding:8px 6px; font-size:12.5px; font-weight:600; text-align:center; background:transparent; line-height:1.3 }
+#featToggle { display:none }
+@media (max-width:760px), (pointer:coarse) and (max-height:520px) {
+  #features { width:auto; padding:14px 16px 16px; border-bottom:1px solid var(--pgLine); background:var(--pg); order:2 }
+  #features:not(.open) { display:none }
+  body.hasfeat #featToggle { display:flex; align-items:center; justify-content:space-between; height:44px; padding:0 16px; font-size:13.5px; font-weight:700; border-bottom:1px solid var(--pgLine); background:var(--pgCard); order:1 }
+  #demoToggle, #demo { order:0 }
+  #phoneWrap { order:3 }
+  body.hasfeat #phoneWrap { height:calc(100dvh - 88px) }
+}

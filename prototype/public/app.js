@@ -980,7 +980,7 @@ SCR.closet = (pp = {}) => {
     <div class="ctabs">${CATS.map((c) => `<button class="${c.k === t ? 'on' : ''}" data-a="closetTab" data-x="${c.k}">${c.label} ${ofCat(c.k).length}</button>`).join('')}</div>
     ${waitReg ? `<button data-a="go" data-x="regFit" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;justify-content:space-between;align-items:center;border-radius:10px;background:var(--fitw);padding:12px 14px;font-size:14px"><span><b>등록 대기 ${waitReg}벌</b> · 확인하면 옷장에 담겨요</span>${I.chev}</button>` : ''}
     ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>처음 등록한 잘 맞는 ${CAT[t]}가 기준 옷이 되고,<br>${CAT[t]} 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
-    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}
+    ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${slot('closet.top')}
     ${!baseOf(t) ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${CAT[t]}가 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
     ${good.length ? rack('good', good, (c) => `${!sv && c.subBase ? c.sub + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
     <div style="height:90px"></div>`}` };
@@ -1114,7 +1114,7 @@ SCR.regFit = () => ({ node: '④ 옷 등록 · 대기 목록 확인 → 옷장�
   <button data-a="regMore" style="width:100%;height:48px;border:1px dashed #C9C9C9;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:20px">＋ 다른 옷 더 등록</button></div>` });
 SCR.regDone = (pp) => ({ node: '④ 옷 등록 · 옷장에 담기 완료 → 어디서 시작했나?', body: `<div class="hdr"><span></span><button data-a="regExit">${I.close}</button></div>
   <div style="text-align:center;padding-top:70px"><div class="check">${I.check}</div><div style="font-size:23px;font-weight:800;letter-spacing:-.03em;margin-top:20px">옷장에 ${pp.n}벌 담았어요</div><div style="font-size:14px;color:var(--ink2);margin-top:8px;line-height:1.55;padding:0 28px;word-break:keep-all">${pp.baseMsg || '이제 상품마다 내 옷 기준 사이즈가 보여요'}</div></div>
-  <div style="position:absolute;left:16px;right:16px;bottom:34px;display:grid;gap:8px">${S.reg && S.reg.from && S.reg.from.startsWith('p') ? `<button class="btn" data-a="regExit">보던 상품으로 돌아가기</button><button class="btn line" data-a="goTab" data-x="closet">내 옷장 보기</button>` : `<button class="btn" data-a="goTab" data-x="closet">내 옷장 보기</button><button class="btn line" data-a="goTab" data-x="home">홈으로</button>`}</div>` });
+  <div style="position:absolute;left:16px;right:16px;bottom:34px;display:grid;gap:8px">${S.reg && S.reg.from && S.reg.from.startsWith('p') ? `<button class="btn" data-a="regExit">보던 상품으로 돌아가기</button><button class="btn line" data-a="goTab" data-x="closet">내 옷장 보기</button>` : `<button class="btn" data-a="goTab" data-x="closet">내 옷장 보기</button><button class="btn line" data-a="goTab" data-x="home">홈으로</button>`}${slot('reg.done')}</div>` });
 
 /* 마이 (H) */
 SCR.my = () => {
@@ -1124,7 +1124,7 @@ SCR.my = () => {
   return { node: '⑥ 마이 · 주문 내역 · 쿠폰함 · 계정', navOn: 'my', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">마이</span><span class="icons">${cartBtn()}</span></div>
     <div class="pad" style="padding-top:6px"><div style="font-size:21px;font-weight:800;letter-spacing:-.02em">${S.user.name}님</div><div style="font-size:13px;color:var(--sub);margin-top:2px">카카오 계정으로 로그인</div></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);margin:18px 16px 0;border:1px solid var(--line);border-radius:10px">${[['closet', '내 옷장', S.closet.length + '벌'], ['coupons', '쿠폰', S.coupons.filter((c) => !c.used).length + '장'], ['orders', '주문', S.orders.length + '건']].map(([s, t, v], i) => `<button data-a="${s === 'closet' ? 'tab' : 'go'}" data-x="${s}" style="padding:14px 0;${i ? 'border-left:1px solid var(--line)' : ''}"><div style="font-size:12.5px;color:var(--sub)">${t}</div><div class="num" style="font-size:18px;font-weight:800;margin-top:2px">${v}</div></button>`).join('')}</div>
-    <div class="list" style="margin-top:14px"><button class="li" data-a="go" data-x="orders">주문 내역 · 반품 · 교환${I.chev}</button><button class="li" data-a="go" data-x="coupons">쿠폰함${I.chev}</button><button class="li" data-a="go" data-x="notis">알림${I.chev}</button><button class="li" data-a="logout">로그아웃${I.chev}</button><button class="li" data-a="go" data-x="leave" style="color:var(--sub)">탈퇴하기${I.chev}</button></div>` };
+    <div class="list" style="margin-top:14px"><button class="li" data-a="go" data-x="orders">주문 내역 · 반품 · 교환${I.chev}</button><button class="li" data-a="go" data-x="coupons">쿠폰함${I.chev}</button><button class="li" data-a="go" data-x="notis">알림${I.chev}</button>${slot('my.menu')}<button class="li" data-a="logout">로그아웃${I.chev}</button><button class="li" data-a="go" data-x="leave" style="color:var(--sub)">탈퇴하기${I.chev}</button></div>` };
 };
 SCR.orders = () => ({ node: '⑥ 마이 · 주문 내역 → 반품 · 교환', body: `${hdrBack('주문 내역')}${S.orders.length ? S.orders.map((o) => { const c = S.closet.find((x) => x.id === o.cid), p = PB[o.pid]; return `<div style="padding:16px;border-bottom:8px solid var(--gray)"><div style="font-size:13px;color:var(--sub)">2026.10.11 주문</div><div style="font-weight:800;font-size:15px;margin-top:4px">${o.returned ? '반품 신청됨' : o.delivered ? '배송 완료' : '배송 중'}</div><div style="display:flex;gap:12px;margin-top:10px"><div class="img" style="width:60px;height:72px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="min-width:0"><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub)">사이즈 ${o.size}</div><div class="price" style="margin-top:4px">${won(sale(p))}원</div></div></div>
     ${o.delivered && c ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px"><button class="btn line" style="height:42px;font-size:13.5px" data-a="fitStart" data-x="${c.id}">${c.fit ? '핏 다시 알려 주기' : '핏 알려 주기'}</button><button class="btn line" style="height:42px;font-size:13.5px" data-a="returnStart" data-x="${c.id}">반품 · 교환</button></div>` : ''}</div>` }).join('') : `<div class="empty"><div class="big">${I.box}</div><h4>주문 내역이 없어요</h4></div>`}` });
@@ -1166,6 +1166,7 @@ function render(fresh) {
   document.querySelectorAll('#presets button').forEach((x) => x.classList.toggle('on', x.dataset.d === 'p:' + S.preset));
   const fb = document.getElementById('failBtn'); if (fb) fb.classList.toggle('on', S.failNext);
   setTimeout(bindRacks);
+  DJ.after(); // 신기능 (features.js)
 }
 
 /* ── 동작 ── */
