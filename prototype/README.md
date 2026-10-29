@@ -4,31 +4,32 @@
 
 - 주소: https://dangjang-prototype.vercel.app (`main`에 합치면 자동 배포, PR마다 미리보기 주소가 생김)
 - 예전 아티팩트(https://claude.ai/artifact/Tky3xmqceQXmTaQdB9Byq4)는 v13에서 멈춤. 서버 기능이 없어 링크 읽기·캡처 찾기가 예시 값으로만 동작한다
-- 팀 프로토타입 4개(`src/home.html`, `detail.html`, `reg.html`, `closet.html`)를 `build.py`로 합쳐서 만든다.
+- 원본은 `public/`의 화면 코드다. 디자이너가 디자인 시스템으로 고친 통합 데모(아티팩트 Rv7yjP93nyGWBqKCJ3Qp2X, 2026-10-29)를 파일로 나눠 들여왔다. 팀 프로토타입 4개를 합치던 `build.py`와 `src/`는 내렸다(git 기록에 남음).
+- 화면은 `public/`을 PR로 직접 고친다. 디자이너도 아티팩트가 아니라 레포에서 고친다. 그래야 버전이 갈라지지 않는다.
 - 서버(`api/`, `lib/`)는 옷장 등록 담당 팀원의 데모(Artemis-ignis/dangjang-demo, 2026-10-28 `fe2cb70`)에서 가져왔다. 우리 Vercel에서 돌아가고, 다른 사람의 서버나 계정에 기대지 않는다. 환경 변수와 API 키는 없다.
-
-- 디자인은 아직 `design-system/`을 적용하기 전이다(색 이름 `--g` 등, 글꼴 Pretendard). 적용은 화면별로 따로 PR을 올린다.
+- 디자인은 `design-system/`을 따른다. 토큰과 글꼴은 `design-system/tokens.css`에서 오고(배포 때 `public/design-system/`으로 복사), `app.css`에서는 데모의 옛 변수 이름(`--g`, `--ink` 등)을 토큰에 잇기만 한다.
 
 ## 폴더
 
 | 경로 | 내용 |
 |---|---|
-| `src/*.html` | 팀 프로토타입 원본. `build.py`가 화면·동작 단위로 골라 합친다 |
-| `build.py` | 합치기. `public/index.html`(웹), `layr.html`(아티팩트용)을 만든다 |
-| `*.js`, `*.css` | 합칠 때 더하는 공통 코드 (후기, 주문, 상세 v2, DANGJANG 디자인) |
+| `public/index.html` | 데모 패널과 폰 화면 틀 |
+| `public/app.css` | 화면 스타일. 색·간격은 토큰(`var(--…)`)으로 |
+| `public/app.js` | 화면과 동작 전부 (홈, 상품 상세, 구매, 옷장, 옷 등록, 마이) |
+| `public/measure.js`, `module.js` | 사진 측정 엔진과 사진 촬영·캡처 등록 창 |
+| `public/img/` | 상품·예시 사진 |
 | `api/` | 서버 기능 4개. `ping` 서버 확인, `product` 상품 링크 읽기, `find` 구매내역 캡처로 상품 찾기, `img` 상품 사진 중계 |
 | `lib/` | 서버 공용 코드 (쇼핑몰 읽기, 상품 표준화·검사) |
 | `test/` | `lib/catalog.js` 시험 |
 | `dev.mjs` | 로컬 시험 서버 (화면 + 서버 기능) |
 | `vercel.json` | 빌드 명령, 올릴 폴더(`public/`), 카메라·AI 옷 분할에 필요한 헤더 |
 
-`public/`, `layr*.html`은 빌드 결과라 레포에 올리지 않는다. Vercel이 배포할 때 `build.py`를 돌려 만든다.
+`public/design-system/`만 배포 때 만들어지고 레포에는 없다(`vercel.json` 빌드 명령, 로컬은 `dev.mjs`가 복사).
 
 ## 고치고 확인하기
 
 ```bash
 cd prototype
-python3 build.py
 node dev.mjs            # http://127.0.0.1:8792
 node test/catalog.test.mjs
 ```
@@ -44,7 +45,9 @@ Vercel → Add New → Project → `jincode93/DANGJANG` Import → Root Director
 - 무신사 상품 읽기·검색은 비공식 내부 주소를 쓴다. 데모·시연용이다. 요청을 몰아 보내면 잠시 막힌다 (IP당 1분: 읽기 40, 찾기 20, 사진 120).
 - AI 옷 분할 모델(`Xenova/segformer_b2_clothes`)은 사용 허가가 분명하지 않다. 시연용으로만 쓴다.
 - 옷장은 그 기기 브라우저에만 저장된다. 서버 저장은 없다.
-- `src/reg.html`은 팀원 데모의 2026-10-22 버전이다. 그 뒤에 바뀐 옷장 등록(사이즈표 사진으로 재기, 캡처 옵션 줄에서 사이즈 찾기, 치수 범위 검사 등)은 아직 반영하지 않았다.
+- 옷 등록 동작은 팀원 데모의 2026-10-22 버전이다. 그 뒤에 바뀐 옷장 등록(사이즈표 사진으로 재기, 캡처 옵션 줄에서 사이즈 찾기, 치수 범위 검사 등)은 아직 반영하지 않았다.
+- 상품 이름·브랜드·가격·사진은 무신사 랭킹 상품(2026-10-29)을 시연용으로 쓴다. 치수는 같은 종류 상품을 견본으로 만든 예시 값이다.
+- 정책과 아직 다른 것: 추천 상태(REC-06: 맞는 사이즈 없음, 두 사이즈 사이 등)는 없고 점수 1위를 추천한다. 추천 점수 가중치는 칸 순서에 붙어 있다(REC-03은 부위 이름). 옷 등록의 "자사몰 구매 내역 불러오기"는 REG-02 등록 경로에 아직 없다.
 
 ## 버전 기록
 
@@ -54,3 +57,4 @@ Vercel → Add New → Project → `jincode93/DANGJANG` Import → Root Director
 | 2026-10-26 | v12 | '핏 기다리는 옷' 삭제. 구매 확정 뒤 "옷장에 담을까요?" 흐름 추가 |
 | 2026-10-26 | v13 | 서비스 이름 DANGJANG. 스플래시, 로그인 시트, 홈 헤더, 추천 섹션을 피그마 시안으로 반영 |
 | 2026-10-28 | v14 | 원본을 레포로 옮김. Maze 유저테스트 모드(`--test`)를 뺌. 서버를 붙여 상품 링크 읽기·구매내역 캡처 찾기가 실제로 동작. Vercel 배포 준비 |
+| 2026-10-29 | v15 | 디자이너 버전(디자인 시스템, 10/28 댓글, 피그마 앱 흐름 시안, 무신사 상품 데이터)을 새 원본으로. 코디북 카드 뺌. 토큰을 `design-system/tokens.css`로, 버튼을 디자인 시스템 값으로, 판정 낱말을 정책(REC-04, 04-1, 05)대로 |
