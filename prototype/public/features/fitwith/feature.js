@@ -39,7 +39,7 @@ const codySeason = (x) => /-s$/.test(grpOf(x)) && x.cat !== 'outer' ? 'short' : 
 function codyPickC(cat, season = 'long') {
   const gs = CODY_GRP[season][cat]; if (!gs.length) return null;
   const all = S.closet.filter((c) => c.cat === cat && c.fit === 'good' && c.img), a = all.filter((c) => gs.includes(grpOf(c)));
-  const pick = (l) => l.find((c) => c.subBase) || l.find((c) => c.base) || l[0] || null; // 세부 종류 기준 옷 → 대분류 기준 옷 → 먼저 담은 옷
+  const pick = (l) => l.find((c) => c.base) || l[0] || null; // 기준 옷 → 먼저 담은 옷
   return pick(a) || pick(all); // 계절에 맞는 옷이 없으면 그 종류에서 내가 등록한 옷
 }
 function codyDefault(season = 'long') { const sl = {}; CODY_SLOT.forEach((k) => { const c = codyPickC(k, season); sl[k] = c ? { k: 'c', id: c.id } : null }); return sl }
