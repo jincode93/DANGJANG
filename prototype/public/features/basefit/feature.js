@@ -6,13 +6,19 @@
      - 공통 규칙: 상세와 같은 계산(recOf, 품절 사이즈 빼고)의 추천 사이즈 판정이 '비슷해요'인 상품만, 퍼센트 없음(REC-05)
      - 랭킹 순위 숫자는 필터 전 그 목록의 순위 (데모는 전체 상품 순위)
      - 비회원이 칩을 누르면 로그인, 기준 옷이 없으면 옷 등록 (제안서 가안. 데모에는 없음)
-     - 데모의 랭킹 기간 칩 · 시트, 스크롤하면 접히는 필터 줄은 #17 범위 밖이라 안 가져옴 */
+     - 데모의 랭킹 기간 칩 · 시트, 스크롤하면 접히는 필터 줄은 #17 범위 밖이라 안 가져옴
+     - 기준 옷이 남성 · 여성 상품이면 반대 성별 전용 상품은 넣지 않음. 성별을 모르는 기준 옷과 공용 상품은 그대로 (정책 없음, 제안서에 더할 것)
+     - 랭킹 시트에는 지금 고른 1 · 2뎁스의 기준 옷만 */
 (() => {
 const SIM_MAX = 6; // 홈에서 가로로 보여 줄 최대 개수, 넘으면 전체보기
 const bases = () => S.closet.filter((c) => c.base);
-// 상품 x가 기준 옷 b와 맞나: 같은 세부 종류 · 옷장에 없는 상품 · 추천 사이즈 판정이 '비슷해요'면 { k: 추천 사이즈 }
+// 성별 전용 상품 (예시 데이터라 이름으로 가림). 'w' 여성 · 'm' 남성 · null 공용이거나 모름
+const WOMEN_ID = ['r12', 'r204']; // 이름에 표시가 없는 여성 상품: 힐다 블라우스, 윌슨 쇼츠 W
+const sexOf = (o) => !o ? null : WOMEN_ID.includes(o.id) || /우먼|여성|\(woman\)/i.test(`${o.brand || ''} ${o.name}`) ? 'w' : /남성|멘즈/.test(o.name) ? 'm' : null;
+const sexClash = (x, b) => { const bs = sexOf(b.pid && PB[b.pid]) || sexOf(b), xs = sexOf(x); return !!bs && !!xs && bs !== xs };
+// 상품 x가 기준 옷 b와 맞나: 같은 세부 종류 · 반대 성별 전용이 아님 · 옷장에 없는 상품 · 추천 사이즈 판정이 '비슷해요'면 { k: 추천 사이즈 }
 const simOf = (x, b) => {
-  if (!x.sizes || x.cat !== b.cat || subOf(x) !== subOf(b) || S.closet.some((c) => c.pid === x.id)) return null;
+  if (!x.sizes || x.cat !== b.cat || subOf(x) !== subOf(b) || sexClash(x, b) || S.closet.some((c) => c.pid === x.id)) return null;
   const best = recOf(x, b); if (!best) return null; // 모든 사이즈 품절
   return fitWord(x, b, best.k) === '비슷해요' ? { k: best.k } : null;
 };
@@ -57,10 +63,12 @@ DJ.feature({
       if (!S.user) { need('로그인하면 내 기준 옷과 맞는 상품만 볼 수 있어요', () => { closeOv(); A.rankBaseOpen() }); return }
       const p = cur().p, ck = CATK.find((c) => CAT[c] === p.rc);
       if (!bases().length) { startReg(ck || null, 'home'); return }
-      const on = p.rm && S.closet.find((c) => c.id === S.rankB);
+      const on = p.rm && S.closet.find((c) => c.id === S.rankB), rs = p.rs || '전체';
+      const bs = bases().filter((c) => (!ck || c.cat === ck) && (rs === '전체' || c.sub === rs)); // 지금 고른 1 · 2뎁스의 기준 옷만
       sheet(`<div class="grab"></div><div class="sh-t">기준 옷 선택</div><div class="rsh-d">고른 옷과 실측이 비슷한 상품만 랭킹에서 보여드려요</div>
         <button class="rro ${on ? '' : 'on'}" role="radio" aria-checked="${!on}" data-a="rankAll"><b>선택 안 함 · 전체 상품</b><span class="rrad"></span></button>
-        ${bases().map((c) => `<button class="rro ${on && on.id === c.id ? 'on' : ''}" role="radio" aria-checked="${!!on && on.id === c.id}" data-a="rankBasePick" data-x="${c.id}"><span class="simpic">${cutPic(c)}</span><span><b>${c.name}</b><small>${CAT[c.cat]} · ${c.size} Size</small></span><span class="rrad"></span></button>`).join('')}
+        ${bs.length ? '' : `<div class="rsh-d">${rs === '전체' ? p.rc : rs}에는 아직 기준 옷이 없어요</div>`}
+        ${bs.map((c) => `<button class="rro ${on && on.id === c.id ? 'on' : ''}" role="radio" aria-checked="${!!on && on.id === c.id}" data-a="rankBasePick" data-x="${c.id}"><span class="simpic">${cutPic(c)}</span><span><b>${c.name}</b><small>${CAT[c.cat]} · ${c.size} Size</small></span><span class="rrad"></span></button>`).join('')}
         <button class="rsh-add" data-a="rankReg" data-x="${ck || ''}">+ 옷 등록하기</button>`); render();
     },
     rankBasePick(id) { closeOv(); const c = S.closet.find((x) => x.id === id); S.simB = id; replace('home', Object.assign({}, cur().p, { rm: 1, rc: CAT[c.cat], rs: SUB[c.cat].includes(c.sub) ? c.sub : '전체' })) }, // 고른 옷의 대분류 · 세부 종류까지 함께 선택
