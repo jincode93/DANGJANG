@@ -2,7 +2,7 @@
 // 사용: node dev.mjs [포트]   → http://127.0.0.1:8792
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.dirname(fileURLToPath(import.meta.url)), PUB = path.join(ROOT, 'public');
-const port = +process.argv[2] || 8792;
+const port = +process.argv[2] || +process.env.PORT || 8792;
 try { process.loadEnvFile(path.join(ROOT, '.env.local')); } catch { } // 사진 저장소(Blob) 인증: vercel env pull .env.local 로 받음
 // vercel.json 빌드와 같게: 디자인 시스템(토큰 · 글꼴)을 public/design-system으로 복사
 fs.rmSync(path.join(PUB, 'design-system'), { recursive: true, force: true }); fs.cpSync(path.join(ROOT, '..', 'design-system'), path.join(PUB, 'design-system'), { recursive: true });

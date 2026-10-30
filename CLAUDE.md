@@ -76,6 +76,7 @@ CONTRIBUTING.md           참여하는 법 (git을 몰라도)
 .github/                  CODEOWNERS, PR 양식, 제안서 자동 검토 워크플로
 logs/time-log.md          작업 시간 기록
 .claude/skills/           review-ceo, review-design, review-eng (gstack 기반, NOTICE.md에 출처. 각각 제안서 모드가 있음), review-policy (제안서의 정책·로직 빈틈), review-proposal (제안서 네 관점을 돌려 합치는 지휘자)
+.claude/launch.json      로컬 미리보기 설정 (prototype 데모 서버)
 ```
 
 ## 협업 규칙 (git과 PR)
@@ -92,6 +93,9 @@ logs/time-log.md          작업 시간 기록
   - 완료본(데모) 화면을 고친다 → `prototype/public/`의 해당 파일을 고친다.
   - 어느 쪽인지 애매하면 고치기 전에 사용자에게 묻는다.
 - **"커밋하고 푸시해줘"는 브랜치에 커밋해 푸시하고 PR을 여는 것까지를 뜻한다.** PR 설명은 `.github/pull_request_template.md` 양식을 채운다.
+- **화면(`prototype/`)을 고치면 PR 전에 로컬 미리보기로 확인한다.** 미리보기 도구로 `.claude/launch.json`의 `dangjang-demo`를 띄운다(`node prototype/dev.mjs`, 기본 http://127.0.0.1:8792, 쓰는 중이면 빈 포트). 아티팩트에서 따로 고쳐 옮기지 않는다. 신기능은 주소에 `?f=기능id`(features.js의 `DJ.feature({ id })`)를 붙여 켠 채로 본다.
+- **화면 PR을 올리면 미리보기 링크를 알린다.** PR이 열리면 vercel[bot] 댓글에 미리보기 주소가 생긴다(1~2분). 그 주소에 신기능이면 `?f=기능id`를 붙여 PR 설명 "미리보기"와 사용자 답에 적는다. 미리보기는 로그인 없이 누구나, 폰에서도 열린다.
+- **다른 사람의 화면 PR을 볼 때는 미리보기 링크를 먼저 연다.** 링크가 없거나 고쳐 보며 확인해야 하면 그 브랜치를 로컬로 받아 띄운다. 끝나면 원래 브랜치로 돌아온다.
 - **PR은 코드 오너(jincode93)의 승인이 있어야 합쳐진다.** 팀원은 서로의 PR을 리뷰하고 댓글을 남길 수 있지만, 합치는 것은 코드 오너가 승인한 뒤다.
 - **관리자 PR은 관리자가 승인 없이 합칠 수 있다(`gh pr merge --squash --admin`).** 이 예외는 PR을 합칠 때만 통하고 직접 푸시에는 통하지 않는다. 합치는 것은 관리자가 따로 말할 때만 한다.
 - **PR 하나에 주제 하나.**
