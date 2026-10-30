@@ -757,7 +757,7 @@ SCR.detail = (pp) => {
   <div class="dtabs">${[['info', '정보'], ['size', '사이즈'], ['rec', '추천'], ['rev', '스냅·후기'], ['qna', '문의']].map(([k, t]) => `<button class="${(pp.tab || 'info') === k ? 'on' : ''}" data-a="dtab" data-x="${k}">${t}</button>`).join('')}</div>
   <section id="s_info"><dl class="pd-spec">${[['품번', `NR-${p.id.toUpperCase()}-0241`], ['시즌', '2026 FW']].concat(p.spec || [['소재', p.cat === 'bottom' ? '울 70% · 폴리 30%' : '면 100%'], ['핏', p.cat === 'bottom' ? '와이드 · 스트레이트' : '릴렉스 핏 · 드롭 숄더']]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
     ${p.det ? p.det.map((k) => `<img class="pd-detail" src="${IMG[k]}" alt="">`).join('') : `<img class="pd-detail ${p.photos ? '' : 'crop'}" src="${IMG[ph.detail || p.img]}" alt="">`}</section>
-  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${top}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}</section>
+  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${top}${slot('detail.size', p, base)}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}</section>
   <section class="dsec" id="s_rec"><div class="dhead"><h2>이 상품과 비슷한 ${CAT[p.cat]}</h2><span>${others.length}개</span></div><div class="hscroll" style="padding:0">${others.map(card).join('')}</div><div style="height:12px"></div></section>
   ${revSection(p)}
   <section class="dsec" id="s_qna" style="border-bottom:0"><div class="dhead"><h2>문의</h2><span>32건</span></div>${qnaList(p)}<div style="height:24px"></div></section></div>` };
@@ -1787,10 +1787,10 @@ Object.assign(A, {
   ordAdd(id) { const o = ordOf(id); closeOv(); if (!o || inCloset(o)) { render(); return } toast(addToCloset(o)); render() },
   orderReturn(id) {
     const o = ordOf(id); closeOv();
-    modal(`<h4>반품 · 교환을 신청할까요?</h4><p>${PB[o.pid].name} ${o.size}. 회수 기사님이 방문해요</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="orderReturnOk" data-x="${o.id}">신청하기</button></div>`);
+    modal(`<h4>반품 · 교환을 신청할까요?</h4><p>${PB[o.pid].name} ${o.size}. 회수 기사님이 방문해요</p>${slot('order.return', o)}<div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="orderReturnOk" data-x="${o.id}">신청하기</button></div>`);
     S.ov.node = '⑥ 주문 내역 · 반품 · 교환 신청'; render();
   },
-  orderReturnOk(id) { ordOf(id).returned = true; closeOv(); toast('반품 · 교환 신청을 접수했어요'); render() },
+  orderReturnOk(id) { const o = ordOf(id); o.returned = true; closeOv(); toast('반품 · 교환 신청을 접수했어요' + slot('order.returned', o)); render() },
   pushOpen() { const oid = S.push.oid; S.push = null; need('로그인이 만료됐어요. 다시 로그인하면 이어서 해요', () => { closeOv(); A.confirmStart(oid) }) },
 });
 app.addEventListener('click', (e) => { const el = e.target.closest('[data-a]'); if (!el || !app.contains(el)) return; const f = A[el.dataset.a]; if (f) { f(el.dataset.x); } });
