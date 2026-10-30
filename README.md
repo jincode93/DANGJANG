@@ -13,11 +13,11 @@ DANGJANG(당신의 옷장)은 새로 만드는 패션 커머스 서비스다. �
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/jincode93"><img src="https://github.com/jincode93.png" width="80" alt=""><br>Zerom (Junho Jin)</a></td>
-    <td align="center"><a href="https://github.com/juribb"><img src="https://github.com/juribb.png" width="80" alt=""><br>juriChoi</a></td>
-    <td align="center"><a href="https://github.com/Artemis-ignis"><img src="https://github.com/Artemis-ignis.png" width="80" alt=""><br>Artemis-ignis</a></td>
-    <td align="center"><a href="https://github.com/cre2mo"><img src="https://github.com/cre2mo.png" width="80" alt=""><br>cre2mo</a></td>
-    <td align="center"><a href="https://github.com/seoulkorea-dev"><img src="https://github.com/seoulkorea-dev.png" width="80" alt=""><br>seoulkorea-dev</a></td>
+    <td align="center"><a href="https://github.com/jincode93"><img src="https://github.com/jincode93.png" width="80" alt=""><br>진준호</a></td>
+    <td align="center"><a href="https://github.com/juribb"><img src="https://github.com/juribb.png" width="80" alt=""><br>최주리</a></td>
+    <td align="center"><a href="https://github.com/Artemis-ignis"><img src="https://github.com/Artemis-ignis.png" width="80" alt=""><br>박준성</a></td>
+    <td align="center"><a href="https://github.com/cre2mo"><img src="https://github.com/cre2mo.png" width="80" alt=""><br>이다영</a></td>
+    <td align="center"><a href="https://github.com/seoulkorea-dev"><img src="https://github.com/seoulkorea-dev.png" width="80" alt=""><br>인정우</a></td>
   </tr>
 </table>
 
