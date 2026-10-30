@@ -1030,6 +1030,24 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app .lgg { background:#fff; border:1px solid #E1E1E1; color:#121212 }
 #app .lgn { background:#03A94D; color:#fff }
 
+/* 온보딩 (TeamProject onboarding 01~04) */
+.ob { position:absolute; inset:0; background:#F6F6F6; overflow:hidden }
+.ob-top { position:absolute; left:0; right:0; top:62px; height:44px; display:flex; align-items:center; justify-content:center }
+.ob-dots { display:flex; gap:6px }
+.ob-dots i { width:6px; height:6px; border-radius:50%; background:#D9D9D9 }
+.ob-dots i.on { background:#06BC51 }
+.ob-skip { position:absolute; right:20px; font-size:13px; font-weight:500; color:#979797 }
+.ob-lb { position:absolute; left:0; right:0; top:130px; text-align:center; font-size:13px; font-weight:600; color:#06BC51 }
+.ob-t { position:absolute; left:20px; right:20px; top:158px; margin:0; text-align:center; font-size:24px; line-height:1.42; font-weight:700; letter-spacing:-.02em; color:#121212 }
+.ob-d { position:absolute; left:20px; right:20px; top:242px; margin:0; text-align:center; font-size:14px; line-height:1.6; font-weight:500; color:#767676 }
+.ob-card { position:absolute; left:50%; top:348px; transform:translateX(-50%); display:block; height:auto }
+.ob-foot { position:absolute; left:0; right:0; bottom:0; display:flex; gap:8px; padding:40px 20px 20px; background:linear-gradient(rgba(246,246,246,0), #F6F6F6 40px) }
+.ob-foot button { flex:1; height:52px; border-radius:12px; font-size:16px; line-height:1; font-weight:600 }
+.ob-foot .ob-prev { flex:none; width:80px; background:#fff; border:1px solid #E1E1E1; color:#121212 }
+.ob-next { background:#06BC51; color:#fff }
+#app .body:has(.ob) ~ .bar { background:#F6F6F6 }
+#app .body:has(.ob) ~ .bar::before { display:none }
+
 /* ── 신기능 패널 (features.js): 폰 오른쪽. 데모 패널과 같은 모양 ── */
 #features { width:300px; flex:0 1 300px; min-width:220px; align-self:center; display:grid; gap:14px; font-size:13.5px }
 #features .box { background:var(--pgCard); border:1px solid var(--pgLine); border-radius:14px; padding:12px }
