@@ -714,7 +714,7 @@ SCR.detail = (pp) => {
   const L = { 1: '로그인 안 함', 2: '옷장 비어 있음', 3: '이 종류 옷 없음', 4: '기준 옷 없음', x: '실측 없음 (사이즈표만)', 5: pp.nob ? '비교 끔 (사이즈표만)' : '비교 완료' }[j.n];
   let node = `② 상품 상세 · 상황: ${L}`;
   if (sel && p.out.includes(sel)) node = '② 상품 상세 · 그 사이즈 재고 있나? → 아니오 · 품절 안내';
-  const chip = { 1: '로그인하고 내 옷과 비교하기', 2: '기준 옷 등록하고 비교하기', 3: '기준 옷 등록하고 비교하기', 4: '기준 옷 정하고 비교하기', 5: `<b>${j.rec} 추천</b>기준 옷과 비교하기`, x: '' }[j.n];
+  const chip = slot('detail.chip', p, j) || { 1: '로그인하고 내 옷과 비교하기', 2: '기준 옷 등록하고 비교하기', 3: '기준 옷 등록하고 비교하기', 4: '기준 옷 정하고 비교하기', 5: `<b>${j.rec} 추천</b>기준 옷과 비교하기`, x: '' }[j.n];
   const hintCard = (txt, link, a, ill) => `<div class="pd-hint"><p>${txt}</p>${link ? `<button class="pd-link hit" data-a="${a}" data-x="${p.id}">${link}${I.chev}</button>` : ''}${ill || ''}</div>`;
   const glass = '<span class="pd-glass"><i></i><b></b></span>', tee = `<img class="pd-tee" src="${IMG.pdTee}" alt="">`;
   let top = '';
@@ -757,7 +757,7 @@ SCR.detail = (pp) => {
   <div class="dtabs">${[['info', '정보'], ['size', '사이즈'], ['rec', '추천'], ['rev', '스냅·후기'], ['qna', '문의']].map(([k, t]) => `<button class="${(pp.tab || 'info') === k ? 'on' : ''}" data-a="dtab" data-x="${k}">${t}</button>`).join('')}</div>
   <section id="s_info"><dl class="pd-spec">${[['품번', `NR-${p.id.toUpperCase()}-0241`], ['시즌', '2026 FW']].concat(p.spec || [['소재', p.cat === 'bottom' ? '울 70% · 폴리 30%' : '면 100%'], ['핏', p.cat === 'bottom' ? '와이드 · 스트레이트' : '릴렉스 핏 · 드롭 숄더']]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
     ${p.det ? p.det.map((k) => `<img class="pd-detail" src="${IMG[k]}" alt="">`).join('') : `<img class="pd-detail ${p.photos ? '' : 'crop'}" src="${IMG[ph.detail || p.img]}" alt="">`}</section>
-  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${top}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}</section>
+  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${slot('detail.size', p, j, pp) || `${top}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}`}</section>
   <section class="dsec" id="s_rec"><div class="dhead"><h2>이 상품과 비슷한 ${CAT[p.cat]}</h2><span>${others.length}개</span></div><div class="hscroll" style="padding:0">${others.map(card).join('')}</div><div style="height:12px"></div></section>
   ${revSection(p)}
   <section class="dsec" id="s_qna" style="border-bottom:0"><div class="dhead"><h2>문의</h2><span>32건</span></div>${qnaList(p)}<div style="height:24px"></div></section></div>` };
@@ -1735,7 +1735,7 @@ Object.assign(A, {
    옷장에는 본인에게 잘 맞는 옷만 등록해요. 그래서 산 옷을 '핏 기다리는 옷'으로 옷장에 미리 담지 않아요.
    주문 → 배송 완료 → 입어 보고 구매 확정 → "옷장에 담을까요?" (담지 않았으면 구매 내역에서 나중에 담기) */
 const ordOf = (id) => S.orders.find((o) => o.id === id);
-const ordStat = (o) => o.returned ? '반품 신청됨' : o.confirmed ? '구매 확정' : o.delivered ? '배송 완료' : '배송 중';
+const ordStat = (o) => slot('order.stat', o) || (o.returned ? '반품 신청됨' : o.confirmed ? '구매 확정' : o.delivered ? '배송 완료' : '배송 중');
 const inCloset = (o) => o.cid && S.closet.some((c) => c.id === o.cid);
 function dlvCard() { // 홈 추천 탭: 배송 완료됐지만 아직 구매 확정 안 한 주문
   const o = S.orders.find((q) => q.delivered && !q.confirmed && !q.returned); if (!o) return '';
@@ -1768,7 +1768,7 @@ SCR.orders = () => ({ node: '⑥ 마이 · 주문 내역 → 구매 확정 · �
       : inCloset(o) ? `<button class="btn line" style="height:42px;font-size:13.5px;grid-column:1/-1" data-a="item" data-x="${o.cid}">내 옷장에서 보기</button>` : `<button class="btn" style="height:42px;font-size:13.5px;grid-column:1/-1" data-a="ordAdd" data-x="${o.id}">${I.plus} 내 옷장에 담기</button>`;
     return `<div style="padding:16px;border-bottom:8px solid var(--gray)"><div style="font-size:13px;color:var(--sub)">2026.10.11 주문</div><div style="font-weight:800;font-size:15px;margin-top:4px">${ordStat(o)}</div><div style="display:flex;gap:12px;margin-top:10px"><div class="img" style="width:60px;height:72px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="min-width:0"><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub)">${o.color ? o.color + ' / ' : '사이즈 '}${o.size}</div><div class="price" style="margin-top:4px">${won(sale(p))}원</div></div></div>
     ${o.confirmed && !inCloset(o) ? '<div style="font-size:12.5px;color:var(--sub);margin-top:10px">잘 맞는 옷만 옷장에 담아 두면 다른 상품을 볼 때 이 옷과 사이즈를 비교해요</div>' : ''}
-    ${acts ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px">${acts}</div>` : ''}</div>` }).join('') : `<div class="empty"><div class="big">${I.box}</div><h4>주문 내역이 없어요</h4></div>`}` });
+    ${acts ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px">${acts}</div>` : ''}${slot('order.card', o)}</div>` }).join('') : `<div class="empty"><div class="big">${I.box}</div><h4>주문 내역이 없어요</h4></div>`}` });
 SCR.notis = () => { S.notis.forEach((n) => n.read = true); return { node: '알림 목록', body: `${hdrBack('알림')}${S.notis.length ? S.notis.map((n) => `<button class="li" style="height:auto;padding:14px 16px;align-items:flex-start;gap:12px" data-a="confirmStart" data-x="${n.oid}"><div style="flex:1"><div style="font-size:14.5px;font-weight:700">${n.t}</div><div style="font-size:13px;color:var(--ink2);margin-top:2px">${n.b}</div><div class="meta">방금</div></div></button>`).join('') : `<div class="empty"><div class="big">${I.bell}</div><h4>새 알림이 없어요</h4></div>`}` } };
 Object.assign(A, {
   confirmStart(id) { // 홈 카드 · 알림 · 주문 내역에서
@@ -1786,7 +1786,7 @@ Object.assign(A, {
   ordLater() { closeOv(); toast('구매를 확정했어요 · 주문 내역에서 언제든 옷장에 담을 수 있어요'); render() },
   ordAdd(id) { const o = ordOf(id); closeOv(); if (!o || inCloset(o)) { render(); return } toast(addToCloset(o)); render() },
   orderReturn(id) {
-    const o = ordOf(id); closeOv();
+    const o = ordOf(id); closeOv(); if (slot('order.return', o)) { render(); return } // 신기능이 신청 흐름을 맡으면 완료본 모달은 안 띄움
     modal(`<h4>반품 · 교환을 신청할까요?</h4><p>${PB[o.pid].name} ${o.size}. 회수 기사님이 방문해요</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="orderReturnOk" data-x="${o.id}">신청하기</button></div>`);
     S.ov.node = '⑥ 주문 내역 · 반품 · 교환 신청'; render();
   },
