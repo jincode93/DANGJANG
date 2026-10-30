@@ -17,8 +17,8 @@
 | `public/app.css` | 화면 스타일. 색·간격은 토큰(`var(--…)`)으로 |
 | `public/app.js` | 화면과 동작 전부 (홈, 상품 상세, 구매, 옷장, 옷 등록, 마이) |
 | `public/measure.js`, `module.js` | 사진 측정 엔진과 사진 촬영·캡처 등록 창 |
-| `public/ms-images.js` | 무신사 상품 사진 주소 목록 (썸네일 229 · 상세 26 · 옷장 바닥컷 14) |
-| `api/` | 서버 기능 5개. `ping` 서버 확인, `product` 상품 링크 읽기, `find` 구매내역 캡처로 상품 찾기, `img` 쇼핑몰 사진 중계, `asset` 데모 자체 사진 |
+| `public/ms-images.js` | 무신사 상품 사진 주소 목록 (썸네일 229 · 상세 26 · 옷장 바닥컷 원본 16) |
+| `api/` | 서버 기능 4개. `ping` 서버 확인, `product` 상품 링크 읽기, `find` 구매내역 캡처로 상품 찾기, `img` 쇼핑몰 사진 중계 |
 | `lib/` | 서버 공용 코드 (쇼핑몰 읽기, 상품 표준화·검사) |
 | `test/` | `lib/catalog.js` 시험 |
 | `dev.mjs` | 로컬 시험 서버 (화면 + 서버 기능) |
@@ -31,8 +31,6 @@
 ```bash
 cd prototype
 npm install
-npx vercel link --project dangjang-prototype   # 처음 한 번
-npx vercel env pull .env.local                # 사진 저장소 인증. 레포에 안 올라감
 node dev.mjs            # http://127.0.0.1:8792
 node test/catalog.test.mjs
 ```
@@ -44,7 +42,7 @@ node test/catalog.test.mjs
 데모 오른쪽 "신기능" 패널에서 기능마다 `#이슈 번호 · 이름 · 토글`로 켜고 끈다. 기본은 꺼짐이고, 켠 상태는 주소 `?f=기능`에 남는다. 켜면 그 아래에 손으로 만들기 번거로운 상태를 바로 만드는 테스트 버튼이 열린다.
 
 - 기능 하나 = `public/features/기능/feature.js`(+ `feature.css`) 폴더 하나 + `public/index.html`의 한 줄
-- 쓰는 법은 `public/features.js` 맨 위 주석. 새 화면 · 새 동작 · 완료본이 열어 둔 자리(`closet.top`, `my.menu`, `reg.done`) · 테스트 버튼을 등록한다. 완료본에 있는 이름을 쓰면 멈춘다
+- 쓰는 법은 `public/features.js` 맨 위 주석. 새 화면 · 새 동작 · 완료본이 열어 둔 자리(`closet.top`, `my.menu`, `reg.done`, `cart.top`, `home.rec`, `rank.filter`, `rank.list`, `order.return`, `order.stat`, `order.card`, `detail.chip`, `detail.size`) · 테스트 버튼을 등록한다. 완료본에 있는 이름을 쓰면 멈춘다
 - 끄면 입구가 사라지고, 그 기능 화면에 있었다면 홈으로 간다
 - 기각되면 폴더와 `index.html`의 한 줄을 지운다. 채택되면 관리자가 정책으로 옮기고 완료본으로 흡수한다
 
@@ -55,9 +53,9 @@ node test/catalog.test.mjs
 | 사진 | 어디에 | 화면이 받는 길 |
 |---|---|---|
 | 무신사 상품 사진 | 무신사 (`public/ms-images.js`에 주소만) | `/api/img?url=…` 중계 |
-| 데모 자체 사진 39장: 예시 상품(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob private 저장소 `dangjang-prototype-blob` | `/api/asset?name=img/hero.jpg` |
+| 데모 자체 사진 59장: 예시 상품 · 옷장 바닥컷(`img/`), 옷 누끼(`cut/`), 촬영 견본(`sample/`) | Vercel Blob public 저장소 `dangjang-prototype-public`. 누구나 키 없이 읽음 | `https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/hero.jpg` |
 
-데모 사진을 더하거나 바꿀 때: `npx vercel blob put 파일 --pathname img/이름.jpg --access private --force` 로 올리고, `public/app.js`의 `IMG0`·`CUT`·`SAMPLE`에 `/api/asset?name=…` 주소를 적는다. 저장소는 Development · Preview · Production 세 환경 모두에 연결되어 있어야 로컬에서도 읽고 올릴 수 있다.
+데모 사진을 더하거나 바꿀 때: `npx vercel link --project dangjang-prototype`, `npx vercel env pull .env.local`로 올리기 키(`PUBLIC_READ_WRITE_TOKEN`, Development 환경에만 있음)를 받는다. `npx vercel blob put 파일 --pathname img/이름.jpg --access public --force --rw-token "$PUBLIC_READ_WRITE_TOKEN"` 로 올리고, `public/app.js`의 `IMG0`·`CUT`·`SAMPLE`에 그 주소를 적는다. 데모를 보기만 할 때는 키가 필요 없다.
 
 ## Vercel 설정 (처음 한 번)
 

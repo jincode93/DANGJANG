@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dangjang-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "prototype/dev.mjs"
+      ],
+      "port": 8792,
+      "autoPort": true
+    }
+  ]
+}

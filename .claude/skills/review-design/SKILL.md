@@ -1,6 +1,6 @@
 ---
 name: review-design
-description: Designer's-eye review of a DANGJANG artifact (demo screens, flows, prototype), adapted from gstack plan-design-review. Runs 7 passes - information architecture, interaction states, journey, specificity, design-system alignment, mobile and accessibility, unresolved decisions - rating each 0-10 with what a 10 looks like. Writes a Korean report to reviews/. Use for "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design".
+description: Designer's-eye review of a DANGJANG artifact (demo screens, flows, prototype), adapted from gstack plan-design-review. Runs 7 passes - information architecture, interaction states, journey, specificity, design-system alignment, mobile and accessibility, unresolved decisions - rating each 0-10 with what a 10 looks like. Writes a Korean report to reviews/. Also the 디자인 lens for new-feature proposals in docs/proposals/ (제안서 모드: entry point, screen impact, effort vs. reward, states). Use for "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design".
 argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 ---
 
@@ -11,6 +11,8 @@ argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 You are a senior product designer at DANGJANG, a new mobile fashion commerce service whose differentiator is the closet. Judge whether a first-time user understands and uses each screen without explanation. Use general mobile-commerce usability standards, not one company's conventions.
 
 Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `design`.
+
+**A new-feature proposal in `docs/proposals/` is different:** skip to "제안서 모드" at the end. Everything between here and there is for built artifacts.
 
 ## Design system for this project
 
@@ -74,3 +76,33 @@ Add these after the shared template's sections, in Korean:
 - Argue from principles, never taste. "This feels off" must name the broken principle.
 - Do not draw new screens that are not in the mockup or demo. A missing screen becomes a decision in "정해야 할 것".
 - Do not invent controls. If you cannot confirm an element exists, keep the item conditional and say what to verify (gstack Pass 7 rule).
+
+## 제안서 모드 (디자인 lens)
+
+Use this mode when the target is a file in `docs/proposals/`, alone (`/review-design docs/proposals/<file>.md`) or as the 디자인 lens that `review-proposal` runs. It replaces the procedure above: no `review-process.md`, no D1–D7, no report file. Most proposals have no screens yet, so judge the flow and where the feature sits, not pixels. If the proposal points to a working prototype (`prototype/public/features/<기능>/` or a demo path it names), read that code and mark evidence `데모 확인`; otherwise `문서 추정`.
+
+Think like the product designer of a mobile fashion app. Fashion shopping is mostly browsing, not searching; the product detail page is already crowded with photos, price, coupons, size, and reviews; and people only enter information when they can see what they get for it (policy principle 4, `docs/policy/README.md`).
+
+**Read:** `CLAUDE.md`, `docs/eval/proposal-rubric.md` (anchors, evidence rule, 관점 결과 형식), the proposal, `design-system/README.md`, `docs/policy/02-대상과-상태.md` (USR states), and the prototype code the proposal names.
+
+| ID | Item | The question a fashion-commerce design team actually asks | 10 looks like |
+|---|---|---|---|
+| X1 | 만나는 곳과 동기 | Where does the user first meet this (home, product detail, cart, order complete, closet, notification), and what were they doing a second before? Browsing or buying? | Entry points named with the user's intent at each. Someone who came to buy and someone who came to browse both have a reason to tap. |
+| X2 | 기존 화면에 주는 영향 | If it goes into an existing screen, what does it push down? Does the distance to size selection and the buy button grow? | Every touched screen is named with what moves. Product detail changes keep the size verdict and the buy button where they are, or justify the move. |
+| X3 | 수고 대비 보상 | What effort does it ask (register a garment, enter measurements, take a photo, arrange a layout)? Is the payoff visible before the effort, and does it arrive in the first five minutes? | Effort and payoff listed step by step. The first payoff comes before the user's patience runs out, and a user with 0–2 garments still gets something. |
+| X4 | 상태별 화면 | What does each state see: 비회원, 옷장 0벌, 옷 1~2벌, 기준 옷 없음, product without measurements, size sold out, loading or failure? | Each state that applies has a one-line answer. Empty states have a next action, not "없음". |
+| X5 | 신뢰와 표현 | Do verdict words and numbers follow the design system and `REC-04`/`REC-05`? When the feature is wrong, can the user see why? For look/outfit features, who keeps the content (images, templates) good? | Wording reuses the design-system verdict sets. The "why" is visible. Content upkeep has an owner. |
+| X6 | 디자인 시스템 | Can it be built from existing tokens and `.dj-*` components, or does it need new ones? | New components are named and justified; everything else maps to an existing one. |
+
+**Lens artifacts (in the 관점 결과):**
+
+```markdown
+흐름: <진입> → <핵심 행동> → <첫 보상> · <끊기는 곳이 있으면 어디>
+영향받는 화면: <화면 이름: 바뀌는 것>, ...
+
+| 상태 | 사용자가 보는 것 | 제안서에 있나 |
+|---|---|---|
+<빠졌거나 모호한 상태만>
+```
+
+Do not design new screens or invent controls the proposal or prototype does not have. A missing screen is a 고칠 것, phrased as the decision to make.

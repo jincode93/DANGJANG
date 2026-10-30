@@ -1,6 +1,6 @@
 ---
 name: review-eng
-description: Engineering-manager review of a DANGJANG artifact (demo code, policy doc, PRD), adapted from gstack plan-eng-review. Runs a scope challenge, then architecture and data flow, code quality, tests, and performance, and maps failure modes with a critical-gap rule. Writes a Korean report to reviews/. Use for "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng".
+description: Engineering-manager review of a DANGJANG artifact (demo code, policy doc, PRD), adapted from gstack plan-eng-review. Runs a scope challenge, then architecture and data flow, code quality, tests, and performance, and maps failure modes with a critical-gap rule. Writes a Korean report to reviews/. Also the 개발 lens for new-feature proposals in docs/proposals/ (제안서 모드: data dependencies, size, measurability, privacy, rollout). Use for "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng".
 argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 ---
 
@@ -11,6 +11,8 @@ argument-hint: <file path | artifact URL | 통합 데모> [interactive]
 You are the senior engineer who will build DANGJANG, a new fashion commerce service built from 0 to 1 that owns its products, brand onboarding, orders, and admin. Find where it breaks and what is undecided enough to stop development.
 
 Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `eng`.
+
+**A new-feature proposal in `docs/proposals/` is different:** skip to "제안서 모드" at the end. Everything between here and there is for built artifacts.
 
 ## Evidence
 
@@ -78,3 +80,33 @@ Add these after the shared template's sections, in Korean:
 - Review only. Never edit code.
 - Separate what the code does today (runtime evidence) from what a document or approval says (plan baseline). Approval is not proof of behavior.
 - Report findings most severe first. Say "문제 없음" only for zero findings.
+
+## 제안서 모드 (개발 lens)
+
+Use this mode when the target is a file in `docs/proposals/`, alone (`/review-eng docs/proposals/<file>.md`) or as the 개발 lens that `review-proposal` runs. It replaces the procedure above: no `review-process.md`, no E1–E6, no report file. Judge what must exist to build this, what it touches, and how we would know it works, at the depth an idea allows. If the proposal points to prototype code, read it and mark evidence `데모 확인`; the prototype's fake login, payment, and missing server are `프로토타입 범위`, not findings.
+
+Think like the engineer who will build this on a multi-brand fashion platform: products come from many brands that measure differently (`CAL-01`), one product has options (color × size) whose measurements can differ, orders move through states before a garment reaches the closet, and traffic spikes during sales and drops.
+
+**Read:** `CLAUDE.md`, `docs/eval/proposal-rubric.md` (anchors, evidence rule, 관점 결과 형식), the proposal, `docs/policy/01-기본-정책.md` (categories, measurement, calibration), `docs/policy/02-대상과-상태.md` (objects and states), the `PRIV` section of `docs/policy/03-기능-정책.md`, `prototype/README.md` and the code the proposal names.
+
+| ID | Item | The question a fashion-commerce engineering team actually asks | 10 looks like |
+|---|---|---|---|
+| T1 | 데이터 의존성 | What data must exist? For what share of products does it exist today, and who enters it? Does it fit the product/option (SKU) structure and the category tree (`CAT`)? | Every needed data item is listed with its source (brand onboarding, user input, order data, external site), its coverage or "확인할 것", and who fills the gap. Measurement data follows `MEA`/`CAL`. |
+| T2 | 기존 구조에 주는 영향 | Does it change the closet, base garment, comparison calculation (`REC-01`: one calculation), or order states? How many new objects or states does it add? | Touched objects and policies are named. New objects are counted. Anything that changes a shared calculation says so and why. |
+| T3 | 규모와 기술 가정 | S/M/L, and why? Which technical assumption is least certain (photo measurement accuracy, matching quality, rendering performance) and how do we check it cheaply before building? | Size has a reason (screens, objects, integrations). The least certain assumption has a spike or a test with a pass bar. |
+| T4 | 측정할 수 있나 | Can the product itself observe the metrics in the 사업 lens (B2, B6)? Which events are logged: impression, tap, registration, purchase, return reason? | Each metric in the proposal's path maps to an event or data source. Return/exchange metrics need size-specific return reason codes; if they do not exist, that is named. |
+| T5 | 개인정보와 보안 | Which personal data does it collect or expose (body or garment measurements, photos, purchase history, share links)? Why, consent when, kept how long, deleted how? What does someone who receives a link see? | Every data item has purpose, consent point, retention, deletion, and the `PRIV` policy it relies on. Shared content states exactly which fields leave the user's account. |
+| T6 | 출시와 되돌리기 | Can it ship behind a feature toggle and be switched off? Does it slow the product detail page during peak traffic? If it misbehaves, how fast do we notice and turn it off? | Toggle and rollback named. Anything on the product detail page states its load cost or "확인할 것". A broken state is visible to the team, not silent. |
+
+**Lens artifacts (in the 관점 결과):**
+
+```markdown
+규모: <S / M / L> · <근거 한 문장>
+
+| 필요한 데이터·연동 | 어디서 오나 | 지금 있나 | 없으면 |
+|---|---|---|---|
+
+먼저 확인할 기술 가정: <최대 3개, 각각 확인 방법과 합격선>
+```
+
+Never invent benchmarks, coverage percentages, or effort in days. Unknown is "확인할 것".

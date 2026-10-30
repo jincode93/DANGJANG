@@ -1,7 +1,7 @@
-const IMG0 = {"hero":"/api/asset?name=img/hero.jpg","base":"/api/asset?name=img/base.jpg","jacket":"/api/asset?name=img/jacket.jpg","slacks":"/api/asset?name=img/slacks.jpg","denim":"/api/asset?name=img/denim.jpg","knit":"/api/asset?name=img/knit.jpg","tee":"/api/asset?name=img/tee.jpg","pdHero":"/api/asset?name=img/pdHero.jpg","pdDetail":"/api/asset?name=img/pdDetail.jpg","ltee":"/api/asset?name=img/ltee.jpg","puffer":"/api/asset?name=img/puffer.jpg","leather":"/api/asset?name=img/leather.jpg","suede":"/api/asset?name=img/suede.jpg","lpuffer":"/api/asset?name=img/lpuffer.jpg","tee2":"/api/asset?name=img/tee2.jpg","blackp":"/api/asset?name=img/blackp.jpg","wide":"/api/asset?name=img/wide.jpg","m1":"/api/asset?name=img/m1.jpg","m2":"/api/asset?name=img/m2.jpg","oxford":"/api/asset?name=img/oxford.jpg","dshirt":"/api/asset?name=img/dshirt.jpg"};
+const IMG0 = {"hero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/hero.jpg","base":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/base.jpg","jacket":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/jacket.jpg","slacks":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/slacks.jpg","denim":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/denim.jpg","knit":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/knit.jpg","tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee.jpg","pdHero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdHero.jpg","pdDetail":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdDetail.jpg","ltee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/ltee.jpg","puffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/puffer.jpg","leather":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/leather.jpg","suede":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/suede.jpg","lpuffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/lpuffer.jpg","tee2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee2.jpg","blackp":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/blackp.jpg","wide":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/wide.jpg","m1":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m1.jpg","m2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m2.jpg","oxford":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/oxford.jpg","dshirt":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/dshirt.jpg"};
 const IMG = new Proxy(IMG0, { get: (t, k) => typeof k === 'string' && /^(data:|blob:|https?:|\/api\/)/.test(k) ? k : t[k] });
 // 서버가 붙은 주소(일반 웹)에서만 켜짐. 아티팩트 안에서는 꺼진 채로 예전 흐름
-const CUT = {"hero":"/api/asset?name=cut/hero.png","base":"/api/asset?name=cut/base.png","jacket":"/api/asset?name=cut/jacket.png","slacks":"/api/asset?name=cut/slacks.png","denim":"/api/asset?name=cut/denim.png","knit":"/api/asset?name=cut/knit.png","tee":"/api/asset?name=cut/tee.png","leather":"/api/asset?name=cut/leather.png","suede":"/api/asset?name=cut/suede.png","ltee":"/api/asset?name=cut/ltee.png","denim_k":"/api/asset?name=cut/denim_k.png","denim_i":"/api/asset?name=cut/denim_i.png","slacks_b":"/api/asset?name=cut/slacks_b.png","slacks_n":"/api/asset?name=cut/slacks_n.png"};
+const CUT = {"hero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/hero.png","base":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/base.png","jacket":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/jacket.png","slacks":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks.png","denim":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim.png","knit":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/knit.png","tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/tee.png","leather":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/leather.png","suede":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/suede.png","ltee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/ltee.png","denim_k":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim_k.png","denim_i":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim_i.png","slacks_b":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks_b.png","slacks_n":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks_n.png"};
 // 큰 data URI 사진은 blob URL로 바꿔 둠: 상품 카드 수백 개가 같은 사진을 써도 화면 문자열이 가벼워요
 const toBlobUrl = (d) => { try { const c = d.indexOf(','), bin = atob(d.slice(c + 1)), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return URL.createObjectURL(new Blob([u], { type: d.slice(5, d.indexOf(';')) })) } catch (e) { return d } };
 for (const o of [IMG0, CUT]) for (const k in o) if (typeof o[k] === 'string' && o[k].startsWith('data:image')) o[k] = toBlobUrl(o[k]);
@@ -9,7 +9,7 @@ for (const o of [IMG0, CUT]) for (const k in o) if (typeof o[k] === 'string' && 
 const API = { on: false };
 const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 try { fetch('/api/ping', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).then((j) => { API.on = !!(j && j.ok); if (API.on && nav.length && nav[nav.length - 1].s === 'regLink') render(); }).catch(() => {}); } catch (e) {}
-const SAMPLE = {"tee":"/api/asset?name=sample/tee.jpg","jeans":"/api/asset?name=sample/jeans.jpg","cap":"/api/asset?name=sample/cap.jpg","noa4":"/api/asset?name=sample/noa4.jpg"};
+const SAMPLE = {"tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/sample/tee.jpg","jeans":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/sample/jeans.jpg","cap":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/sample/cap.jpg","noa4":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/sample/noa4.jpg"};
 /* ── 아이콘 ── */
 const sv = (d, s = 24, sw = 1.8) => `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" style="width:${s}px;height:${s}px" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const I = {
@@ -112,15 +112,16 @@ const SUB_DEFAULT = { top: 'tee-l', outer: 'jacket', bottom: 'pants-l' };
    세부 종류: 15종 (통합본은 한글 이름 '긴팔 셔츠'로 저장, 상세 v2 키 'shirt-l'과 1:1)
    그룹: 8개 (긴팔 상의 · 반팔 상의 · 짧은/긴 아우터 · 긴바지/반바지 · 긴치마/짧은 치마) — 재는 부위가 같은 세부 종류끼리
    치수(m): 그룹 칸(GPARTS) 순서 배열. 재지 않은 칸은 null/0 → 비교 · 사이즈표에서 뺌
-   기준 옷: 그룹마다 하나 (+ 내 옷장의 세부 종류 기준은 선택). 다른 그룹 옷끼리는 비교하지 않음 */
+   기준 옷: 세부 종류마다 하나 (BASE-01). 기준 옷이 없으면 같은 그룹 옷과 자동 비교 (CMP-04). 다른 그룹 옷끼리는 비교하지 않음 */
 const SUBK = Object.fromEntries(Object.entries(SUBS).map(([k, v]) => [v.n, k])); // 한글 세부 종류 → v2 키
 const subOf = (x) => SUBS[x.sub] ? x.sub : SUBK[x.sub] || SUB_DEFAULT[x.cat];
 const grpOf = (x) => SUBS[subOf(x)].g;
 const partsOf = (x) => GPARTS[grpOf(x)];
-const GN = (x) => GROUP_N[grpOf(x)]; // 그룹 이름 (기준 옷 문구용)
+const GN = (x) => SUBS[subOf(x)].n; // 세부 종류 이름 (기준 옷 문구용)
+const josa = (w, a, b) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return w + (k >= 0 && k < 11172 && k % 28 ? a : b) }; // 받침 있으면 a
 const famOf = (p) => ofCat(p.cat).filter((c) => grpOf(c) === grpOf(p)); // 같은 그룹의 내 옷
-// 기준 옷: baseOf('top') = 그 종류의 아무 기준 옷(있는지 확인용) · baseOf(옷/상품) = 같은 그룹의 기준 옷
-const baseOf = (x) => typeof x === 'string' ? S.closet.find((c) => c.cat === x && c.base) : S.closet.find((c) => c.base && c.cat === x.cat && grpOf(c) === grpOf(x));
+// 기준 옷: baseOf('top') = 그 종류의 아무 기준 옷(있는지 확인용) · baseOf(옷/상품) = 같은 세부 종류의 기준 옷
+const baseOf = (x) => typeof x === 'string' ? S.closet.find((c) => c.cat === x && c.base) : S.closet.find((c) => c.base && c.cat === x.cat && subOf(c) === subOf(x));
 const gArr = (x, m) => partsOf(x).map((_, i) => m && +m[i] > 0 ? +m[i] : null); // 빈 칸은 null로
 const remapM = (from, m, to) => to.map((k) => { const i = from.indexOf(k); return i >= 0 && m && m[i] != null ? m[i] : ''; }); // 부위 이름으로 칸 옮기기
 
@@ -153,11 +154,11 @@ function legacyOf(c) { // 내 옷장 실루엣(옛 칸 순서로 그림)용: 상
   const sh = v.어깨 || (v.가슴 ? v.가슴 * 0.9 : 0), sl = v.소매 || (v.전체소매 ? v.전체소매 - sh / 2 : 20);
   return v.총장 && v.가슴 ? [v.총장, sh, v.가슴, sl] : null;
 }
-function ensureBases() { // 그룹마다 기준 옷 하나: 없으면 먼저 등록한 잘 맞는 옷, 둘 이상이면 먼저 등록한 옷만 남김
-  for (const c of S.closet) if (c.fit !== 'good') { c.base = false; c.subBase = false }
+function ensureBases() { // 세부 종류마다 기준 옷 하나: 없으면 먼저 등록한 잘 맞는 옷, 둘 이상이면 먼저 등록한 옷만 남김
+  for (const c of S.closet) if (c.fit !== 'good') c.base = false;
   const good = S.closet.filter((c) => c.fit === 'good').sort((a, b) => a.at - b.at), seen = {};
-  good.forEach((c) => { if (c.base) { if (seen[grpOf(c)]) c.base = false; else seen[grpOf(c)] = c } });
-  good.forEach((c) => { if (!seen[grpOf(c)]) { c.base = true; seen[grpOf(c)] = c } });
+  good.forEach((c) => { if (c.base) { if (seen[subOf(c)]) c.base = false; else seen[subOf(c)] = c } });
+  good.forEach((c) => { if (!seen[subOf(c)]) { c.base = true; seen[subOf(c)] = c } });
 }
 const CATS = [
   { k: 'top', label: '상의', icon: 'top', parts: PARTS.top, sizes: ['S', 'M', 'L', 'XL'], shape: 'top', subs: SUB.top,
@@ -232,15 +233,15 @@ for (const p of P) { const d = MSIMG[p.id]; if (d) { IMG0['ms_' + p.id] = msImg(
   const f = MSFIX[p.id]; if (f) { p.name = f[0]; if (f.length > 1) { p.dc = f[1]; p.sp = f[2]; p.price = f[1] ? Math.round(f[2] / (1 - f[1] / 100) / 100) * 100 : f[2]; } } }
 // 무신사 상세 이미지 (앞쪽 2장) · 옷장용 바닥컷 (누끼, 배경 #f6f6f6)
 for (const p of P) { const d = MSDET[p.id]; if (d) p.det = d.map((u, i) => { const k = 'det_' + p.id + '_' + i; IMG0[k] = msImg(u); return k; }); }
-for (const k in MSFLAT) IMG0['flat_' + k] = msImg(MSFLAT[k]);
-const FLAT_SWAP = {"p4": "r44", "p2": "r15", "r101": "r100", "r172": "r167", "r197": "r196", "r39": "r36"}; // 바닥컷이 없는 옷은 바닥컷 있는 같은 종류 상품으로
+for (const k in MSFLAT) IMG0['flat_' + k] = `https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/flat_${k}.jpg`; // 디자이너가 손본 바닥컷 (배경 #f6f6f6, 색상 칩 지움). 원본 주소는 MSFLAT
+const FLAT_SWAP = {"p4": "r44", "p2": "r15", "p1": "r16", "r22": "r21", "r101": "r100", "r172": "r167", "r197": "r196", "r39": "r36"}; // 바닥컷이 없는 옷은 바닥컷 있는 같은 종류 상품으로
 const PB = Object.fromEntries(P.map((p) => [p.id, p]));
 const won = (n) => n.toLocaleString('ko-KR');
 const sale = (p) => p.sp || Math.round(p.price * (100 - p.dc) / 100 / 100) * 100;
 const sizeKeys = (p) => p.sizes ? Object.keys(p.sizes) : p.list;
 let uid = 1;
 // 옷 한 벌. 치수는 그룹 칸 순서. 예전 형식(상의 4 · 바지 5칸) 데이터는 그룹 칸으로 옮기고 늘어난 칸은 예시 값으로 (g: true면 이미 그룹 칸)
-const item = (o) => { const x = Object.assign({ id: 'c' + (uid++), fit: null, notes: [], base: false, subBase: false, sub: null, img: null, returned: false, src: '직접 입력', at: uid }, o);
+const item = (o) => { const x = Object.assign({ id: 'c' + (uid++), fit: null, notes: [], base: false, sub: null, img: null, returned: false, src: '직접 입력', at: uid }, o);
   if (x.m && !x.g) x.m = fromLegacy(x, x.m, true); delete x.g;
   if (x.img && x.brand && !/^(data:|blob:|ms_|flat_)/.test(x.img)) { let p = (x.pid && PB[x.pid]) || P.find((q) => q.brand === x.brand && (q.name === x.name || q.name.includes(x.name) || x.name.includes(q.name)));
     if (p && FLAT_SWAP[p.id]) { p = PB[FLAT_SWAP[p.id]]; x.brand = p.brand; x.name = p.name; if (x.pid) x.pid = p.id; }
@@ -271,7 +272,23 @@ const PRESETS = {
     item({ brand: '에잇세컨즈', name: '스트라이프 셔츠 스카이 블루', cat: 'top', sub: '긴팔 셔츠', size: 'L', m: [74, 50, 58, 60], fit: 'good', src: '직접 입력' }),
     item({ img: 'denim_i', sub: '긴바지', brand: '무신사 스탠다드 우먼', name: '우먼즈 에센셜 커브드 데님 팬츠 [딥 인디고]', cat: 'bottom', size: '30', m: [40, 30, 31.5, 75, 103], fit: 'good', src: '상품 링크' }),
     item({ img: 'slacks_n', sub: '긴바지', brand: '네이비얼', name: '투턱 퓨어 울 슬랙스', cat: 'bottom', size: '30', m: [41, 30, 32, 76, 104], fit: 'good', src: 'A4 촬영' }),
-    item({ brand: '노스페이스', name: 'NJ3NS50A 남성 눕시 온볼 패딩 자켓 BLACK', cat: 'outer', sub: '숏패딩', size: 'L', m: [68, 54, 66, 64], fit: 'good', src: '직접 입력' })); return f },
+    item({ brand: '노스페이스', name: 'NJ3NS50A 남성 눕시 온볼 패딩 자켓 BLACK', cat: 'outer', sub: '숏패딩', size: 'L', m: [68, 54, 66, 64], fit: 'good', src: '직접 입력' }),
+    // 사진 없는 옷: 세부 종류 15종 × 색 케이스 (이름에 색이 없으면 기본 #979797)
+    item({ name: '베이직 롱슬리브 티셔츠', cat: 'top', sub: '긴팔 티셔츠', g: true, size: 'L', m: [72, 50, 57, 60, 54, 11, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '린넨 셔츠 화이트', cat: 'top', sub: '긴팔 셔츠', g: true, size: 'L', m: [74, 50, 58, 60, 56, 12, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '오버핏 반팔 티셔츠 옐로우', cat: 'top', sub: '반팔 티셔츠', g: true, size: 'L', m: [71, 55, 19, 23, 54, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '하와이안 반팔 셔츠 그린', cat: 'top', sub: '반팔 셔츠', g: true, size: 'L', m: [73, 56, 20, 24, 55, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '기모 후드티 핑크', cat: 'top', sub: '후드티', g: true, size: 'L', m: [70, 54, 60, 58, 50, 11, 27], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 브이넥 가디건 버건디', cat: 'outer', sub: '가디건', g: true, size: 'L', m: [66, 50, 56, 60, 52, 11, 25], fit: 'good', src: '직접 입력' }),
+    item({ name: '나일론 블루종 네이비', cat: 'outer', sub: '점퍼/자켓', g: true, size: 'L', m: [68, 52, 60, 62, 58, 13, 27], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 숏코트 카멜', cat: 'outer', sub: '숏코트', g: true, size: 'L', m: [80, 49, 59, 62, 58, 14, 28], fit: 'good', src: '직접 입력' }),
+    item({ name: '캐시미어 롱코트 차콜', cat: 'outer', sub: '롱코트', g: true, size: 'L', m: [110, 49, 60, 63, 62, 15, 28], fit: 'good', src: '직접 입력' }),
+    item({ name: '크롭 숏패딩 라벤더', cat: 'outer', sub: '숏패딩', g: true, size: 'L', m: [62, 54, 64, 62, 62, 14, 29], fit: 'good', src: '직접 입력' }),
+    item({ name: '구스다운 롱패딩 카키', cat: 'outer', sub: '롱패딩', g: true, size: 'L', m: [112, 55, 66, 64, 66, 15, 30], fit: 'good', src: '직접 입력' }),
+    item({ name: '와이드 코듀로이 팬츠 브라운', cat: 'bottom', sub: '긴바지', g: true, size: '30', m: [104, 40, 52, 32, 30, 22], fit: 'good', src: '직접 입력' }),
+    item({ name: '데님 쇼츠 블루', cat: 'bottom', sub: '반바지', g: true, size: '30', m: [46, 40, 53, 32, 30, 29], fit: 'good', src: '직접 입력' }),
+    item({ name: '플리츠 롱스커트 베이지', cat: 'bottom', sub: '긴치마', g: true, size: 'M', m: [85, 35, 50, 65], fit: 'good', src: '직접 입력' }),
+    item({ name: '울 미니스커트 레드', cat: 'bottom', sub: '짧은 치마', g: true, size: 'M', m: [45, 35, 48, 55], fit: 'good', src: '직접 입력' })); return f },
 };
 /* ── 상태 ── */
 let S;
@@ -279,7 +296,7 @@ function reset(preset) {
   const p = PRESETS[preset]();
   S = { preset, recent: ['셔츠', '패딩', '데님 자켓'], user: p.user, closet: p.closet, accounts: { kakao: !!p.user, naver: false, google: false }, pending: [], orders: [], cart: [],
     coupons: p.user ? [{ t: '신규 가입 10% 쿠폰', d: '3만 원 이상 · 10월 31일까지', used: false }] : [], likes: {}, popupSeen: false, notifAsked: false, notifOn: false,
-    firstReg: p.closet.length > 0, rack: {}, failNext: false, photoPerm: null, camPerm: null, after: null, ov: null, toast: null, push: null, notis: [], fitTodo: [] };
+    firstReg: p.closet.length > 0, rack: {}, cmp: {}, failNext: false, photoPerm: null, camPerm: null, after: null, ov: null, toast: null, push: null, notis: [], fitTodo: [] };
   nav = [{ s: 'home', p: {} }];
 }
 let nav = [];
@@ -293,19 +310,26 @@ function toast(t) { S.toast = t; clearTimeout(toast.h); toast.h = setTimeout(() 
 function sheet(html) { S.ov = { k: 'sheet', html } } function modal(html) { S.ov = { k: 'modal', html } } function closeOv() { S.ov = null }
 const ofCat = (cat) => S.closet.filter((c) => c.cat === cat);
 /* ── 로그인 게이트 (B) ── */
-const subBaseOf = (cat, sub) => sub ? S.closet.find((c) => c.cat === cat && c.sub === sub && c.subBase) : null;
-// 기준 옷: 세부 종류 기준(내 옷장, 선택)이 있으면 그 옷, 없으면 그룹 기준 옷 (상세 v2)
-const baseFor = (p) => { const b = subBaseOf(p.cat, p.sub) || baseOf(p); return b && grpOf(b) === grpOf(p) ? b : null; }; // 세부 종류 기준 → 그룹 기준 옷. 다른 그룹 옷과는 비교 안 함
+// 상품과 견줄 옷 (BASE-02): 이 상품만 고른 옷(CMP-01) → 같은 세부 종류의 기준 옷 → 자동 비교(CMP-04: 같은 그룹, 기준 옷인 옷 먼저 · 먼저 담은 옷)
+// ponytail: CMP-04 2순위(같은 대분류의 다른 그룹)는 재는 부위가 달라 비교 계산이 없어서 뺌. 그룹 간 비교(REC-02)를 만들 때 추가
+const baseFor = (p) => { const c = S.closet.find((q) => q.id === S.cmp[p.id]); return c && grpOf(c) === grpOf(p) ? c : baseOf(p) || famOf(p).filter((q) => q.fit === 'good').sort((a, b) => b.base - a.base || a.at - b.at)[0] || null; };
 const pic = (c, st = '') => c.img ? `<img src="${IMG[c.img] || CUT[c.img]}" style="${st}">` : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#B5B5B5;background:var(--gray);padding:12%">${tplSvg(c)}</div>`;
 const catGrid = (on, a) => `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${CATS.map((c) => `<button data-a="${a}" data-x="${c.k}" style="height:72px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:14px;${c.k === on ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line);color:var(--ink2)'}">${I[c.icon]}${c.label}</button>`).join('')}</div>`;
 const pill = (on, a, x, t) => `<button data-a="${a}" data-x="${x}" style="height:36px;min-width:48px;padding:0 12px;border-radius:18px;font-size:14px;flex:none;${on ? 'background:var(--primary);color:var(--on-primary);font-weight:700' : 'border:1px solid var(--line)'}">${t}</button>`;
 /* ── 로그인 게이트 (B) ── */
+// 로그인/온보딩 (피그마 TeamProject 로그인/온보딩 · login): 마크 + 워드마크, 카카오 · Google · 네이버
+const LG_LOGO = '<svg aria-label="DANGJANG" role="img" width="193" height="108" viewBox="0 0 193 108" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="71.4287" width="50" height="50" rx="10" fill="white"/><path d="M96.4287 11.667C101.952 11.667 106.429 16.1442 106.429 21.667V33.334L106.425 33.5918C106.288 38.9951 101.865 43.3338 96.4287 43.334C90.9923 43.334 86.5688 38.9952 86.4316 33.5918L86.4287 33.334H93.0957C93.096 35.1747 94.5879 36.667 96.4287 36.667C98.2693 36.6668 99.7614 35.1746 99.7617 33.334V31.0947C98.7189 31.4634 97.5977 31.667 96.4287 31.667C90.906 31.667 86.4289 27.1897 86.4287 21.667C86.4287 16.1441 90.9059 11.667 96.4287 11.667ZM96.4287 18.333C94.5878 18.333 93.0957 19.826 93.0957 21.667C93.0958 23.5078 94.5879 25 96.4287 25C98.2696 25 99.7616 23.5078 99.7617 21.667C99.7617 19.8261 98.2696 18.333 96.4287 18.333ZM103.095 5C104.936 5 106.429 6.49218 106.429 8.33301C106.429 10.174 104.936 11.667 103.095 11.667C101.254 11.6668 99.7617 10.1739 99.7617 8.33301C99.7619 6.49227 101.254 5.00015 103.095 5Z" fill="#06BC51"/><path d="M184.614 94.1653H181.88V87.5309H192.857V99.3923C192.857 105.544 187.831 107.756 181.679 107.756C175.527 107.756 170.3 105.544 170.3 99.3923V78.3634C170.3 72.2115 175.326 70 181.478 70C187.63 70 192.656 72.2115 192.656 78.3634V82.5048H184.212V79.6902C184.212 78.1221 183.046 77.2777 181.478 77.2777C179.91 77.2777 178.744 78.1221 178.744 79.6902V98.0655C178.744 99.6336 180.111 100.478 181.679 100.478C183.247 100.478 184.614 99.6336 184.614 98.0655V94.1653Z" fill="white"/><path d="M159.861 70.8042H167.903V106.952H159.861L153.387 88.6567V106.952H145.346V70.8042H153.387L159.861 89.2598V70.8042Z" fill="white"/><path d="M135.125 100.88H129.054L128.29 106.952H119.886L124.993 70.8042H139.227L144.414 106.952H135.93L135.125 100.88ZM134.201 93.6425L132.11 77.1169L129.979 93.6425H134.201Z" fill="white"/><path d="M110.516 97.9851V70.8042H118.96V99.3923C118.96 105.544 114.135 107.756 107.983 107.756C101.872 107.756 97.6095 105.544 97.6095 99.3923V93.9642H106.254V97.9851C106.254 99.5532 106.817 100.478 108.385 100.478C109.953 100.478 110.516 99.5532 110.516 97.9851Z" fill="white"/><path d="M87.8029 94.1653H85.0687V87.5309H96.0456V99.3923C96.0456 105.544 91.0196 107.756 84.8677 107.756C78.7158 107.756 73.4887 105.544 73.4887 99.3923V78.3633C73.4887 72.2115 78.5148 70 84.6667 70C90.8186 70 95.8446 72.2115 95.8446 78.3633V82.5048H87.4008V79.6902C87.4008 78.1221 86.2348 77.2777 84.6667 77.2777C83.0985 77.2777 81.9325 78.1221 81.9325 79.6902V98.0655C81.9325 99.6336 83.2996 100.478 84.8677 100.478C86.4358 100.478 87.8029 99.6336 87.8029 98.0655V94.1653Z" fill="white"/><path d="M63.0496 70.8042H71.0913V106.952H63.0496L56.5761 88.6567V106.952H48.5344V70.8042H56.5761L63.0496 89.2598V70.8042Z" fill="white"/><path d="M38.313 100.88H32.2415L31.4775 106.952H23.074L28.1804 70.8042H42.4142L47.6011 106.952H39.1171L38.313 100.88ZM37.3882 93.6425L35.2973 77.1169L33.1663 93.6425H37.3882Z" fill="white"/><path d="M22.3559 78.8458V98.9098C22.3559 104.418 19.5815 106.952 14.3142 106.952H0V70.8042H14.3142C19.5815 70.8042 22.3559 73.3373 22.3559 78.8458ZM14.1132 96.7788V81.0171C14.1132 79.2881 13.5904 78.2427 11.6604 78.2427H8.44377V99.5532H11.6604C13.5904 99.5532 14.1132 98.5078 14.1132 96.7788Z" fill="white"/></svg>'; // 사용자 제공 로고 (마크 + 워드마크)
+const LG_KAKAO = '<svg class="lgi" width="20" height="19" viewBox="0 0 20 19" aria-hidden="true"><path d="M10.0013 0C4.47645 0 0 3.63886 0 8.12702C0 11.0119 1.85164 13.5468 4.64155 14.9879L3.69827 18.6089C3.66318 18.7169 3.69073 18.8327 3.76582 18.9125C3.82082 18.9691 3.89591 19 3.96845 19C4.031 19 4.09354 18.9794 4.14609 18.9357L8.19964 16.1202C8.78273 16.2052 9.38318 16.2515 9.99873 16.2515C15.5211 16.2515 20 12.6127 20 8.12449C20 3.63633 15.5235 0 10.0013 0Z" fill="#191919"/></svg>';
+const LG_GOOGLE = '<svg class="lgi" width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+const LG_NAVER = '<svg class="lgi lgin" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.8484 8.56487L4.91659 0H0V16H5.15157V7.43815L11.0834 16H16V0H10.8484V8.56487Z" fill-rule="evenodd" fill="#fff"/></svg>';
 function need(reason, then) {
   if (S.user) return then();
   S.after = then;
-  sheet(`<button class="lgx" data-a="closeOv" aria-label="닫기">${I.close}</button><div class="lglogo">${LOGO('#FFFFFF', 224)}</div><p class="lgwhy">${reason}</p>
-    <div class="lgbtns"><button class="lgb" style="background:#F1F1F1;color:#1E1E1E" data-a="social" data-x="google">Google로 계속하기</button>
-    <button class="lgb" style="background:#FFEA64;color:#1E1E1E" data-a="social" data-x="kakao">카카오로 계속하기</button><button class="lgb" style="background:#47CC54;color:#FFFFFF" data-a="social" data-x="naver">네이버로 계속하기</button></div>`);
+  sheet(`<button class="lgx" data-a="closeOv" aria-label="뒤로">${I.back}</button>
+    <div class="lgh"><h2>실패없는 쇼핑 경험은<br><em>당장에서 당장해요</em></h2><p>내 옷장에서 잘 맞는 옷을 기준으로</p></div>
+    <div class="lgtip"><svg width="179" height="68" viewBox="0 0 179 68" aria-hidden="true"><path d="M89 68L83 56H12C5.37 56 0 50.63 0 44V12C0 5.37 5.37 0 12 0H167C173.63 0 179 5.37 179 12V44C179 50.63 173.63 56 167 56H95L89 68Z" fill="#fff" stroke="#F6F6F6" stroke-width="1"/></svg><span>지금 가입하면<br>최대 <b>20% 웰컴쿠폰팩</b> 드려요!</span></div>
+    <div class="lgbtns"><button class="lgb lgk" data-a="social" data-x="kakao">${LG_KAKAO}카카오로 계속하기</button>
+    <button class="lgb lgg" data-a="social" data-x="google">${LG_GOOGLE}Google로 계속하기</button><button class="lgb lgn" data-a="social" data-x="naver">${LG_NAVER}네이버로 계속하기</button></div>`);
   S.ov.k = 'sheet lgfull';
   S.ov.node = '⑦ 로그인 게이트 · 로그인 했나? → 아니오 · 로그인 안내 시트';
   render();
@@ -349,8 +373,15 @@ function navBar(on) {
 
 /* ── 화면 ── */
 const SCR = {};
+// 온보딩 (피그마 TeamProject 로그인/온보딩 · onboarding 01~04). 카드 그림은 디자이너 제공 이미지(1127×2000, 4배)
+// 신기능 장(내 옷 기준 추천 · 코디북)은 그 기능을 켤 때만 뒤에 붙음 (features.js onboard)
+const OB = [["옷장에 기준 옷 등록", "지금 제일 잘 맞는 옷<br>한 벌이면 충분해요", "5가지 방법 중 편한 걸로 등록해요.<br>종류마다 처음 담은 옷이 기준 옷이 되고,<br>내 옷장에서 언제든 바꿀 수 있어요.", 282, "onboard/1.webp"], ["상품 상세에서 내 옷과 비교", "사기 전에 어디가<br>크고 작은지 알려드려요", "기준 옷과 부위별로 겹쳐 보여 주고,<br>차이가 가장 작은 사이즈를 추천해 드려요", 282, "onboard/2.webp"]];
+const obList = () => OB.concat(DJ.onboard());
+SCR.onboard = (pp) => { const L = obList(), i = Math.min(pp.i || 0, L.length - 1), [lb, t, d, wd, img] = L[i]; return { node: `앱 처음 실행 · 온보딩 ${i + 1}/${L.length} · ${lb}`, full: true,
+  body: `<div class="ob"><div class="ob-top"><span class="ob-dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</span><button class="ob-skip" data-a="obDone">건너뛰기</button></div>
+  <div class="ob-lb">${lb}</div><h2 class="ob-t">${t}</h2><p class="ob-d">${d}</p><img class="ob-card" src="${img}" style="width:${wd}px" alt=""><div class="ob-foot">${i ? `<button class="ob-prev" data-a="obPrev">이전</button>` : ''}<button class="ob-next" data-a="obNext">${i === L.length - 1 ? '완료' : '다음'}</button></div></div>` }; };
 SCR.splash = () => ({ node: '앱 실행 · 스플래시 → 업데이트 · 연결 · 로그인 확인', full: true, body: `
-  <div style="position:absolute;inset:0;background:var(--g);display:flex;align-items:center;justify-content:center" data-a="splashGo">${LOGO('#FFFFFF', 224)}</div>` });
+  <div style="position:absolute;inset:0;background:var(--g);display:flex;align-items:center;justify-content:center" data-a="splashGo">${LG_LOGO}</div>` });
 function regCard() {
   const t = '사이즈 고민, 내 옷으로 풀어요';
   const d = '자주 입는 옷과 비교해서 상품마다 어디가 크고 작은지 알려 드려요';
@@ -407,38 +438,12 @@ function lazyBind() {
 const saleCard = (p) => card(p);
 const miniCard = (p) => card(p);
 
-/* ── 개인화: 랭킹 상품 중 내 기준 옷과 실측이 비슷한 상품 ──
-   부위별 차이 0cm = 100%, 5cm 이상 = 0%로 바꿔 평균 낸 값. 가장 비슷한 사이즈 기준, 70% 이상만 보여줘요.
-   회원 데이터 없이 상품 사이즈표만으로 계산해요. 이미 옷장에 있는 상품은 빼요 */
-const simPct = (x, b, k) => { const d = x.sizes[k].map((v, i) => v && b.m[i] ? Math.abs(v - b.m[i]) : null).filter((v) => v != null); return d.length ? Math.round(d.reduce((a, v) => a + Math.max(0, 1 - v / 5), 0) / d.length * 100) : 0; }; // 두 옷 모두 잰 부위만
-function simFit() {
-  const bases = S.closet.filter((c) => c.base); if (!bases.length) return '';
-  const b = bases.find((c) => c.id === S.simB) || bases[0], open = !!S.simDD;
-  const rank = P.slice().sort((x, y) => y.rev - x.rev).map((x) => x.id), owned = S.closet.map((c) => c.pid);
-  const same = (x) => b.sub ? x.sub === b.sub : x.cat === b.cat; // 같은 2뎁스끼리, 기준 옷에 2뎁스가 없으면 같은 1뎁스
-  const items = rank.map((id) => PB[id]).filter((x) => x.sizes && !owned.includes(x.id) && x.cat === b.cat && grpOf(x) === grpOf(b) && same(x)).map((x) => {
-    const best = Object.keys(x.sizes).map((k) => ({ k, pct: simPct(x, b, k) })).sort((m, n) => n.pct - m.pct)[0];
-    return { x, k: best.k, pct: best.pct };
-  }).filter((e) => e.pct >= 70);
-  const row = (c) => `<span class="simpic">${cutPic(c)}</span><span class="simtx"><b>${c.name} ${c.size}</b><small>${c.sub || CAT[c.cat]}</small></span>`;
-  return `<div class="sec"><h3>${S.user.name}님 옷장 기준으로 골랐어요</h3></div>
-  <p class="psub">비교할 내 옷을 고르면, 랭킹 상품 중 실측이 가까운 상품을 보여 드려요</p>
-  <div class="simdd ${open ? 'open' : ''}"><button class="simbox" data-a="simOpen" aria-expanded="${open}">${row(b)}<span class="simarr">${I.down}</span></button>
-    ${open ? `<div class="simlist" role="listbox">${bases.map((c) => `<button class="simopt ${c.id === b.id ? 'on' : ''}" role="option" aria-selected="${c.id === b.id}" data-a="simPick" data-x="${c.id}">${row(c)}${c.id === b.id ? `<span class="simchk">${I.check}</span>` : ''}</button>`).join('')}</div>` : ''}</div>
-  ${items.length ? `<div class="hscroll">${items.map(({ x, k, pct }) => `<button class="card pcard" data-a="detail" data-x="${x.id}"><div class="img"><img src="${IMG[x.img]}" alt=""></div><div class="br" style="margin-top:8px">${x.brand}</div><div class="nm">${x.name}</div><div class="price">${x.dc ? `<em>${x.dc}%</em>` : ''}${won(sale(x))}원</div><div class="pfit"><b>${pct}%</b> 비슷해요<span>${k} 사이즈 · 내 ${b.name.split(' ').pop()} 기준</span></div></button>`).join('')}</div>`
-    : `<div class="simnone">아직 이 옷과 실측이 가까운 ${b.sub || CAT[b.cat]} 랭킹 상품이 없어요</div>`}`;
-}
-// 목록이 펼쳐진 동안 바깥을 누르면 목록만 닫음 (다른 버튼은 눌리지 않음)
-document.getElementById('app').addEventListener('click', (e) => {
-  if (!S.simDD || e.target.closest('.simdd')) return;
-  e.stopPropagation(); e.preventDefault(); S.simDD = false; saveY(); render();
-}, true);
 function tabRec(base, todo, mine) {
   return `<button class="img" style="position:relative;height:250px;width:100%;display:block" data-a="detail" data-x="p3"><img src="${IMG.jacket}" style="object-position:50% 40%"><div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,0) 65%)"></div>
     <div style="position:absolute;left:20px;bottom:24px;color:#FFFFFF;text-align:left"><div style="font-size:11px;font-weight:700;letter-spacing:.12em">COLLECTION</div><div style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-top:6px">MEA 26 FW<br>SEASON OPEN</div></div></button>
   ${base.length ? '' : regCard()}
   ${dlvCard()}
-  ${base.length ? simFit() : ''}
+  ${slot('home.rec')}
   <div class="sec"><h3>인기 상품</h3></div>
   ${lazyGrid('pop', P.slice().sort((a, b) => b.rate * b.rev - a.rate * a.rev).slice(0, 100), (x) => card(x))}
   <div style="height:16px"></div>`;
@@ -450,8 +455,8 @@ function tabRank(p) {
   if (rp === '실시간') list.sort((a, b) => b.rev - a.rev); else if (rp === '일간') list.sort((a, b) => b.dc * 100 + b.rev / 100 - (a.dc * 100 + a.rev / 100)); else list.sort((a, b) => b.rate - a.rate || b.rev - a.rev);
   return `<div class="tabs ctabs rtabs">${['전체'].concat(CATK.map((c) => CAT[c])).map((x) => `<button class="${x === rc ? 'on' : ''}" data-a="rankCat" data-x="${x}">${x}</button>`).join('')}</div>
   ${ck ? `<div class="chips">${['전체'].concat(SUB[ck]).map((x) => `<button class="chip ${x === rs ? 'on' : ''}" data-a="rankSub" data-x="${x}">${x}</button>`).join('')}</div>` : ''}
-  <div class="rhead"><div class="seg2">${['실시간', '일간', '주간'].map((x) => `<button class="${x === rp ? 'on' : ''}" data-a="rankPeriod" data-x="${x}">${x}</button>`).join('')}</div><span class="rtime">10월 21일 14:00 기준</span></div>
-  ${list.length ? `${lazyGrid(`rank:${rc}:${rs}:${rp}`, list.slice(0, 200), (x, i) => rankCard(x, i + 1), 'grid3r')}` : `<div class="rempty">아직 ${rs} 상품이 없어요</div>`}`;
+  <div class="rhead"><div class="seg2">${['실시간', '일간', '주간'].map((x) => `<button class="${x === rp ? 'on' : ''}" data-a="rankPeriod" data-x="${x}">${x}</button>`).join('')}</div><span class="rtime">10월 21일 14:00 기준</span></div>${slot('rank.filter', list, p)}
+  ${slot('rank.list', list, p) || (list.length ? `${lazyGrid(`rank:${rc}:${rs}:${rp}`, list.slice(0, 200), (x, i) => rankCard(x, i + 1), 'grid3r')}` : `<div class="rempty">아직 ${rs} 상품이 없어요</div>`)}`;
 }
 function tabSale(p) {
   const min = +(p.sm || 0);
@@ -480,7 +485,7 @@ SCR.home = (p) => {
   const base = ['top', 'bottom', 'outer'].map((c) => baseOf(c)).filter(Boolean);
   const mine = base.length ? P.filter((x) => judge(x).n === 5) : [];
   const st = S.user ? (base.length ? '기준 옷 있음' : '기준 옷 없음') : '비회원';
-  const node = t === '추천' ? (base.length ? '① 홈 · 추천 · 기준 옷 있음 · 옷장 기준으로 고른 랭킹 상품' : `① 홈 · 추천 · ${st} · 슬라이드 아래 등록 카드`) : `① 홈 · ${t} 탭`;
+  const node = t === '추천' ? (base.length ? '① 홈 · 추천 · 기준 옷 있음' : `① 홈 · 추천 · ${st} · 슬라이드 아래 등록 카드`) : `① 홈 · ${t} 탭`;
   const body = t === '랭킹' ? tabRank(p) : t === '세일' ? tabSale(p) : t === '기획전' ? tabExh() : t === '이벤트' ? tabEvt() : tabRec(base, null, mine);
   return { node, navOn: 'home', fab: `<button class="totop" data-a="toTop" aria-label="맨 위로">${ICO_UP}</button>`, body: `
   <div class="hdr"><span>${LOGO()}</span><span class="icons"><button class="hsrch" data-a="findGo" aria-label="검색">${I.search}</button><button data-a="go" data-x="notis" aria-label="알림">${I.bell}${S.notis.some((n) => !n.read) ? '<span class="cnt" style="background:var(--sale);min-width:8px;height:8px;top:0;right:0;padding:0"></span>' : ''}</button>${cartBtn()}</span></div>
@@ -724,11 +729,11 @@ SCR.detail = (pp) => {
   const L = { 1: '로그인 안 함', 2: '옷장 비어 있음', 3: '이 종류 옷 없음', 4: '기준 옷 없음', x: '실측 없음 (사이즈표만)', 5: pp.nob ? '비교 끔 (사이즈표만)' : '비교 완료' }[j.n];
   let node = `② 상품 상세 · 상황: ${L}`;
   if (sel && p.out.includes(sel)) node = '② 상품 상세 · 그 사이즈 재고 있나? → 아니오 · 품절 안내';
-  const chip = { 1: '로그인하고 내 옷과 비교하기', 2: '기준 옷 등록하고 비교하기', 3: '기준 옷 등록하고 비교하기', 4: '기준 옷 정하고 비교하기', 5: `<b>${j.rec} 추천</b>기준 옷과 비교하기`, x: '' }[j.n];
+  const chip = slot('detail.chip', p, j) || { 1: '로그인하고 내 옷과 비교하기', 2: '기준 옷 등록하고 비교하기', 3: '기준 옷 등록하고 비교하기', 4: '기준 옷 정하고 비교하기', 5: `<b>${j.rec} 추천</b>기준 옷과 비교하기`, x: '' }[j.n];
   const hintCard = (txt, link, a, ill) => `<div class="pd-hint"><p>${txt}</p>${link ? `<button class="pd-link hit" data-a="${a}" data-x="${p.id}">${link}${I.chev}</button>` : ''}${ill || ''}</div>`;
   const glass = '<span class="pd-glass"><i></i><b></b></span>', tee = `<img class="pd-tee" src="${IMG.pdTee}" alt="">`;
   let top = '';
-  if (base) top = `<div class="pd-base"><div class="pd-brow"><span class="pd-bimg">${cutPic(base)}</span><span class="pd-bw"><em>${base.subBase && base.sub === p.sub ? base.sub + ' 기준' : '기준'}</em><b>${base.name}</b><small>내 옷장 · ${SUBS[subOf(base)].n} · ${base.size} Size</small></span><button class="pd-swap hit" data-a="dpick">교체하기${I.chev}</button></div></div>`;
+  if (base) top = `<div class="pd-base"><div class="pd-brow"><span class="pd-bimg">${cutPic(base)}</span><span class="pd-bw"><em>${base.base && subOf(base) === subOf(p) ? '기준' : '비교'}</em><b>${base.name}</b><small>내 옷장 · ${SUBS[subOf(base)].n} · ${base.size} Size</small></span><button class="pd-swap hit" data-a="dpick">교체하기${I.chev}</button></div></div>`;
   else if (j.n === 1) top = hintCard('로그인하면 내 옷장 옷과 겹쳐서<br>크기를 비교해 드려요.', '로그인하기', 'chip', glass);
   else if (j.n === 2 || j.n === 3) top = hintCard('기준 옷 한 벌만 등록하면<br>이 상품과 겹쳐서 비교해 드려요.', '기준 옷 등록하기', 'chip', tee);
   else if (j.n === 4) top = hintCard('내 옷장에서 기준 옷을 정하면<br>이 상품과 겹쳐서 비교해 드려요.', '기준 옷 정하기', 'dpick', tee);
@@ -767,7 +772,7 @@ SCR.detail = (pp) => {
   <div class="dtabs">${[['info', '정보'], ['size', '사이즈'], ['rec', '추천'], ['rev', '스냅·후기'], ['qna', '문의']].map(([k, t]) => `<button class="${(pp.tab || 'info') === k ? 'on' : ''}" data-a="dtab" data-x="${k}">${t}</button>`).join('')}</div>
   <section id="s_info"><dl class="pd-spec">${[['품번', `NR-${p.id.toUpperCase()}-0241`], ['시즌', '2026 FW']].concat(p.spec || [['소재', p.cat === 'bottom' ? '울 70% · 폴리 30%' : '면 100%'], ['핏', p.cat === 'bottom' ? '와이드 · 스트레이트' : '릴렉스 핏 · 드롭 숄더']]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
     ${p.det ? p.det.map((k) => `<img class="pd-detail" src="${IMG[k]}" alt="">`).join('') : `<img class="pd-detail ${p.photos ? '' : 'crop'}" src="${IMG[ph.detail || p.img]}" alt="">`}</section>
-  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${top}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}</section>
+  <section class="pd-size" id="s_size"><div class="pd-title"><h2>사이즈</h2>${j.n === 5 ? `<button class="pd-tg hit" data-a="cmpToggle"><span>내 옷과 비교</span><i class="${pp.nob ? '' : 'on'}"></i></button>` : '<span class="pd-sub">단면 실측 cm</span>'}</div>${slot('detail.size', p, j, pp) || `${top}${base ? szs : p.sizes ? `<div class="pd-guide">${flatFig(subOf(p), [{ m: gsz(keys[Math.floor((keys.length - 1) / 2)]).map((v, i) => v ?? ref[i]), role: 'prod' }], { guide: true })}<span>${SUBS[subOf(p)].n} 실측 부위</span></div>` : ''}${cmp}`}</section>
   <section class="dsec" id="s_rec"><div class="dhead"><h2>이 상품과 비슷한 ${CAT[p.cat]}</h2><span>${others.length}개</span></div><div class="hscroll" style="padding:0">${others.map(card).join('')}</div><div style="height:12px"></div></section>
   ${revSection(p)}
   <section class="dsec" id="s_qna" style="border-bottom:0"><div class="dhead"><h2>문의</h2><span>32건</span></div>${qnaList(p)}<div style="height:24px"></div></section></div>` };
@@ -887,7 +892,7 @@ function revSection(p) { // 상품 상세의 스냅·후기 영역
   if (!list.length) return `<section class="pd-size rv" id="s_rev">${head}<div class="rv-note">아직 후기가 없어요. 첫 후기를 남겨 주세요</div></section>`;
   return `<section class="pd-size rv" id="s_rev">${head}
     ${few ? `<div class="rv-note">신상품이라 후기가 아직 ${list.length}개예요. 사이즈 평가는 후기가 더 모이면 보여 드려요</div>` : `<div class="rv-sum">${rvScore(p)}${rvBars(list)}</div>`}
-    ${b && !few ? `<button class="rv-mine" data-a="revAll" data-x="${p.id}|mine"><span>평소 <b>${b.size}</b> 입는 사람의 후기 ${mine.length}개<small>내 ${CAT[p.cat]} 기준 옷(${b.name})이 ${b.size} 사이즈예요</small></span>${I.chev}</button>` : ''}
+    ${b && !few ? `<button class="rv-mine" data-a="revAll" data-x="${p.id}|mine"><span>평소 <b>${b.size}</b> 입는 사람의 후기 ${mine.length}개<small>내 ${GN(b)} ${b.name}이 ${b.size} 사이즈예요</small></span>${I.chev}</button>` : ''}
     ${rvSnaps(p, list)}
     <div class="rv-list">${list.slice(0, 3).map((r) => rvCard(p, r)).join('')}</div>
     ${few ? '' : `<button class="btn pd-cta line" data-a="revAll" data-x="${p.id}">후기 ${won(p.rev)}개 전체 보기</button>`}</section>`;
@@ -918,7 +923,7 @@ SCR.review = (pp) => {
       ${rvPh(r) ? `<div class="rv-dph">${[0, 1].map((k) => `<span>${rvImg(p, r, k)}</span>`).join('')}</div>` : ''}
       <button class="rv-help ${on ? 'on' : ''}" data-a="revHelp" data-x="${key}">도움돼요 <span class="num">${r.help + (on ? 1 : 0)}</span></button></div>` };
 };
-SCR.cart = () => ({ node: '② 장바구니', bar: S.cart.length ? `<button class="btn" data-a="cartOrder">${won(S.cart.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0))}원 주문하기</button>` : '', body: `${hdrBack('장바구니')}
+SCR.cart = () => ({ node: '② 장바구니', bar: S.cart.length ? `<button class="btn" data-a="cartOrder">${won(S.cart.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0))}원 주문하기</button>` : '', body: `${hdrBack('장바구니')}${S.cart.length ? slot('cart.top') : ''}
   ${S.cart.length ? S.cart.map((c, i) => { const p = PB[c.pid]; return `<div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)"><div class="img" style="width:76px;height:92px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="flex:1;min-width:0"><div class="br">${p.brand}</div><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub);margin-top:3px">${c.color ? c.color + ' / ' : '사이즈 '}${c.size} · ${c.qty || 1}개</div><div class="price" style="margin-top:6px">${won(sale(p) * (c.qty || 1))}원</div></div><button data-a="cartDel" data-x="${i}" style="align-self:flex-start;color:var(--sub)">${I.close}</button></div>` }).join('')
     : `<div class="empty"><div class="big">${I.bag}</div><h4>장바구니가 비어 있어요</h4><p>마음에 드는 옷을 담아 보세요</p></div>`}
   ${S.cart.length && !S.user ? '<div class="p" style="font-size:12.5px;color:var(--sub)">비회원 장바구니는 이 기기에만 저장돼요. 가입하면 계정으로 합쳐져요</div>' : ''}` });
@@ -949,7 +954,7 @@ SCR.fit = (pp) => {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 16px 0">${[['good', '잘 맞아요'], ['bad', '안 맞아요']].map(([k, t]) => `<button data-a="fitAns" data-x="${c.id}|${k}" style="height:52px;border-radius:6px;font-size:15px;${ans === k ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line);font-weight:600'}">${t}</button>`).join('')}</div>
     ${ans === 'bad' ? `
       ${c.delivered ? `<div style="font-size:16px;font-weight:700;padding:24px 16px 10px">반품 · 교환할 건가요?</div><div class="pad" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${[[1, '반품 · 교환 신청'], [0, '그냥 둘게요']].map(([k, t]) => `<button data-a="fitRet" data-x="${c.id}|${k}" style="height:46px;border-radius:6px;font-size:14px;${ret === k ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line)'}">${t}</button>`).join('')}</div>` : ''}
-      <div style="margin:16px 16px 20px;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">옷장에는 잘 맞는 옷만 담겨요. 안 맞는 옷은 옷장에서 빠져요${c.base ? '. 지금 기준 옷이라 같은 종류의 다른 잘 맞는 옷이 기준을 이어받아요' : ''}</div>` : ''}` };
+      <div style="margin:16px 16px 20px;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">옷장에는 잘 맞는 옷만 담겨요. 안 맞는 옷은 옷장에서 빠져요${c.base ? '. 지금 기준 옷이라 같은 세부 종류의 다른 잘 맞는 옷이 기준을 이어받아요' : ''}</div>` : ''}` };
 };
 
 /* 옷장 (E) */
@@ -959,11 +964,10 @@ SCR.closet = (pp = {}) => {
   const waitReg = S.pending.length;
   if (!S.closet.length && !waitReg) return { node: '⑤ 내 옷장 · 옷이 있나? → 아니오 · 빈 옷장', navOn: 'closet', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>첫 옷을 등록해 보세요</h4><p>지금 제일 잘 맞는 옷 한 벌이면 충분해요.<br>첫 등록하면 10% 쿠폰을 드려요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="|closet">첫 옷 등록하기</button></div>` };
   const t = pp.t || (CATS.find((c) => ofCat(c.k).length) || CATS[0]).k, all = ofCat(t), subs = CM[t].subs.filter((x) => all.some((c) => c.sub === x));
-  const sv = subs.includes(pp.s) ? pp.s : '', mine = sv ? all.filter((c) => c.sub === sv) : all, cb = sv ? baseOf({ cat: t, sub: sv }) : baseOf(t), sb = sv ? subBaseOf(t, sv) : null;
-  const isRef = (c) => sv ? c.subBase : c === cb; // 그룹마다 기준 옷이 있어 '전체'에선 첫 기준 옷만 가운데 // 이 범위의 기준 옷
-  const good = mine.filter((c) => c.fit === 'good' && !isRef(c));
-  const b0 = mine.find((c) => isRef(c) && c.fit === 'good') || (sv && !sb ? mine.find((c) => c.base) : null); // 기준 옷을 선반 가운데에 걸어 양옆이 보이게
-  if (b0) { good.splice(good.indexOf(b0) >= 0 ? good.indexOf(b0) : good.length, good.indexOf(b0) >= 0 ? 1 : 0); good.splice(good.length >> 1, 0, b0) }
+  const sv = subs.includes(pp.s) ? pp.s : '', mine = sv ? all.filter((c) => c.sub === sv) : all, cb = sv ? baseOf({ cat: t, sub: sv }) : baseOf(t);
+  const b0 = mine.find((c) => c.base && c.fit === 'good'); // 기준 옷을 선반 가운데에 걸어 양옆이 보이게. '전체'에선 세부 종류마다 기준 옷이 있어 첫 기준 옷만 가운데
+  const good = mine.filter((c) => c.fit === 'good' && c !== b0);
+  if (b0) good.splice(good.length >> 1, 0, b0);
   // 선반: 가운데 옷을 크게, 양옆 2벌씩 겹쳐 보임. 옆 옷을 누르거나 끌면 가운데로, 가운데 옷을 누르면 옷 상세 정보
   const rack = (key, arr, cap) => {
     const k = t + ':' + sv + ':' + key, bi = b0 ? arr.indexOf(b0) : -1;
@@ -979,22 +983,21 @@ SCR.closet = (pp = {}) => {
     <div class="hdr"><span class="t">내 옷장</span></div>
     <div class="ctabs">${CATS.map((c) => `<button class="${c.k === t ? 'on' : ''}" data-a="closetTab" data-x="${c.k}">${c.label} ${ofCat(c.k).length}</button>`).join('')}</div>
     ${waitReg ? `<button data-a="go" data-x="regFit" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;justify-content:space-between;align-items:center;border-radius:10px;background:var(--fitw);padding:12px 14px;font-size:14px"><span><b>등록 대기 ${waitReg}벌</b> · 확인하면 옷장에 담겨요</span>${I.chev}</button>` : ''}
-    ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>처음 등록한 잘 맞는 ${CAT[t]}가 기준 옷이 되고,<br>${CAT[t]} 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
+    ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>잘 맞는 ${CAT[t]}를 등록하면 세부 종류마다 기준 옷이 되고,<br>그 종류 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
     ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${slot('closet.top')}
-    ${!baseOf(t) ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${CAT[t]}가 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
-    ${good.length ? rack('good', good, (c) => `${!sv && c.subBase ? c.sub + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
+    ${!cb ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${josa(sv || CAT[t], '이', '가')} 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
+    ${good.length ? rack('good', good, (c) => `${c.base ? GN(c) + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
     <div style="height:90px"></div>`}` };
 };
 SCR.item = (pp) => {
   const c = S.closet.find((x) => x.id === pp.id); if (!c) return SCR.closet();
-  const cb = baseOf(c), L = GN(c), sb = c.sub ? subBaseOf(c.cat, c.sub) : null, ye = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return k >= 0 && k < 11172 && k % 28 ? '이에요' : '예요' };
-  // 기준 옷 설정: 종류 기준 + 세부 종류만 따로 기준. 한 줄에 제목 · 설명 · 버튼 (시안 475:1045)
+  const cb = baseOf(c), L = GN(c), ye = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return k >= 0 && k < 11172 && k % 28 ? '이에요' : '예요' };
+  // 기준 옷 설정: 세부 종류마다 하나. 한 줄에 제목 · 설명 · 버튼 (시안 475:1045)
   const row = (title, desc, right) => `<div class="it-row"><div><b>${title}</b><small>${desc}</small></div>${right}</div>`;
   const act = (a, t) => `<button class="it-btn" data-a="${a}" data-x="${c.id}">${t}</button>`;
   const baseSec = c.fit !== 'good' ? '<div class="it-note">입어 보기 전인 옷은 기준 옷이 될 수 없어요. 핏을 알려 주고 잘 맞으면 기준 옷으로 정할 수 있어요</div>'
-    : row(c.base ? `${L} 기준 옷` : `${L} 기준 옷으로 변경하기`, c.base ? `${L} 상품의 추천 사이즈를 이 옷으로 계산해요` : `지금은 ${cb.name}${ye(cb.name)}`, c.base ? `<span class="it-now">${I.check}지금 기준</span>` : act('setBase', '변경하기'))
-    + (c.sub && !c.base ? row(c.subBase ? `${c.sub} 기준 옷` : `${c.sub} 기준 옷으로 변경하기`, c.subBase ? `${c.sub} 상품은 ${L} 기준 옷 대신 이 옷과 비교해요` : `${c.sub}만 핏이 달라 따로 비교하고 싶을 때 지정${sb ? ` · 지금은 ${sb.name}` : ''}`, c.subBase ? act('unsetSub', '해제') : act('setSubBase', sb ? '변경하기' : '지정하기')) : '');
-  return { node: '⑤ 내 옷장 · 옷 상세 정보 → 기준 옷 바꾸기 · 세부 종류 기준 · 정보 수정 · 삭제', bar: `<button class="btn" data-a="editItem" data-x="${c.id}">수정하기</button>`, body: `${hdrBack('옷 상세 정보', `<button class="it-del" data-a="delItem" data-x="${c.id}">삭제</button>`)}
+    : row(c.base ? `${L} 기준 옷` : `${L} 기준 옷으로 변경하기`, c.base ? `${L} 상품의 추천 사이즈를 이 옷으로 계산해요` : `지금은 ${cb.name}${ye(cb.name)}`, c.base ? `<span class="it-now">${I.check}지금 기준</span>` : act('setBase', '변경하기'));
+  return { node: '⑤ 내 옷장 · 옷 상세 정보 → 기준 옷 바꾸기 · 정보 수정 · 삭제', bar: `<button class="btn" data-a="editItem" data-x="${c.id}">수정하기</button>`, body: `${hdrBack('옷 상세 정보', `<button class="it-del" data-a="delItem" data-x="${c.id}">삭제</button>`)}
     <div class="it-img">${c.img ? `<img src="${CUT[c.img] || IMG[c.img]}" alt="">`
       : `<div style="display:flex;flex-direction:column;align-items:center;gap:12px"><div style="width:200px;height:200px">${tplSvg(c)}</div><span style="font-size:13px;color:var(--text-tertiary)">사진이 없어 치수로 그린 모양이에요</span><button class="it-btn" data-a="photoAdd" data-x="${c.id}|item" style="display:flex;align-items:center;gap:4px">${I.plus} 사진 추가</button></div>`}</div>
     <div class="it-info"><div class="it-nm">${c.name}</div><div class="it-meta">${CAT[c.cat]}${c.sub ? ' · ' + c.sub : ''} · ${c.size} 사이즈 · 등록 경로 ${c.src}</div>
@@ -1177,8 +1180,7 @@ function RK(d) { // 시안: 가운데 150×180, 옆 120×144(0.8), 끝 100×120(
   return { x, t: `translateX(${x.toFixed(1)}px) scale(${sc.toFixed(3)})`, z: 100 - Math.round(a * 10), o: a > 2.5 ? Math.max(0, 1 - (a - 2.5) * 2) : 1, d: (Math.min(a, 1) * .06).toFixed(3) };
 }
 const withWa = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return w + (k >= 0 && k < 11172 && k % 28 ? '과' : '와') };
-const rkAct = (c, sv) => !c || c.fit !== 'good' ? '' : sv ? (c.subBase ? `<span class="now">${I.check}${sv} 기준</span>` : `<button data-a="setSubBase" data-x="${c.id}">${sv} 기준으로 정하기${I.chev}</button>`)
-  : c.base ? `<span class="now">${I.check}${GN(c)} 기준</span>` : `<button data-a="setBase" data-x="${c.id}">${GN(c)} 기준으로 정하기${I.chev}</button>`;
+const rkAct = (c) => !c || c.fit !== 'good' ? '' : c.base ? `<span class="now">${I.check}${GN(c)} 기준</span>` : `<button data-a="setBase" data-x="${c.id}">${GN(c)} 기준으로 정하기${I.chev}</button>`;
 const CHK = (on) => on ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0ZM13.7305 7.46973C13.4377 7.17692 12.9628 7.17708 12.6699 7.46973L8.7998 11.3389L7.33008 9.86914C7.03729 9.57652 6.5624 9.57665 6.26953 9.86914C5.97669 10.162 5.97679 10.6368 6.26953 10.9297L8.26953 12.9307C8.2878 12.9489 8.30658 12.9665 8.32617 12.9824C8.38501 13.0303 8.44997 13.0673 8.51758 13.0947C8.69816 13.1679 8.90148 13.168 9.08203 13.0947C9.14961 13.0673 9.21463 13.0304 9.27344 12.9824C9.29302 12.9664 9.31182 12.9489 9.33008 12.9307L13.7305 8.53027C14.023 8.2375 14.0229 7.76257 13.7305 7.46973Z" fill="#06BC51"/></svg>'
   : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M19.5 10C19.5 15.2467 15.2467 19.5 10 19.5C4.75329 19.5 0.5 15.2467 0.5 10C0.5 4.75329 4.75329 0.5 10 0.5C15.2467 0.5 19.5 4.75329 19.5 10Z" fill="white" stroke="#E1E1E1"/></svg>';
 const cutPic = (c) => c.img ? `<img src="${CUT[c.img] || IMG[c.img]}" alt="">` : tplSvg(c);
@@ -1192,25 +1194,33 @@ const TB = { // 몸판 실루엣 (긴팔 · 반팔 · 아우터 · 긴 아우터
 const dot = (x, ys) => ys.map((y) => `<circle cx="${x}" cy="${y}" r="1.8"/>`).join('');
 // [색, 실루엣 path들, 디테일 선, 디테일 점]
 const TPL_ICON = {
-  'tee-l': ['#C8A84E', TB.l, 'M42 22Q50 28 58 22'],
-  'shirt-l': ['#BFDDF5', TB.l, 'M39 20L44 30L50 24L56 30L61 20M50 24V82', dot(50, [40, 54, 68])],
-  'tee-s': ['#C8A84E', TB.s, 'M42 24Q50 30 58 24'],
-  'shirt-s': ['#BFDDF5', TB.s, 'M39 22L44 32L50 26L56 32L61 22M50 26V80', dot(50, [42, 55, 68])],
-  hoodie: ['#CDB8F0', TB.l + 'M35 24Q34 8 50 8Q66 8 65 24Q58 30 50 30Q42 30 35 24Z', 'M43 21Q50 26 57 21M38 70L41 61H59L62 70'],
-  cardigan: ['#7C1A2B', TB.o, 'M39 18L50 46L61 18M50 46V84', dot(50, [54, 64, 74])],
-  jacket: ['#D9261C', TB.o + 'M39 21V12H61V21Z', 'M50 12V84M30 77H70'],
-  'coat-s': ['#D8C6A0', TB.o, 'M39 18L35 28L41 30L50 50M61 18L65 28L59 30L50 50M50 50V84', dot(54, [58, 70])],
-  'coat-l': ['#7C1A2B', TB.ol, 'M39 12L35 22L41 24L50 46M61 12L65 22L59 24L50 46M50 46V92', dot(54, [54, 66, 78])],
-  'pad-s': ['#CDB8F0', 'M37 18V10H63V18L78 22Q87 40 91 64L79 69L71 46V84H29V46L21 69L9 64Q13 40 22 22Z', 'M50 10V84M29 34H71M29 50H71M29 66H71M15 46L24 44M85 46L76 44'],
-  'pad-l': ['#F3D98A', 'M37 10V4H63V10L76 14Q84 32 88 56L77 60L70 36V94H30V36L23 60L12 56Q16 32 24 14Z', 'M50 4V94M30 26H70M30 42H70M30 58H70M30 74H70'],
-  'pants-l': ['#BFDDF5', 'M30 10H70V18L78 90H58L50 42L42 90H22L30 18Z', 'M30 18H70M50 18V34'],
-  'pants-s': ['#F3D98A', 'M30 24H70V32L80 72H58L50 50L42 72H20L30 32Z', 'M30 32H70M50 32V46'],
-  'skirt-l': ['#D9261C', 'M34 10H66V18L78 92H22L34 18Z', 'M34 18H66M44 18L40 92M56 18L60 92'],
-  'skirt-s': ['#CDB8F0', 'M33 26H67V34L78 74H22L33 34Z', 'M33 34H67M44 34L41 74M56 34L59 74'],
+  'tee-l': [TB.l, 'M42 22Q50 28 58 22'],
+  'shirt-l': [TB.l, 'M39 20L44 30L50 24L56 30L61 20M50 24V82', dot(50, [40, 54, 68])],
+  'tee-s': [TB.s, 'M42 24Q50 30 58 24'],
+  'shirt-s': [TB.s, 'M39 22L44 32L50 26L56 32L61 22M50 26V80', dot(50, [42, 55, 68])],
+  hoodie: [TB.l + 'M35 24Q34 8 50 8Q66 8 65 24Q58 30 50 30Q42 30 35 24Z', 'M43 21Q50 26 57 21M38 70L41 61H59L62 70'],
+  cardigan: [TB.o, 'M39 18L50 46L61 18M50 46V84', dot(50, [54, 64, 74])],
+  jacket: [TB.o + 'M39 21V12H61V21Z', 'M50 12V84M30 77H70'],
+  'coat-s': [TB.o, 'M39 18L35 28L41 30L50 50M61 18L65 28L59 30L50 50M50 50V84', dot(54, [58, 70])],
+  'coat-l': [TB.ol, 'M39 12L35 22L41 24L50 46M61 12L65 22L59 24L50 46M50 46V92', dot(54, [54, 66, 78])],
+  'pad-s': ['M37 18V10H63V18L78 22Q87 40 91 64L79 69L71 46V84H29V46L21 69L9 64Q13 40 22 22Z', 'M50 10V84M29 34H71M29 50H71M29 66H71M15 46L24 44M85 46L76 44'],
+  'pad-l': ['M37 10V4H63V10L76 14Q84 32 88 56L77 60L70 36V94H30V36L23 60L12 56Q16 32 24 14Z', 'M50 4V94M30 26H70M30 42H70M30 58H70M30 74H70'],
+  'pants-l': ['M30 10H70V18L78 90H58L50 42L42 90H22L30 18Z', 'M30 18H70M50 18V34'],
+  'pants-s': ['M30 24H70V32L80 72H58L50 50L42 72H20L30 32Z', 'M30 32H70M50 32V46'],
+  'skirt-l': ['M34 10H66V18L78 92H22L34 18Z', 'M34 18H66M44 18L40 92M56 18L60 92'],
+  'skirt-s': ['M33 26H67V34L78 74H22L33 34Z', 'M33 34H67M44 34L41 74M56 34L59 74'],
 };
+// 상품명에 색 이름이 있으면 그 색, 없으면 기본 #979797 (앞에 있는 규칙이 먼저)
+const NAME_COL = [[/스카이\s*블루|sky\s*blue|라이트\s*블루|light\s*blue/i, '#A9CBEA'], [/차콜|charcoal|건메탈|gunmetal/i, '#4A4A4D'], [/블랙|black|흑청/i, '#2B2B2B'],
+  [/화이트|white|아이보리|ivory|크림|cream|오프\s*화이트/i, '#E6E3DC'], [/네이비|navy|인디고|indigo/i, '#2E3A5C'], [/그레이|grey|gray|회색|멜란지|melange/i, '#9A9CA0'],
+  [/버건디|burgundy|와인|wine/i, '#7C1A2B'], [/레드|red(?!uce)|빨강/i, '#D9261C'], [/핑크|pink/i, '#EDB3C3'], [/브라운|brown|초콜릿|chocolate|반다이크|tobacco|타바코|모카/i, '#7A5236'],
+  [/베이지|beige|오트밀|oatmeal|카멜|camel|샌드|sand|토프|taupe|탄\b/i, '#D3BF9C'], [/카키|khaki|올리브|olive|mud|머드/i, '#7C7A4C'], [/그린|green|forest|포레스트|틸|teal/i, '#3F7A5A'],
+  [/블루|blue|데님|denim/i, '#5B83B8'], [/옐로우|yellow|머스타드|mustard|버터/i, '#E8C860'], [/퍼플|purple|라벤더|lavender|바이올렛/i, '#B9A3E3']];
+const nameCol = (c) => (NAME_COL.find(([r]) => r.test(c.name || '')) || [])[1] || '#979797';
 function tplSvg(c) {
-  const [col, sil, det = '', dots = ''] = TPL_ICON[subOf(c)] || TPL_ICON['tee-l'];
-  return `<svg class="tpl" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="${sil}" fill="${col}" stroke="${col}" stroke-width="5" stroke-linejoin="round"/><g fill="none" stroke="#000" stroke-opacity=".14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${det}"/></g><g fill="#000" fill-opacity=".18">${dots}</g></svg>`;
+  const [sil, det = '', dots = ''] = TPL_ICON[subOf(c)] || TPL_ICON['tee-l'], col = nameCol(c);
+  const dark = parseInt(col.slice(1, 3), 16) * .3 + parseInt(col.slice(3, 5), 16) * .59 + parseInt(col.slice(5, 7), 16) * .11 < 110, ink = dark ? '#fff' : '#000', op = dark ? .28 : .16;
+  return `<svg class="tpl" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="${sil}" fill="${col}" stroke="${col}" stroke-width="5" stroke-linejoin="round"/><g fill="none" stroke="${ink}" stroke-opacity="${op}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${det}"/></g><g fill="${ink}" fill-opacity="${op + .04}">${dots}</g></svg>`;
 }
 let dragEnd = 0;
 function bindRacks() {
@@ -1367,7 +1377,7 @@ function pendingAdded(it) { // 묻지 않고 바로 옷장에 등록 (핏 확인
   A.regSave();
 }
 function saveFit(c, good) {
-  if (!good) { S.closet = S.closet.filter((q) => q !== c); if (!c.base) return '안 맞는 옷은 옷장에서 뺐어요'; ensureBases(); const nx = baseOf(c); return `안 맞는 옷은 옷장에서 뺐어요 · ${nx ? `기준 옷은 ${nx.name} ${nx.size}이 이어받았어요` : `잘 맞는 ${GN(c)}가 없어서 기준 옷이 없어졌어요`}` }
+  if (!good) { S.closet = S.closet.filter((q) => q !== c); if (!c.base) return '안 맞는 옷은 옷장에서 뺐어요'; ensureBases(); const nx = baseOf(c); return `안 맞는 옷은 옷장에서 뺐어요 · ${nx ? `기준 옷은 ${nx.name} ${nx.size}이 이어받았어요` : `잘 맞는 ${josa(GN(c), '이', '가')} 없어서 기준 옷이 없어졌어요`}` }
   c.fit = 'good'; c.delivered = false;
   if (!baseOf(c)) { c.base = true; return `${GN(c)} 기준 옷으로 정했어요 · 옷 상세 정보에서 바꿀 수 있어요` }
   return '잘 맞는 옷으로 저장했어요';
@@ -1388,9 +1398,9 @@ function optSheet(patch) {
 }
 function baseSheet(p, sel) {
   const cat = p.cat, list = famOf(p), i = list.findIndex((c) => c.id === sel), swap = !!baseFor(p);
-  sheet(`<button class="pd-grab" aria-label="닫기"></button><h3>${GROUP_N[grpOf(p)]} 기준 옷 ${swap ? '교체' : '선택'}</h3><div class="pd-bl">${list.map((c, k) => `<button class="pd-bi ${k === i ? 'on' : ''} ${k === i - 1 ? 'nb' : ''}" data-a="bpSel" data-x="${c.id}"><span class="pd-bimg">${cutPic(c)}</span><span class="pd-bw">${c.base ? '<em>기준</em>' : ''}<b>${c.name}</b><small>내 옷장 · ${CAT[cat]} · ${c.size} Size</small></span><span class="pd-rd"></span></button>`).join('')}</div>
+  sheet(`<button class="pd-grab" aria-label="닫기"></button><h3>비교할 옷 ${swap ? '교체' : '선택'}</h3><div class="pd-bl">${list.map((c, k) => `<button class="pd-bi ${k === i ? 'on' : ''} ${k === i - 1 ? 'nb' : ''}" data-a="bpSel" data-x="${c.id}"><span class="pd-bimg">${cutPic(c)}</span><span class="pd-bw">${c.base ? '<em>기준</em>' : ''}<b>${c.name}</b><small>내 옷장 · ${CAT[cat]} · ${c.size} Size</small></span><span class="pd-rd"></span></button>`).join('')}</div>
     <div class="pd-sf fade"><button class="btn pd-cta" data-a="bpOk" ${sel ? '' : 'disabled'}>${swap ? '교체하기' : '선택'}</button></div>`);
-  Object.assign(S.ov, { k: 'sheet pd-sheet', cat, pid: p.id, sel, node: '② 상품 상세 · 사이즈 영역 → 내 옷 목록에서 기준 옷 고르기' });
+  Object.assign(S.ov, { k: 'sheet pd-sheet', cat, pid: p.id, sel, node: '② 상품 상세 · 사이즈 영역 → 내 옷 목록에서 이 상품과 비교할 옷 고르기' });
 }
 // 시트 손잡이: 눌러서 닫기, 아래로 80px 이상 끌면 닫기 (U-06)
 document.addEventListener('pointerdown', (e) => {
@@ -1403,7 +1413,10 @@ document.addEventListener('pointerdown', (e) => {
 document.addEventListener('click', (e) => { if (e.detail === 0 && e.target.closest && e.target.closest('.pd-grab')) { closeOv(); render(); } });
 const A = {
   noop() {}, back, closeOv() { closeOv(); S.after = null; render() },
-  splashGo() { replace('home'); homePopupCheck(); render() },
+  splashGo() { if (!S.user && !S.obSeen) { S.obSeen = true; replace('onboard', { i: 0 }); return } A.obDone() },
+  obPrev() { const i = cur().p.i || 0; if (i > 0) replace('onboard', { i: i - 1 }) },
+  obNext() { const i = cur().p.i || 0; if (i < obList().length - 1) replace('onboard', { i: i + 1 }); else A.obDone() },
+  obDone() { replace('home'); homePopupCheck(); render() }, // 비회원도 쓰므로 로그인이 아니라 홈으로
   tab(s) {
     if (s === 'closet' && !S.user) { tab('closet'); need('옷장은 로그인하면 쓸 수 있어요', () => { closeOv(); tab('closet') }); return }
     tab(s); if (s === 'home') { homePopupCheck(); render() }
@@ -1429,9 +1442,9 @@ const A = {
   dsel(k) { saveY(); cur().p.sel = k; render() },
   dpick() { const p = PB[cur().p.id], b = baseFor(p); saveY(); baseSheet(p, b ? b.id : null); render() },
   noBase() { saveY(); Object.assign(cur().p, { nob: true, pick: false }); render() },
-  pickBase(cid) {
+  pickBase(cid) { // 이 상품과만 비교 (CMP-01). 기준 옷은 그대로
     const c = S.closet.find((q) => q.id === cid);
-    S.closet.forEach((q) => { if (q.cat === c.cat && grpOf(q) === grpOf(c)) q.base = false }); c.base = true; saveY(); Object.assign(cur().p, { nob: false, sel: null }); render(); toast(`${c.name} ${c.size}을 기준 옷으로 정했어요 · 실측 확인부터 다시 판단했어요`);
+    S.cmp[cur().p.id] = cid; saveY(); Object.assign(cur().p, { nob: false, sel: null }); render(); toast(`이 상품은 이제 ${c.name} ${c.size} 사이즈와 비교해요 · 기준 옷은 그대로예요`);
   },
   dbuy(mode) { const pp = cur().p; buyFlow(pp.id, pp.sel, mode) },
   restock(k) { toast(`${k} 사이즈 재입고되면 알려 드릴게요`); render() },
@@ -1482,12 +1495,12 @@ const A = {
     if (!d.size) { toast('사이즈를 골라 주세요'); render(); return }
     const miss = NEED[pkOf(d.cat, d.sub)].filter((k) => !m[partsOf(d).indexOf(k)]); if (miss.length) { toast(`${miss.map((k) => LONG[k] || k).join(', ')}은 꼭 적어 주세요`); render(); return }
     if (m.some((v) => v && (v < 5 || v > 200))) { toast('치수가 너무 작거나 커요 · 단면 실측 cm로 적어 주세요'); render(); return }
-    const moved = d.cat !== c.cat || grpOf(d) !== grpOf(c), wasBase = c.base || c.subBase;
-    if (moved) { c.base = false; c.subBase = false } else if (d.sub !== c.sub) c.subBase = false;
+    const moved = d.cat !== c.cat || subOf(d) !== subOf(c), wasBase = c.base; // 세부 종류를 바꾸면 삭제와 등록으로 봄 (BASE-07)
+    if (moved) c.base = false;
     Object.assign(c, { img: d.img, name: d.name.trim() || c.name, cat: d.cat, sub: d.sub, size: d.size, m });
     ensureBases(); const nb = baseOf(c) === c && moved;
-    if (d.base && !c.base && c.fit === 'good') { const o = baseOf(c); if (o) o.base = false; c.base = true; c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]) }
-    toast(moved ? `${GN(c)}로 옮겼어요${nb ? ` · 처음 잘 맞는 ${GN(c)}라 기준 옷이 됐어요` : ''}${wasBase && c.base === false ? ' · 원래 종류의 기준 옷은 다른 옷이 이어받았어요' : ''}` : '정보를 고쳤어요 · 추천 사이즈를 다시 계산했어요'); back();
+    if (d.base && !c.base && c.fit === 'good') { const o = baseOf(c); if (o) o.base = false; c.base = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]) }
+    toast(moved ? `${josa(GN(c), '으로', '로')} 옮겼어요${nb ? ` · 처음 잘 맞는 ${josa(GN(c), '이라', '라')} 기준 옷이 됐어요` : ''}${wasBase && c.base === false ? ' · 원래 세부 종류의 기준 옷은 다른 옷이 이어받았어요' : ''}` : '정보를 고쳤어요 · 추천 사이즈를 다시 계산했어요'); back();
   },
   setBase(id) {
     const c = S.closet.find((q) => q.id === id), old = baseOf(c);
@@ -1496,11 +1509,11 @@ const A = {
     compareSheet(c, old, 'setBaseOk', `${GN(c)} 기준 옷 변경`, GN(c));
     S.ov.node = '⑤ 기준 옷 바꾸기 (옷장 선반 · 옷 상세 정보) → 정말 바꿀까요? · 지금 기준과 비교 · 바뀌는 추천 사이즈'; render();
   },
-  setBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = baseOf(c); if (old) old.base = false; c.base = true; c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${GN(c)} 기준 옷을 바꿨어요 · 추천 사이즈를 다시 계산했어요`); render() },
-  delItem(id) { const c = S.closet.find((q) => q.id === id); modal(`<h4>이 옷을 삭제할까요?</h4><p>${c.name} ${c.size}${c.base ? '은 지금 기준 옷이에요. 같은 종류의 다른 옷으로 기준이 바뀌어요' : '의 치수와 핏 기록이 지워져요'}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" style="background:var(--sale)" data-a="delOk" data-x="${id}">삭제</button></div>`); S.ov.node = '⑤ 옷 상세 정보 · 삭제 확인 → 기준 옷이었나?'; render() },
+  setBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = baseOf(c); if (old) old.base = false; c.base = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${GN(c)} 기준 옷을 바꿨어요 · 추천 사이즈를 다시 계산했어요`); render() },
+  delItem(id) { const c = S.closet.find((q) => q.id === id); modal(`<h4>이 옷을 삭제할까요?</h4><p>${c.name} ${c.size}${c.base ? '은 지금 기준 옷이에요. 같은 세부 종류의 다른 옷으로 기준이 바뀌어요' : '의 치수와 핏 기록이 지워져요'}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" style="background:var(--sale)" data-a="delOk" data-x="${id}">삭제</button></div>`); S.ov.node = '⑤ 옷 상세 정보 · 삭제 확인 → 기준 옷이었나?'; render() },
   delOk(id) {
     const c = S.closet.find((q) => q.id === id); S.closet = S.closet.filter((q) => q.id !== id); closeOv(); back();
-    if (c.base) { ensureBases(); const nx = baseOf(c); toast(nx ? `${nx.name} ${nx.size}이 기준 옷을 이어받았어요` : `잘 맞는 ${GN(c)}가 없어서 기준 옷이 없어졌어요`) }
+    if (c.base) { ensureBases(); const nx = baseOf(c); toast(nx ? `${nx.name} ${nx.size}이 기준 옷을 이어받았어요` : `잘 맞는 ${josa(GN(c), '이', '가')} 없어서 기준 옷이 없어졌어요`) }
     else toast('삭제했어요');
   },
   reg(x) { const [cat, from] = x.split('|'); startReg(cat || null, from) },
@@ -1613,7 +1626,7 @@ const A = {
   regLater() { const from = (S.reg || {}).from; nav = nav.filter((e) => e.s !== 'regFit'); toast(`대기 목록에 ${S.pending.length}벌 남겨 둘게요 · 다음에 이어서 해요`); if (!nav.length) nav = [{ s: 'closet', p: {} }]; render(true) },
   regSave() {
     const n = S.pending.length; let baseMsg = '';
-    for (const c of S.pending) { if (c.base) { S.closet.forEach((x) => { if (x.cat === c.cat && grpOf(x) === grpOf(c)) x.base = false; }); baseMsg = `${c.name} ${c.size}을 ${GN(c)} 기준 옷으로 정했어요. 옷 보기에서 바꿀 수 있어요` } S.closet.push(c) }
+    for (const c of S.pending) { if (c.base) { S.closet.forEach((x) => { if (x.cat === c.cat && subOf(x) === subOf(c)) x.base = false; }); baseMsg = `${c.name} ${c.size}을 ${GN(c)} 기준 옷으로 정했어요. 옷 보기에서 바꿀 수 있어요` } S.closet.push(c) }
     S.pending = [];
     nav = nav.filter((e) => e.s !== 'regFit'); go('regDone', { n, baseMsg });
     if (!S.firstReg) { S.firstReg = true; S.coupons.unshift({ t: '첫 옷 등록 10% 쿠폰', d: '모든 상품 · 11월 15일까지', used: false }); modal(`<div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:var(--fitw);color:var(--fit);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800">10%</div><h4>첫 등록 쿠폰을 받았어요</h4><p>쿠폰함에서 확인할 수 있어요</p></div><div class="mb"><button class="btn" data-a="closeOv">확인</button></div>`); S.ov.node = '④ 옷 등록 · 첫 등록? → 예 · 첫 등록 쿠폰 지급'; render() }
@@ -1661,28 +1674,12 @@ const A = {
   rackTap(x) { if (Date.now() - dragEnd < 300) return; const [k, i, id] = x.split('|'), box = app.querySelector(`.rkbox[data-rack="${k}"]`); if (+i === S.rack[k]) A.item(id); else box.rackTo(+i) },
   editCat(k) {
     const d = syncEdit(), c = S.closet.find((q) => q.id === cur().p.id); if (k === d.cat) { render(); return }
-    modal(`<h4>종류를 바꿀까요?</h4><p>${CAT[d.cat]} → ${CAT[k]}. 치수 항목이 달라져서 치수를 다시 적어야 해요${c.base ? `. 지금 ${CAT[c.cat]} 기준 옷이라 저장하면 같은 종류의 다른 잘 맞는 옷이 기준을 이어받아요` : c.subBase ? `. ${c.sub} 따로 기준에서도 빠져요` : ''}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="editCatOk" data-x="${k}">바꾸기</button></div>`);
+    modal(`<h4>종류를 바꿀까요?</h4><p>${CAT[d.cat]} → ${CAT[k]}. 치수 항목이 달라져서 치수를 다시 적어야 해요${c.base ? `. 지금 ${GN(c)} 기준 옷이라 저장하면 같은 세부 종류의 다른 잘 맞는 옷이 기준을 이어받아요` : ''}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="editCatOk" data-x="${k}">바꾸기</button></div>`);
     S.ov.node = '⑤ 정보 수정 · 종류를 바꾸나? → 치수 항목 바뀜 · 기준 옷이면 해제 안내'; render();
   },
   editCatOk(k) { const d = cur().p.d; Object.assign(d, { cat: k, sub: null, size: null, m: partsOf({ cat: k }).map(() => '') }); closeOv(); render() },
   editSub(x) { const d = syncEdit(), was = partsOf(d); d.sub = x || null; const now = partsOf(d); if (was.join() !== now.join()) d.m = remapM(was, d.m, now); /* 그룹이 바뀌면 같은 부위 값만 옮김 */ render() },
   editSize(x) { syncEdit().size = x; render() },
-  setSubBase(id) {
-    const c = S.closet.find((q) => q.id === id), old = subBaseOf(c.cat, c.sub), cb = baseOf(c), L = GN(c);
-    if (old) { // 이미 있는 세부 기준을 바꿀 때만 비교표
-      compareSheet(c, old, 'setSubBaseOk', `${c.sub} 기준 옷 변경`, c.sub);
-      S.ov.node = '⑤ 세부 종류 기준 옷 바꾸기 → 정말 바꿀까요? · 지금 세부 기준과 비교'; render(); return;
-    }
-    // 처음 정할 때: 비교표 없이 이 옷(새 세부 기준)과 그대로인 종류 기준 옷을 카드로 (시안 477:1169)
-    const card = (item, who, on) => `<div class="csh-card ${on ? 'on' : ''}"><div class="ci">${cutPic(item)}</div><small>${who}</small><b>${item.name}</b></div>`;
-    sheet(`<div class="grab"></div><div class="csh-t">${c.sub} 기준 옷을 따로 정할까요?</div>
-      <div class="csh-d">${c.sub} 상품만 이 옷과 비교해서 사이즈를 추천해요.<br>${L} 기준 옷은 바뀌지 않아요</div>
-      <div class="csh-cards">${card(c, `${c.sub} 기준 옷`, true)}${cb ? card(cb, `다른 ${L} 상품`, false) : ''}</div>
-      <div class="mb" style="margin-top:20px"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="setSubBaseOk" data-x="${c.id}">정하기</button></div>`);
-    S.ov.node = '⑤ 세부 종류 기준 옷 처음 정하기 → 이 세부 종류만 따로 · 종류 기준 옷은 그대로'; render();
-  },
-  setSubBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = subBaseOf(c.cat, c.sub); if (old) old.subBase = false; c.subBase = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${c.sub} 상품은 이제 ${c.name} ${c.size}과 비교해요`); render() },
-  unsetSub(id) { const c = S.closet.find((q) => q.id === id); c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); toast(`${GN(c)} 기준으로 되돌렸어요 · ${c.sub}도 ${GN(c)} 기준 옷과 비교해요`); render() },
   photoAdd(x) {
     const [id, ctx] = x.split('|'), has = ctx === 'edit' ? syncEdit().img : S.closet.find((q) => q.id === id).img;
     sheet(`<div class="grab"></div><div style="font-size:18px;font-weight:800">사진 ${has ? '바꾸기' : '추가'}</div><div style="font-size:13px;color:var(--sub);margin-top:4px">사진이 없어도 치수 비교는 그대로 돼요</div><div style="margin-top:14px">
@@ -1716,8 +1713,6 @@ const A = {
   rankPeriod(x) { replace('home', Object.assign({}, cur().p, { rp: x })) },
   saleMin(x) { saveY(); cur().p.sm = +x; render() },
   coupon() { if (S.cpGot) return; const give = () => { closeOv(); S.cpGot = true; toast('쿠폰을 받았어요'); render() }; if (!S.user) { need('로그인하면 쿠폰을 받을 수 있어요', give); return } give() },
-  simOpen() { S.simDD = !S.simDD; saveY(); render() },
-  simPick(id) { S.simB = id; S.simDD = false; saveY(); render() },
 };
 Object.assign(A, {
   revAll(x) { const [id, m] = x.split('|'); go('reviews', { id, mine: m === 'mine' }) },
@@ -1729,37 +1724,17 @@ Object.assign(A, {
 });
 /* ── DANGJANG 브랜드 · 홈 디자인 (2026-10-26 피그마 login · home_01 · home_02) ── */
 const LOGO = (c = '#06BC51', w = 112) => `<svg class="logo" width="${w}" height="${w * 22 / 112}" viewBox="0 0 112 22" fill="${c}" role="img" aria-label="DANGJANG"><path d="M107.213 14.0809H105.625V10.2151H112V17.1267C112 20.7114 109.081 22 105.509 22C101.936 22 98.9003 20.7114 98.9003 17.1267V4.87327C98.9003 1.28861 101.819 0 105.392 0C108.964 0 111.883 1.28861 111.883 4.87327V7.28648H106.98V5.64643C106.98 4.7327 106.302 4.24068 105.392 4.24068C104.481 4.24068 103.804 4.7327 103.804 5.64643V16.3536C103.804 17.2673 104.598 17.7593 105.509 17.7593C106.419 17.7593 107.213 17.2673 107.213 16.3536V14.0809Z"/><path d="M92.8378 0.468583H97.5079V21.5314H92.8378L89.0783 10.8711V21.5314H84.4082V0.468583H89.0783L92.8378 11.2226V0.468583Z"/><path d="M78.4728 17.9936H74.9469L74.5032 21.5314H69.6229L72.5884 0.468583H80.8546L83.8668 21.5314H78.9398L78.4728 17.9936ZM77.9358 13.7764L76.7215 4.14697L75.4839 13.7764H77.9358Z"/><path d="M64.1814 16.3067V0.468583H69.085V17.1267C69.085 20.7114 66.2829 22 62.7103 22C59.161 22 56.6858 20.7114 56.6858 17.1267V13.9638H61.7062V16.3067C61.7062 17.2204 62.0331 17.7593 62.9438 17.7593C63.8544 17.7593 64.1814 17.2204 64.1814 16.3067Z"/><path d="M50.9907 14.0809H49.4029V10.2151H55.7776V17.1267C55.7776 20.7114 52.8588 22 49.2861 22C45.7135 22 42.6779 20.7114 42.6779 17.1267V4.87327C42.6779 1.2886 45.5967 0 49.1694 0C52.742 0 55.6609 1.2886 55.6609 4.87327V7.28647H50.7572V5.64643C50.7572 4.73269 50.0801 4.24068 49.1694 4.24068C48.2587 4.24068 47.5815 4.73269 47.5815 5.64643V16.3536C47.5815 17.2673 48.3755 17.7593 49.2861 17.7593C50.1968 17.7593 50.9907 17.2673 50.9907 16.3536V14.0809Z"/><path d="M36.6155 0.468583H41.2856V21.5314H36.6155L32.856 10.8711V21.5314H28.1859V0.468583H32.856L36.6155 11.2226V0.468583Z"/><path d="M22.2499 17.9936H18.7239L18.2803 21.5314H13.4L16.3655 0.468583H24.6317L27.6439 21.5314H22.7169L22.2499 17.9936ZM21.7128 13.7764L20.4986 4.14696L19.261 13.7764H21.7128Z"/><path d="M12.983 5.15442V16.8456C12.983 20.0554 11.3718 21.5314 8.31284 21.5314H0V0.468583H8.31284C11.3718 0.468583 12.983 1.94462 12.983 5.15442ZM8.19608 15.6038V6.41959C8.19608 5.41214 7.89252 4.80298 6.77169 4.80298H4.90364V17.2204H6.77169C7.89252 17.2204 8.19608 16.6113 8.19608 15.6038Z"/></svg>`;
-const ICO_INFO = '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#C4C4C4"/><path d="M8 4v5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.6" r="1" fill="#fff"/></svg>';
 const ICO_UP = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>';
-// 홈 추천: 내 옷장 기준 옷과 실측이 가까운 랭킹 상품 (home_01 · home_02)
-function simFit() {
-  const bases = S.closet.filter((c) => c.base); if (!bases.length) return '';
-  const b = bases.find((c) => c.id === S.simB) || bases[0], open = !!S.simDD;
-  const rank = P.slice().sort((x, y) => y.rev - x.rev).map((x) => x.id), owned = S.closet.map((c) => c.pid);
-  const same = (x) => b.sub ? x.sub === b.sub : x.cat === b.cat; // 같은 2뎁스끼리, 기준 옷에 2뎁스가 없으면 같은 1뎁스
-  const items = rank.map((id) => PB[id]).filter((x) => x.sizes && !owned.includes(x.id) && x.cat === b.cat && grpOf(x) === grpOf(b) && same(x)).map((x) => {
-    const best = Object.keys(x.sizes).map((k) => ({ k, pct: simPct(x, b, k) })).sort((m, n) => n.pct - m.pct)[0];
-    return { x, k: best.k, pct: best.pct };
-  }).filter((e) => e.pct >= 70);
-  const row = (c) => `<span class="simpic">${cutPic(c)}</span><span class="simtx"><b>${c.name}</b><small>${CAT[c.cat]} · ${c.size} Size</small></span>`;
-  return `<div class="sec simsec"><h3>${S.user.name}님 옷장 기준으로 골랐어요</h3><button class="simi" data-a="simTip">랭킹 상품 기준${ICO_INFO}</button>
-    ${S.simTip ? `<div class="simtip" role="tooltip">비교할 내 옷을 고르면 랭킹 상품 중<br>실측이 가까운 상품을 보여드려요.<button data-a="simTip" aria-label="닫기"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.8 8L0 7.2L3.2 4L0 0.8L0.8 0L4 3.2L7.2 0L8 0.8L4.8 4L8 7.2L7.2 8L4 4.8L0.8 8Z" fill="white"/></svg></button></div>` : ''}</div>
-  <div class="simdd ${open ? 'open' : ''}"><button class="simbox" data-a="simOpen" aria-expanded="${open}">${row(b)}<span class="simarr">${I.down}</span></button>
-    ${open ? `<div class="simlist" role="listbox">${bases.map((c) => `<button class="simopt ${c.id === b.id ? 'on' : ''}" role="option" aria-selected="${c.id === b.id}" data-a="simPick" data-x="${c.id}">${row(c)}${c.id === b.id ? `<span class="simchk">${I.check}</span>` : ''}</button>`).join('')}</div>` : ''}</div>
-  ${items.length ? `<div class="hscroll">${items.map(({ x, k, pct }) => `<button class="card pcard" data-a="detail" data-x="${x.id}"><div class="img"><img src="${IMG[x.img]}" alt=""></div>${cardBody(x)}<span class="szchip">${CAT[x.cat]} · ${k} Size</span><div class="pfit">${pct}% 비슷해요</div></button>`).join('')}${items.length > 6 ? `<button class="pmore" data-a="homeTab" data-x="랭킹">전체보기${I.chev}</button>` : ''}</div>`
-    : `<div class="simnone">아직 이 옷과 실측이 가까운 ${b.sub || CAT[b.cat]} 랭킹 상품이 없어요</div>`}`;
-}
 // 홈을 내리면 검색창 대신 헤더 돋보기 · 맨 위로 버튼 (home_02)
 document.addEventListener('scroll', (e) => { const b = e.target; if (b.classList && b.classList.contains('body')) b.parentElement.classList.toggle('scrolled', b.scrollTop > 120) }, true);
 Object.assign(A, {
-  simTip() { S.simTip = !S.simTip; render() },
   toTop() { const b = document.querySelector('#view .body'); if (b) b.scrollTo({ top: 0, behavior: 'smooth' }) },
 });
 /* ── 구매 이후 (2026-10-26 팀 결정) ──
    옷장에는 본인에게 잘 맞는 옷만 등록해요. 그래서 산 옷을 '핏 기다리는 옷'으로 옷장에 미리 담지 않아요.
    주문 → 배송 완료 → 입어 보고 구매 확정 → "옷장에 담을까요?" (담지 않았으면 구매 내역에서 나중에 담기) */
 const ordOf = (id) => S.orders.find((o) => o.id === id);
-const ordStat = (o) => o.returned ? '반품 신청됨' : o.confirmed ? '구매 확정' : o.delivered ? '배송 완료' : '배송 중';
+const ordStat = (o) => slot('order.stat', o) || (o.returned ? '반품 신청됨' : o.confirmed ? '구매 확정' : o.delivered ? '배송 완료' : '배송 중');
 const inCloset = (o) => o.cid && S.closet.some((c) => c.id === o.cid);
 function dlvCard() { // 홈 추천 탭: 배송 완료됐지만 아직 구매 확정 안 한 주문
   const o = S.orders.find((q) => q.delivered && !q.confirmed && !q.returned); if (!o) return '';
@@ -1792,7 +1767,7 @@ SCR.orders = () => ({ node: '⑥ 마이 · 주문 내역 → 구매 확정 · �
       : inCloset(o) ? `<button class="btn line" style="height:42px;font-size:13.5px;grid-column:1/-1" data-a="item" data-x="${o.cid}">내 옷장에서 보기</button>` : `<button class="btn" style="height:42px;font-size:13.5px;grid-column:1/-1" data-a="ordAdd" data-x="${o.id}">${I.plus} 내 옷장에 담기</button>`;
     return `<div style="padding:16px;border-bottom:8px solid var(--gray)"><div style="font-size:13px;color:var(--sub)">2026.10.11 주문</div><div style="font-weight:800;font-size:15px;margin-top:4px">${ordStat(o)}</div><div style="display:flex;gap:12px;margin-top:10px"><div class="img" style="width:60px;height:72px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="min-width:0"><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub)">${o.color ? o.color + ' / ' : '사이즈 '}${o.size}</div><div class="price" style="margin-top:4px">${won(sale(p))}원</div></div></div>
     ${o.confirmed && !inCloset(o) ? '<div style="font-size:12.5px;color:var(--sub);margin-top:10px">잘 맞는 옷만 옷장에 담아 두면 다른 상품을 볼 때 이 옷과 사이즈를 비교해요</div>' : ''}
-    ${acts ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px">${acts}</div>` : ''}</div>` }).join('') : `<div class="empty"><div class="big">${I.box}</div><h4>주문 내역이 없어요</h4></div>`}` });
+    ${acts ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px">${acts}</div>` : ''}${slot('order.card', o)}</div>` }).join('') : `<div class="empty"><div class="big">${I.box}</div><h4>주문 내역이 없어요</h4></div>`}` });
 SCR.notis = () => { S.notis.forEach((n) => n.read = true); return { node: '알림 목록', body: `${hdrBack('알림')}${S.notis.length ? S.notis.map((n) => `<button class="li" style="height:auto;padding:14px 16px;align-items:flex-start;gap:12px" data-a="confirmStart" data-x="${n.oid}"><div style="flex:1"><div style="font-size:14.5px;font-weight:700">${n.t}</div><div style="font-size:13px;color:var(--ink2);margin-top:2px">${n.b}</div><div class="meta">방금</div></div></button>`).join('') : `<div class="empty"><div class="big">${I.bell}</div><h4>새 알림이 없어요</h4></div>`}` } };
 Object.assign(A, {
   confirmStart(id) { // 홈 카드 · 알림 · 주문 내역에서
@@ -1810,7 +1785,7 @@ Object.assign(A, {
   ordLater() { closeOv(); toast('구매를 확정했어요 · 주문 내역에서 언제든 옷장에 담을 수 있어요'); render() },
   ordAdd(id) { const o = ordOf(id); closeOv(); if (!o || inCloset(o)) { render(); return } toast(addToCloset(o)); render() },
   orderReturn(id) {
-    const o = ordOf(id); closeOv();
+    const o = ordOf(id); closeOv(); if (slot('order.return', o)) { render(); return } // 신기능이 신청 흐름을 맡으면 완료본 모달은 안 띄움
     modal(`<h4>반품 · 교환을 신청할까요?</h4><p>${PB[o.pid].name} ${o.size}. 회수 기사님이 방문해요</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="orderReturnOk" data-x="${o.id}">신청하기</button></div>`);
     S.ov.node = '⑥ 주문 내역 · 반품 · 교환 신청'; render();
   },
@@ -1835,7 +1810,7 @@ document.getElementById('page').addEventListener('click', (e) => {
   const el = e.target.closest('[data-d]'); if (!el) return; const d = el.dataset.d;
   if (d === 'toggle') { document.getElementById('demo').classList.toggle('open'); return }
   if (d.startsWith('p:')) { reset(d.slice(2)); render(true); homePopupCheck(); render(); return }
-  if (d === 'restart') { reset(S.preset); nav = [{ s: 'splash', p: {} }]; render(true); setTimeout(() => { if (cur().s === 'splash') A.splashGo() }, 1600); return }
+  if (d === 'restart') { reset(S.preset); S.obSeen = false; nav = [{ s: 'splash', p: {} }]; render(true); setTimeout(() => { if (cur().s === 'splash') A.splashGo() }, 1600); return }
   if (d === 'failpay') { S.failNext = !S.failNext; render(); return }
   if (d === 'popup') { S.popupSeen = false; tab('home'); homePopupCheck(); render(); return }
   if (d === 'deliver') { demoDeliver(); return }
@@ -1870,7 +1845,6 @@ function focusGo(f) {
   if (f === 'home') tab('closet');
   else if (f === 'item') at(b);
   else if (f === 'baseChange') { at(other); A.setBase(other.id) }
-  else if (f === 'sub') { const k = S.closet.find((c) => c.cat === 'top' && c.fit === 'good' && !c.base && c.sub && !c.subBase) || other; at(k); A.setSubBase(k.id) }
   else if (f === 'edit') { at(b); go('edit', { id: b.id }) }
   else if (f === 'editCat') { at(b); go('edit', { id: b.id }); A.editCat('bottom') }
   else if (f === 'photo') { let c = S.closet.find((q) => !q.img); if (!c) { c = scenario('nophoto') } at(c); A.photoAdd(c.id + '|item') }
