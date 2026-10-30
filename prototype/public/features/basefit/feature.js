@@ -47,6 +47,7 @@ function rankBase(list, p) {
 }
 DJ.feature({
   id: 'basefit', issue: 17, name: '내 옷 기준 추천', proposal: 'docs/proposals/내-옷-기준-추천.md',
+  onboard: [["홈에서 바로 추천", "내 옷과 실측이 가까운<br>랭킹 상품을 골라드려요", "비교할 내 옷을 바꾸면 상품도 바로 바뀌어요.<br>품절 사이즈는 빼고 보여 드려요.", 282, "features/basefit/onboard.webp"]],
   actions: {
     simOpen() { S.simDD = !S.simDD; saveY(); render() },
     simPick(id) { S.simB = id; S.simDD = false; saveY(); render() },

@@ -7,7 +7,7 @@ const port = +process.argv[2] || +process.env.PORT || 8792;
 fs.rmSync(path.join(PUB, 'design-system'), { recursive: true, force: true }); fs.cpSync(path.join(ROOT, '..', 'design-system'), path.join(PUB, 'design-system'), { recursive: true });
 // vercel.json 과 같은 헤더 (카메라 허용 + 교차 출처 격리: AI 옷 분할이 여러 코어를 씀)
 const HEAD = { 'permissions-policy': 'camera=(self)', 'cross-origin-opener-policy': 'same-origin', 'cross-origin-embedder-policy': 'credentialless' };
-const TYPE = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.css': 'text/css' };
+const TYPE = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.css': 'text/css' };
 http.createServer(async (req, res) => {
   const u = new URL(req.url, `http://127.0.0.1:${port}`);
   try {

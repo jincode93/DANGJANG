@@ -514,6 +514,7 @@ function sampleBooks(n) {
 }
 DJ.feature({
   id: 'codibook', issue: 15, name: '코디북', proposal: 'docs/proposals/패션북.md',
+  onboard: [["나만의 코디북", "옷장 옷으로 코디하고<br>친구에게 공유해요", "등록한 옷을 골라 한 장에 놓아 보세요.<br>사려는 상품도 같이 놓아 보면<br>가진 옷과 어울리는지 미리 알 수 있어요.", 282, "features/codibook/onboard.webp"]],
   screens: SCRX, actions: AX,
   slots: {
     'closet.top': () => bookBanner(),

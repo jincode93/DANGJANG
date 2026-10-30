@@ -373,6 +373,13 @@ function navBar(on) {
 
 /* ── 화면 ── */
 const SCR = {};
+// 온보딩 (피그마 TeamProject 로그인/온보딩 · onboarding 01~04). 카드 그림은 디자이너 제공 이미지(1127×2000, 4배)
+// 신기능 장(내 옷 기준 추천 · 코디북)은 그 기능을 켤 때만 뒤에 붙음 (features.js onboard)
+const OB = [["옷장에 기준 옷 등록", "지금 제일 잘 맞는 옷<br>한 벌이면 충분해요", "5가지 방법 중 편한 걸로 등록해요.<br>종류마다 처음 담은 옷이 기준 옷이 되고,<br>내 옷장에서 언제든 바꿀 수 있어요.", 282, "onboard/1.webp"], ["상품 상세에서 내 옷과 비교", "사기 전에 어디가<br>크고 작은지 알려드려요", "기준 옷과 부위별로 겹쳐 보여 주고,<br>차이가 가장 작은 사이즈를 추천해 드려요", 282, "onboard/2.webp"]];
+const obList = () => OB.concat(DJ.onboard());
+SCR.onboard = (pp) => { const L = obList(), i = Math.min(pp.i || 0, L.length - 1), [lb, t, d, wd, img] = L[i]; return { node: `앱 처음 실행 · 온보딩 ${i + 1}/${L.length} · ${lb}`, full: true,
+  body: `<div class="ob"><div class="ob-top"><span class="ob-dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</span><button class="ob-skip" data-a="obDone">건너뛰기</button></div>
+  <div class="ob-lb">${lb}</div><h2 class="ob-t">${t}</h2><p class="ob-d">${d}</p><img class="ob-card" src="${img}" style="width:${wd}px" alt=""><div class="ob-foot">${i ? `<button class="ob-prev" data-a="obPrev">이전</button>` : ''}<button class="ob-next" data-a="obNext">${i === L.length - 1 ? '완료' : '다음'}</button></div></div>` }; };
 SCR.splash = () => ({ node: '앱 실행 · 스플래시 → 업데이트 · 연결 · 로그인 확인', full: true, body: `
   <div style="position:absolute;inset:0;background:var(--g);display:flex;align-items:center;justify-content:center" data-a="splashGo">${LG_LOGO}</div>` });
 function regCard() {
@@ -1406,7 +1413,10 @@ document.addEventListener('pointerdown', (e) => {
 document.addEventListener('click', (e) => { if (e.detail === 0 && e.target.closest && e.target.closest('.pd-grab')) { closeOv(); render(); } });
 const A = {
   noop() {}, back, closeOv() { closeOv(); S.after = null; render() },
-  splashGo() { replace('home'); homePopupCheck(); render() },
+  splashGo() { if (!S.user && !S.obSeen) { S.obSeen = true; replace('onboard', { i: 0 }); return } A.obDone() },
+  obPrev() { const i = cur().p.i || 0; if (i > 0) replace('onboard', { i: i - 1 }) },
+  obNext() { const i = cur().p.i || 0; if (i < obList().length - 1) replace('onboard', { i: i + 1 }); else A.obDone() },
+  obDone() { replace('home'); homePopupCheck(); render() }, // 비회원도 쓰므로 로그인이 아니라 홈으로
   tab(s) {
     if (s === 'closet' && !S.user) { tab('closet'); need('옷장은 로그인하면 쓸 수 있어요', () => { closeOv(); tab('closet') }); return }
     tab(s); if (s === 'home') { homePopupCheck(); render() }
@@ -1800,7 +1810,7 @@ document.getElementById('page').addEventListener('click', (e) => {
   const el = e.target.closest('[data-d]'); if (!el) return; const d = el.dataset.d;
   if (d === 'toggle') { document.getElementById('demo').classList.toggle('open'); return }
   if (d.startsWith('p:')) { reset(d.slice(2)); render(true); homePopupCheck(); render(); return }
-  if (d === 'restart') { reset(S.preset); nav = [{ s: 'splash', p: {} }]; render(true); setTimeout(() => { if (cur().s === 'splash') A.splashGo() }, 1600); return }
+  if (d === 'restart') { reset(S.preset); S.obSeen = false; nav = [{ s: 'splash', p: {} }]; render(true); setTimeout(() => { if (cur().s === 'splash') A.splashGo() }, 1600); return }
   if (d === 'failpay') { S.failNext = !S.failNext; render(); return }
   if (d === 'popup') { S.popupSeen = false; tab('home'); homePopupCheck(); render(); return }
   if (d === 'deliver') { demoDeliver(); return }
