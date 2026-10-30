@@ -38,7 +38,7 @@
 .cf-ptabs { padding:12px 20px 4px } .cf-ptabs button small { font-weight:500; opacity:.75 }
 .cf-row { margin-top:12px } .cf-rowh { padding:0 20px 8px; font-size:14px; font-weight:800 } .cf-rowh small { font-weight:500; font-size:12px; color:var(--sub); margin-left:4px }
 .cf-mine > button { position:relative }
-.cf-on { position:absolute; left:4px; top:4px; font-size:10px; font-weight:700; color:#fff; background:var(--ink); border-radius:4px; padding:1px 5px; font-style:normal }
+.cf-on { position:absolute; right:5px; top:5px; width:20px; height:20px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #fff }
 .cf-prods { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:0 20px 2px; align-items:flex-start } .cf-prods::-webkit-scrollbar { display:none }
 .cf-pc { flex:none; width:104px; display:flex; flex-direction:column; gap:2px; text-align:left; background:var(--bg) }
 .cf-pc .img { position:relative; width:104px; height:124px; border-radius:8px; overflow:hidden; background:var(--gray); border:2px solid transparent; margin-bottom:3px } .cf-pc.on .img { border-color:var(--ink) }
@@ -56,7 +56,7 @@
 .cf-floor { position:relative; margin:8px 20px 0; width:350px; border-radius:14px; background:var(--floor); overflow:hidden }
 .cf-it { position:absolute; transform:translateX(-50%); display:block; padding:0; border:0; background:none }
 .cf-it img { height:100%; width:auto; max-width:none; display:block; filter:drop-shadow(0 6px 7px rgba(40,32,20,.28)) }
-.cf-it.ph img { border-radius:8px; filter:none; box-shadow:0 6px 14px rgba(40,32,20,.28) }
+.cf-it.ph img { aspect-ratio:4 / 5; width:auto; object-fit:cover; object-position:center top; border-radius:8px; filter:none; box-shadow:0 6px 14px rgba(40,32,20,.28); background:#f6f6f6 } /* 누끼를 못 딴 사진은 4:5 박스로 같은 모양 */
 .cf-card small.cf-incart { color:var(--fit); font-weight:600 }
 button.cf-it:focus-visible, .cf-slot:focus-visible { outline:2px solid #fff; outline-offset:3px; border-radius:6px }
 .cf-floor.live .cf-it { cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none }
@@ -125,3 +125,127 @@ button.cf-it:focus-visible, .cf-slot:focus-visible { outline:2px solid #fff; out
 .cf-th { width:62px; height:72px; border-radius:8px; background:var(--floor); display:flex; align-items:center; justify-content:center; flex:none }
 .cf-th img { max-width:54px; max-height:66px; object-fit:contain }
 .toast button.tl { color:#9DB4FF; font-weight:700; margin-left:8px; white-space:nowrap }
+/* 2차: 고른 옷 '맨 뒤로 · 빼기' 바 · 주문 시트의 '이 코디도 저장' */
+.cf-keep { display:flex; align-items:center; gap:8px; width:100%; margin:0 0 10px; font-size:14px; font-weight:600; color:var(--ink) }
+/* 2차: 고른 옷 아래 '비슷한 상품' 줄 */
+.cf-sim { margin:8px 0 0 } .cf-simh { padding:0 20px 8px; display:flex; align-items:baseline; gap:8px } .cf-simh b { font-size:14px } .cf-simh small { font-size:12px; color:var(--sub); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.cf-empty { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:0 40px; text-align:center; font-size:13.5px; color:rgba(255,255,255,.9); pointer-events:none } .cf-floor.lt .cf-empty { color:rgba(0,0,0,.45) }
+/* 비슷한 상품: 아래 상품 줄보다 작게 */
+.cf-sims { gap:6px }
+.cf-sc { flex:none; width:68px; display:flex; flex-direction:column; gap:1px; text-align:left; background:var(--bg) }
+.cf-sc .img { position:relative; width:68px; height:85px; border-radius:6px; overflow:hidden; background:var(--gray); border:2px solid transparent; margin-bottom:2px } .cf-sc.on .img { border-color:var(--ink) }
+.cf-sc .img img { width:100%; height:100%; object-fit:cover }
+.cf-sc .rk { position:absolute; left:0; top:0; right:auto; bottom:auto; width:auto; min-width:18px; height:18px; padding:0 4px; border-bottom-right-radius:6px; background:rgba(0,0,0,.72); color:#fff; font-size:10.5px; font-weight:800; display:flex; align-items:center; justify-content:center }
+.cf-sc .cf-on { right:3px; top:3px; width:16px; height:16px } .cf-sc .cf-on svg { width:10px; height:10px }
+.cf-sc b { font-size:11px; font-weight:600; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.cf-sc .pr { font-size:11.5px; font-weight:800 }
+.cf-sc .why { display:flex; gap:3px; margin-top:1px } .cf-sc .why i { font-style:normal; font-size:10px; font-weight:600; padding:0 4px; border-radius:4px; background:var(--fitw); color:var(--fit); white-space:nowrap } .cf-sc .why i.g { background:var(--gray); color:var(--ink2) }
+
+/* 바닥에서 고른 옷 카드: 아래 목록 자리에 올라와요 */
+.cf-ocard { margin:10px 12px 0; padding:12px 0 14px; border-radius:16px; background:var(--bg); box-shadow:0 -2px 16px rgba(0,0,0,.08), 0 0 0 1px #ECECEC }
+.cf-ocard.in { animation:cfUp .22s ease-out } @keyframes cfUp { from { transform:translateY(24px); opacity:0 } to { transform:none; opacity:1 } }
+.cf-och { display:flex; align-items:center; gap:10px; padding:0 12px 0 14px }
+.cf-och .th { width:44px; height:52px; border-radius:8px; background:var(--floor); display:flex; align-items:center; justify-content:center; overflow:hidden; flex:none } .cf-och .th img { max-width:40px; max-height:48px; object-fit:contain }
+.cf-och .nm { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px } .cf-och small { font-size:11.5px; color:var(--sub) } .cf-och b { font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap } .cf-och .num { font-size:12.5px; color:var(--ink2); font-weight:600 }
+.cf-och .x { width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:var(--sub); flex:none }
+.cf-oca { display:flex; gap:6px; padding:10px 14px 12px; border-bottom:1px solid #F0F0F0; margin-bottom:10px }
+.cf-oca button { height:30px; padding:0 12px; border-radius:15px; border:1px solid #D6D6D6; background:#fff; font-size:12px; font-weight:700; color:var(--ink) }
+.cf-ocard .cf-simh { padding:0 14px 8px } .cf-ocard .cf-prods { padding:0 14px 2px } .cf-ocard .cf-recnone { margin:0 14px }
+.cf-olist { display:flex; align-items:center; gap:8px; padding:0 14px 10px; margin-bottom:10px; border-bottom:1px solid #F0F0F0 } .cf-olist small { flex:none; font-size:11.5px; font-weight:700; color:var(--sub) }
+.cf-olist div { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none } .cf-olist div::-webkit-scrollbar { display:none }
+.cf-olist button { flex:none; width:34px; height:40px; border-radius:7px; background:var(--floor); border:2px solid transparent; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:0 } .cf-olist button.on { border-color:var(--ink) } .cf-olist img { max-width:28px; max-height:34px; object-fit:contain }
+.cf-x { position:absolute; right:-7px; top:-7px; width:20px; height:20px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #fff; cursor:pointer; z-index:2 }
+.cf-it.sel img { outline:2px dashed rgba(17,17,17,.55); outline-offset:3px; border-radius:4px }
+.cf-it .cf-x { width:24px; height:24px; right:-10px; top:-10px }
+.cf-olist button { position:relative; overflow:visible; margin-top:6px } .cf-olist button > img { border-radius:5px }
+.cf-olist div { padding:0 8px 0 0 }
+.cf-olist .cf-x { width:16px; height:16px; right:-6px; top:-6px; box-shadow:0 0 0 1.5px #fff } .cf-olist .cf-x svg { width:8px; height:8px }
+.toast .cf-undo { float:right; margin-left:12px; color:#7CE29A; font-weight:700; font-size:14px; background:none; border:0; padding:0 }
+/* ── 편집 화면: 위 도구 · 화면 폭 바닥 · 아래 서랍 ── */
+.cf-ed { display:flex; flex-direction:column; min-height:100% }
+.cf-tb { display:flex; align-items:center; gap:2px; height:48px; padding:0 8px 0 4px; flex:none }
+.cf-tb .bk { width:40px; height:40px; display:flex; align-items:center; justify-content:center }
+.cf-tb .t { flex:1; min-width:0; display:flex; align-items:center; gap:6px; font-size:16px; font-weight:800 }
+.cf-tbi { width:38px; height:38px; border-radius:19px; display:flex; align-items:center; justify-content:center; color:var(--ink) } .cf-tbi.on { background:var(--gray) }
+.cf-tbi .aa { font-size:17px; font-weight:800; letter-spacing:-.04em }
+.cf-ed .cf-bgs { margin:0 0 8px; padding:0 16px }
+.cf-stage { position:relative; flex:none; display:flex; justify-content:center; overflow:hidden }
+.cf-fw { flex:none; width:350px; height:438px; transform-origin:top center }
+.cf-fw .cf-floor { margin:0; border-radius:0 } .cf-fw.sm .cf-floor { border-radius:16px }
+.cf-dbar { position:absolute; left:50%; top:10px; transform:translateX(-50%); display:flex; align-items:center; gap:4px; padding:4px 4px 4px 12px; border-radius:20px; background:rgba(17,17,17,.82); color:#fff; font-size:12.5px; font-weight:700; z-index:6; white-space:nowrap }
+.cf-dbar button { height:28px; padding:0 11px; border-radius:14px; background:rgba(255,255,255,.16); color:#fff; font-size:12.5px; font-weight:700 } .cf-dbar button:last-child { background:#fff; color:var(--ink) }
+/* 바닥 위: 크기 · 회전 · 손잡이 · 휴지통 */
+.cf-it { transform:translateX(-50%) rotate(var(--r,0deg)) scale(var(--s,1)); transform-origin:center }
+.cf-deco { transform:translate(-50%, -50%) rotate(var(--r,0deg)) scale(var(--s,1)); white-space:nowrap; line-height:1 }
+.cf-deco .tx { display:block; font-size:22px; font-weight:800; letter-spacing:-.03em; text-shadow:0 1px 6px rgba(0,0,0,.18) } .cf-deco .tx.box, .cf-tprev .tx.box { padding:5px 11px; border-radius:8px; text-shadow:none }
+.cf-deco .em { display:block; font-size:40px } .cf-deco .wd, .cf-stks .wd { display:block; font-size:16px; font-weight:800; background:#fff; color:#111; padding:5px 12px; border-radius:20px }
+.cf-it.sel > img, .cf-it.sel > .tx, .cf-it.sel > .em, .cf-it.sel > .wd { outline:2px dashed rgba(255,255,255,.95); outline-offset:4px; border-radius:6px }
+.cf-floor.lt .cf-it.sel > * { outline-color:rgba(17,17,17,.55) }
+.cf-it .cf-x, .cf-it .cf-rs { transform:scale(calc(1 / var(--s,1))) }
+.cf-rs { position:absolute; right:-11px; bottom:-11px; width:24px; height:24px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #fff; cursor:nwse-resize; z-index:2; touch-action:none }
+.cf-it.del { opacity:.45 }
+.cf-trash { position:absolute; left:50%; bottom:16px; width:48px; height:48px; margin-left:-24px; border-radius:50%; background:rgba(17,17,17,.5); display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(.8); transition:opacity .15s, transform .15s, background .15s; pointer-events:none; z-index:7 }
+.cf-floor.dragging .cf-trash { opacity:1; transform:none } .cf-trash.hot { background:#FF5A5F; transform:scale(1.18) !important }
+.cf-real { position:absolute; left:10px; top:10px; z-index:6; height:28px; padding:0 11px; border-radius:14px; background:rgba(17,17,17,.78); color:#fff; font-size:11.5px; font-weight:700 }
+.cf-hint2 { position:absolute; left:50%; bottom:76px; transform:translateX(-50%); width:max-content; max-width:300px; padding:8px 12px; border-radius:12px; background:rgba(17,17,17,.72); color:#fff; font-size:12px; font-weight:600; line-height:1.45; text-align:center; pointer-events:none; z-index:6 }
+/* 서랍 */
+.cf-drawer { flex:none; display:flex; flex-direction:column; background:var(--bg); border-radius:18px 18px 0 0; box-shadow:0 -6px 18px rgba(0,0,0,.07); margin-top:-14px; position:relative; z-index:8 }
+.cf-drawer.open { flex:1; min-height:0; margin-top:8px }
+.cf-dh { flex:none; height:34px; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:11.5px; font-weight:700; color:var(--sub) }
+.cf-dh i { width:36px; height:4px; border-radius:2px; background:#D9D9D9 }
+.cf-dc { flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; padding-bottom:14px } .cf-dc::-webkit-scrollbar { display:none }
+.cf-dc .cf-ocard { margin:0; padding-top:2px; border-radius:0; box-shadow:none }
+.cf-dc .cf-panel { margin-top:0; padding-top:0; border-top:0 } .cf-dc .cf-ptabs { padding-top:2px }
+.cf-dmini { padding:0 0 10px } .cf-dmini .cf-olist { border:0; margin:0; padding-bottom:6px } .cf-dmini small { display:block; padding:0 14px; font-size:11.5px; color:var(--sub) }
+.cf-tfnote { display:flex; align-items:center; gap:8px; margin:-2px 14px 12px; padding:8px 10px 8px 12px; border-radius:10px; background:#FFF4EC; font-size:12px; color:#B5440A } .cf-tfnote span { flex:1 }
+.cf-tfnote button { flex:none; height:28px; padding:0 10px; border-radius:14px; background:#fff; border:1px solid #F1D3BF; font-size:12px; font-weight:700; color:#B5440A }
+/* 글자 · 스티커 시트 */
+.cf-tin2 { width:100%; height:48px; margin-top:14px; padding:0 14px; border:1px solid var(--line); border-radius:10px; font-size:16px }
+.cf-tcs { display:flex; align-items:center; gap:10px } .cf-tcs button { width:30px; height:30px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.15) } .cf-tcs button.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink) }
+.cf-tcs .cf-tbx { width:auto; height:32px; padding:0 14px; border-radius:16px; box-shadow:none; border:1px solid var(--line); font-size:13px; font-weight:700; margin-left:auto } .cf-tcs .cf-tbx.on { background:var(--ink); color:#fff; border-color:var(--ink) }
+.cf-tprev { margin-top:14px; height:88px; border-radius:12px; display:flex; align-items:center; justify-content:center } .cf-tprev .tx { font-size:22px; font-weight:800 }
+.cf-stks { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:14px } .cf-stks button { height:64px; border-radius:12px; background:var(--gray); display:flex; align-items:center; justify-content:center } .cf-stks .em { font-size:32px }
+/* 공유 시트 */
+.cf-seg2 { display:flex; gap:6px; margin-top:12px } .cf-seg2 button { flex:1; height:36px; border-radius:18px; border:1px solid var(--line); font-size:13px; font-weight:700 } .cf-seg2 button.on { background:var(--ink); color:#fff; border-color:var(--ink) }
+.cf-shot { margin:12px auto 0; width:208px; aspect-ratio:4 / 5; border-radius:12px; overflow:hidden; background:var(--gray); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.12) } .cf-shot.st { width:160px; aspect-ratio:9 / 16 }
+.cf-shot img { width:100%; height:100%; object-fit:cover; display:block } .cf-shot span { font-size:12.5px; color:var(--sub) }
+.cf-shnote { margin-top:12px; padding:10px 12px; border-radius:10px; background:var(--gray); font-size:12px; line-height:1.5; color:var(--ink2) } .cf-shnote b { display:block; font-size:12.5px; color:var(--ink); margin-bottom:2px }
+.cf-shps { margin-top:10px } .cf-shps small { font-size:12px; color:var(--sub) } .cf-shps > div { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin-top:6px }
+.cf-shps span { flex:none; width:84px; display:flex; flex-direction:column; gap:1px } .cf-shps img { width:84px; height:100px; object-fit:cover; border-radius:8px; background:var(--gray) } .cf-shps b { font-size:11px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .cf-shps em { font-style:normal; font-size:11.5px; font-weight:800 }
+.cf-shsv { display:flex; align-items:center; gap:8px; margin-top:10px; padding:8px 10px 8px 12px; border-radius:10px; background:var(--fitw); font-size:12.5px; font-weight:600 } .cf-shsv span { flex:1 } .cf-shsv button { height:28px; padding:0 12px; border-radius:14px; background:var(--ink); color:#fff; font-size:12px; font-weight:700 }
+.cf-shbtn { display:flex; gap:8px; margin-top:14px } .cf-shbtn .btn { flex:1 } .cf-shbtn .btn[disabled] { opacity:.4 }
+.cf-shview { display:block; width:100%; margin-top:10px; height:36px; font-size:13px; font-weight:700; color:var(--sub) }
+.cf-shby { display:block; font-size:12px; color:var(--sub); margin-bottom:2px } .cf-shfl { display:flex; justify-content:center }
+
+/* ── v5: 바닥 크기 고정 · 아래 영역 늘 보임 · 상품 구분 · 꾸미기 손잡이 단정하게 ── */
+.cf-ed { height:100% } .cf-stage { flex:none } .cf-fw .cf-floor { border-radius:16px }
+.cf-dock { flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; padding:10px 0 14px; border-top:1px solid #F0F0F0; margin-top:10px } .cf-dock::-webkit-scrollbar { display:none }
+.cf-dock .cf-ocard { margin:0; padding-top:0; border-radius:0; box-shadow:none }
+.cf-dock .cf-panel { margin-top:4px; padding-top:0; border-top:0 } .cf-dock .cf-ptabs { padding-top:6px }
+.cf-tip { margin:0 14px 10px; padding:8px 10px; border-radius:8px; background:var(--gray); font-size:12px; color:var(--ink2); line-height:1.45 }
+/* 놓인 옷 줄: 내 옷 | 상품 */
+.cf-olist { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none } .cf-olist::-webkit-scrollbar { display:none }
+.cf-olist > div { overflow:visible } .cf-olist small.g { color:var(--fit) }
+.cf-olist .sep { flex:none; width:1px; height:28px; background:#E3E3E3; margin:6px 2px 0 }
+.cf-olist button.p { background:#fff; border-color:var(--fit) } .cf-olist button.p.on { border-color:var(--ink) }
+.cf-olist button em { position:absolute; left:-2px; right:-2px; bottom:-2px; height:12px; border-radius:0 0 7px 7px; background:var(--fit); color:#fff; font-style:normal; font-size:7.5px; font-weight:800; line-height:12px; text-align:center; letter-spacing:-.04em }
+/* 바닥 위 상품 태그 */
+.cf-ptag { position:absolute; left:0; top:0; transform:translate(-4px, -6px) scale(calc(1 / var(--s,1))); transform-origin:top left; height:18px; padding:0 6px; border-radius:9px; background:rgba(17,17,17,.72); color:#fff; font-size:10px; font-weight:800; line-height:18px; white-space:nowrap; pointer-events:none; z-index:1 }
+.cf-ptag.c { background:var(--fit) }
+/* 손잡이: 흰 동그라미에 얇은 아이콘, 고른 표시는 얇은 실선 */
+.cf-x, .cf-rs { background:#fff !important; box-shadow:0 1px 4px rgba(0,0,0,.28) !important }
+.cf-x svg, .cf-rs svg { stroke:#111 }
+.cf-it .cf-x, .cf-it .cf-rs { width:22px; height:22px } .cf-it .cf-x { right:-9px; top:-9px } .cf-rs { right:-9px; bottom:-9px }
+.cf-it.sel > img, .cf-it.sel > .tx, .cf-it.sel > .em, .cf-it.sel > .wd { outline:1.5px solid rgba(255,255,255,.95); outline-offset:3px }
+.cf-floor.lt .cf-it.sel > * { outline-color:rgba(17,17,17,.4) }
+.cf-real { height:24px; padding:0 9px; border-radius:12px; font-size:11px; background:rgba(17,17,17,.6) }
+/* 꾸미기: 글자는 그림자 없이, 글자 태그 스티커는 얇은 테두리 알약 */
+.cf-deco .tx { text-shadow:none; letter-spacing:-.02em }
+.cf-deco .wd, .cf-stks .wd { font-size:13px; font-weight:800; letter-spacing:.02em; background:#fff; color:#111; padding:5px 11px; border-radius:14px; box-shadow:0 0 0 1px rgba(17,17,17,.12), 0 2px 6px rgba(0,0,0,.08) }
+.cf-deco .em { font-size:34px }
+.cf-stks button { height:56px; background:#F4F4F2 } .cf-stks .em { font-size:28px }
+.cf-vhead { display:flex; align-items:center; gap:8px } .cf-vhead b { flex:1; min-width:0 }
+.cf-vren { flex:none; height:28px; padding:0 10px; border-radius:14px; border:1px solid var(--line); font-size:12px; font-weight:700; color:var(--ink2) }
+.cf-vhead { flex-wrap:wrap } .cf-vhead .cf-shby { flex-basis:100% }
+.cf-osn { margin:-2px 0 8px; font-size:12.5px; color:#B5440A; line-height:1.45 }
+.cf-np { display:block; font-style:normal; font-size:11.5px; font-weight:500; color:var(--sub); margin-top:2px }
