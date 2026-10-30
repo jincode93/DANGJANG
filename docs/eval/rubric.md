@@ -1,6 +1,6 @@
 # 평가 기준
 
-결과물(데모, PRD, 정책 문서, 확장 기능 프로토타입)을 CEO, 디자이너, 엔지니어 세 관점에서 리뷰하는 기준을 사람이 읽기 쉽게 요약한 문서다. 신기능 제안서(`docs/proposals/`)는 이 기준이 아니라 `docs/eval/proposal-rubric.md`로 본다. 스킬이 실제로 따르는 지시는 각 스킬 파일(영어)에 있다.
+결과물(데모, PRD, 정책 문서, 확장 기능 프로토타입)을 CEO, 디자이너, 엔지니어 세 관점에서 리뷰하는 기준을 사람이 읽기 쉽게 요약한 문서다. 신기능 제안서(`docs/proposals/`)는 이 기준이 아니라 `docs/eval/proposal-rubric.md`로 본다. 스킬이 실제로 따르는 지시는 각 스킬 파일에 있다.
 
 기준은 gstack의 `plan-ceo-review`, `plan-design-review`, `plan-eng-review`를 DANGJANG에 맞게 고친 것이다. 출처와 라이선스는 `.claude/skills/NOTICE.md`에 있다.
 

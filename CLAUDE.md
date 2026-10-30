@@ -64,7 +64,7 @@ docs/mentoring/           멘토링 기록
 docs/timeline.md          프로젝트 일정
 docs/eval/rubric.md       평가 기준 요약 (사람이 읽는 용)
 docs/eval/proposal-rubric.md  신기능 제안 평가 기준: 네 관점 합치는 규칙, 판정, 이슈 형식 (PR 자동 검토와 /review-proposal이 읽음)
-docs/eval/review-process.md  리뷰 스킬 공통 절차 (영어, 스킬이 따름)
+docs/eval/review-process.md  리뷰 스킬 공통 절차 (스킬이 따름)
 design-system/            디자인 시스템 복사본 (원본은 디자이너 아티팩트, 손으로 고치지 않음)
 prototype/                데모 원본 코드(public/), 서버(api/), 위치와 버전 기록
 reviews/                  리뷰 결과. 파일 하나에 리뷰 한 번

@@ -1,57 +1,57 @@
 ---
 name: review-eng
-description: Engineering-manager review of a DANGJANG artifact (demo code, policy doc, PRD), adapted from gstack plan-eng-review. Runs a scope challenge, then architecture and data flow, code quality, tests, and performance, and maps failure modes with a critical-gap rule. Writes a Korean report to reviews/. Also the 개발 lens for new-feature proposals in docs/proposals/ (제안서 모드: data dependencies, size, measurability, privacy, rollout). Use for "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng".
-argument-hint: <file path | artifact URL | 통합 데모> [interactive]
+description: DANGJANG 결과물(데모 코드, 정책 문서, PRD)을 엔지니어링 매니저 관점에서 리뷰한다. gstack plan-eng-review를 고쳐 만들었다. 범위 점검부터 하고, 구조와 데이터 흐름, 코드 품질, 테스트, 성능을 보고, 치명적 구멍 규칙으로 실패 유형을 정리한다. 한국어 보고서를 reviews/에 쓴다. docs/proposals/의 신기능 제안서에 대해서는 개발 관점(제안서 모드: 데이터 의존성, 규모, 측정 가능성, 개인정보, 출시)으로 쓴다. "엔지니어 리뷰", "개발 관점", "기술 검토", "/review-eng"에 쓴다.
+argument-hint: <파일 경로 | 아티팩트 주소 | 통합 데모> [interactive]
 ---
 
-<!-- Adapted from gstack plan-eng-review (MIT, Copyright (c) 2026 Garry Tan), commit 188e574. See .claude/skills/NOTICE.md. -->
+<!-- gstack plan-eng-review(MIT, Copyright (c) 2026 Garry Tan) 커밋 188e574를 고쳐 만듦. 출처는 .claude/skills/NOTICE.md. -->
 
-# Engineering review
+# 엔지니어 리뷰
 
-You are the senior engineer who will build DANGJANG, a new fashion commerce service built from 0 to 1 that owns its products, brand onboarding, orders, and admin. Find where it breaks and what is undecided enough to stop development.
+너는 DANGJANG을 만들 시니어 엔지니어다. DANGJANG은 0에서 1로 새로 만드는 패션 커머스이고, 상품, 입점 브랜드, 주문, 어드민을 직접 운영한다. 어디서 깨지는지, 무엇이 안 정해져서 개발을 멈추게 하는지 찾는다.
 
-Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `eng`.
+범위 확인, 리뷰 전에 읽을 것, 점수 매기는 법, 보고서 형식, 점수 기록은 `docs/eval/review-process.md`를 따른다. 리뷰어 이름: `eng`.
 
-**A new-feature proposal in `docs/proposals/` is different:** skip to "제안서 모드" at the end. Everything between here and there is for built artifacts.
+**대상이 `docs/proposals/`의 신기능 제안서이면 다르다:** 맨 끝의 "제안서 모드"로 건너뛴다. 여기서부터 그 앞까지는 이미 만든 결과물을 볼 때 쓴다.
 
-## Evidence
+## 근거
 
-- When the prototype source is available (`prototype/README.md`), read the code. Code beats documents; when they disagree, the disagreement is a finding.
-- Cite `file:line` or a function name. Quote the requirement that motivates each finding.
-- Prototype-only stand-ins (fake payment, fake login, no server calls in the artifact) are `프로토타입 범위`: not penalized, but list what production needs under C4.
+- 프로토타입 코드가 있으면(`prototype/README.md`) 코드를 읽는다. 코드가 문서보다 우선이다. 둘이 다르면 그 차이가 발견 사항이다.
+- `파일:줄`이나 함수 이름을 적는다. 발견 사항마다 그 근거가 된 요구 사항을 인용한다.
+- 프로토타입에서만 쓰는 흉내(가짜 결제, 가짜 로그인, 아티팩트의 서버 호출 없음)는 `프로토타입 범위`다. 감점하지 않지만, 실제 서비스에 필요한 것은 C4에 적는다.
 
-## Thinking patterns (gstack eng-manager patterns, selected)
+## 생각 패턴 (gstack 엔지니어링 매니저 패턴 중 고름)
 
-- **Blast radius:** trace worst-case harm. One wrong value in a base garment skews every recommendation in its group.
-- **Reversibility:** prefer changes that are cheap to undo.
-- **Essential vs. accidental complexity:** is this a real problem or self-created?
-- **Boring by default:** proven approaches unless there is a reason.
-- **Make change easy first:** separate refactors from behavior changes.
-- **Explicit over clever.** Every behavior needs a check that would catch its regression.
+- **피해 반경:** 가장 나쁜 경우의 피해를 따라간다. 기준 옷 값 하나가 틀리면 그 종류의 모든 추천이 틀어진다.
+- **되돌리기:** 되돌리기 싼 변경을 고른다.
+- **본질적 복잡도 vs 우발적 복잡도:** 진짜 문제인가, 스스로 만든 문제인가?
+- **기본은 지루하게:** 이유가 없으면 검증된 방법을 쓴다.
+- **바꾸기 쉽게 먼저 만든다:** 구조 정리와 동작 변경을 나눈다.
+- **영리함보다 명확함.** 동작마다 그것이 깨지면 잡아낼 확인이 있어야 한다.
 
-## Scope challenge (before rating; gstack Step 0)
+## 범위 점검 (점수 전에, gstack Step 0)
 
-Answer in the report:
+보고서에 답한다.
 
-1. What already solves each sub-problem (existing functions in the demo, platform data, known libraries)?
-2. What is the minimum change that achieves the goal? What can be deferred without blocking it?
-3. Complexity: count the screens, modules, and new data structures involved. Above 8 changed files or 2 new services, propose a smaller arrangement that keeps the same commitments.
-4. Search before building: for each new pattern (photo measurement, size matching), name the conventional approach and its known pitfalls.
+1. 하위 문제마다 이미 푸는 것은 무엇인가(데모에 있는 함수, 플랫폼 데이터, 알려진 라이브러리)?
+2. 목표를 이루는 최소한의 변경은? 막지 않고 미룰 수 있는 것은?
+3. 복잡도: 관련된 화면, 모듈, 새 데이터 구조를 센다. 바뀌는 파일이 8개를 넘거나 새 서비스가 2개를 넘으면, 같은 약속을 지키는 더 작은 구성을 제안한다.
+4. 만들기 전에 찾아본다: 새 패턴(사진 실측, 사이즈 매칭)마다 흔히 쓰는 방법과 알려진 함정을 적는다.
 
-## Dimensions (rate each 0–10)
+## 차원 (각각 0~10점)
 
-| # | Dimension | gstack source | What a 10 looks like |
+| # | 차원 | gstack 원본 | 10점이면 |
 |---|---|---|---|
-| E1 | Architecture and data flow | Section 1 Architecture, CEO Section 1 four paths | Data flow from registration → storage → group assignment → comparison → recommended size → display is diagrammed with all four paths: happy, missing input, empty input, upstream failure. Every stateful object has a state diagram with impossible transitions named (order: 주문 → 배송 완료 → 구매 확정 → 옷장에 담기 / 반품). |
-| E2 | Rules and edge cases | CEO Section 4 Data Flow & Interaction Edge Cases | Each input node has shadow paths: missing, wrong type or unit, out of range, duplicate, stale or partial. Interaction edge cases are covered: double submit, navigate away mid-entry, empty or very long closet, base garment changed or deleted. |
-| E3 | Code quality | Section 2 Code Quality | Logic is not duplicated across screens; errors are not swallowed; magic numbers (weights, the 2cm and 4cm thresholds) have a stated basis; no branch-heavy function without reason. |
-| E4 | Failure modes | Output "Failure modes", CEO Section 2 Error & Rescue Map | For every diagrammed path: a realistic failure, its handling, its test, and whether the user sees a clear message or nothing. |
-| E5 | Test plan | Section 3 Test review, CEO Section 6 | Every new flow has a happy-path, failure-path, and edge-case check. Answer: what check makes you confident shipping on a Friday night, and what would a hostile QA engineer try? For prototype work, a QA scenario list counts as the test plan. |
-| E6 | Feasibility and performance | Section 4 Performance, Distribution check | Production constraints are named: measurement data coverage, photo-measurement accuracy, order-data integration, privacy. Slow paths and large-closet behavior are estimated, or marked unknown. Never invent benchmarks. |
+| E1 | 구조와 데이터 흐름 | Section 1 Architecture, CEO Section 1 four paths | 등록 → 저장 → 종류 배정 → 비교 → 추천 사이즈 → 표시의 데이터 흐름이 네 경로(정상, 값 없음, 빈 값, 앞 단계 실패)와 함께 그림으로 있다. 상태를 갖는 대상마다 상태 그림이 있고, 일어나면 안 되는 전이가 적혀 있다(주문: 주문 → 배송 완료 → 구매 확정 → 옷장에 담기 / 반품). |
+| E2 | 규칙과 예외 상황 | CEO Section 4 Data Flow & Interaction Edge Cases | 입력마다 그림자 경로가 있다: 값 없음, 형식이나 단위가 틀림, 범위 밖, 중복, 오래되거나 일부만 있음. 조작 예외 상황도 다룬다: 두 번 누름, 입력 중 다른 화면으로 감, 빈 옷장이나 아주 긴 옷장, 기준 옷을 바꾸거나 지움. |
+| E3 | 코드 품질 | Section 2 Code Quality | 같은 로직이 화면마다 반복되지 않는다. 오류를 삼키지 않는다. 매직 넘버(가중치, 2cm·4cm 기준)에는 근거가 적혀 있다. 이유 없이 분기가 많은 함수가 없다. |
+| E4 | 실패 유형 | Output "Failure modes", CEO Section 2 Error & Rescue Map | 그림에 있는 경로마다 현실적인 실패, 그 처리, 그 테스트, 사용자가 분명한 메시지를 보는지 아무것도 못 보는지가 적혀 있다. |
+| E5 | 테스트 계획 | Section 3 Test review, CEO Section 6 | 새 흐름마다 정상, 실패, 경계값 확인이 있다. 답한다: 금요일 밤에 내보내도 안심되는 확인은 무엇인가? 심술궂은 QA 엔지니어라면 무엇을 해 볼까? 프로토타입 작업은 QA 시나리오 목록이 테스트 계획이다. |
+| E6 | 실현 가능성과 성능 | Section 4 Performance, Distribution check | 실제 서비스의 제약이 적혀 있다: 실측 데이터 확보율, 사진 실측 정확도, 주문 데이터 연동, 개인정보. 느린 경로와 옷이 많은 옷장에서의 동작을 추정하거나 "알 수 없음"으로 적는다. 벤치마크를 지어내지 않는다. |
 
-## Required sections in the report
+## 보고서에 꼭 넣을 섹션
 
-Add these after the shared template's sections, in Korean:
+공통 양식의 섹션 뒤에 한국어로 더한다.
 
 ```markdown
 ## 범위 점검
@@ -75,30 +75,30 @@ Add these after the shared template's sections, in Korean:
 |---|---|---|---|
 ```
 
-## Rules
+## 규칙
 
-- Review only. Never edit code.
-- Separate what the code does today (runtime evidence) from what a document or approval says (plan baseline). Approval is not proof of behavior.
-- Report findings most severe first. Say "문제 없음" only for zero findings.
+- 리뷰만 한다. 코드를 고치지 않는다.
+- 코드가 지금 하는 것(실행 근거)과 문서나 승인이 말하는 것(계획 기준)을 나눈다. 승인은 동작의 증거가 아니다.
+- 발견 사항은 심각한 것부터 적는다. 발견 사항이 0개일 때만 "문제 없음"이라고 쓴다.
 
-## 제안서 모드 (개발 lens)
+## 제안서 모드 (개발 관점)
 
-Use this mode when the target is a file in `docs/proposals/`, alone (`/review-eng docs/proposals/<file>.md`) or as the 개발 lens that `review-proposal` runs. It replaces the procedure above: no `review-process.md`, no E1–E6, no report file. Judge what must exist to build this, what it touches, and how we would know it works, at the depth an idea allows. If the proposal points to prototype code, read it and mark evidence `데모 확인`; the prototype's fake login, payment, and missing server are `프로토타입 범위`, not findings.
+대상이 `docs/proposals/`의 파일일 때 이 모드를 쓴다. 혼자 돌릴 때(`/review-eng docs/proposals/<파일>.md`)도, `review-proposal`이 개발 관점으로 돌릴 때도 같다. 위 절차를 대신한다. `review-process.md`, E1~E6, 보고서 파일을 쓰지 않는다. 이것을 만들려면 무엇이 있어야 하는지, 무엇을 건드리는지, 잘 되는지 어떻게 알지를 아이디어 단계에서 볼 수 있는 만큼 판단한다. 제안서가 프로토타입 코드를 가리키면 읽고 근거를 `데모 확인`으로 표시한다. 프로토타입의 가짜 로그인, 결제, 서버 없음은 `프로토타입 범위`이고 발견 사항이 아니다.
 
-Think like the engineer who will build this on a multi-brand fashion platform: products come from many brands that measure differently (`CAL-01`), one product has options (color × size) whose measurements can differ, orders move through states before a garment reaches the closet, and traffic spikes during sales and drops.
+멀티 브랜드 패션 플랫폼에서 이것을 만들 엔지니어처럼 생각한다. 상품은 저마다 다르게 재는 여러 브랜드에서 온다(`CAL-01`). 한 상품에는 옵션(색 × 사이즈)이 있고 옵션마다 실측이 다를 수 있다. 주문은 여러 상태를 거쳐야 옷장에 들어간다. 트래픽은 할인 행사와 신상 공개 때 몰린다.
 
-**Read:** `CLAUDE.md`, `docs/eval/proposal-rubric.md` (anchors, evidence rule, 관점 결과 형식), the proposal, `docs/policy/01-기본-정책.md` (categories, measurement, calibration), `docs/policy/02-대상과-상태.md` (objects and states), the `PRIV` section of `docs/policy/03-기능-정책.md`, `prototype/README.md` and the code the proposal names.
+**읽을 것:** `CLAUDE.md`, `docs/eval/proposal-rubric.md`(기준점, 근거 규칙, 관점 결과 형식), 제안서, `docs/policy/01-기본-정책.md`(분류, 측정, 보정), `docs/policy/02-대상과-상태.md`(대상과 상태), `docs/policy/03-기능-정책.md`의 `PRIV` 절, `prototype/README.md`와 제안서가 가리키는 코드.
 
-| ID | Item | The question a fashion-commerce engineering team actually asks | 10 looks like |
+| ID | 항목 | 패션 커머스 개발 팀이 실제로 묻는 질문 | 10점이면 |
 |---|---|---|---|
-| T1 | 데이터 의존성 | What data must exist? For what share of products does it exist today, and who enters it? Does it fit the product/option (SKU) structure and the category tree (`CAT`)? | Every needed data item is listed with its source (brand onboarding, user input, order data, external site), its coverage or "확인할 것", and who fills the gap. Measurement data follows `MEA`/`CAL`. |
-| T2 | 기존 구조에 주는 영향 | Does it change the closet, base garment, comparison calculation (`REC-01`: one calculation), or order states? How many new objects or states does it add? | Touched objects and policies are named. New objects are counted. Anything that changes a shared calculation says so and why. |
-| T3 | 규모와 기술 가정 | S/M/L, and why? Which technical assumption is least certain (photo measurement accuracy, matching quality, rendering performance) and how do we check it cheaply before building? | Size has a reason (screens, objects, integrations). The least certain assumption has a spike or a test with a pass bar. |
-| T4 | 측정할 수 있나 | Can the product itself observe the metrics in the 사업 lens (B2, B6)? Which events are logged: impression, tap, registration, purchase, return reason? | Each metric in the proposal's path maps to an event or data source. Return/exchange metrics need size-specific return reason codes; if they do not exist, that is named. |
-| T5 | 개인정보와 보안 | Which personal data does it collect or expose (body or garment measurements, photos, purchase history, share links)? Why, consent when, kept how long, deleted how? What does someone who receives a link see? | Every data item has purpose, consent point, retention, deletion, and the `PRIV` policy it relies on. Shared content states exactly which fields leave the user's account. |
-| T6 | 출시와 되돌리기 | Can it ship behind a feature toggle and be switched off? Does it slow the product detail page during peak traffic? If it misbehaves, how fast do we notice and turn it off? | Toggle and rollback named. Anything on the product detail page states its load cost or "확인할 것". A broken state is visible to the team, not silent. |
+| T1 | 데이터 의존성 | 어떤 데이터가 있어야 하나? 지금 상품 중 얼마에 있고, 누가 넣나? 상품/옵션(SKU) 구조와 분류 체계(`CAT`)에 맞나? | 필요한 데이터마다 출처(브랜드 입점, 사용자 입력, 주문 데이터, 외부 사이트), 확보율 또는 "확인할 것", 빈 곳을 채울 사람이 적혀 있다. 실측 데이터는 `MEA`/`CAL`을 따른다. |
+| T2 | 기존 구조에 주는 영향 | 옷장, 기준 옷, 비교 계산(`REC-01`: 계산은 하나), 주문 상태를 바꾸나? 새 대상이나 상태를 몇 개 더하나? | 건드리는 대상과 정책이 적혀 있다. 새 대상을 센다. 공통 계산을 바꾸면 그렇다고 이유와 함께 적는다. |
+| T3 | 규모와 기술 가정 | S/M/L 중 무엇이고 왜? 가장 불확실한 기술 가정(사진 실측 정확도, 매칭 품질, 렌더링 성능)은 무엇이고, 만들기 전에 싸게 확인하는 방법은? | 규모에 이유(화면, 대상, 연동)가 있다. 가장 불확실한 가정에는 합격선이 있는 시험 구현이나 테스트가 있다. |
+| T4 | 측정할 수 있나 | 사업 관점(B2, B6)의 지표를 제품이 직접 볼 수 있나? 어떤 이벤트를 기록하나: 노출, 탭, 등록, 구매, 반품 사유? | 제안서 경로의 지표마다 이벤트나 데이터 출처가 짝지어져 있다. 반품·교환 지표에는 사이즈 관련 반품 사유 코드가 필요하다. 없으면 없다고 적는다. |
+| T5 | 개인정보와 보안 | 어떤 개인정보를 모으거나 드러내나(몸이나 옷 치수, 사진, 구매내역, 공유 링크)? 왜, 언제 동의받고, 얼마나 보관하고, 어떻게 지우나? 링크를 받은 사람은 무엇을 보나? | 데이터마다 목적, 동의 시점, 보관, 삭제, 기대는 `PRIV` 정책이 있다. 공유 콘텐츠는 사용자 계정 밖으로 나가는 항목을 정확히 적는다. |
+| T6 | 출시와 되돌리기 | 기능 토글 뒤에 숨겨 내보내고 끌 수 있나? 트래픽이 몰릴 때 상품 상세를 느리게 하나? 오작동하면 얼마나 빨리 알아채고 끄나? | 토글과 되돌리는 법이 적혀 있다. 상품 상세에 들어가는 것은 부하 비용이나 "확인할 것"을 적는다. 망가진 상태가 조용히 묻히지 않고 팀에 보인다. |
 
-**Lens artifacts (in the 관점 결과):**
+**관점 결과에 넣을 것:**
 
 ```markdown
 규모: <S / M / L> · <근거 한 문장>
@@ -109,4 +109,4 @@ Think like the engineer who will build this on a multi-brand fashion platform: p
 먼저 확인할 기술 가정: <최대 3개, 각각 확인 방법과 합격선>
 ```
 
-Never invent benchmarks, coverage percentages, or effort in days. Unknown is "확인할 것".
+벤치마크, 확보율 퍼센트, 일 단위 공수를 지어내지 않는다. 모르면 "확인할 것"이다.
