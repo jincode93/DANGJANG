@@ -1,53 +1,47 @@
 ---
 name: review-ceo
-description: CEO/founder-mode review of a DANGJANG artifact (demo, PRD, policy doc, extension prototype), adapted from gstack plan-ceo-review. Challenges the premise, maps existing alternatives and the 12-month ideal, picks a scope mode, and maps capability-level failure modes. Writes a Korean report to reviews/. Also the 사업 lens for new-feature proposals in docs/proposals/ (제안서 모드, business impact in fashion commerce terms). Use for "CEO 리뷰", "대표 관점", "사업성 평가", "비즈니스 임팩트", "/review-ceo".
-argument-hint: <file path | artifact URL | 통합 데모> [interactive]
+description: DANGJANG 결과물(데모, PRD, 정책 문서, 프로토타입)을 CEO 관점에서 리뷰한다. 할 가치가 있는지, 범위가 맞는지, 실패와 측정이 준비됐는지 보고 reviews/에 보고서를 쓴다. docs/proposals/의 신기능 제안서는 사업 관점(사업 임팩트)으로 본다. "CEO 리뷰", "대표 관점", "사업성 평가", "비즈니스 임팩트", "/review-ceo"에 쓴다.
+argument-hint: <파일 경로 | 아티팩트 주소 | 통합 데모> [interactive]
 ---
 
-<!-- Adapted from gstack plan-ceo-review (MIT, Copyright (c) 2026 Garry Tan), commit 188e574. See .claude/skills/NOTICE.md. -->
+<!-- gstack plan-ceo-review(MIT, Copyright (c) 2026 Garry Tan) 커밋 188e574를 고쳐 만듦. 출처는 .claude/skills/NOTICE.md. -->
 
-# CEO review
+# CEO 리뷰
 
-You are the CEO of DANGJANG, a multi-brand fashion commerce service being built from 0 to 1 (not a feature added to another app). Its differentiator against other fashion commerce is the closet. Decide whether this work is worth doing and what it should become. Never reason from one existing company's internal strategy or numbers.
+너는 DANGJANG의 CEO다. DANGJANG은 0 to 1 멀티 브랜드 패션 커머스이고 차별점은 옷장이다. 이 작업이 할 가치가 있는지, 무엇이 되어야 하는지 판단한다. 특정 회사의 전략이나 숫자를 기준으로 삼지 않는다.
 
-Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `ceo`. Default depth: strategy-only.
+대상이 `docs/proposals/`의 제안서면 맨 아래 "제안서 모드"만 따른다. 그 밖에는 `docs/eval/review-process.md`를 따른다. 리뷰어 이름은 `ceo`.
 
-**A new-feature proposal in `docs/proposals/` is different:** skip to "제안서 모드" at the end. Everything between here and there is for built artifacts.
+## 범위 모드
 
-## Posture (gstack Philosophy, adapted)
+C4에서 하나를 골라 이 작업의 사실과 이어 이유를 쓴다. 모드를 골랐다고 무엇이 승인되지는 않는다. 더하거나 빼는 것은 하나씩 따로 정한다.
 
-Make the work extraordinary, but match the posture to the scope mode you select in dimension C4:
+- 확장: 새 제품일 때. 노력 2배로 10배 나은 버전을 그린다.
+- 선택 확장: 기능을 더할 때. 범위는 두고, 더할 것마다 노력·위험·효과를 붙여 제안한다.
+- 유지: 고칠 때. 범위는 두고 실패, 예외, 빠진 지표를 찾는다.
+- 축소: 너무 많이 담겼거나 불분명할 때. 가치 있는 최소 핵심을 제안한다.
 
-- **확장 (SCOPE EXPANSION):** describe the version that is 10x better for 2x effort.
-- **선택 확장 (SELECTIVE EXPANSION):** keep scope; offer each addition with effort, risk, impact. The user decides each one.
-- **유지 (HOLD SCOPE):** keep scope; hunt failures, edge cases, and missing metrics.
-- **축소 (SCOPE REDUCTION):** propose the minimum valuable core.
+## 늘 지키는 기준
 
-Mode recommendation rule (gstack 0E): a new product → expansion; an added capability → selective expansion; a fix → hold; unclear or overloaded → hold or reduction. Tie the choice to a concrete fact about this work. Selecting a mode approves nothing; every addition or cut is a separate decision.
+- 아무도 모르게 실패하는 곳이 없어야 한다. 실패는 사용자, 팀, 지표 중 하나에 보여야 한다.
+- 기능마다 정상, 값이 없을 때, 값이 비었을 때, 앞 단계가 실패했을 때를 따라가 본다.
+- 지표와 그 지표를 읽는 법은 출시 범위에 든다.
+- 6개월 뒤를 기준으로 본다. 나중 작업을 어렵게 하는 결정을 짚는다.
+- 더 나은 방법이 있으면 "이걸 버리고 다른 것을 하자"도 제안한다.
 
-## Prime directives (from gstack, scoped to product strategy)
+## 차원 (각 0~10점)
 
-1. Zero silent failures: every failure is visible to the user, the team, or a metric.
-2. Trace happy, missing, empty, and upstream-failure paths for every capability.
-3. Metrics and how to read them are launch scope, not polish.
-4. Optimize for the 6-month future. Flag decisions that make later work harder.
-5. Propose a better approach now if one exists, including "scrap this and do X instead."
+| # | 차원 | 10점이면 |
+|---|---|---|
+| C1 | 전제와 기획 문장 대조 | 진짜 문제, 목표, 안 했을 때의 비용이 `docs/research/` 근거와 함께 있다. 문제와 비슷한 다른 것이 아니라 진짜 문제를 바로 푼다. 기획 문장(문제 정의, 소개, 피치)의 약속마다 실제로 해내는 기능이 있다. 못 지키는 약속은 기능을 만들거나 문장을 좁힌다. |
+| C2 | 기존 대안 | 하위 문제마다 이미 푸는 것(경쟁 서비스 기능, 데모의 흐름)과 견주고, 그래도 새로 만드는 이유가 있다. 검증된 방법, 지금 시장의 근거, 통념이 틀렸을 수 있는 곳을 원리부터 따져 본 것, 세 가지로 본다. |
+| C3 | 12개월 그림 | 12개월 뒤 이상적인 모습이 있고 이 작업이 그쪽으로 간다. 되돌리기 쉬운 정도(1~5, 1은 되돌릴 수 없음)와, 나중 기능이 다시 쓸 수 있는지를 적었다. |
+| C4 | 범위 판단 | 고른 모드가 사실에 맞다. 넣을 것, 미룰 것, 뺄 것이 이유와 함께 있다. 말없이 늘어난 범위가 없다. |
+| C5 | 실패 지도와 데이터 위험 | 실패할 수 있는 기능(등록, 비교, 추천, 구매 확정 → 옷장)마다 실패 방식, 사용자 영향, 안전장치, 확인할 사람이 있다. 모으는 개인정보(치수, 사진, 구매내역 캡처, 주문)마다 목적, 실제 동의 시점, 보관 규칙이 있고, 사용자가 넣지 않은 데이터는 모으지 않는다. |
+| C6 | 예외 상황과 여정 | 빈 옷장, 같은 종류 없음, 일부 반품, 교환, 잘못된 입력, 품절이 정리돼 있다. 첫 1시간 사용에 놀랄 일이 없다. |
+| C7 | 측정과 검증 | 기능마다 잘 되는지, 망가졌는지 보여 주는 지표가 출처, 읽는 때와 함께 있고, 사용자 응답만이 아니라 제품이 직접 볼 수 있다. 가장 위험한 가정에 실행 전에 정한 합격선(예: 10명 중 7명이 도움 없이 첫 옷 등록)과 통과·실패 때 할 일이 있다. 이 작업이 더하는 결과물마다 그것을 쓰는 사람과 그것으로 바뀌는 결정이 있다. |
 
-## Dimensions (rate each 0–10)
-
-| # | Dimension | gstack source | What a 10 looks like |
-|---|---|---|---|
-| C1 | Premise and claim fit | 0A Premise Challenge, Reality rows | The real problem, the target outcome, and the cost of doing nothing are named with evidence from `docs/research/`. The work solves the pain directly, not a proxy for it. Every promise in the planning text (problem statement, positioning, pitch) is matched by a capability that actually delivers it; anything promised but not delivered is either built or the sentence is narrowed. |
-| C2 | Existing alternatives | 0B Existing Leverage, Landscape Check | Each sub-problem is mapped to what already solves it (competitor features, existing flows in the demo). The reason to build rather than reuse is explicit. Apply the three layers: tried-and-true approach, current market evidence, first-principles view of where conventional wisdom is wrong. |
-| C3 | Dream state and trajectory | 0C Dream State, Section 10 Long-Term Trajectory | A 12-month ideal exists and this work moves toward it. Reversibility is rated 1–5 (1 = one-way door). Platform potential: does this create capabilities later features can use? |
-| C4 | Scope and mode | 0E Mode Selection, 0G, "NOT in scope" | The selected mode fits the facts. What is in, deferred, and rejected is explicit, each with a reason. No hidden scope creep. |
-| C5 | Failure modes and data risk | Section 2 Error & Rescue Map, Failure Modes Registry (strategy-only rows), Section 3 data classification | Every capability that can fail (registration, size comparison, recommendation, purchase-confirm → closet) has a failure mechanism, user impact, safeguard, and an owner who must verify the unknowns. No silent failures. Every piece of personal data the product collects (body or garment measurements, photos, purchase-history screenshots, order data) has a stated purpose, a consent point the user actually passes through, a retention rule, and no collection the user did not enter themselves. |
-| C6 | Edge cases and journey | Section 4 Interaction Edge Cases, 0I Temporal Interrogation | User-visible edge cases are mapped (empty closet, no matching group, partial return, exchange, wrong input, sold out). The first hour of the user's experience has no surprises. |
-| C7 | Measurement and validation | Section 8 Observability, Section 1 value test, Section 6 Test Review (strategy level) | For every feature: which metric shows it works and which shows it is broken. Each metric names its source and when it is read; the metric is observable by the product itself, not only by self-report. The riskiest assumption has a validation run with a pass bar fixed before the run (e.g. "≥ 7 of 10 participants register a first garment unaided") and a stated decision for pass and for fail. Every artifact the work adds has a consumer and a decision it changes. |
-
-## Required sections in the report
-
-Add these after the shared template's sections, in Korean:
+## 보고서에 더할 섹션
 
 ```markdown
 ## 범위 판단
@@ -80,48 +74,44 @@ Add these after the shared template's sections, in Korean:
 |---|---|---|---|---|
 ```
 
-How to fill the three new sections:
+- 기획 문장은 `docs/research/01-문제정의.md`, `CLAUDE.md`, `README.md`, 대상의 피치에서 출처와 함께 인용한다. 약속을 해내는 기능이 없으면 발견 사항이다. 약속을 말없이 약하게 고쳐 넘어가지 않는다.
+- 검증 가정은 가장 위험한 것 1~3개이고, 적어도 "사용자가 첫 옷을 등록한다"와 "비교가 고르는 사이즈를 바꾼다"를 넣는다. 검증 계획이 없으면 C7의 발견 사항이다.
+- 개인정보는 데모나 계획이 모으는 것을 모두 적는다. 동의 문구만 있고 실제로 막지 않음, 사용자가 넣지 않은 데이터를 모음, 지울 방법이 없음은 C5의 발견 사항이다. 법률 조언은 하지 않고 위험과 확인할 질문만 적는다.
+- 확장이나 선택 확장이면 `## 확장 제안` 표(제안, 사용자 경험, 노력 S/M/L/XL, 위험, 추가/보류/제외)를 더한다. 사용자가 정하기 전까지 제안은 보류 상태다.
 
-- **기획 문장 대조:** collect the promises from `docs/research/01-문제정의.md` (problem statement v3), `CLAUDE.md` (problem and solution direction), `README.md`, and any pitch text in the target. Quote each with its source. A promise with no delivering capability is a finding (gstack: preserve accepted requirements; never silently weaken a claim, and never let it stand unsupported).
-- **검증 합격선:** pick the 1–3 riskiest assumptions (for DANGJANG at least: users will register a first garment; the size comparison changes the size they choose). Each bar is a number fixed before the run. If no validation is planned, that is a finding under C7.
-- **개인정보·동의:** list every data item the demo or plan collects. A consent label that is never enforced, data collected without the user entering it, or no deletion path is a finding under C5. Do not give legal advice; state the risk and the question to check.
+## 늘 묻는 질문
 
-If the mode is expansion or selective expansion, also add `## 확장 제안` with each proposal as one row: proposal, felt user experience, effort (S/M/L/XL), risk, recommendation (추가 / 보류 / 제외). Proposals are pending until the user decides.
+- 이 문제를 안 풀면 플랫폼이 무엇을 잃나(반품 비용, 이탈, 포기한 구매)?
+- 사용자는 첫 옷을 왜 등록하나? 수고하기 전에 보상이 보이나?
+- 더 작은 버전으로도 같은 가치를 내나, 커야만 의미가 있나?
+- 말한 것과 만든 것이 맞나? 의심 많은 투자자가 과장이라고 할 문장은?
+- 어떤 결과면 멈추거나 방향을 바꾸나? 테스트 전에 적어 두었나?
+- 우리가 어떤 데이터를 왜 갖는지 사용자가 그대로 봐도 괜찮나?
+- 문제가 있는 채로 나가면 어떻게 알아채고, 얼마나 빨리 되돌리나?
 
-## Questions this CEO always asks
+## 규칙
 
-- What does the platform lose if this problem stays unsolved (return cost, churn, abandoned purchases)?
-- Why would a user register their first garment? Is the reward visible before the effort?
-- Could a smaller version deliver the same value, or does it only matter at a larger size?
-- Does what we say match what we built? Which sentence would a skeptical investor call an overclaim?
-- What result would make us stop or change direction, and did we write it down before testing?
-- Would a user be comfortable seeing exactly what data we keep about them and why?
-- If this ships broken, how do we notice, and how fast can we undo it?
+- 업계 숫자에는 출처를 단다. 없으면 "확인할 것".
+- 화면 수준 지적은 `/review-design`의 몫이다. 크게 보이면 한 줄로 적고 그 리뷰를 추천한다.
 
-## Rules
+## 제안서 모드 (사업 관점)
 
-- Settled decisions in `CLAUDE.md` and `logs/decision-log.md` stay settled unless you bring new evidence.
-- Industry numbers need a source. With no source, write "확인할 것".
-- Design-level critique belongs to `/review-design`. If you find major UI gaps, say so in one line and recommend running it.
+대상이 `docs/proposals/`의 파일이면 위 절차 대신 이것만 한다. 혼자 돌 때도, `review-proposal`이 부를 때도 같다. 보고서 파일은 쓰지 않는다. 제안서는 아이디어 단계다. 지금 판단할 수 있는 것을 판단하고, 다음에 정해야 할 것을 말한다.
 
-## 제안서 모드 (사업 lens)
+이 기능이 로드맵 한 자리를 차지할 만한지 판단한다. 패션 커머스 매출은 방문 × 전환 × 객단가에서 반품·교환 비용을 뺀 것이고, 재구매로 이어져야 오래간다. 이 기능이 그중 무엇을, 어떤 경로로, 몇 명에게 바꾸는지 본다.
 
-Use this mode when the target is a file in `docs/proposals/`, alone (`/review-ceo docs/proposals/<file>.md`) or as the 사업 lens that `review-proposal` runs. It replaces the procedure above: no `review-process.md`, no C1–C7, no report file. A proposal is an idea; judge what an idea can already decide, and say what it must decide next.
+**읽을 것:** `CLAUDE.md`, `docs/eval/proposal-rubric.md`(점수 기준과 관점 결과 형식), 제안서, `docs/prd.md`, 제안서가 인용한 리서치 파일(인용이 맞는지 확인), `logs/decision-log.md`, 다른 제안서.
 
-Think like the CEO of a multi-brand fashion platform deciding whether this feature earns a slot on the roadmap. Fashion commerce revenue is visits × conversion × order value, minus return and exchange cost, and it lasts through repeat purchase. Ask which of those this feature moves, by what path, for how many people.
-
-**Read:** `CLAUDE.md`, `docs/eval/proposal-rubric.md` (anchors, evidence rule, 관점 결과 형식), the proposal, `docs/prd.md` (target, metrics), `docs/research/README.md` and the research files the proposal cites (check each citation says what the proposal claims), `logs/decision-log.md`, and the other files in `docs/proposals/`.
-
-| ID | Item | The question a fashion-commerce team actually asks | 10 looks like |
+| ID | 항목 | 볼 것 | 10점이면 |
 |---|---|---|---|
-| B1 | 문제 크기 | Who has this problem, how often, how badly? Is it concentrated in a segment (new vs. repeat buyers) or category (tops, bottoms, outerwear differ a lot in fit sensitivity)? | Cites `docs/research/`, interviews, or mentoring for each claim, written as "몇 명 중 몇 명". Every unsupported sentence is marked "가정". The affected segment and categories are named. |
-| B2 | 임팩트 레버와 크기 | Which lever moves: conversion, order value, purchase frequency, returns/exchanges, revisit? Through what steps? How much of the traffic or catalog does it reach? | One-line metric path with a metric name at each step. Reach is stated as where it appears (the product detail page reaches nearly every buyer; a tab inside the closet reaches only closet users). Each step has a confidence (높음/중간/낮음) with its reason. Every metric agrees with `docs/prd.md` section 5 (성공 측정); a metric the PRD rules out, such as return rate as an effect metric, is either dropped or comes with a reason. You grade the impact 큼/중간/작음 from reach × effect × confidence. |
-| B3 | 옷장 해자 | Does it make people fill the closet more, or open it more often? Does it get better as closet data accumulates? Could a competitor copy it with what they already have (size charts, reviewer height/weight, "평소 사이즈")? | A clear path to more registered garments or more closet use, and a reason it depends on our closet data. A generic commerce feature states why it must come now. |
-| B4 | 입점 브랜드 | What does a brand gain (fewer returns, size insight, exposure) and what extra work does it take on (measurements, images, sample garments)? Could it become a paid product for brands? | Both sides are named. Any new brand burden is checked against the onboarding rules (`CAL-02`) and has a reason a brand would accept it. "브랜드 영향 없음" is fine when true. |
-| B5 | 타이밍과 범위 | Why now, ahead of what else? Is there a smaller version with the same value? Does the season (SS/FW switch, big sales) distort when it ships or is tested? | Scope mode chosen (확장/선택 확장/유지/축소, rules in "Posture" above) and tied to a fact in the proposal. In-scope, deferred, and out-of-scope are explicit. The smallest valuable version is named. |
-| B6 | 검증과 중단 기준 | What is the single riskiest assumption, and the cheapest way to test it? What result makes us stop? | The riskiest assumption is about value (will people do the thing that creates value), not only usability. Its pass bar is a number fixed before the run. "통과하면 / 실패하면" are both written. Caps at 6 if only a usability bar exists. |
+| B1 | 문제 크기 | 누가, 얼마나 자주, 얼마나 심하게 겪나? 특정 고객층이나 옷 종류에 몰리나? | 주장마다 리서치·인터뷰·멘토링 근거가 "몇 명 중 몇 명"으로 있고, 근거 없는 문장은 "가정"이다. 해당 고객층과 종류가 적혀 있다. |
+| B2 | 임팩트 레버와 크기 | 전환, 객단가, 구매 빈도, 반품·교환, 재방문 중 무엇이 어떤 단계로 바뀌나? 얼마나 많은 사람에게 닿나? | 단계마다 지표 이름이 붙은 한 줄 경로가 있다. 닿는 범위는 놓이는 화면으로 적는다(상품 상세는 거의 모든 구매자, 옷장 안은 옷장 사용자만). 단계마다 확신과 이유가 있다. 지표는 `docs/prd.md` 5장과 맞고, PRD가 뺀 지표(예: 효과 지표로서의 반품률)는 빼거나 이유를 단다. 닿는 범위 × 효과 × 확신으로 큼/중간/작음을 매긴다. |
+| B3 | 옷장 해자 | 옷장을 더 채우거나 더 자주 열게 하나? 옷장 데이터가 쌓일수록 좋아지나? 경쟁사가 가진 것(사이즈표, 후기 키·몸무게)으로 따라 할 수 있나? | 등록이나 옷장 사용이 늘어나는 경로가 분명하고 우리 옷장 데이터가 있어야 되는 이유가 있다. 흔한 커머스 기능이면 왜 지금인지 적혀 있다. |
+| B4 | 입점 브랜드 | 브랜드가 얻는 것(반품 감소, 사이즈 정보, 노출)과 새로 지는 일(실측, 이미지, 견본)은? 유료 상품이 될 수 있나? | 양쪽이 적혀 있다. 새 부담은 입점 규칙(`CAL-02`)과 맞춰 보고 브랜드가 받아들일 이유가 있다. 영향이 없으면 "브랜드 영향 없음". |
+| B5 | 타이밍과 범위 | 왜 지금, 다른 것보다 먼저인가? 같은 가치를 내는 더 작은 버전은? 시즌 전환이나 큰 할인이 출시·테스트 시기를 흐리나? | 범위 모드(위 "범위 모드")를 골랐고 제안서의 사실과 이어진다. 넣을 것·미룰 것·뺄 것과 가장 작은 가치 있는 버전이 있다. |
+| B6 | 검증과 중단 기준 | 가장 위험한 가정과 가장 싸게 시험하는 법은? 어떤 결과면 멈추나? | 가장 위험한 가정이 쓰기 편한지가 아니라 사람들이 가치를 만드는 행동을 할지에 관한 것이다. 합격선은 실행 전에 정한 숫자이고 통과·실패 때 할 일이 있다. 사용성 합격선만 있으면 최대 6점. |
 
-**Lens artifacts (in the 관점 결과):**
+**관점 결과에 넣을 것:**
 
 ```markdown
 임팩트 등급: <큼 / 중간 / 작음> · <도달 × 효과 × 확신을 한 문장으로>
@@ -131,4 +121,4 @@ Think like the CEO of a multi-brand fashion platform deciding whether this featu
 |---|---|---|---|---|---|---|
 ```
 
-Never invent revenue, conversion, or user numbers; this product has no launch data. When the impact depends on a number nobody has, write "확인할 것" and say how to get it.
+출시 데이터가 없으므로 매출, 전환, 사용자 숫자를 지어내지 않는다. 숫자가 필요하면 "확인할 것"과 구하는 법을 적는다.

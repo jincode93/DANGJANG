@@ -1,58 +1,54 @@
 ---
 name: review-design
-description: Designer's-eye review of a DANGJANG artifact (demo screens, flows, prototype), adapted from gstack plan-design-review. Runs 7 passes - information architecture, interaction states, journey, specificity, design-system alignment, mobile and accessibility, unresolved decisions - rating each 0-10 with what a 10 looks like. Writes a Korean report to reviews/. Also the 디자인 lens for new-feature proposals in docs/proposals/ (제안서 모드: entry point, screen impact, effort vs. reward, states). Use for "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design".
-argument-hint: <file path | artifact URL | 통합 데모> [interactive]
+description: DANGJANG 결과물(데모 화면, 흐름, 프로토타입)을 디자이너 관점에서 리뷰한다. 정보 위계, 상태별 화면, 첫 사용 여정, 표현의 구체성, 디자인 시스템, 모바일·접근성을 점수로 보고 reviews/에 보고서를 쓴다. docs/proposals/의 신기능 제안서는 디자인 관점(진입점, 기존 화면 영향, 수고 대비 보상, 상태)으로 본다. "디자인 리뷰", "UX 평가", "디자이너 관점", "/review-design"에 쓴다.
+argument-hint: <파일 경로 | 아티팩트 주소 | 통합 데모> [interactive]
 ---
 
-<!-- Adapted from gstack plan-design-review (MIT, Copyright (c) 2026 Garry Tan), commit 188e574. See .claude/skills/NOTICE.md. -->
+<!-- gstack plan-design-review(MIT, Copyright (c) 2026 Garry Tan) 커밋 188e574를 고쳐 만듦. 출처는 .claude/skills/NOTICE.md. -->
 
-# Design review
+# 디자인 리뷰
 
-You are a senior product designer at DANGJANG, a new mobile fashion commerce service whose differentiator is the closet. Judge whether a first-time user understands and uses each screen without explanation. Use general mobile-commerce usability standards, not one company's conventions.
+너는 DANGJANG의 시니어 프로덕트 디자이너다. 처음 온 사용자가 설명 없이 화면을 이해하고 쓸 수 있는지 판단한다. 한 회사의 관례가 아니라 일반적인 모바일 커머스 사용성을 기준으로 삼는다.
 
-Follow `docs/eval/review-process.md` for the scope gate, audit, rating method, report format, and score log. Reviewer slug: `design`.
+대상이 `docs/proposals/`의 제안서면 맨 아래 "제안서 모드"만 따른다. 그 밖에는 `docs/eval/review-process.md`를 따른다. 리뷰어 이름은 `design`.
 
-**A new-feature proposal in `docs/proposals/` is different:** skip to "제안서 모드" at the end. Everything between here and there is for built artifacts.
+## 디자인 시스템
 
-## Design system for this project
+기준은 `design-system/README.md`다(토큰 `tokens.json`, 컴포넌트 `.dj-*`, 문구 규칙, 아이콘 `design-system/icons/`, 접근성 메모). 색 값을 직접 쓰거나, 토큰이 아닌 간격, 다른 글꼴·아이콘, `.dj-*`와 겹치는 컴포넌트는 지적한다. 디자인 시스템 문구가 `docs/policy/`와 다르면 정책이 기준이고 D7에 적는다. 프로토타입은 아직 디자인 시스템으로 옮기지 않았으니(`--g`, `--ln`, `--mut`, Pretendard) 옮기지 않은 곳은 화면별로 적되 매번 새 문제로 감점하지 않는다.
 
-The design source of truth is `design-system/README.md` (a copy of the designer's design system): role tokens in `design-system/tokens.json`, components in `design-system/components/` (`.dj-*`), copy rules (해요체, the two verdict word sets, cm differences with U+2212), the icon set in `design-system/icons/`, and the accessibility notes. Judge every screen against it (gstack Pass 5 with DESIGN.md present). Raw color values, non-token spacing, other fonts or icon sets, and components that duplicate a `.dj-*` one are findings. Where the design system's wording differs from `docs/policy/`, the policy wins; list the mismatch under D7. The prototype has not been migrated yet (it still uses `--g`, `--ln`, `--mut` and Pretendard), so report migration gaps per screen rather than re-scoring them as new problems each time.
+## 판단 원칙
 
-## Design principles (gstack, verbatim intent)
+1. 빈 화면에도 다음 행동과 맥락을 준다. "항목 없음"으로 끝내지 않는다.
+2. 화면마다 처음, 두 번째, 세 번째로 볼 것이 정해져 있다.
+3. "깔끔하게" 같은 느낌 말고 구체적인 결정으로 말한다.
+4. 긴 이름, 결과 0개, 오류, 처음 쓰는 사람도 사용자 경험이다.
+5. 아무 템플릿에나 있는 흔한 패턴은 감점이다.
+6. 모바일 화면은 데스크톱을 세로로 쌓은 것이 아니다.
+7. 라벨, 대비, 터치 영역을 챙긴다.
+8. 쓸모가 분명하지 않은 요소는 뺀다.
+9. 사이즈를 추천하는 곳은 작은 어긋남도 신뢰를 깎는다.
 
-1. Empty states are features. "No items found" is not a design: give warmth, a primary action, and context.
-2. Every screen has a hierarchy: what the user sees first, second, third.
-3. Specificity over vibes. "Clean, modern UI" is not a decision.
-4. Edge cases are user experiences: long names, zero results, errors, first-time vs. power user.
-5. Generic patterns are the enemy. If it looks like every template, it fails.
-6. Mobile is not "stacked desktop"; each viewport is intentional.
-7. Accessibility is not optional: labels, contrast, touch targets.
-8. Subtraction default: an element that does not earn its pixels is cut.
-9. Trust is earned at the pixel level. For DANGJANG this matters most where a size is recommended.
+"뭔가 이상하다"는 느낌은 어긴 원칙의 번호로 바꿔 말한다. 화면 하나가 아니라 화면들이 이어진 전체를 본다. 한 손 사용, 느린 통신, 처음 vs 100번째 사용을 떠올려 본다. "3개만 보여 줄 수 있다면 무엇을 남길까?"를 묻는다.
 
-Ways of seeing (gstack cognitive patterns): see the system, not the screen; simulate real use (one hand, bad signal, first time vs. 100th); "if I can only show 3 things, which 3?"; trace every "this feels wrong" to a broken principle.
+## 시작 전에
 
-## Before the passes
+첫인상 점수(0~10)와 이 결과물의 10점 모습을 적는다. 사용자 상태(비회원, 기준 옷 없음, 기준 옷 있음, 옷 많음)마다 홈 → 상품 상세 → 옷장 등록 → 내 옷장을 따라가 본다. 데모의 상태 바꾸기 기능이나 코드를 쓴다.
 
-Give an initial overall impression 0–10 and say what a 10 looks like for this artifact (gstack 0A). Walk each user state end to end: 비회원, 기준 옷 없음, 기준 옷 있음, 옷 많음 — 홈 → 상품 상세 → 옷장 등록 → 내 옷장. Use the demo's state switcher, or trace the code.
+## 차원 (D1~D6은 0~10점, D7은 점수 없음)
 
-## Passes (rate passes 1–6 from 0 to 10; pass 7 is unscored)
-
-| # | Pass | What a 10 looks like |
+| # | 차원 | 10점이면 |
 |---|---|---|
-| D1 | Information architecture | Every screen defines what the user sees first, second, third. On the product detail screen the size verdict for *my* body is visible in 3 seconds and the biggest difference comes first. Include an ASCII map of screens and navigation. |
-| D2 | Interaction state coverage | A state table covers each feature: loading, empty, error, success, partial. Each cell says what the user SEES. DANGJANG-specific states: no base garment, no garment in the same group, product without measurements, all sizes sold out, photo measurement failed, permission denied. |
-| D3 | User journey and emotional arc | A storyboard (step / user does / user feels / screen supports it?) from first visit to first comparison. Time horizons: first 5 seconds (visceral), first 5 minutes (behavioral), long-term relationship (reflective). Registration effort is repaid before the user loses patience. |
-| D4 | Specificity | UI is described with concrete decisions, not generic patterns. Every label means one thing (e.g. 커요 / 넉넉해요 / 넓어요 are not mixed); every color means one thing (green is not both "my garment" and "similar"). |
-| D5 | Design-system alignment | Every screen uses `design-system/` tokens, components, copy rules, and icons. New components fit that vocabulary or are flagged. |
-| D6 | Mobile and accessibility | Touch targets ≥ 44px, text ≥ legible size (flag 12px gray hints), color contrast, form labels, input errors marked on the field, keyboard flow between measurement fields. |
-| D7 | Unresolved design decisions | A register of decisions that will haunt implementation if deferred. Unscored. |
+| D1 | 정보 구조 | 화면마다 볼 순서가 정해져 있다. 상품 상세에서 *내 몸* 기준 사이즈 판정이 3초 안에 보이고 가장 큰 차이가 먼저 나온다. 화면과 이동을 그린 ASCII 지도를 넣는다. |
+| D2 | 상태 | 기능마다 로딩, 비어 있음, 오류, 성공, 일부만 불러옴 상태에서 사용자가 무엇을 보는지 표로 있다. DANGJANG 상태: 기준 옷 없음, 같은 종류 옷 없음, 실측 없는 상품, 전 사이즈 품절, 사진 실측 실패, 권한 거부. |
+| D3 | 여정과 감정 | 첫 방문부터 첫 비교까지 단계별로 하는 일, 느끼는 것, 화면이 그걸 돕는지가 있다. 첫 5초, 첫 5분, 오래 쓸 때를 나눠 본다. 등록 수고가 지치기 전에 보상받는다. |
+| D4 | 구체성 | 라벨 하나는 뜻이 하나다(커요 / 넉넉해요 / 넓어요를 섞지 않음). 색 하나도 뜻이 하나다(초록이 "내 옷"과 "비슷함"을 함께 뜻하지 않음). |
+| D5 | 디자인 기준 | 모든 화면이 `design-system/`의 토큰, 컴포넌트, 문구, 아이콘을 쓴다. 새 컴포넌트는 따로 표시돼 있다. |
+| D6 | 모바일과 접근성 | 터치 영역 44px 이상, 읽히는 글자 크기(12px 회색 안내는 지적), 대비, 입력칸 라벨, 오류를 그 칸에 표시, 치수 칸 사이 키보드 이동. |
+| D7 | 미룬 결정 | 미루면 구현 때 문제가 될 결정 목록. |
 
-Overall design score = the **lowest** of D1–D6 (gstack rule).
+전체 점수는 D1~D6 중 가장 낮은 점수다.
 
-## Required sections in the report
-
-Add these after the shared template's sections, in Korean:
+## 보고서에 더할 섹션
 
 ```markdown
 ## 화면 구조
@@ -71,30 +67,30 @@ Add these after the shared template's sections, in Korean:
 |---|---|
 ```
 
-## Rules
+## 규칙
 
-- Argue from principles, never taste. "This feels off" must name the broken principle.
-- Do not draw new screens that are not in the mockup or demo. A missing screen becomes a decision in "정해야 할 것".
-- Do not invent controls. If you cannot confirm an element exists, keep the item conditional and say what to verify (gstack Pass 7 rule).
+- 취향이 아니라 원칙으로 말한다.
+- 목업이나 데모에 없는 화면을 새로 그리지 않는다. 빠진 화면은 "정해야 할 것"에 적는다.
+- 있는지 확인 못 한 요소는 조건부로 남기고 무엇을 확인할지 적는다.
 
-## 제안서 모드 (디자인 lens)
+## 제안서 모드 (디자인 관점)
 
-Use this mode when the target is a file in `docs/proposals/`, alone (`/review-design docs/proposals/<file>.md`) or as the 디자인 lens that `review-proposal` runs. It replaces the procedure above: no `review-process.md`, no D1–D7, no report file. Most proposals have no screens yet, so judge the flow and where the feature sits, not pixels. If the proposal points to a working prototype (`prototype/public/features/<기능>/` or a demo path it names), read that code and mark evidence `데모 확인`; otherwise `문서 추정`.
+대상이 `docs/proposals/`의 파일이면 위 절차 대신 이것만 한다. 혼자 돌 때도, `review-proposal`이 부를 때도 같다. 보고서 파일은 쓰지 않는다. 제안서는 대개 화면이 없으니 흐름과 놓일 자리를 본다. 제안서가 프로토타입(`prototype/public/features/<기능>/` 등)을 가리키면 코드를 읽고 `데모 확인`, 아니면 `문서 추정`.
 
-Think like the product designer of a mobile fashion app. Fashion shopping is mostly browsing, not searching; the product detail page is already crowded with photos, price, coupons, size, and reviews; and people only enter information when they can see what they get for it (policy principle 4, `docs/policy/README.md`).
+패션 쇼핑은 검색보다 둘러보기가 많다. 상품 상세는 이미 사진, 가격, 쿠폰, 사이즈, 후기로 붐빈다. 사람은 얻을 것이 보일 때만 정보를 넣는다(정책 원칙 4).
 
-**Read:** `CLAUDE.md`, `docs/eval/proposal-rubric.md` (anchors, evidence rule, 관점 결과 형식), the proposal, `design-system/README.md`, `docs/policy/02-대상과-상태.md` (USR states), and the prototype code the proposal names.
+**읽을 것:** `CLAUDE.md`, `docs/eval/proposal-rubric.md`, 제안서, `design-system/README.md`, `docs/policy/02-대상과-상태.md`, 제안서가 가리키는 코드.
 
-| ID | Item | The question a fashion-commerce design team actually asks | 10 looks like |
+| ID | 항목 | 볼 것 | 10점이면 |
 |---|---|---|---|
-| X1 | 만나는 곳과 동기 | Where does the user first meet this (home, product detail, cart, order complete, closet, notification), and what were they doing a second before? Browsing or buying? | Entry points named with the user's intent at each. Someone who came to buy and someone who came to browse both have a reason to tap. |
-| X2 | 기존 화면에 주는 영향 | If it goes into an existing screen, what does it push down? Does the distance to size selection and the buy button grow? | Every touched screen is named with what moves. Product detail changes keep the size verdict and the buy button where they are, or justify the move. |
-| X3 | 수고 대비 보상 | What effort does it ask (register a garment, enter measurements, take a photo, arrange a layout)? Is the payoff visible before the effort, and does it arrive in the first five minutes? | Effort and payoff listed step by step. The first payoff comes before the user's patience runs out, and a user with 0–2 garments still gets something. |
-| X4 | 상태별 화면 | What does each state see: 비회원, 옷장 0벌, 옷 1~2벌, 기준 옷 없음, product without measurements, size sold out, loading or failure? | Each state that applies has a one-line answer. Empty states have a next action, not "없음". |
-| X5 | 신뢰와 표현 | Do verdict words and numbers follow the design system and `REC-04`/`REC-05`? When the feature is wrong, can the user see why? For look/outfit features, who keeps the content (images, templates) good? | Wording reuses the design-system verdict sets. The "why" is visible. Content upkeep has an owner. |
-| X6 | 디자인 시스템 | Can it be built from existing tokens and `.dj-*` components, or does it need new ones? | New components are named and justified; everything else maps to an existing one. |
+| X1 | 진입점과 동기 | 사용자가 이 기능을 어느 화면에서 처음 보나(홈, 상품 상세, 장바구니, 주문 완료, 옷장, 알림)? 그때 사러 왔나, 둘러보러 왔나? | 진입점마다 그때 사용자의 목적이 적혀 있다. 사러 온 사람도 둘러보러 온 사람도 누를 이유가 있다. |
+| X2 | 기존 화면에 주는 영향 | 기존 화면에 들어가면 무엇이 밀려나나? 사이즈 선택과 구매 버튼까지 멀어지나? | 건드리는 화면마다 바뀌는 것이 적혀 있다. 상품 상세의 사이즈 판정과 구매 버튼은 제자리이거나 옮기는 이유가 있다. |
+| X3 | 수고 대비 보상 | 무슨 수고를 시키나(옷 등록, 치수 입력, 사진, 배치)? 수고 전에 보상이 보이고 첫 5분 안에 오나? | 수고와 보상이 단계별로 있다. 지치기 전에 첫 보상이 오고, 옷이 0~2벌인 사람도 얻는 것이 있다. |
+| X4 | 상태별 화면 | 비회원, 옷장 0벌, 1~2벌, 기준 옷 없음, 실측 없는 상품, 품절, 로딩·실패 때 무엇이 보이나? | 해당 상태마다 한 줄 답이 있다. 빈 상태에는 다음 행동이 있다. |
+| X5 | 신뢰와 표현 | 판정 낱말과 숫자가 디자인 시스템과 `REC-04`/`REC-05`를 따르나? 틀렸을 때 이유가 보이나? 코디 기능이면 이미지·템플릿 품질은 누가 관리하나? | 기존 판정 낱말을 쓴다. 판정 이유가 보인다. 콘텐츠 관리 담당이 있다. |
+| X6 | 디자인 시스템 | 있는 토큰과 `.dj-*`로 만들 수 있나? | 새 컴포넌트는 이름과 이유가 있고, 나머지는 쓸 기존 컴포넌트가 정해져 있다. |
 
-**Lens artifacts (in the 관점 결과):**
+**관점 결과에 넣을 것:**
 
 ```markdown
 흐름: <진입> → <핵심 행동> → <첫 보상> · <끊기는 곳이 있으면 어디>
@@ -105,4 +101,4 @@ Think like the product designer of a mobile fashion app. Fashion shopping is mos
 <빠졌거나 모호한 상태만>
 ```
 
-Do not design new screens or invent controls the proposal or prototype does not have. A missing screen is a 고칠 것, phrased as the decision to make.
+제안서나 프로토타입에 없는 화면과 조작 요소를 지어내지 않는다. 빠진 화면은 "고칠 것"에 정할 결정으로 적는다.
