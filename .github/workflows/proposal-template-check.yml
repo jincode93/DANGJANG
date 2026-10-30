@@ -1,0 +1,31 @@
+# 자동 검토가 매기는 항목(B1~L6)마다 제안서 양식에 칸이 있는지 본다.
+# 항목은 각 관점 스킬의 제안서 모드 표에서 읽고, 양식(docs/proposals/README.md)의 칸 이름 옆 번호와 맞춘다.
+# 기준만 바꾸고 양식을 그대로 두면, 양식대로 쓴 제안서도 빈 항목에서 낮은 점수를 받는다.
+name: 제안서 양식 검사
+
+on:
+  pull_request:
+    paths:
+      - "docs/proposals/README.md"
+      - "docs/eval/proposal-rubric.md"
+      - ".claude/skills/review-*/SKILL.md"
+      - ".github/workflows/proposal-template-check.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 검토 항목마다 양식에 칸이 있는지
+        run: |
+          ids=$(grep -ohE '^\| [BXTL][0-9]+ \|' .claude/skills/review-*/SKILL.md | tr -d '| ' | sort -u)
+          [ -n "$ids" ] || { echo "스킬에서 검토 항목을 찾지 못함"; exit 1; }
+          missing=""
+          for id in $ids; do
+            grep -qE "^## .*\((.*[ ,])?$id([,)].*)?$" docs/proposals/README.md || missing="$missing $id"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error file=docs/proposals/README.md::양식에 칸이 없는 검토 항목:$missing. 양식의 칸 이름 옆 (번호)에 넣거나 새 칸을 만드세요."
+            exit 1
+          fi
+          echo "검토 항목 $(echo $ids | wc -w)개 모두 양식에 칸이 있음"

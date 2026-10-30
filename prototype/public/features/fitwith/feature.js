@@ -78,7 +78,7 @@ const codySeason = (x) => /-s$/.test(grpOf(x)) && x.cat !== 'outer' ? 'short' : 
 function codyPickC(cat, season = 'long') {
   const gs = CODY_GRP[season][cat]; if (!gs.length) return null; // 반팔 계절의 아우터는 비워요
   const all = S.closet.filter((c) => c.cat === cat && codyCan(c)), a = all.filter((c) => gs.includes(grpOf(c)));
-  const pick = (l) => l.find((c) => c.subBase) || l.find((c) => c.base) || l[0] || null; // 세부 종류 기준 옷 → 대분류 기준 옷 → 먼저 담은 옷
+  const pick = (l) => l.find((c) => c.base) || l[0] || null; // 기준 옷(세부 종류마다 하나, BASE-01) → 먼저 담은 옷
   return pick(a) || pick(all); // 계절에 맞는 옷이 없으면 그 종류에서 내가 등록한 옷(기준 옷 먼저)
 }
 // 기본 배치(뒤 → 앞): 아우터 · 하의 · 상의

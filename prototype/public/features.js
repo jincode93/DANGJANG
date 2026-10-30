@@ -6,6 +6,7 @@
                         · 'order.return'(o: 반품 · 교환 버튼. 빈 문자열이 아니면 완료본 모달 대신 신기능 흐름) · 'order.stat'(o: 주문 상태 글, 빈 문자열이면 완료본)
                         · 'order.card'(o: 주문 내역 카드 맨 아래) · 'detail.chip'(p, j: 상세 사진 위 칩 글, 빈 문자열이면 완료본)
                         · 'detail.size'(p, j, pp: 상세 사이즈 칸의 기준 옷 줄 · 사이즈 · 비교를 통째로 대신할 HTML, 빈 문자열이면 완료본) · 'rank.filter'(list, p: 랭킹 기간 줄 아래) · 'rank.list'(list, p: 랭킹 목록 대신 그릴 HTML, 빈 문자열이면 완료본 목록)
+     onboard            온보딩 뒤에 붙일 장 [[라벨, 제목, 설명, 그림 폭, 그림 주소], …]
      after()            화면을 다 그린 뒤 · start()  앱을 열 때 (켜져 있을 때만)
      panel              오른쪽 패널 테스트 버튼 [['이름', () => {…}], …]. 손으로 하기 번거로운 상태만
    켠 기능은 주소 ?f=id,id 에 남는다. 기본은 모두 꺼짐
@@ -56,6 +57,6 @@ const DJ = (() => {
     for (const id of [...on]) if (!list.some((f) => f.id === id)) on.delete(id); // 없는 기능 이름은 주소에서 지움
     setUrl(); panel(); live().forEach((f) => f.start && f.start()); render();
   }
-  return { feature, slot, after, ready, isOn: (id) => on.has(id) };
+  return { feature, slot, after, ready, onboard: () => live().flatMap((f) => f.onboard || []), isOn: (id) => on.has(id) };
 })();
 const slot = DJ.slot;
