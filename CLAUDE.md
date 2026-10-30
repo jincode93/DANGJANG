@@ -88,8 +88,8 @@ logs/time-log.md          작업 시간 기록
 - **작업을 시작할 때:** `git status`로 지금 상태를 본다. 커밋하지 않은 변경이 있으면 먼저 사용자에게 묻는다. `main`으로 옮겨 최신을 받고(`git pull`), `이름/주제` 브랜치를 만든다(예: `minji/rec-04-판정기준`). 이름은 GitHub 아이디(`gh api user --jq .login`)를 쓴다. `main`에는 커밋하지 않는다.
 - **요청이 무엇인지 먼저 가른다.**
   - 지금 있는 정책·용어가 틀렸거나 헷갈린다 → `docs/policy/`, `docs/glossary.md`의 해당 부분을 고친다.
-  - 새 기능이다(지금 정책 ID에 없는 기능, 화면, 흐름) → **`docs/proposals/기능이름.md` 한 파일만 만든다.** 양식은 `docs/proposals/README.md`. 정책, 용어집, PRD는 고치지 않는다. 합의되면 관리자가 정책으로 옮긴다.
-  - 신기능의 프로토타입을 만든다 → **`prototype/public/features/기능/` 폴더와 `prototype/public/index.html`의 그 기능 한 줄만 고친다.** 완료본(`app.js`, `app.css`)은 고치지 않는다. 끼울 자리가 더 필요하면 완료본에 자리만 여는 PR을 따로 올린다. 쓰는 법은 `prototype/public/features.js` 맨 위.
+  - 새 기능이다(지금 정책 ID에 없는 기능, 화면, 흐름) → **제안서 `docs/proposals/기능이름.md`와 토글 프로토타입을 한 PR로 함께 만든다.** 합의 전에 실제 화면으로 검토하려는 흐름이다. 양식은 `docs/proposals/README.md`. 정책, 용어집, PRD는 고치지 않는다. 합의되면 관리자가 정책으로 옮긴다. 사용자가 제안서만 원하면 제안서만 만든다.
+  - 신기능의 프로토타입을 만든다(제안서와 함께든 따로든) → **`prototype/public/features/기능/` 폴더와 `prototype/public/index.html`의 그 기능 한 줄만 고친다.** 완료본(`app.js`, `app.css`)은 고치지 않는다. 끼울 자리가 더 필요하면 완료본에 자리만 여는 PR을 따로 올린다. 쓰는 법은 `prototype/public/features.js` 맨 위.
   - 완료본(데모) 화면을 고친다 → `prototype/public/`의 해당 파일을 고친다.
   - 어느 쪽인지 애매하면 고치기 전에 사용자에게 묻는다.
 - **"커밋하고 푸시해줘"는 브랜치에 커밋해 푸시하고 PR을 여는 것까지를 뜻한다.** PR 설명은 `.github/pull_request_template.md` 양식을 채운다.
