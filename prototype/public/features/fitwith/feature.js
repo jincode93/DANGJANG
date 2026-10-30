@@ -60,7 +60,7 @@ function codyRef(r) {
   if (!r) return null;
   if (r.k === 'p') {
     const p = PB[r.id]; if (!p) return null;
-    const j = judge(p), ks = sizeKeys(p) || [], sz = r.size || (j.n === 5 ? j.rec : ks[0]);
+    const ks = sizeKeys(p) || [], sz = r.size || codyPickSize(p) || ks[0];
     const len = p.sizes && p.sizes[sz] && +p.sizes[sz][0];
     const src = codyFlat(p) || IMG[p.img], k = CUT[p.img] || codyCutOf(src);
     return { p, name: p.name, img: k || src, cut: !!k, len: len || codyLen(p.cat), size: sz, cat: p.cat, pend: codyTagOf(p.id) };
@@ -77,7 +77,7 @@ const CODY_GRP = { long: { top: ['top-l'], bottom: ['pants-l', 'skirt-l'], outer
 const codySeason = (x) => /-s$/.test(grpOf(x)) && x.cat !== 'outer' ? 'short' : 'long'; // 아우터의 outer-s는 '짧은 아우터'라 계절과 무관
 function codyPickC(cat, season = 'long') {
   const gs = CODY_GRP[season][cat]; if (!gs.length) return null; // 반팔 계절의 아우터는 비워요
-  const all = S.closet.filter((c) => c.cat === cat && c.fit === 'good' && c.img), a = all.filter((c) => gs.includes(grpOf(c)));
+  const all = S.closet.filter((c) => c.cat === cat && codyCan(c)), a = all.filter((c) => gs.includes(grpOf(c)));
   const pick = (l) => l.find((c) => c.subBase) || l.find((c) => c.base) || l[0] || null; // 세부 종류 기준 옷 → 대분류 기준 옷 → 먼저 담은 옷
   return pick(a) || pick(all); // 계절에 맞는 옷이 없으면 그 종류에서 내가 등록한 옷(기준 옷 먼저)
 }
@@ -114,7 +114,7 @@ function codyFloor(its, live, o = {}) {
   const at = {}, items = [], one = (q) => { const u = q.e.x.u, s = pos[u] || { x: q.x, y: q.y + dy }, y = Math.max(0, Math.min(h - q.ih, s.y)); at[u] = { x: s.x, y };
     items.push({ u, x: s.x, y, ih: q.ih, img: q.e.r.img, cut: q.e.r.cut, s: s.s || 1, r: s.r || 0 });
     const on = sel === u;
-    return `<${tag} class="cf-it ${q.e.r.cut ? '' : 'ph'} ${on ? 'sel' : ''} ${(s.s || 1) !== 1 ? 'tf' : ''}" ${live ? `data-a="codyTap" data-x="${u}"` : ''} style="left:${s.x}px;top:${y}px;height:${q.ih}px;${codyTf(s)}" aria-label="${esc(q.e.r.name)}${live ? ' · 누르면 맨 앞으로' : ''}"><img src="${q.e.r.img}" alt="" draggable="false">${live && q.e.x.k === 'p' ? `<span class="cf-ptag ${q.e.r.pend === '장바구니' ? 'c' : ''}">${q.e.r.pend === '장바구니' ? '장바구니' : '구매 전'}</span>` : ''}${on ? codyHandles(u) : ''}</${tag}>` };
+    return `<${tag} class="cf-it ${q.e.r.cut ? '' : 'ph'} ${on ? 'sel' : ''} ${(s.s || 1) !== 1 ? 'tf' : ''}" ${live ? `data-a="codyTap" data-x="${u}"` : ''} style="left:${s.x}px;top:${y}px;height:${q.ih}px;${codyTf(s)}" aria-label="${esc(q.e.r.name)}${live ? ' · 누르면 맨 앞으로' : ''}"><img src="${q.e.r.img}" alt="" draggable="false">${live && q.e.x.k === 'p' ? `<span class="cf-ptag ${q.e.r.pend === '장바구니' ? 'c' : ''}">${q.e.r.pend === '장바구니' ? '장바구니' : '구매 전'}${q.e.r.size ? ` · ${q.e.r.size}` : ''}</span>` : ''}${on ? codyHandles(u) : ''}</${tag}>` };
   const decos = (its || []).filter(codyDeco).map((x) => { const s = pos[x.u] || { x: CODY_W / 2, y: CODY_H / 2 }; at[x.u] = { x: s.x, y: s.y }; return { x, s } });
   const dh = decos.map(({ x, s }) => `<${tag} class="cf-it cf-deco ${sel === x.u ? 'sel' : ''}" ${live ? `data-a="codyTap" data-x="${x.u}"` : ''} style="left:${s.x}px;top:${s.y}px;${codyTf(s)}" aria-label="${x.k === 't' ? '글자' : '스티커'} ${esc(x.id)}">${codyDecoHtml(x)}${sel === x.u ? codyHandles(x.u) : ''}</${tag}>`).join('');
   const html = `${ps.map(one).join('')}${dh}${live && !L.length && !decos.length ? '<div class="cf-empty">아래 목록에서 옷을 눌러 바닥에 놓아 보세요</div>' : ''}`
@@ -168,17 +168,15 @@ const codyFront = (pp, u) => { const i = pp.its.findIndex((x) => x.u === u); if 
 // 직접 고르기: 색을 고르고 창을 닫으면(change) 바닥에 반영
 app.addEventListener('change', (e) => { if (e.target.id === 'codyColor' && cur() && cur().s === 'codyMake') A.codyBgSet(e.target.value.toUpperCase()) });
 // ── 코디 제목: 태그(#출근 · #주말 …)와 계절, 대표 옷으로 추천해요. 사용자는 고쳐 쓸 수 있어요
-const CODY_TAGS = ['출근', '주말', '약속', '여행', '데일리'];
 const CODY_SW = { 봄: ['봄', '산뜻한 봄'], 여름: ['여름', '시원한 여름'], 가을: ['가을', '선선한 가을'], 늦가을: ['늦가을', '쌀쌀한 늦가을'], 겨울: ['겨울', '포근한 겨울'] };
-const CODY_TT = { 출근: ['{s} 출근룩', '{s} 오피스 코디', '{i} 출근 코디'], 주말: ['{s} 주말 나들이룩', '{s} 주말 코디', '{i} 주말 코디'], 약속: ['{s} 약속룩', '{s} 데이트 코디', '{i} 약속 코디'],
-  여행: ['{s} 여행룩', '{s} 여행 코디', '{i} 여행 코디'], 데일리: ['{s} 데일리룩', '{i} 데일리 코디', '{s} 기본 코디'] };
+const CODY_NAMES = ['{s} 데일리룩', '{s} {i} 코디', '{i} 데일리 코디', '{s} 기본 코디'];
 // 계절감: 옷에서 먼저(패딩 → 겨울, 코트 → 늦가을, 상의가 모두 반팔이고 아우터 없음 → 여름), 아니면 지금 달
 function codySeasonWord(L) {
   const os = L.filter((e) => e.r.cat === 'outer'), ts = L.filter((e) => e.r.cat === 'top');
   if (os.some((e) => /패딩/.test(codySrc(e).sub || ''))) return '겨울';
   if (os.some((e) => /코트/.test(codySrc(e).sub || ''))) return '늦가을';
   if (ts.length && !os.length && ts.every((e) => codySeason(codySrc(e)) === 'short')) return '여름';
-  const m = new Date().getMonth() + 1; return m >= 3 && m <= 5 ? '봄' : m >= 6 && m <= 8 ? '여름' : m >= 9 && m <= 11 ? '가을' : '겨울';
+  return codySeasonLabel(codyBoardSeasons(L));
 }
 // 대표 옷 이름: 상품이 있으면 그 상품, 없으면 상의의 세부 종류 (예: 니트, 긴팔 셔츠)
 function codyKeyItem(L) {
@@ -186,53 +184,86 @@ function codyKeyItem(L) {
   const t = L.find((e) => e.r.cat === 'top') || L[0]; return t ? (codySrc(t).sub || CAT[t.r.cat]).replace(/^긴팔 |^반팔 /, '') : '데일리';
 }
 function codyTitleOf(its, tag, n = 0) {
-  const L = codyL(its), sw = CODY_SW[codySeasonWord(L)], tt = CODY_TT[tag] || CODY_TT['데일리'], t = tt[n % tt.length];
+  const L = codyL(its), sw = CODY_SW[codySeasonWord(L)], tt = CODY_NAMES, t = tt[n % tt.length]; // 해시태그 없이 계절 + 대표 옷으로
   return t.replace('{s}', sw[Math.floor(n / tt.length) % sw.length]).replace('{i}', codyKeyItem(L));
 }
 function codySaveSheet(patch) {
   const o = S.ov, two = o.mode === 'edit' || o.mode === 'resave';
-  o.html = `<div class="grab"></div><div style="font-size:18px;font-weight:800">${o.mode === 'edit' ? '수정한 코디를 저장할게요' : o.mode === 'rename' ? '이름과 태그 바꾸기' : '이 코디를 저장할게요'}</div>
-    <label class="cf-lbl" for="codyTitle">제목</label>
-    <div class="cf-tin"><input id="codyTitle" maxlength="24" value="${esc(o.title)}" autocomplete="off"><button data-a="codyTitleNext" aria-label="다른 제목 추천">다른 추천</button></div>
-    <div class="cf-hint">계절과 고른 태그로 추천했어요. 직접 고쳐 써도 돼요</div>
-    <div class="cf-lbl">태그 <small>여러 개 골라도 돼요</small></div>
-    <div class="cf-tags">${CODY_TAGS.map((t) => `<button class="${o.tags.includes(t) ? 'on' : ''}" data-a="codyTag" data-x="${t}" aria-pressed="${o.tags.includes(t)}">#${t}</button>`).join('')}</div>
+  o.html = `<div class="grab"></div><div style="font-size:18px;font-weight:800">${o.mode === 'edit' ? '수정한 코디를 저장할게요' : o.mode === 'rename' ? '이름 바꾸기' : '이 코디를 저장할게요'}</div>
+    <label class="cf-lbl" for="codyTitle">이름</label>
+    <div class="cf-tin"><input id="codyTitle" maxlength="24" value="${esc(o.title)}" autocomplete="off"><button data-a="codyTitleNext" aria-label="다른 이름 추천">다른 추천</button></div>
+    <div class="cf-hint">계절과 옷으로 추천했어요. 직접 고쳐 써도 돼요</div>
     ${two ? `<button class="btn" style="margin-top:18px" data-a="codySaveOk">${o.mode === 'edit' ? '이 코디에 저장' : '저장하기'}</button><button class="btn line" style="margin-top:8px" data-a="codySaveNew">새 코디로 저장</button>`
       : `<button class="btn" style="margin-top:18px" data-a="codySaveOk">${o.mode === 'rename' ? '바꾸기' : '저장하기'}</button>`}`;
   if (patch) { const sh = app.querySelector('.sheet'); if (sh) sh.innerHTML = o.html }
 }
-// ── 추천 상품: 바닥에 놓인 다른 종류 옷을 기준으로, 고른 종류(상의 · 하의 · 아우터)에 놓을 상품을 골라요
-// 순서: ① 내 옷 기준 추천 사이즈가 있는 상품 ② 같은 세부 종류(그 종류 내 옷이 없으면 계절 그룹) ③ 계절 ④ 색 톤 ⑤ 태그 ⑥ 후기 많은 순. 점수나 %는 보여 주지 않고 이유만 보여 줘요(REC-05)
-// 그 종류의 상품은 기준에서 빼요. 그래야 추천 상품을 놓았다 뺐다 해도 목록이 흔들리지 않아요
-// 데모 가정: 색 계열은 사진을 보고 손으로 붙인 값, 스타일 태그는 상품 이름 · 종류의 키워드로 대신해요 (실서비스는 입점 데이터로 받아야 함)
-const CODY_TONE = { hero: '무채색', base: '블루', jacket: '블루', knit: '브라운·베이지', slacks: '무채색', denim: '블루', tee: '무채색', puffer: '블루', leather: '무채색', suede: '브라운·베이지', lpuffer: '블루', tee2: '브라운·베이지', blackp: '무채색', wide: '블루', dshirt: '블루', pdHero: '블루', denim_k: '무채색', slacks_b: '브라운·베이지', denim_i: '블루', slacks_n: '블루', ltee: '브라운·베이지' };
-const CODY_STYLE = { 출근: ['셔츠', '니트', '슬랙스', '코트', '재킷'], 주말: ['티셔츠', '데님', '후드', '패딩'], 약속: ['셔츠', '니트', '슬랙스', '레더', '스웨이드'], 여행: ['티셔츠', '데님', '후드', '패딩'], 데일리: ['티셔츠', '데님', '셔츠', '니트'] };
+// ── 계절: 세부 종류마다 입는 계절을 정해 두고(이름에 니트 · 울 · 린넨 같은 말이 있으면 고쳐요), 보드에 놓인 옷들이 가장 많이 겹치는 계절을 "이 코디의 계절"로 봐요
+// 보드가 비어 있을 때만 이번 달로 정해요. 데모 가정: 계절표는 팀이 정한 값이고, 실서비스에서는 정책(CAT)에 한 칸을 더해 확정해야 함
+const CODY_SNS = ['봄', '여름', '가을', '겨울'];
+const CODY_SS = { // 세부 종류 키(app.js SUBS) → 입는 계절
+  'shirt-l': '봄가을', 'tee-l': '봄가을겨울', 'shirt-s': '봄여름', 'tee-s': '여름', hoodie: '봄가을겨울', // 긴팔 셔츠 · 긴팔 티 · 반팔 셔츠 · 반팔 티 · 후드티
+  'pants-l': '봄가을겨울', 'pants-s': '여름', 'skirt-l': '봄가을겨울', 'skirt-s': '봄여름가을', // 긴바지 · 반바지 · 긴치마 · 짧은 치마
+  cardigan: '봄가을', jacket: '봄가을', 'coat-s': '가을겨울', 'coat-l': '가을겨울', 'pad-s': '겨울', 'pad-l': '겨울' }; // 가디건 · 점퍼/자켓 · 숏코트 · 롱코트 · 숏패딩 · 롱패딩
+const CODY_WARM = /니트|울|wool|기모|플리스|fleece|코듀로이|corduroy|스웨터|sweater|캐시미어|무스탕|퍼 |패딩|다운/i, CODY_COOL = /린넨|linen|시어서커|메쉬|mesh|쿨링|썸머|summer/i;
+const codyMonthSeason = () => { const m = new Date().getMonth() + 1; return m >= 3 && m <= 5 ? '봄' : m >= 6 && m <= 8 ? '여름' : m >= 9 && m <= 11 ? '가을' : '겨울' };
+function codySeasons(x) {
+  const base = CODY_SNS.filter((w) => (CODY_SS[subOf(x)] || '봄가을').includes(w)), nm = (x.name || '') + ' ' + (x.tag || '');
+  const keep = CODY_WARM.test(nm) ? ['가을', '겨울'] : CODY_COOL.test(nm) ? ['봄', '여름'] : null; if (!keep) return new Set(base);
+  const r = base.filter((w) => keep.includes(w)); return new Set(r.length ? r : base); // 이름은 계절을 좁히기만 해요 (코듀로이 반바지는 그대로 여름)
+}
+function codyBoardSeasons(L) {
+  if (!L.length) return new Set([codyMonthSeason()]);
+  const n = {}; L.forEach((e) => codySeasons(codySrc(e)).forEach((w) => { n[w] = (n[w] || 0) + 1 })); const mx = Math.max(...Object.values(n));
+  return new Set(CODY_SNS.filter((w) => n[w] === mx));
+}
+// 계절 이름 하나로: 이번 달 계절이 들어 있으면 그것, 아니면 겨울 → 가을 → 봄 → 여름 순
+const codySeasonLabel = (set) => set.has(codyMonthSeason()) ? codyMonthSeason() : ['겨울', '가을', '봄', '여름'].find((w) => set.has(w)) || codyMonthSeason();
+// 맞는 사이즈: 상품 상세와 같은 추천 계산(REC-01)의 추천 상태(REC-06)를 하나로 받아 칩 · 옵션 시트 · 놓는 사이즈가 함께 써요
+// 점수는 app.js recOf와 같고, 1위는 품절 사이즈까지 넣어 고른 뒤 상태를 정해요(REC-06 "품절 사이즈도 점수 계산에 넣는다")
+//   맞는 사이즈 없음: 1위도 핵심 부위(CAT-08) 중 하나가 4cm 넘게 작음 · 가장 맞는 사이즈 품절: 1위가 품절(재고 있는 다음 사이즈를 함께) · 추천: 그 밖
+//   두 사이즈 사이(REC-06 4)는 기준 값이 검토 중이라 아직 따지지 않아요. 이 계산은 데모용 사본이고 실서비스는 REC-01 결과를 그대로 받아요
+const CODY_CORE = { 'top-l': ['총장', '가슴', '어깨', '소매'], 'outer-s': ['총장', '가슴', '어깨', '소매'], 'outer-l': ['총장', '가슴', '어깨', '소매'], 'top-s': ['총장', '가슴', '어깨'],
+  'pants-l': ['허리', '엉덩이', '밑위', '총장'], 'pants-s': ['허리', '엉덩이', '밑위', '총장'], 'skirt-l': ['허리', '엉덩이', '총장'], 'skirt-s': ['허리', '엉덩이', '총장'] };
+function codyRec(p) {
+  const j = judge(p); if (j.n !== 5 || !p.sizes) return { state: null };
+  const parts = partsOf(p), core = CODY_CORE[grpOf(p)] || [], small = (d) => d.some((v, i) => core.includes(parts[i]) && v < -TOL * 2); let best = null;
+  for (const k of Object.keys(p.sizes)) { const d = deltaOf(p, j.base, k), sc = d.reduce((a, v, i) => a + Math.abs(v) * (i === 0 || i === 1 ? 1.3 : 1), 0); if (!best || sc < best.sc) best = { k, d, sc } }
+  if (!best) return { state: null };
+  if (small(best.d)) return { state: '맞는 사이즈 없음', base: j.base };
+  if (p.out.includes(best.k)) { const nx = j.rec && !small(deltaOf(p, j.base, j.rec)) ? j.rec : null; return { state: '가장 맞는 사이즈 품절', best: best.k, next: nx, base: j.base } }
+  return { state: '추천', rec: best.k, base: j.base };
+}
+const codyFit = (p) => { const r = codyRec(p); return r.state === '추천' ? r.rec : null }; // 칩 "추천 M"은 이때만
+const codyPickSize = (p) => { const r = codyRec(p); return r.state === '추천' ? r.rec : r.state === '가장 맞는 사이즈 품절' ? r.next : null }; // 놓을 때 · 시트에서 미리 고를 사이즈
+// 홈 랭킹(실시간)에서 그 대분류 탭을 골랐을 때의 순위
+const CODY_CRANK = {};
+const codyCatRank = (p) => { if (!CODY_CRANK[p.cat]) { CODY_CRANK[p.cat] = {}; P.filter((x) => x.cat === p.cat).sort((a, b) => b.rev - a.rev).forEach((x, i) => { CODY_CRANK[p.cat][x.id] = i + 1 }) } return CODY_CRANK[p.cat][p.id] || 999 };
+// ── 추천 상품: 아래 목록 상품 줄. 이 코디에 "더해 볼" 상품을 골라요 (같은 세부 종류로 견주는 건 비슷한 상품의 일)
+// 거르기: 고른 종류 탭의 상품만, 모든 사이즈 품절 · 보드에 놓인 상품 · (장바구니 상품: 앞에 따로) 빼기
+// 순서: ① 맞는 사이즈가 있다(REC-06 추천) ② 계절이 맞다(보드 전체로 정한 계절과 겹침) ③ 같은 그룹(그 종류로 놓인 내 옷 중 맨 앞의 옷과 같은 그룹. 없으면 계절 그룹) ④ 홈 랭킹
+// 점수나 %는 보여 주지 않고 이유만(REC-05). 그 종류의 상품은 기준에서 빼서 추천 상품을 놓았다 뺐다 해도 목록이 흔들리지 않아요
 function codyRecs(its, k, tags = [], o = {}) {
-  const L = codyL(its).filter((e) => !(e.r.cat === k && e.r.p)), now = L.filter((e) => e.r.cat === k).pop(), others = L.filter((e) => e.r.cat !== k);
-  const sw = codySeasonWord(L), se = sw === '여름' ? 'short' : 'long';
-  const nowSub = now ? codySrc(now).sub : null, nowG = now ? grpOf(codySrc(now)) : null, tones = others.map((e) => CODY_TONE[codySrc(e).img]).filter(Boolean);
-  const onFloor = others.filter((e) => e.r.p).map((e) => e.x.id);
+  const L = codyL(its).filter((e) => !(e.r.cat === k && e.r.p)), now = L.filter((e) => e.r.cat === k).pop(), bs = codyBoardSeasons(L);
+  const se = bs.has('여름') && !bs.has('가을') && !bs.has('겨울') ? 'short' : 'long', nowG = now ? grpOf(codySrc(now)) : null;
+  const onFloor = codyL(its).filter((e) => e.r.p).map((e) => e.x.id);
   return Object.values(PB).filter((p) => p.cat === k && !onFloor.includes(p.id) && !(o.noCart && inCart(p.id)) && !(o.skip || []).includes(p.id) && sizeKeys(p).some((z) => !p.out.includes(z))).map((p) => {
-    const j = judge(p), fit = j.n === 5, g = grpOf(p);
-    const subR = nowSub ? (p.sub === nowSub ? 0 : g === nowG ? 1 : 2) : ((CODY_GRP[se][k] || []).includes(g) ? 1 : 2);
-    const seOk = codySeason(p) === se, t = CODY_TONE[p.img], toneOk = t === '무채색' || tones.includes(t);
-    const tag = tags.find((x) => (CODY_STYLE[x] || []).some((w) => (p.name + (p.sub || '') + (p.tag || '')).includes(w)));
-    const why = [fit ? `추천 ${j.rec}` : null, subR < 2 ? (p.sub || p.tag) : null, seOk ? sw : null, toneOk ? (t === '무채색' ? '무채색' : '같은 톤') : null, tag ? '#' + tag : null].filter(Boolean);
-    return { p, rec: fit ? j.rec : null, why, key: [fit ? 0 : 1, subR, seOk ? 0 : 1, toneOk ? 0 : 1, tag ? 0 : 1, -(p.rev || 0)] };
+    const rec = codyFit(p), ps = codySeasons(p), both = new Set([...ps].filter((w) => bs.has(w))), g = grpOf(p), gOk = nowG ? g === nowG : (CODY_GRP[se][k] || []).includes(g);
+    const why = [rec ? `추천 ${rec}` : null, both.size ? codySeasonLabel(both) : null].filter(Boolean);
+    return { p, rec, why, key: [rec ? 0 : 1, both.size ? 0 : 1, gOk ? 0 : 1, codyCatRank(p)] };
   }).sort((a, b) => { for (let i = 0; i < a.key.length; i++) if (a.key[i] !== b.key[i]) return a.key[i] - b.key[i]; return 0 }).slice(0, o.n || 5);
 }
 // ── 비슷한 상품: 바닥에서 고른 옷(내 옷이든 상품이든)과 비슷한 상품. 옆에 놓아 견줘 보라고 보여 줘요
-// 순서: ① 같은 세부 종류 ② 같은 그룹(예: 긴팔 상의) ③ 비슷한 색 ④ 내 옷 기준 추천 사이즈가 있는 상품 ⑤ 후기 많은 순. 점수나 %는 보여 주지 않고 이유만(REC-05)
+// 순서: ① 같은 세부 종류 ② 같은 그룹(예: 긴팔 상의) ③ 그 안에서 홈 랭킹 순. 추천 사이즈(REC-06 추천)는 칩으로만. 점수나 %는 보여 주지 않아요(REC-05)
 // 홈 랭킹(실시간)에서 그 세부 종류 칩을 눌렀을 때의 순위: 같은 대분류 · 세부 종류 안에서 후기 많은 순 (app.js tabRank와 같은 기준)
 const CODY_RANK = {};
 const codyRank = (p) => { const k = p.cat + '|' + p.sub; if (!CODY_RANK[k]) { CODY_RANK[k] = {}; P.filter((x) => x.cat === p.cat && x.sub === p.sub).sort((a, b) => b.rev - a.rev).forEach((x, i) => { CODY_RANK[k][x.id] = i + 1 }) } return CODY_RANK[k][p.id] || 999 };
 function codySimilar(its, u, n = 8) {
   const e = codyL(its).find((v) => v.x.u === u); if (!e) return [];
-  const b = codySrc(e), k = e.r.cat, bSub = b.sub, bG = grpOf(b), bT = CODY_TONE[b.img];
+  const b = codySrc(e), k = e.r.cat, bSub = b.sub, bG = grpOf(b);
   const all = Object.values(PB).filter((p) => p.cat === k && !(e.x.k === 'p' && p.id === e.x.id) && sizeKeys(p).some((z) => !p.out.includes(z))).map((p) => {
-    const j = judge(p), fit = j.n === 5, subR = p.sub === bSub ? 0 : grpOf(p) === bG ? 1 : 2, toneOk = !!bT && CODY_TONE[p.img] === bT, rk = codyRank(p);
-    const why = [subR === 0 ? '같은 종류' : subR === 1 ? '비슷한 종류' : null, toneOk ? '비슷한 색' : null, fit ? `추천 ${j.rec}` : null, `랭킹 ${rk}위`].filter(Boolean);
-    return { p, rec: fit ? j.rec : null, why, subR, key: [subR, rk] }; // 순서는 홈 랭킹 그대로, 핏 · 색은 칩으로만
+    const rf = codyFit(p), subR = p.sub === bSub ? 0 : grpOf(p) === bG ? 1 : 2, rk = codyRank(p);
+    const why = [subR === 0 ? '같은 종류' : subR === 1 ? '비슷한 종류' : null, rf ? `추천 ${rf}` : null, `랭킹 ${rk}위`].filter(Boolean);
+    return { p, rec: rf, why, subR, key: [subR, rk] }; // 순서는 홈 랭킹 그대로, 핏 · 색은 칩으로만
   }).sort((a, b2) => { for (let i = 0; i < a.key.length; i++) if (a.key[i] !== b2.key[i]) return a.key[i] - b2.key[i]; return 0 });
   const near = all.filter((r) => r.subR < 2); return (near.length ? near : all).slice(0, n); // 같은 · 비슷한 종류가 없으면 같은 대분류에서
 }
@@ -251,12 +282,12 @@ function codyOptSheet(patch) {
   const o = S.ov, n = o.items.reduce((a, it) => a + it.qty, 0), sum = o.items.reduce((a, it) => a + sale(PB[it.pid]) * it.qty, 0);
   o.html = `<div class="grab"></div><div style="font-size:18px;font-weight:800">옵션을 확인해 주세요</div>
     <div class="cf-hint" style="margin-top:4px">${o.mode === 'cart' ? '코디에 놓인 상품을 장바구니에 담아요. 사이즈는 내 옷 기준 추천으로 골라 뒀어요' : '코디에 놓인 장바구니 상품이에요. 바꾼 옵션은 장바구니에도 반영돼요'}</div>
-    ${o.items.map((it, i) => { const p = PB[it.pid], j = judge(p), base = j.n === 5 ? j.base : null;
+    ${o.items.map((it, i) => { const p = PB[it.pid], rs = codyRec(p), base = rs.base || null;
       return `<div class="cf-os"><div class="cf-osh"><img src="${IMG[p.img]}" alt=""><div><small>${esc(p.brand)}</small><b>${esc(p.name)}</b><span class="num">${won(sale(p) * it.qty)}원</span></div></div>
-        ${p.colors && p.colors.length > 1 ? `<div class="cf-osl">컬러</div><div class="cf-tags">${p.colors.map((c) => `<button class="${it.color === c ? 'on' : ''}" data-a="codyOptColor" data-x="${i}|${c}" aria-pressed="${it.color === c}">${c}</button>`).join('')}</div>` : ''}
-        <div class="cf-osl">사이즈${base ? ` <small>${esc(base.name)} 기준</small>` : ''}</div>
+        ${p.colors && p.colors.length > 1 ? `<div class="cf-osl">컬러 <small>보드 사진은 대표 컬러예요</small></div><div class="cf-tags">${p.colors.map((c) => `<button class="${it.color === c ? 'on' : ''}" data-a="codyOptColor" data-x="${i}|${c}" aria-pressed="${it.color === c}">${c}</button>`).join('')}</div>` : ''}
+        <div class="cf-osl">사이즈${base ? ` <small>${esc(base.name)} 기준</small>` : ''}</div>${rs.state === '가장 맞는 사이즈 품절' ? `<div class="cf-osn">가장 맞는 사이즈(${rs.best})는 품절이에요.${rs.next ? ` 다음으로 맞는 사이즈: ${rs.next}` : ' 재고 있는 사이즈 중에는 맞는 사이즈가 없어요'}</div>` : rs.state === '맞는 사이즈 없음' ? '<div class="cf-osn">내 옷과 비교하면 맞는 사이즈가 없어요</div>' : ''}
         <div class="cf-tags cf-oss">${sizeKeys(p).map((k) => { const out = p.out.includes(k), w = !out && base && p.sizes ? fitWord(p, base, k) : '';
-          return `<button class="${it.size === k ? 'on' : ''}" data-a="codyOptSize" data-x="${i}|${k}" ${out ? 'disabled' : ''} aria-pressed="${it.size === k}">${k}${out ? ' · 품절' : ''}${!out && base && k === j.rec ? '<em>추천</em>' : ''}${w ? `<small>${w}</small>` : ''}</button>` }).join('')}</div>
+          return `<button class="${it.size === k ? 'on' : ''}" data-a="codyOptSize" data-x="${i}|${k}" ${out ? 'disabled' : ''} aria-pressed="${it.size === k}">${k}${out ? ' · 품절' : ''}${!out && rs.state === '추천' && k === rs.rec ? '<em>추천</em>' : !out && rs.state === '가장 맞는 사이즈 품절' && k === rs.next ? '<em>다음 사이즈</em>' : ''}${w ? `<small>${w}</small>` : ''}</button>` }).join('')}</div>
         <div class="cf-osq"><span>수량</span><div class="pd-qty"><button class="hit" data-a="codyOptQty" data-x="${i}|-1" aria-label="수량 줄이기" ${it.qty <= 1 ? 'disabled' : ''}>${I.minus}</button><span class="num">${it.qty}</span><button class="hit" data-a="codyOptQty" data-x="${i}|1" aria-label="수량 늘리기">${I.plus}</button></div></div></div>` }).join('')}
     <div class="cf-ost num"><span>총 ${n}개</span><b>${won(sum)}원</b></div>
     ${o.canKeep ? `<button class="cf-keep ${o.keep ? 'on' : ''}" data-a="codyOptKeep" aria-pressed="${!!o.keep}"><span class="chk ${o.keep ? 'on' : ''}">${o.keep ? '✓' : ''}</span>이 코디도 저장해 둘게요</button>` : ''}
@@ -275,16 +306,22 @@ function codyQuietSave() {
 // 제목을 직접 고치면 그대로 기억해요 (다시 그리지 않아 입력이 끊기지 않아요)
 app.addEventListener('input', (e) => { if (e.target.id === 'codyTitle' && S.ov) S.ov.title = e.target.value });
 // 장바구니 맨 위: 장바구니 옷을 내 옷장 옷이랑 맞춰 보는 화면으로. 옷장이 비었으면 등록부터 하자고 알려요
-const codyHasMine = () => S.user && S.closet.some((c) => c.img && c.fit === 'good');
+// 보드에 놓을 수 있는 내 옷 = 사진이 있는 옷 (CLO-01에 따라 옷장의 옷은 모두 잘 맞는 옷이라 핏 조건은 두지 않아요)
+// 총장도 있어야 해요: 보드의 크기를 총장으로 정하므로, 총장이 없는 옷(치수 부족, CLO-03)을 정해 둔 길이로 말없이 그리지 않아요(원칙 2)
+const codyLenOk = (c) => !!(c.m && +c.m[0] > 0); // 모든 치수 양식의 첫 칸이 총장
+const codyCan = (c) => !!c.img && codyLenOk(c);
+const codyHasMine = () => S.user && S.closet.some(codyCan);
+const codyNoPic = (cat) => S.closet.filter((c) => (!cat || c.cat === cat) && !c.img); // 옷장에 있지만 사진이 없어 놓을 수 없는 옷
+const codyNoLen = (cat) => S.closet.filter((c) => (!cat || c.cat === cat) && c.img && !codyLenOk(c)); // 사진은 있지만 총장이 없어 놓을 수 없는 옷
 const codyCartBar = () => { if (!S.cart.length) return '';
-  return `<button class="cf-cartbar" data-a="codyCartAll"><span class="cf-cbtx"><b>내 옷장 옷이랑 맞춰 볼까요?</b><small>${codyHasMine() ? (S.cart.length > 1 ? `장바구니 ${S.cart.length}개를 하나씩 가진 옷과 놓아 봐요` : '가진 옷과 같이 놓아 봐요') : '가진 옷 1벌만 등록하면 같이 놓아 볼 수 있어요'}</small></span><span class="cf-cbgo">맞춰 보기 ›</span></button>` };
+  return `<button class="cf-cartbar" data-a="codyCartAll"><span class="cf-cbtx"><b>내 옷장 옷이랑 맞춰 볼까요?</b><small>${!S.user ? '로그인하면 내 옷장 옷과 같이 놓아 볼 수 있어요' : codyHasMine() ? (S.cart.length > 1 ? `장바구니 ${S.cart.length}개를 하나씩 가진 옷과 놓아 봐요` : '가진 옷과 같이 놓아 봐요') : S.closet.length ? '옷에 사진을 더하면 같이 놓아 볼 수 있어요' : '가진 옷 1벌만 등록하면 같이 놓아 볼 수 있어요'}</small></span><span class="cf-cbgo">맞춰 보기 ›</span></button>` };
 // 옷장에 없는 종류는 등록하러 갔다가, 등록이 끝나면 이 화면으로 돌아와 바닥에 더해요
 function codyBack() {
   const r = S.codyRet; S.codyRet = null;
   nav = nav.filter((e) => !e.s.startsWith('reg') && !['loading', 'permDenied'].includes(e.s));
   while (nav.length > 1 && cur().s !== 'codyMake') nav.pop();
   if (cur().s !== 'codyMake') { go('cody'); return }
-  const k = r && r.slot, c = k && [...S.closet].reverse().find((x) => x.cat === k && x.fit === 'good' && x.img);
+  const k = r && r.slot, c = k && [...S.closet].reverse().find((x) => x.cat === k && codyCan(x));
   if (c) { const pp = cur().p, it = codyIt('c', c.id); pp.its.push(it); codyFront(pp, it.u); toast(`방금 등록한 ${c.name}${jo(c.name, '을', '를')} 바닥에 놓았어요`) }
   else if (k) toast(`사진이 있는 ${CAT[k]}만 놓을 수 있어요 · 옷 상세에서 사진을 추가해 주세요`);
   render(true);
@@ -297,11 +334,11 @@ const codyCtOf = (pp) => { if (pp.ct) return pp.ct; const fp = pp.its.find((x) =
 const CODY_CHK = '<span class="cf-on" aria-label="바닥에 놓임"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
 function codyPanel(pp) {
   const ct = codyCtOf(pp), on = new Set(pp.its.map((x) => x.k + ':' + x.id)), isOn = (t, id) => on.has(t + ':' + id);
-  const mine = S.closet.filter((c) => c.cat === ct && c.fit === 'good' && c.img), cartIds = [...new Set(S.cart.map((c) => c.pid))].filter((id) => PB[id] && PB[id].cat === ct);
+  const mine = S.closet.filter((c) => c.cat === ct && codyCan(c)), np = codyNoPic(ct).length, nl = codyNoLen(ct).length, cartIds = [...new Set(S.cart.map((c) => c.pid))].filter((id) => PB[id] && PB[id].cat === ct);
   const recs = codyRecs(pp.its, ct, pp.tags || [], { skip: cartIds, n: 8 });
   // 장바구니 밖에서 놓은 상품(상품 상세에서 연 경우 등)이 추천 목록에 없으면 상품 줄 맨 앞에 보여 줘요
   const loose = pp.its.filter((x) => x.k === 'p' && codyCatOf(x) === ct && !inCart(x.id) && !recs.some((r) => r.p.id === x.id)).map((x) => x.id), prods = [...new Set([...loose, ...cartIds])];
-  const mineRow = `<div class="cf-row"><div class="cf-rowh">내 옷 <small>${mine.length}</small></div>
+  const mineRow = `<div class="cf-row"><div class="cf-rowh">내 옷 <small>${mine.length}</small>${np || nl ? `<em class="cf-np">${[np ? `사진이 없는 옷 ${np}벌` : '', nl ? `총장이 없는 옷 ${nl}벌` : ''].filter(Boolean).join(' · ')}은 놓을 수 없어요</em>` : ''}</div>
     <div class="cf-mine">${mine.map((c) => `<button class="${isOn('c', c.id) ? 'on' : ''}" data-a="codyMine" data-x="${c.id}" aria-label="${esc(c.name)} ${c.size}${isOn('c', c.id) ? ' · 바닥에 놓임, 누르면 빼기' : ''}"><img src="${CUT[c.img] || IMG[c.img]}" alt="">${isOn('c', c.id) ? CODY_CHK : ''}</button>`).join('')}
       <button class="cf-mreg" data-a="codyReg" data-x="${ct}">+ ${CAT[ct]} 등록</button></div></div>`;
   const pcard = (p, tag, why) => `<button class="cf-pc ${isOn('p', p.id) ? 'on' : ''}" data-a="codyPut" data-x="${p.id}"><span class="img"><img src="${IMG[p.img]}" alt="">${isOn('p', p.id) ? CODY_CHK : ''}</span><small class="tg">${tag}</small><b>${esc(p.name)}</b><span class="pr num">${won(sale(p))}원</span>${why ? `<span class="why">${why.slice(0, 3).map((w) => `<i>${w}</i>`).join('')}</span>` : ''}</button>`;
@@ -363,7 +400,9 @@ SCRX.codyMake = (pp) => {
     <div class="cf-dock">${pp.hinted ? '' : '<div class="cf-tip">옷을 누르면 × 로 뺄 수 있어요. 끌어서 옮기고, 모서리를 끌면 크기 · 회전을 바꿔요. 크기를 바꾸면 실측 비율과 달라져요</div>'}
       ${card ? codyCard(pp, card) : `${nL ? codyStrip(pp, null) : ''}${(() => { // 바닥에 그 종류가 없고 내 옷장에도 없으면 등록하자고 알려요 (반팔 계절의 아우터는 일부러 비워 둔 거라 빼요)
       const se = pp.season || 'long', miss = ['bottom', 'top', 'outer'].filter((k) => !F.by(k).length && CODY_GRP[se][k].length && !codyPickC(k, se));
-      if (!miss.length) return ''; const L = miss.map((k) => CAT[k]).join(' · '), k = miss[0];
+      if (!miss.length) return ''; const L = miss.map((k) => CAT[k]).join(' · '), k = miss[0], np = codyNoPic(k), nlen = codyNoLen(k);
+      if (!np.length && nlen.length) return `<div class="cf-regcta"><div><b>총장이 있는 ${CAT[k]}${josa(CAT[k])} 없어요</b><small>내 옷장의 ${CAT[k]} ${nlen.length}벌에 총장이 없어 보드에 실제 비율로 놓을 수 없어요. 치수를 채우거나 아래 추천 상품으로 채워 볼 수 있어요</small></div><span class="cf-rgb"><button data-a="codyItem" data-x="${nlen[0].id}">치수 채우기</button><button class="ln" data-a="codyCt" data-x="${k}|go">추천 보기</button></span></div>`;
+      if (np.length) return `<div class="cf-regcta"><div><b>사진이 있는 ${CAT[k]}${josa(CAT[k])} 없어요</b><small>내 옷장의 ${CAT[k]} ${np.length}벌에 사진이 없어 보드에 놓을 수 없어요. 사진을 더하거나 아래 추천 상품으로 채워 볼 수 있어요</small></div><span class="cf-rgb"><button data-a="codyItem" data-x="${np[0].id}">사진 추가하기</button><button class="ln" data-a="codyCt" data-x="${k}|go">추천 보기</button></span></div>`;
       return `<div class="cf-regcta"><div><b>내 옷장에 ${L}${josa(CAT[miss[miss.length - 1]])} 없어요</b><small>가진 옷을 등록하거나, 아래 추천 상품으로 채워 볼 수 있어요</small></div><span class="cf-rgb"><button data-a="codyReg" data-x="${k}">${CAT[k]} 등록하기</button><button class="ln" data-a="codyCt" data-x="${k}|go">추천 보기</button></span></div>` })()}${codyPanel(pp)}`}
     </div></div>` };
 };
@@ -452,7 +491,7 @@ SCRX.codyView = (pp) => {
   return { node: `#19 맞춰 보기 · 저장한 코디 상세 (${q.name}) → 수정하기 · 어울리는 상품 · ⋯(이름 · 복사 · 삭제)`,
     bar: buy ? `<button class="btn line" style="flex:none;width:112px" data-a="codyModify" data-x="${q.id}">수정하기</button>${buy}` : `<button class="btn" data-a="codyModify" data-x="${q.id}">수정하기</button>`,
     body: `${hdrBack('', `<button data-a="codyMore" data-x="${q.id}" aria-label="더보기">${I.more}</button>`)}
-    <div class="cf-vhead"><b>${esc(q.name)}</b>${q.tags && q.tags.length ? `<div class="cf-vtags" style="padding:0;margin-top:6px">${q.tags.map((t) => `<span>#${t}</span>`).join('')}</div>` : ''}</div>
+    <div class="cf-vhead"><b>${esc(q.name)}</b><button class="cf-vren" data-a="codyRename" data-x="${q.id}" aria-label="이름 바꾸기">✎ 이름 바꾸기</button></div>
     <button class="cf-vfloor" data-a="codyModify" data-x="${q.id}" aria-label="이 코디 수정하기">${F.html}<span class="cf-vedit">✎ 눌러서 수정</span></button>
     <div class="sec" style="margin-top:18px"><h3>이 코디의 옷<small>${F.L.length}벌${ps.length ? ` · 장바구니 · 구매 전 상품 ${ps.length}개` : ''}</small></h3></div>
     <div class="cf-vlist">${rows}</div>
@@ -470,7 +509,7 @@ SCRX.cody = () => {
       : `<div class="pad" style="font-size:13px;color:var(--sub);line-height:1.5">장바구니에 상품을 담으면 여기서 내 옷이랑 맞춰 볼 수 있어요. 사기 전에 가진 옷과 같이 놓아 보고 정해요</div>`}
     <div class="sec"><h3>저장한 코디<small>${saved.length}</small></h3></div>
     <div class="cf-grid">${saved.map((q) => { const F = codyFloor(q.its, false, { pos: q.pos, bg: q.bg }), has = F.L.some((e) => e.r.pend === '장바구니'); // 장바구니에서 빠진 상품은 '구매 전'으로만 표시
-      return `<div class="cf-card" data-a="codyEdit" data-x="${q.id}" role="button" tabindex="0"><div class="cf-mini" style="height:${Math.round(F.h * sc)}px;background:${F.bg}"><div style="transform:scale(${sc})">${F.html}</div></div><b>${esc(q.name)}</b>${q.tags && q.tags.length ? `<small class="cf-ctags">${q.tags.map((t) => '#' + t).join(' ')}</small>` : ''}<small>옷 ${F.L.length}벌 · ${F.L.slice().reverse().map((e) => e.r.name).join(' + ')}</small>${has ? '<small class="cf-incart">장바구니 상품 포함</small>' : ''}</div>` }).join('')}
+      return `<div class="cf-card" data-a="codyEdit" data-x="${q.id}" role="button" tabindex="0"><div class="cf-mini" style="height:${Math.round(F.h * sc)}px;background:${F.bg}"><div style="transform:scale(${sc})">${F.html}</div></div><b>${esc(q.name)}</b><small>옷 ${F.L.length}벌 · ${F.L.slice().reverse().map((e) => e.r.name).join(' + ')}</small>${has ? '<small class="cf-incart">장바구니 상품 포함</small>' : ''}</div>` }).join('')}
       <button class="cf-add" data-a="codyNew">+ 새 코디</button></div>
     <div style="height:40px"></div>` };
 };
@@ -537,14 +576,14 @@ Object.assign(AX, {
     if (on) { pp.its = pp.its.filter((v) => v.u !== on.u); if (pp.pos) delete pp.pos[on.u]; render(); return }
     const F = codyFloor(pp.its, true, { pos: pp.pos, bg: pp.bg }), a = F.at[u] || { x: CODY_W / 2, y: 40 }, ci = inCart(pid), j = judge(PB[pid]);
     const side = pp.its.filter((v) => v.k === 'p' && (pp.simOf || {})[v.u] === u).length, dx = 118 + 26 * side, nx = a.x + dx <= CODY_W - 50 ? a.x + dx : Math.max(50, a.x - dx);
-    const it = codyIt('p', pid, ci ? ci.size : j.n === 5 ? j.rec : null); pp.its.push(it);
+    const it = codyIt('p', pid, ci ? ci.size : codyPickSize(PB[pid])); pp.its.push(it);
     pp.pos = Object.assign({}, pp.pos, { [it.u]: { x: Math.round(nx), y: Math.round(a.y + 10 * side) } }); pp.simOf = Object.assign({}, pp.simOf, { [it.u]: u }); pp.sel = u; render() },
   codyCt(x) { const [k, go2] = x.split('|'), pp = cur().p; pp.ct = k; if (go2) pp.card = null; render() },
   // 아래 목록의 내 옷 · 상품: 바닥에 없으면 더하고(맨 앞), 있으면 빼요
   codyMine(id) { const pp = cur().p, on = pp.its.find((x) => x.k === 'c' && x.id === id);
     if (on) { A.codyRemove(on.u); return } const it = codyIt('c', id); pp.its.push(it); codyFront(pp, it.u); render() },
   codyPut(id) { const pp = cur().p, on = pp.its.find((x) => x.k === 'p' && x.id === id);
-    if (on) { A.codyRemove(on.u); return } const ci = inCart(id), j = judge(PB[id]), it = codyIt('p', id, ci ? ci.size : j.n === 5 ? j.rec : null); pp.its.push(it); codyFront(pp, it.u); render() },
+    if (on) { A.codyRemove(on.u); return } const ci = inCart(id), j = judge(PB[id]), it = codyIt('p', id, ci ? ci.size : codyPickSize(PB[id])); pp.its.push(it); codyFront(pp, it.u); render() },
   codySave() {
     const pp = cur().p, sv = pp.sv && CD().saved.find((q) => q.id === pp.sv);
     if (!codyL(pp.its).length) { toast('옷을 한 벌 이상 놓아 주세요'); render(); return }
@@ -553,10 +592,9 @@ Object.assign(AX, {
     codySaveSheet(); render();
   },
   // 태그를 누르면 넣고 빼고, 마지막에 고른 태그로 제목을 다시 추천해요
-  codyTag(t) { const o = S.ov, i = o.tags.indexOf(t); if (i >= 0) o.tags.splice(i, 1); else o.tags.push(t); o.n = 0; o.title = codyTitleOf(codyCurIts(), o.tags[o.tags.length - 1], 0); codySaveSheet(true) },
   codyTitleNext() { const o = S.ov; o.n++; o.title = codyTitleOf(codyCurIts(), o.tags[o.tags.length - 1], o.n); codySaveSheet(true) },
   codySaveOk() {
-    if (S.ov.mode === 'rename') { const q = CD().saved.find((x) => x.id === cur().p.id), o = S.ov; q.name = (o.title || '').trim() || q.name; q.tags = [...o.tags]; closeOv(); toast('이름과 태그를 바꿨어요'); render(); return }
+    if (S.ov.mode === 'rename') { const q = CD().saved.find((x) => x.id === cur().p.id), o = S.ov; q.name = (o.title || '').trim() || q.name; closeOv(); toast('이름을 바꿨어요'); render(); return }
     const pp = cur().p, o = S.ov, nm = (o.title || '').trim() || codyTitleOf(pp.its, o.tags[o.tags.length - 1]), tags = [...o.tags];
     const its = codyCopyIts(pp.its), pos = pp.pos ? JSON.parse(JSON.stringify(pp.pos)) : null, bg = pp.bg || null; let sv = pp.sv && CD().saved.find((q) => q.id === pp.sv);
     if (sv) Object.assign(sv, { name: nm, tags, its, pos, bg }); else { sv = { id: 'k' + (uid++), name: nm, tags, its, pos, bg }; CD().saved.unshift(sv); pp.sv = sv.id }
@@ -575,7 +613,7 @@ Object.assign(AX, {
   codyCart() {
     const ps = codyProds(codyCurIts()).filter((id) => !inCart(id));
     if (!ps.length) { go('cart'); return }
-    sheet(''); Object.assign(S.ov, { mode: 'cart', canKeep: codyKeepable(), keep: true, items: ps.map((id) => { const p = PB[id], r = codyCurIts().find((x) => x.k === 'p' && x.id === id), j = judge(p), ok = sizeKeys(p).filter((z) => !p.out.includes(z)); return { pid: id, size: (r && r.size) || (j.n === 5 ? j.rec : ok[0]), color: (p.colors || [])[0] || null, qty: 1 } }), node: '#19 맞춰 보기 · 장바구니 담기 → 옵션 확인 시트(추천 사이즈 미리 고름)' });
+    sheet(''); Object.assign(S.ov, { mode: 'cart', canKeep: codyKeepable(), keep: true, items: ps.map((id) => { const p = PB[id], r = codyCurIts().find((x) => x.k === 'p' && x.id === id), j = judge(p), ok = sizeKeys(p).filter((z) => !p.out.includes(z)); return { pid: id, size: (r && r.size && !p.out.includes(r.size) ? r.size : null) || codyPickSize(p) || ok[0], color: (p.colors || [])[0] || null, qty: 1 } }), node: '#19 맞춰 보기 · 장바구니 담기 → 옵션 확인 시트(추천 사이즈 미리 고름)' });
     codyOptSheet(); render();
   },
   codyOptKeep() { S.ov.keep = !S.ov.keep; codyOptSheet(true) },
@@ -589,10 +627,10 @@ Object.assign(AX, {
   // 상세에서 고른 추천 상품을 더해 놓고 수정 화면으로. 아래 목록이 그 종류로 맞춰져서 다른 추천으로 바로 바꿔 볼 수 있어요
   codyModify(id, patch) { const q = CD().saved.find((v) => v.id === id); if (!q) return;
     const pp = { its: codyCopyIts(q.its), pos: q.pos ? JSON.parse(JSON.stringify(q.pos)) : null, bg: q.bg, tags: [...(q.tags || [])], sv: id, edit: true, from: 'closet' }; pp.snap = codySnap(pp); if (patch) patch(pp); closeOv(); go('codyMake', pp) },
-  codyRecModify(x) { const [id, pid] = x.split('|'), j = judge(PB[pid]); A.codyModify(id, (pp) => { const it = codyIt('p', pid, j.n === 5 ? j.rec : null); pp.its.push(it); pp.sel = it.u; pp.ct = PB[pid].cat }); codyToPanel() },
+  codyRecModify(x) { const [id, pid] = x.split('|'), j = judge(PB[pid]); A.codyModify(id, (pp) => { const it = codyIt('p', pid, codyPickSize(PB[pid])); pp.its.push(it); pp.sel = it.u; pp.ct = PB[pid].cat }); codyToPanel() },
   codyMore(id) { const q = CD().saved.find((v) => v.id === id);
-    sheet(`<div class="grab"></div><div style="font-size:16px;font-weight:800;margin-bottom:6px">${esc(q.name)}</div><div class="cf-menu"><button data-a="codyRename" data-x="${id}">이름 · 태그 바꾸기</button><button data-a="codyCopy" data-x="${id}">새 코디로 복사해서 맞춰 보기</button><button class="del" data-a="codyDel" data-x="${id}">삭제</button></div>`); S.ov.node = '#19 맞춰 보기 · 저장한 코디 ⋯ 메뉴'; render() },
-  codyRename(id) { const q = CD().saved.find((v) => v.id === id); closeOv(); sheet(''); Object.assign(S.ov, { mode: 'rename', tags: [...(q.tags || [])], n: 0, title: q.name, node: '#19 맞춰 보기 · 이름 · 태그 바꾸기' }); codySaveSheet(); render() },
+    sheet(`<div class="grab"></div><div style="font-size:16px;font-weight:800;margin-bottom:6px">${esc(q.name)}</div><div class="cf-menu"><button data-a="codyRename" data-x="${id}">이름 바꾸기</button><button data-a="codyCopy" data-x="${id}">새 코디로 복사해서 맞춰 보기</button><button class="del" data-a="codyDel" data-x="${id}">삭제</button></div>`); S.ov.node = '#19 맞춰 보기 · 저장한 코디 ⋯ 메뉴'; render() },
+  codyRename(id) { const q = CD().saved.find((v) => v.id === id); closeOv(); sheet(''); Object.assign(S.ov, { mode: 'rename', tags: [...(q.tags || [])], n: 0, title: q.name, node: '#19 맞춰 보기 · 이름 바꾸기' }); codySaveSheet(); render() },
   codyItem(id) { go('item', { id }) },
   codyRecTab(k) { cur().p.rk = k; render() },
   // 바닥에 놓인 장바구니 상품 → 옵션 확인 시트 → 주문
@@ -622,10 +660,10 @@ Object.assign(AX, {
 
 // 테스트 버튼용: 사진 있는 내 옷으로 저장한 코디 n개 (상의 · 하의, 첫 번째는 아우터까지, 두 번째는 상의를 겹쳐 입기)
 function sampleSaved(n) {
-  const of = (cat) => S.closet.filter((c) => c.cat === cat && c.fit === 'good' && c.img), T = of('top'), B = of('bottom'), O = of('outer'), tg = ['출근', '주말', '약속'], out = [];
+  const of = (cat) => S.closet.filter((c) => c.cat === cat && codyCan(c)), T = of('top'), B = of('bottom'), O = of('outer'), tg = ['출근', '주말', '약속'], out = [];
   for (let i = 0; i < n && T[i] && B[i % B.length]; i++) {
     const its = [i === 0 && O[0] ? codyIt('c', O[0].id) : null, codyIt('c', B[i % B.length].id), i === 1 && T[i + 1] ? codyIt('c', T[i + 1].id) : null, codyIt('c', T[i].id)].filter(Boolean);
-    out.push({ id: 'k' + (uid++), name: codyTitleOf(its, tg[i]), tags: [tg[i]], its, pos: null, bg: CODY_BG[i % CODY_BG.length][0] });
+    out.push({ id: 'k' + (uid++), name: codyTitleOf(its, null, i), tags: [], its, pos: null, bg: CODY_BG[i % CODY_BG.length][0] });
   }
   return out;
 }
