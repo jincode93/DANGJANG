@@ -112,15 +112,16 @@ const SUB_DEFAULT = { top: 'tee-l', outer: 'jacket', bottom: 'pants-l' };
    세부 종류: 15종 (통합본은 한글 이름 '긴팔 셔츠'로 저장, 상세 v2 키 'shirt-l'과 1:1)
    그룹: 8개 (긴팔 상의 · 반팔 상의 · 짧은/긴 아우터 · 긴바지/반바지 · 긴치마/짧은 치마) — 재는 부위가 같은 세부 종류끼리
    치수(m): 그룹 칸(GPARTS) 순서 배열. 재지 않은 칸은 null/0 → 비교 · 사이즈표에서 뺌
-   기준 옷: 그룹마다 하나 (+ 내 옷장의 세부 종류 기준은 선택). 다른 그룹 옷끼리는 비교하지 않음 */
+   기준 옷: 세부 종류마다 하나 (BASE-01). 기준 옷이 없으면 같은 그룹 옷과 자동 비교 (CMP-04). 다른 그룹 옷끼리는 비교하지 않음 */
 const SUBK = Object.fromEntries(Object.entries(SUBS).map(([k, v]) => [v.n, k])); // 한글 세부 종류 → v2 키
 const subOf = (x) => SUBS[x.sub] ? x.sub : SUBK[x.sub] || SUB_DEFAULT[x.cat];
 const grpOf = (x) => SUBS[subOf(x)].g;
 const partsOf = (x) => GPARTS[grpOf(x)];
-const GN = (x) => GROUP_N[grpOf(x)]; // 그룹 이름 (기준 옷 문구용)
+const GN = (x) => SUBS[subOf(x)].n; // 세부 종류 이름 (기준 옷 문구용)
+const josa = (w, a, b) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return w + (k >= 0 && k < 11172 && k % 28 ? a : b) }; // 받침 있으면 a
 const famOf = (p) => ofCat(p.cat).filter((c) => grpOf(c) === grpOf(p)); // 같은 그룹의 내 옷
-// 기준 옷: baseOf('top') = 그 종류의 아무 기준 옷(있는지 확인용) · baseOf(옷/상품) = 같은 그룹의 기준 옷
-const baseOf = (x) => typeof x === 'string' ? S.closet.find((c) => c.cat === x && c.base) : S.closet.find((c) => c.base && c.cat === x.cat && grpOf(c) === grpOf(x));
+// 기준 옷: baseOf('top') = 그 종류의 아무 기준 옷(있는지 확인용) · baseOf(옷/상품) = 같은 세부 종류의 기준 옷
+const baseOf = (x) => typeof x === 'string' ? S.closet.find((c) => c.cat === x && c.base) : S.closet.find((c) => c.base && c.cat === x.cat && subOf(c) === subOf(x));
 const gArr = (x, m) => partsOf(x).map((_, i) => m && +m[i] > 0 ? +m[i] : null); // 빈 칸은 null로
 const remapM = (from, m, to) => to.map((k) => { const i = from.indexOf(k); return i >= 0 && m && m[i] != null ? m[i] : ''; }); // 부위 이름으로 칸 옮기기
 
@@ -153,11 +154,11 @@ function legacyOf(c) { // 내 옷장 실루엣(옛 칸 순서로 그림)용: 상
   const sh = v.어깨 || (v.가슴 ? v.가슴 * 0.9 : 0), sl = v.소매 || (v.전체소매 ? v.전체소매 - sh / 2 : 20);
   return v.총장 && v.가슴 ? [v.총장, sh, v.가슴, sl] : null;
 }
-function ensureBases() { // 그룹마다 기준 옷 하나: 없으면 먼저 등록한 잘 맞는 옷, 둘 이상이면 먼저 등록한 옷만 남김
-  for (const c of S.closet) if (c.fit !== 'good') { c.base = false; c.subBase = false }
+function ensureBases() { // 세부 종류마다 기준 옷 하나: 없으면 먼저 등록한 잘 맞는 옷, 둘 이상이면 먼저 등록한 옷만 남김
+  for (const c of S.closet) if (c.fit !== 'good') c.base = false;
   const good = S.closet.filter((c) => c.fit === 'good').sort((a, b) => a.at - b.at), seen = {};
-  good.forEach((c) => { if (c.base) { if (seen[grpOf(c)]) c.base = false; else seen[grpOf(c)] = c } });
-  good.forEach((c) => { if (!seen[grpOf(c)]) { c.base = true; seen[grpOf(c)] = c } });
+  good.forEach((c) => { if (c.base) { if (seen[subOf(c)]) c.base = false; else seen[subOf(c)] = c } });
+  good.forEach((c) => { if (!seen[subOf(c)]) { c.base = true; seen[subOf(c)] = c } });
 }
 const CATS = [
   { k: 'top', label: '상의', icon: 'top', parts: PARTS.top, sizes: ['S', 'M', 'L', 'XL'], shape: 'top', subs: SUB.top,
@@ -240,7 +241,7 @@ const sale = (p) => p.sp || Math.round(p.price * (100 - p.dc) / 100 / 100) * 100
 const sizeKeys = (p) => p.sizes ? Object.keys(p.sizes) : p.list;
 let uid = 1;
 // 옷 한 벌. 치수는 그룹 칸 순서. 예전 형식(상의 4 · 바지 5칸) 데이터는 그룹 칸으로 옮기고 늘어난 칸은 예시 값으로 (g: true면 이미 그룹 칸)
-const item = (o) => { const x = Object.assign({ id: 'c' + (uid++), fit: null, notes: [], base: false, subBase: false, sub: null, img: null, returned: false, src: '직접 입력', at: uid }, o);
+const item = (o) => { const x = Object.assign({ id: 'c' + (uid++), fit: null, notes: [], base: false, sub: null, img: null, returned: false, src: '직접 입력', at: uid }, o);
   if (x.m && !x.g) x.m = fromLegacy(x, x.m, true); delete x.g;
   if (x.img && x.brand && !/^(data:|blob:|ms_|flat_)/.test(x.img)) { let p = (x.pid && PB[x.pid]) || P.find((q) => q.brand === x.brand && (q.name === x.name || q.name.includes(x.name) || x.name.includes(q.name)));
     if (p && FLAT_SWAP[p.id]) { p = PB[FLAT_SWAP[p.id]]; x.brand = p.brand; x.name = p.name; if (x.pid) x.pid = p.id; }
@@ -295,7 +296,7 @@ function reset(preset) {
   const p = PRESETS[preset]();
   S = { preset, recent: ['셔츠', '패딩', '데님 자켓'], user: p.user, closet: p.closet, accounts: { kakao: !!p.user, naver: false, google: false }, pending: [], orders: [], cart: [],
     coupons: p.user ? [{ t: '신규 가입 10% 쿠폰', d: '3만 원 이상 · 10월 31일까지', used: false }] : [], likes: {}, popupSeen: false, notifAsked: false, notifOn: false,
-    firstReg: p.closet.length > 0, rack: {}, failNext: false, photoPerm: null, camPerm: null, after: null, ov: null, toast: null, push: null, notis: [], fitTodo: [] };
+    firstReg: p.closet.length > 0, rack: {}, cmp: {}, failNext: false, photoPerm: null, camPerm: null, after: null, ov: null, toast: null, push: null, notis: [], fitTodo: [] };
   nav = [{ s: 'home', p: {} }];
 }
 let nav = [];
@@ -309,9 +310,9 @@ function toast(t) { S.toast = t; clearTimeout(toast.h); toast.h = setTimeout(() 
 function sheet(html) { S.ov = { k: 'sheet', html } } function modal(html) { S.ov = { k: 'modal', html } } function closeOv() { S.ov = null }
 const ofCat = (cat) => S.closet.filter((c) => c.cat === cat);
 /* ── 로그인 게이트 (B) ── */
-const subBaseOf = (cat, sub) => sub ? S.closet.find((c) => c.cat === cat && c.sub === sub && c.subBase) : null;
-// 기준 옷: 세부 종류 기준(내 옷장, 선택)이 있으면 그 옷, 없으면 그룹 기준 옷 (상세 v2)
-const baseFor = (p) => { const b = subBaseOf(p.cat, p.sub) || baseOf(p); return b && grpOf(b) === grpOf(p) ? b : null; }; // 세부 종류 기준 → 그룹 기준 옷. 다른 그룹 옷과는 비교 안 함
+// 상품과 견줄 옷 (BASE-02): 이 상품만 고른 옷(CMP-01) → 같은 세부 종류의 기준 옷 → 자동 비교(CMP-04: 같은 그룹, 기준 옷인 옷 먼저 · 먼저 담은 옷)
+// ponytail: CMP-04 2순위(같은 대분류의 다른 그룹)는 재는 부위가 달라 비교 계산이 없어서 뺌. 그룹 간 비교(REC-02)를 만들 때 추가
+const baseFor = (p) => { const c = S.closet.find((q) => q.id === S.cmp[p.id]); return c && grpOf(c) === grpOf(p) ? c : baseOf(p) || famOf(p).filter((q) => q.fit === 'good').sort((a, b) => b.base - a.base || a.at - b.at)[0] || null; };
 const pic = (c, st = '') => c.img ? `<img src="${IMG[c.img] || CUT[c.img]}" style="${st}">` : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#B5B5B5;background:var(--gray);padding:12%">${tplSvg(c)}</div>`;
 const catGrid = (on, a) => `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${CATS.map((c) => `<button data-a="${a}" data-x="${c.k}" style="height:72px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:14px;${c.k === on ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line);color:var(--ink2)'}">${I[c.icon]}${c.label}</button>`).join('')}</div>`;
 const pill = (on, a, x, t) => `<button data-a="${a}" data-x="${x}" style="height:36px;min-width:48px;padding:0 12px;border-radius:18px;font-size:14px;flex:none;${on ? 'background:var(--primary);color:var(--on-primary);font-weight:700' : 'border:1px solid var(--line)'}">${t}</button>`;
@@ -725,7 +726,7 @@ SCR.detail = (pp) => {
   const hintCard = (txt, link, a, ill) => `<div class="pd-hint"><p>${txt}</p>${link ? `<button class="pd-link hit" data-a="${a}" data-x="${p.id}">${link}${I.chev}</button>` : ''}${ill || ''}</div>`;
   const glass = '<span class="pd-glass"><i></i><b></b></span>', tee = `<img class="pd-tee" src="${IMG.pdTee}" alt="">`;
   let top = '';
-  if (base) top = `<div class="pd-base"><div class="pd-brow"><span class="pd-bimg">${cutPic(base)}</span><span class="pd-bw"><em>${base.subBase && base.sub === p.sub ? base.sub + ' 기준' : '기준'}</em><b>${base.name}</b><small>내 옷장 · ${SUBS[subOf(base)].n} · ${base.size} Size</small></span><button class="pd-swap hit" data-a="dpick">교체하기${I.chev}</button></div></div>`;
+  if (base) top = `<div class="pd-base"><div class="pd-brow"><span class="pd-bimg">${cutPic(base)}</span><span class="pd-bw"><em>${base.base && subOf(base) === subOf(p) ? '기준' : '비교'}</em><b>${base.name}</b><small>내 옷장 · ${SUBS[subOf(base)].n} · ${base.size} Size</small></span><button class="pd-swap hit" data-a="dpick">교체하기${I.chev}</button></div></div>`;
   else if (j.n === 1) top = hintCard('로그인하면 내 옷장 옷과 겹쳐서<br>크기를 비교해 드려요.', '로그인하기', 'chip', glass);
   else if (j.n === 2 || j.n === 3) top = hintCard('기준 옷 한 벌만 등록하면<br>이 상품과 겹쳐서 비교해 드려요.', '기준 옷 등록하기', 'chip', tee);
   else if (j.n === 4) top = hintCard('내 옷장에서 기준 옷을 정하면<br>이 상품과 겹쳐서 비교해 드려요.', '기준 옷 정하기', 'dpick', tee);
@@ -884,7 +885,7 @@ function revSection(p) { // 상품 상세의 스냅·후기 영역
   if (!list.length) return `<section class="pd-size rv" id="s_rev">${head}<div class="rv-note">아직 후기가 없어요. 첫 후기를 남겨 주세요</div></section>`;
   return `<section class="pd-size rv" id="s_rev">${head}
     ${few ? `<div class="rv-note">신상품이라 후기가 아직 ${list.length}개예요. 사이즈 평가는 후기가 더 모이면 보여 드려요</div>` : `<div class="rv-sum">${rvScore(p)}${rvBars(list)}</div>`}
-    ${b && !few ? `<button class="rv-mine" data-a="revAll" data-x="${p.id}|mine"><span>평소 <b>${b.size}</b> 입는 사람의 후기 ${mine.length}개<small>내 ${CAT[p.cat]} 기준 옷(${b.name})이 ${b.size} 사이즈예요</small></span>${I.chev}</button>` : ''}
+    ${b && !few ? `<button class="rv-mine" data-a="revAll" data-x="${p.id}|mine"><span>평소 <b>${b.size}</b> 입는 사람의 후기 ${mine.length}개<small>내 ${GN(b)} ${b.name}이 ${b.size} 사이즈예요</small></span>${I.chev}</button>` : ''}
     ${rvSnaps(p, list)}
     <div class="rv-list">${list.slice(0, 3).map((r) => rvCard(p, r)).join('')}</div>
     ${few ? '' : `<button class="btn pd-cta line" data-a="revAll" data-x="${p.id}">후기 ${won(p.rev)}개 전체 보기</button>`}</section>`;
@@ -946,7 +947,7 @@ SCR.fit = (pp) => {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 16px 0">${[['good', '잘 맞아요'], ['bad', '안 맞아요']].map(([k, t]) => `<button data-a="fitAns" data-x="${c.id}|${k}" style="height:52px;border-radius:6px;font-size:15px;${ans === k ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line);font-weight:600'}">${t}</button>`).join('')}</div>
     ${ans === 'bad' ? `
       ${c.delivered ? `<div style="font-size:16px;font-weight:700;padding:24px 16px 10px">반품 · 교환할 건가요?</div><div class="pad" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${[[1, '반품 · 교환 신청'], [0, '그냥 둘게요']].map(([k, t]) => `<button data-a="fitRet" data-x="${c.id}|${k}" style="height:46px;border-radius:6px;font-size:14px;${ret === k ? 'border:1px solid var(--primary);background:var(--primary-subtle);font-weight:700' : 'border:1px solid var(--line)'}">${t}</button>`).join('')}</div>` : ''}
-      <div style="margin:16px 16px 20px;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">옷장에는 잘 맞는 옷만 담겨요. 안 맞는 옷은 옷장에서 빠져요${c.base ? '. 지금 기준 옷이라 같은 종류의 다른 잘 맞는 옷이 기준을 이어받아요' : ''}</div>` : ''}` };
+      <div style="margin:16px 16px 20px;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">옷장에는 잘 맞는 옷만 담겨요. 안 맞는 옷은 옷장에서 빠져요${c.base ? '. 지금 기준 옷이라 같은 세부 종류의 다른 잘 맞는 옷이 기준을 이어받아요' : ''}</div>` : ''}` };
 };
 
 /* 옷장 (E) */
@@ -956,11 +957,10 @@ SCR.closet = (pp = {}) => {
   const waitReg = S.pending.length;
   if (!S.closet.length && !waitReg) return { node: '⑤ 내 옷장 · 옷이 있나? → 아니오 · 빈 옷장', navOn: 'closet', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>첫 옷을 등록해 보세요</h4><p>지금 제일 잘 맞는 옷 한 벌이면 충분해요.<br>첫 등록하면 10% 쿠폰을 드려요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="|closet">첫 옷 등록하기</button></div>` };
   const t = pp.t || (CATS.find((c) => ofCat(c.k).length) || CATS[0]).k, all = ofCat(t), subs = CM[t].subs.filter((x) => all.some((c) => c.sub === x));
-  const sv = subs.includes(pp.s) ? pp.s : '', mine = sv ? all.filter((c) => c.sub === sv) : all, cb = sv ? baseOf({ cat: t, sub: sv }) : baseOf(t), sb = sv ? subBaseOf(t, sv) : null;
-  const isRef = (c) => sv ? c.subBase : c === cb; // 그룹마다 기준 옷이 있어 '전체'에선 첫 기준 옷만 가운데 // 이 범위의 기준 옷
-  const good = mine.filter((c) => c.fit === 'good' && !isRef(c));
-  const b0 = mine.find((c) => isRef(c) && c.fit === 'good') || (sv && !sb ? mine.find((c) => c.base) : null); // 기준 옷을 선반 가운데에 걸어 양옆이 보이게
-  if (b0) { good.splice(good.indexOf(b0) >= 0 ? good.indexOf(b0) : good.length, good.indexOf(b0) >= 0 ? 1 : 0); good.splice(good.length >> 1, 0, b0) }
+  const sv = subs.includes(pp.s) ? pp.s : '', mine = sv ? all.filter((c) => c.sub === sv) : all, cb = sv ? baseOf({ cat: t, sub: sv }) : baseOf(t);
+  const b0 = mine.find((c) => c.base && c.fit === 'good'); // 기준 옷을 선반 가운데에 걸어 양옆이 보이게. '전체'에선 세부 종류마다 기준 옷이 있어 첫 기준 옷만 가운데
+  const good = mine.filter((c) => c.fit === 'good' && c !== b0);
+  if (b0) good.splice(good.length >> 1, 0, b0);
   // 선반: 가운데 옷을 크게, 양옆 2벌씩 겹쳐 보임. 옆 옷을 누르거나 끌면 가운데로, 가운데 옷을 누르면 옷 상세 정보
   const rack = (key, arr, cap) => {
     const k = t + ':' + sv + ':' + key, bi = b0 ? arr.indexOf(b0) : -1;
@@ -976,22 +976,21 @@ SCR.closet = (pp = {}) => {
     <div class="hdr"><span class="t">내 옷장</span></div>
     <div class="ctabs">${CATS.map((c) => `<button class="${c.k === t ? 'on' : ''}" data-a="closetTab" data-x="${c.k}">${c.label} ${ofCat(c.k).length}</button>`).join('')}</div>
     ${waitReg ? `<button data-a="go" data-x="regFit" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;justify-content:space-between;align-items:center;border-radius:10px;background:var(--fitw);padding:12px 14px;font-size:14px"><span><b>등록 대기 ${waitReg}벌</b> · 확인하면 옷장에 담겨요</span>${I.chev}</button>` : ''}
-    ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>처음 등록한 잘 맞는 ${CAT[t]}가 기준 옷이 되고,<br>${CAT[t]} 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
+    ${!mine.length ? `<div class="empty" style="padding-top:60px"><div class="big">${I[CM[t].icon]}</div><h4>${CAT[t]}가 아직 없어요</h4><p>잘 맞는 ${CAT[t]}를 등록하면 세부 종류마다 기준 옷이 되고,<br>그 종류 상품마다 추천 사이즈가 나와요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="${t}|closet">${CAT[t]} 한 벌 등록</button></div>` : `
     ${subs.length ? `<div class="cchips">${['', ...subs].map((x) => `<button class="${x === sv ? 'on' : ''}" data-a="closetSub" data-x="${x}">${x || '전체'}</button>`).join('')}</div>` : ''}${slot('closet.top')}
-    ${!baseOf(t) ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${CAT[t]}가 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
-    ${good.length ? rack('good', good, (c) => `${!sv && c.subBase ? c.sub + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
+    ${!cb ? `<div style="margin:14px 16px 0;font-size:13px;color:var(--ink2);background:var(--gray);border-radius:8px;padding:11px 12px">잘 맞는 ${josa(sv || CAT[t], '이', '가')} 아직 없어서 기준 옷이 없어요. 잘 맞는 옷을 등록하면 자동으로 기준 옷이 돼요</div>` : ''}
+    ${good.length ? rack('good', good, (c) => `${c.base ? GN(c) + ' 기준 옷' : c.sub || CAT[c.cat]} · ${c.size} Size`) : '<div class="pad" style="font-size:13px;color:var(--sub)">입어 보고 잘 맞으면 여기에 걸려요</div>'}
     <div style="height:90px"></div>`}` };
 };
 SCR.item = (pp) => {
   const c = S.closet.find((x) => x.id === pp.id); if (!c) return SCR.closet();
-  const cb = baseOf(c), L = GN(c), sb = c.sub ? subBaseOf(c.cat, c.sub) : null, ye = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return k >= 0 && k < 11172 && k % 28 ? '이에요' : '예요' };
-  // 기준 옷 설정: 종류 기준 + 세부 종류만 따로 기준. 한 줄에 제목 · 설명 · 버튼 (시안 475:1045)
+  const cb = baseOf(c), L = GN(c), ye = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return k >= 0 && k < 11172 && k % 28 ? '이에요' : '예요' };
+  // 기준 옷 설정: 세부 종류마다 하나. 한 줄에 제목 · 설명 · 버튼 (시안 475:1045)
   const row = (title, desc, right) => `<div class="it-row"><div><b>${title}</b><small>${desc}</small></div>${right}</div>`;
   const act = (a, t) => `<button class="it-btn" data-a="${a}" data-x="${c.id}">${t}</button>`;
   const baseSec = c.fit !== 'good' ? '<div class="it-note">입어 보기 전인 옷은 기준 옷이 될 수 없어요. 핏을 알려 주고 잘 맞으면 기준 옷으로 정할 수 있어요</div>'
-    : row(c.base ? `${L} 기준 옷` : `${L} 기준 옷으로 변경하기`, c.base ? `${L} 상품의 추천 사이즈를 이 옷으로 계산해요` : `지금은 ${cb.name}${ye(cb.name)}`, c.base ? `<span class="it-now">${I.check}지금 기준</span>` : act('setBase', '변경하기'))
-    + (c.sub && !c.base ? row(c.subBase ? `${c.sub} 기준 옷` : `${c.sub} 기준 옷으로 변경하기`, c.subBase ? `${c.sub} 상품은 ${L} 기준 옷 대신 이 옷과 비교해요` : `${c.sub}만 핏이 달라 따로 비교하고 싶을 때 지정${sb ? ` · 지금은 ${sb.name}` : ''}`, c.subBase ? act('unsetSub', '해제') : act('setSubBase', sb ? '변경하기' : '지정하기')) : '');
-  return { node: '⑤ 내 옷장 · 옷 상세 정보 → 기준 옷 바꾸기 · 세부 종류 기준 · 정보 수정 · 삭제', bar: `<button class="btn" data-a="editItem" data-x="${c.id}">수정하기</button>`, body: `${hdrBack('옷 상세 정보', `<button class="it-del" data-a="delItem" data-x="${c.id}">삭제</button>`)}
+    : row(c.base ? `${L} 기준 옷` : `${L} 기준 옷으로 변경하기`, c.base ? `${L} 상품의 추천 사이즈를 이 옷으로 계산해요` : `지금은 ${cb.name}${ye(cb.name)}`, c.base ? `<span class="it-now">${I.check}지금 기준</span>` : act('setBase', '변경하기'));
+  return { node: '⑤ 내 옷장 · 옷 상세 정보 → 기준 옷 바꾸기 · 정보 수정 · 삭제', bar: `<button class="btn" data-a="editItem" data-x="${c.id}">수정하기</button>`, body: `${hdrBack('옷 상세 정보', `<button class="it-del" data-a="delItem" data-x="${c.id}">삭제</button>`)}
     <div class="it-img">${c.img ? `<img src="${CUT[c.img] || IMG[c.img]}" alt="">`
       : `<div style="display:flex;flex-direction:column;align-items:center;gap:12px"><div style="width:200px;height:200px">${tplSvg(c)}</div><span style="font-size:13px;color:var(--text-tertiary)">사진이 없어 치수로 그린 모양이에요</span><button class="it-btn" data-a="photoAdd" data-x="${c.id}|item" style="display:flex;align-items:center;gap:4px">${I.plus} 사진 추가</button></div>`}</div>
     <div class="it-info"><div class="it-nm">${c.name}</div><div class="it-meta">${CAT[c.cat]}${c.sub ? ' · ' + c.sub : ''} · ${c.size} 사이즈 · 등록 경로 ${c.src}</div>
@@ -1174,8 +1173,7 @@ function RK(d) { // 시안: 가운데 150×180, 옆 120×144(0.8), 끝 100×120(
   return { x, t: `translateX(${x.toFixed(1)}px) scale(${sc.toFixed(3)})`, z: 100 - Math.round(a * 10), o: a > 2.5 ? Math.max(0, 1 - (a - 2.5) * 2) : 1, d: (Math.min(a, 1) * .06).toFixed(3) };
 }
 const withWa = (w) => { const k = w.charCodeAt(w.length - 1) - 0xAC00; return w + (k >= 0 && k < 11172 && k % 28 ? '과' : '와') };
-const rkAct = (c, sv) => !c || c.fit !== 'good' ? '' : sv ? (c.subBase ? `<span class="now">${I.check}${sv} 기준</span>` : `<button data-a="setSubBase" data-x="${c.id}">${sv} 기준으로 정하기${I.chev}</button>`)
-  : c.base ? `<span class="now">${I.check}${GN(c)} 기준</span>` : `<button data-a="setBase" data-x="${c.id}">${GN(c)} 기준으로 정하기${I.chev}</button>`;
+const rkAct = (c) => !c || c.fit !== 'good' ? '' : c.base ? `<span class="now">${I.check}${GN(c)} 기준</span>` : `<button data-a="setBase" data-x="${c.id}">${GN(c)} 기준으로 정하기${I.chev}</button>`;
 const CHK = (on) => on ? '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0ZM13.7305 7.46973C13.4377 7.17692 12.9628 7.17708 12.6699 7.46973L8.7998 11.3389L7.33008 9.86914C7.03729 9.57652 6.5624 9.57665 6.26953 9.86914C5.97669 10.162 5.97679 10.6368 6.26953 10.9297L8.26953 12.9307C8.2878 12.9489 8.30658 12.9665 8.32617 12.9824C8.38501 13.0303 8.44997 13.0673 8.51758 13.0947C8.69816 13.1679 8.90148 13.168 9.08203 13.0947C9.14961 13.0673 9.21463 13.0304 9.27344 12.9824C9.29302 12.9664 9.31182 12.9489 9.33008 12.9307L13.7305 8.53027C14.023 8.2375 14.0229 7.76257 13.7305 7.46973Z" fill="#06BC51"/></svg>'
   : '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M19.5 10C19.5 15.2467 15.2467 19.5 10 19.5C4.75329 19.5 0.5 15.2467 0.5 10C0.5 4.75329 4.75329 0.5 10 0.5C15.2467 0.5 19.5 4.75329 19.5 10Z" fill="white" stroke="#E1E1E1"/></svg>';
 const cutPic = (c) => c.img ? `<img src="${CUT[c.img] || IMG[c.img]}" alt="">` : tplSvg(c);
@@ -1372,7 +1370,7 @@ function pendingAdded(it) { // 묻지 않고 바로 옷장에 등록 (핏 확인
   A.regSave();
 }
 function saveFit(c, good) {
-  if (!good) { S.closet = S.closet.filter((q) => q !== c); if (!c.base) return '안 맞는 옷은 옷장에서 뺐어요'; ensureBases(); const nx = baseOf(c); return `안 맞는 옷은 옷장에서 뺐어요 · ${nx ? `기준 옷은 ${nx.name} ${nx.size}이 이어받았어요` : `잘 맞는 ${GN(c)}가 없어서 기준 옷이 없어졌어요`}` }
+  if (!good) { S.closet = S.closet.filter((q) => q !== c); if (!c.base) return '안 맞는 옷은 옷장에서 뺐어요'; ensureBases(); const nx = baseOf(c); return `안 맞는 옷은 옷장에서 뺐어요 · ${nx ? `기준 옷은 ${nx.name} ${nx.size}이 이어받았어요` : `잘 맞는 ${josa(GN(c), '이', '가')} 없어서 기준 옷이 없어졌어요`}` }
   c.fit = 'good'; c.delivered = false;
   if (!baseOf(c)) { c.base = true; return `${GN(c)} 기준 옷으로 정했어요 · 옷 상세 정보에서 바꿀 수 있어요` }
   return '잘 맞는 옷으로 저장했어요';
@@ -1393,9 +1391,9 @@ function optSheet(patch) {
 }
 function baseSheet(p, sel) {
   const cat = p.cat, list = famOf(p), i = list.findIndex((c) => c.id === sel), swap = !!baseFor(p);
-  sheet(`<button class="pd-grab" aria-label="닫기"></button><h3>${GROUP_N[grpOf(p)]} 기준 옷 ${swap ? '교체' : '선택'}</h3><div class="pd-bl">${list.map((c, k) => `<button class="pd-bi ${k === i ? 'on' : ''} ${k === i - 1 ? 'nb' : ''}" data-a="bpSel" data-x="${c.id}"><span class="pd-bimg">${cutPic(c)}</span><span class="pd-bw">${c.base ? '<em>기준</em>' : ''}<b>${c.name}</b><small>내 옷장 · ${CAT[cat]} · ${c.size} Size</small></span><span class="pd-rd"></span></button>`).join('')}</div>
+  sheet(`<button class="pd-grab" aria-label="닫기"></button><h3>비교할 옷 ${swap ? '교체' : '선택'}</h3><div class="pd-bl">${list.map((c, k) => `<button class="pd-bi ${k === i ? 'on' : ''} ${k === i - 1 ? 'nb' : ''}" data-a="bpSel" data-x="${c.id}"><span class="pd-bimg">${cutPic(c)}</span><span class="pd-bw">${c.base ? '<em>기준</em>' : ''}<b>${c.name}</b><small>내 옷장 · ${CAT[cat]} · ${c.size} Size</small></span><span class="pd-rd"></span></button>`).join('')}</div>
     <div class="pd-sf fade"><button class="btn pd-cta" data-a="bpOk" ${sel ? '' : 'disabled'}>${swap ? '교체하기' : '선택'}</button></div>`);
-  Object.assign(S.ov, { k: 'sheet pd-sheet', cat, pid: p.id, sel, node: '② 상품 상세 · 사이즈 영역 → 내 옷 목록에서 기준 옷 고르기' });
+  Object.assign(S.ov, { k: 'sheet pd-sheet', cat, pid: p.id, sel, node: '② 상품 상세 · 사이즈 영역 → 내 옷 목록에서 이 상품과 비교할 옷 고르기' });
 }
 // 시트 손잡이: 눌러서 닫기, 아래로 80px 이상 끌면 닫기 (U-06)
 document.addEventListener('pointerdown', (e) => {
@@ -1434,9 +1432,9 @@ const A = {
   dsel(k) { saveY(); cur().p.sel = k; render() },
   dpick() { const p = PB[cur().p.id], b = baseFor(p); saveY(); baseSheet(p, b ? b.id : null); render() },
   noBase() { saveY(); Object.assign(cur().p, { nob: true, pick: false }); render() },
-  pickBase(cid) {
+  pickBase(cid) { // 이 상품과만 비교 (CMP-01). 기준 옷은 그대로
     const c = S.closet.find((q) => q.id === cid);
-    S.closet.forEach((q) => { if (q.cat === c.cat && grpOf(q) === grpOf(c)) q.base = false }); c.base = true; saveY(); Object.assign(cur().p, { nob: false, sel: null }); render(); toast(`${c.name} ${c.size}을 기준 옷으로 정했어요 · 실측 확인부터 다시 판단했어요`);
+    S.cmp[cur().p.id] = cid; saveY(); Object.assign(cur().p, { nob: false, sel: null }); render(); toast(`이 상품은 이제 ${c.name} ${c.size} 사이즈와 비교해요 · 기준 옷은 그대로예요`);
   },
   dbuy(mode) { const pp = cur().p; buyFlow(pp.id, pp.sel, mode) },
   restock(k) { toast(`${k} 사이즈 재입고되면 알려 드릴게요`); render() },
@@ -1487,12 +1485,12 @@ const A = {
     if (!d.size) { toast('사이즈를 골라 주세요'); render(); return }
     const miss = NEED[pkOf(d.cat, d.sub)].filter((k) => !m[partsOf(d).indexOf(k)]); if (miss.length) { toast(`${miss.map((k) => LONG[k] || k).join(', ')}은 꼭 적어 주세요`); render(); return }
     if (m.some((v) => v && (v < 5 || v > 200))) { toast('치수가 너무 작거나 커요 · 단면 실측 cm로 적어 주세요'); render(); return }
-    const moved = d.cat !== c.cat || grpOf(d) !== grpOf(c), wasBase = c.base || c.subBase;
-    if (moved) { c.base = false; c.subBase = false } else if (d.sub !== c.sub) c.subBase = false;
+    const moved = d.cat !== c.cat || subOf(d) !== subOf(c), wasBase = c.base; // 세부 종류를 바꾸면 삭제와 등록으로 봄 (BASE-07)
+    if (moved) c.base = false;
     Object.assign(c, { img: d.img, name: d.name.trim() || c.name, cat: d.cat, sub: d.sub, size: d.size, m });
     ensureBases(); const nb = baseOf(c) === c && moved;
-    if (d.base && !c.base && c.fit === 'good') { const o = baseOf(c); if (o) o.base = false; c.base = true; c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]) }
-    toast(moved ? `${GN(c)}로 옮겼어요${nb ? ` · 처음 잘 맞는 ${GN(c)}라 기준 옷이 됐어요` : ''}${wasBase && c.base === false ? ' · 원래 종류의 기준 옷은 다른 옷이 이어받았어요' : ''}` : '정보를 고쳤어요 · 추천 사이즈를 다시 계산했어요'); back();
+    if (d.base && !c.base && c.fit === 'good') { const o = baseOf(c); if (o) o.base = false; c.base = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]) }
+    toast(moved ? `${josa(GN(c), '으로', '로')} 옮겼어요${nb ? ` · 처음 잘 맞는 ${josa(GN(c), '이라', '라')} 기준 옷이 됐어요` : ''}${wasBase && c.base === false ? ' · 원래 세부 종류의 기준 옷은 다른 옷이 이어받았어요' : ''}` : '정보를 고쳤어요 · 추천 사이즈를 다시 계산했어요'); back();
   },
   setBase(id) {
     const c = S.closet.find((q) => q.id === id), old = baseOf(c);
@@ -1501,11 +1499,11 @@ const A = {
     compareSheet(c, old, 'setBaseOk', `${GN(c)} 기준 옷 변경`, GN(c));
     S.ov.node = '⑤ 기준 옷 바꾸기 (옷장 선반 · 옷 상세 정보) → 정말 바꿀까요? · 지금 기준과 비교 · 바뀌는 추천 사이즈'; render();
   },
-  setBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = baseOf(c); if (old) old.base = false; c.base = true; c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${GN(c)} 기준 옷을 바꿨어요 · 추천 사이즈를 다시 계산했어요`); render() },
-  delItem(id) { const c = S.closet.find((q) => q.id === id); modal(`<h4>이 옷을 삭제할까요?</h4><p>${c.name} ${c.size}${c.base ? '은 지금 기준 옷이에요. 같은 종류의 다른 옷으로 기준이 바뀌어요' : '의 치수와 핏 기록이 지워져요'}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" style="background:var(--sale)" data-a="delOk" data-x="${id}">삭제</button></div>`); S.ov.node = '⑤ 옷 상세 정보 · 삭제 확인 → 기준 옷이었나?'; render() },
+  setBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = baseOf(c); if (old) old.base = false; c.base = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${GN(c)} 기준 옷을 바꿨어요 · 추천 사이즈를 다시 계산했어요`); render() },
+  delItem(id) { const c = S.closet.find((q) => q.id === id); modal(`<h4>이 옷을 삭제할까요?</h4><p>${c.name} ${c.size}${c.base ? '은 지금 기준 옷이에요. 같은 세부 종류의 다른 옷으로 기준이 바뀌어요' : '의 치수와 핏 기록이 지워져요'}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" style="background:var(--sale)" data-a="delOk" data-x="${id}">삭제</button></div>`); S.ov.node = '⑤ 옷 상세 정보 · 삭제 확인 → 기준 옷이었나?'; render() },
   delOk(id) {
     const c = S.closet.find((q) => q.id === id); S.closet = S.closet.filter((q) => q.id !== id); closeOv(); back();
-    if (c.base) { ensureBases(); const nx = baseOf(c); toast(nx ? `${nx.name} ${nx.size}이 기준 옷을 이어받았어요` : `잘 맞는 ${GN(c)}가 없어서 기준 옷이 없어졌어요`) }
+    if (c.base) { ensureBases(); const nx = baseOf(c); toast(nx ? `${nx.name} ${nx.size}이 기준 옷을 이어받았어요` : `잘 맞는 ${josa(GN(c), '이', '가')} 없어서 기준 옷이 없어졌어요`) }
     else toast('삭제했어요');
   },
   reg(x) { const [cat, from] = x.split('|'); startReg(cat || null, from) },
@@ -1618,7 +1616,7 @@ const A = {
   regLater() { const from = (S.reg || {}).from; nav = nav.filter((e) => e.s !== 'regFit'); toast(`대기 목록에 ${S.pending.length}벌 남겨 둘게요 · 다음에 이어서 해요`); if (!nav.length) nav = [{ s: 'closet', p: {} }]; render(true) },
   regSave() {
     const n = S.pending.length; let baseMsg = '';
-    for (const c of S.pending) { if (c.base) { S.closet.forEach((x) => { if (x.cat === c.cat && grpOf(x) === grpOf(c)) x.base = false; }); baseMsg = `${c.name} ${c.size}을 ${GN(c)} 기준 옷으로 정했어요. 옷 보기에서 바꿀 수 있어요` } S.closet.push(c) }
+    for (const c of S.pending) { if (c.base) { S.closet.forEach((x) => { if (x.cat === c.cat && subOf(x) === subOf(c)) x.base = false; }); baseMsg = `${c.name} ${c.size}을 ${GN(c)} 기준 옷으로 정했어요. 옷 보기에서 바꿀 수 있어요` } S.closet.push(c) }
     S.pending = [];
     nav = nav.filter((e) => e.s !== 'regFit'); go('regDone', { n, baseMsg });
     if (!S.firstReg) { S.firstReg = true; S.coupons.unshift({ t: '첫 옷 등록 10% 쿠폰', d: '모든 상품 · 11월 15일까지', used: false }); modal(`<div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:var(--fitw);color:var(--fit);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800">10%</div><h4>첫 등록 쿠폰을 받았어요</h4><p>쿠폰함에서 확인할 수 있어요</p></div><div class="mb"><button class="btn" data-a="closeOv">확인</button></div>`); S.ov.node = '④ 옷 등록 · 첫 등록? → 예 · 첫 등록 쿠폰 지급'; render() }
@@ -1666,28 +1664,12 @@ const A = {
   rackTap(x) { if (Date.now() - dragEnd < 300) return; const [k, i, id] = x.split('|'), box = app.querySelector(`.rkbox[data-rack="${k}"]`); if (+i === S.rack[k]) A.item(id); else box.rackTo(+i) },
   editCat(k) {
     const d = syncEdit(), c = S.closet.find((q) => q.id === cur().p.id); if (k === d.cat) { render(); return }
-    modal(`<h4>종류를 바꿀까요?</h4><p>${CAT[d.cat]} → ${CAT[k]}. 치수 항목이 달라져서 치수를 다시 적어야 해요${c.base ? `. 지금 ${CAT[c.cat]} 기준 옷이라 저장하면 같은 종류의 다른 잘 맞는 옷이 기준을 이어받아요` : c.subBase ? `. ${c.sub} 따로 기준에서도 빠져요` : ''}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="editCatOk" data-x="${k}">바꾸기</button></div>`);
+    modal(`<h4>종류를 바꿀까요?</h4><p>${CAT[d.cat]} → ${CAT[k]}. 치수 항목이 달라져서 치수를 다시 적어야 해요${c.base ? `. 지금 ${GN(c)} 기준 옷이라 저장하면 같은 세부 종류의 다른 잘 맞는 옷이 기준을 이어받아요` : ''}</p><div class="mb"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="editCatOk" data-x="${k}">바꾸기</button></div>`);
     S.ov.node = '⑤ 정보 수정 · 종류를 바꾸나? → 치수 항목 바뀜 · 기준 옷이면 해제 안내'; render();
   },
   editCatOk(k) { const d = cur().p.d; Object.assign(d, { cat: k, sub: null, size: null, m: partsOf({ cat: k }).map(() => '') }); closeOv(); render() },
   editSub(x) { const d = syncEdit(), was = partsOf(d); d.sub = x || null; const now = partsOf(d); if (was.join() !== now.join()) d.m = remapM(was, d.m, now); /* 그룹이 바뀌면 같은 부위 값만 옮김 */ render() },
   editSize(x) { syncEdit().size = x; render() },
-  setSubBase(id) {
-    const c = S.closet.find((q) => q.id === id), old = subBaseOf(c.cat, c.sub), cb = baseOf(c), L = GN(c);
-    if (old) { // 이미 있는 세부 기준을 바꿀 때만 비교표
-      compareSheet(c, old, 'setSubBaseOk', `${c.sub} 기준 옷 변경`, c.sub);
-      S.ov.node = '⑤ 세부 종류 기준 옷 바꾸기 → 정말 바꿀까요? · 지금 세부 기준과 비교'; render(); return;
-    }
-    // 처음 정할 때: 비교표 없이 이 옷(새 세부 기준)과 그대로인 종류 기준 옷을 카드로 (시안 477:1169)
-    const card = (item, who, on) => `<div class="csh-card ${on ? 'on' : ''}"><div class="ci">${cutPic(item)}</div><small>${who}</small><b>${item.name}</b></div>`;
-    sheet(`<div class="grab"></div><div class="csh-t">${c.sub} 기준 옷을 따로 정할까요?</div>
-      <div class="csh-d">${c.sub} 상품만 이 옷과 비교해서 사이즈를 추천해요.<br>${L} 기준 옷은 바뀌지 않아요</div>
-      <div class="csh-cards">${card(c, `${c.sub} 기준 옷`, true)}${cb ? card(cb, `다른 ${L} 상품`, false) : ''}</div>
-      <div class="mb" style="margin-top:20px"><button class="btn line" data-a="closeOv">취소</button><button class="btn" data-a="setSubBaseOk" data-x="${c.id}">정하기</button></div>`);
-    S.ov.node = '⑤ 세부 종류 기준 옷 처음 정하기 → 이 세부 종류만 따로 · 종류 기준 옷은 그대로'; render();
-  },
-  setSubBaseOk(id) { const c = S.closet.find((q) => q.id === id), old = subBaseOf(c.cat, c.sub); if (old) old.subBase = false; c.subBase = true; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); closeOv(); toast(`${c.sub} 상품은 이제 ${c.name} ${c.size}과 비교해요`); render() },
-  unsetSub(id) { const c = S.closet.find((q) => q.id === id); c.subBase = false; Object.keys(S.rack).forEach((k) => k.startsWith(c.cat + ':') && delete S.rack[k]); toast(`${GN(c)} 기준으로 되돌렸어요 · ${c.sub}도 ${GN(c)} 기준 옷과 비교해요`); render() },
   photoAdd(x) {
     const [id, ctx] = x.split('|'), has = ctx === 'edit' ? syncEdit().img : S.closet.find((q) => q.id === id).img;
     sheet(`<div class="grab"></div><div style="font-size:18px;font-weight:800">사진 ${has ? '바꾸기' : '추가'}</div><div style="font-size:13px;color:var(--sub);margin-top:4px">사진이 없어도 치수 비교는 그대로 돼요</div><div style="margin-top:14px">
@@ -1853,7 +1835,6 @@ function focusGo(f) {
   if (f === 'home') tab('closet');
   else if (f === 'item') at(b);
   else if (f === 'baseChange') { at(other); A.setBase(other.id) }
-  else if (f === 'sub') { const k = S.closet.find((c) => c.cat === 'top' && c.fit === 'good' && !c.base && c.sub && !c.subBase) || other; at(k); A.setSubBase(k.id) }
   else if (f === 'edit') { at(b); go('edit', { id: b.id }) }
   else if (f === 'editCat') { at(b); go('edit', { id: b.id }); A.editCat('bottom') }
   else if (f === 'photo') { let c = S.closet.find((q) => !q.img); if (!c) { c = scenario('nophoto') } at(c); A.photoAdd(c.id + '|item') }
