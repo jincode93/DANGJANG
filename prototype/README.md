@@ -44,7 +44,7 @@ node test/catalog.test.mjs
 데모 오른쪽 "신기능" 패널에서 기능마다 `#이슈 번호 · 이름 · 토글`로 켜고 끈다. 기본은 꺼짐이고, 켠 상태는 주소 `?f=기능`에 남는다. 켜면 그 아래에 손으로 만들기 번거로운 상태를 바로 만드는 테스트 버튼이 열린다.
 
 - 기능 하나 = `public/features/기능/feature.js`(+ `feature.css`) 폴더 하나 + `public/index.html`의 한 줄
-- 쓰는 법은 `public/features.js` 맨 위 주석. 새 화면 · 새 동작 · 완료본이 열어 둔 자리(`closet.top`, `my.menu`, `reg.done`, `cart.top`, `home.rec`, `rank.filter`, `rank.list`, `order.return`, `order.returned`, `detail.size`) · 테스트 버튼을 등록한다. 완료본에 있는 이름을 쓰면 멈춘다
+- 쓰는 법은 `public/features.js` 맨 위 주석. 새 화면 · 새 동작 · 완료본이 열어 둔 자리(`closet.top`, `my.menu`, `reg.done`, `cart.top`, `home.rec`, `rank.filter`, `rank.list`, `order.return`, `order.stat`, `order.card`, `detail.chip`, `detail.size`) · 테스트 버튼을 등록한다. 완료본에 있는 이름을 쓰면 멈춘다
 - 끄면 입구가 사라지고, 그 기능 화면에 있었다면 홈으로 간다
 - 기각되면 폴더와 `index.html`의 한 줄을 지운다. 채택되면 관리자가 정책으로 옮기고 완료본으로 흡수한다
 

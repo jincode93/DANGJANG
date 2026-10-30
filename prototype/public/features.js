@@ -3,8 +3,9 @@
    DJ.feature({ id, issue, name, proposal, screens, actions, slots, after, start, panel })
      screens · actions  새 화면(SCR) · 새 동작(A). 완료본에 이미 있는 이름이면 멈춘다 (덮어쓰기 금지)
      slots              완료본이 열어 둔 자리에 끼울 HTML: 'closet.top' · 'my.menu' · 'reg.done' · 'cart.top' · 'home.rec'(홈 추천 탭, 인기 상품 위)
-                        · 'order.return'(o: 반품 · 교환 신청 모달 안) · 'order.returned'(o: 신청 직후, 접수 토스트 뒤에 붙일 글)
-                        · 'detail.size'(p, base: 상품 상세 사이즈 칸, 기준 옷 줄 아래) · 'rank.filter'(list, p: 랭킹 기간 줄 아래) · 'rank.list'(list, p: 랭킹 목록 대신 그릴 HTML, 빈 문자열이면 완료본 목록)
+                        · 'order.return'(o: 반품 · 교환 버튼. 빈 문자열이 아니면 완료본 모달 대신 신기능 흐름) · 'order.stat'(o: 주문 상태 글, 빈 문자열이면 완료본)
+                        · 'order.card'(o: 주문 내역 카드 맨 아래) · 'detail.chip'(p, j: 상세 사진 위 칩 글, 빈 문자열이면 완료본)
+                        · 'detail.size'(p, j, pp: 상세 사이즈 칸의 기준 옷 줄 · 사이즈 · 비교를 통째로 대신할 HTML, 빈 문자열이면 완료본) · 'rank.filter'(list, p: 랭킹 기간 줄 아래) · 'rank.list'(list, p: 랭킹 목록 대신 그릴 HTML, 빈 문자열이면 완료본 목록)
      after()            화면을 다 그린 뒤 · start()  앱을 열 때 (켜져 있을 때만)
      panel              오른쪽 패널 테스트 버튼 [['이름', () => {…}], …]. 손으로 하기 번거로운 상태만
    켠 기능은 주소 ?f=id,id 에 남는다. 기본은 모두 꺼짐
