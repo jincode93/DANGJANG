@@ -31,6 +31,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목). 결�
 | 결정 이력과 이유 | `logs/decision-log.md`, 검토한 선택지는 `logs/decisions/` |
 | 화면 디자인 규칙 | `design-system/README.md` |
 | 신기능 제안 양식과 평가 기준 | `docs/proposals/README.md`, `docs/eval/proposal-rubric.md` |
+| 제안서를 화면 캡처로 풀어 쓴 설명본 | `docs/explainers/<기능 ID>.html` (기능 ID는 데모 `?f=` 값. GitHub Pages로 공개) |
 | 사람이 읽는 참여 안내 | `CONTRIBUTING.md` |
 
 ## 협업 규칙 (git과 PR)
