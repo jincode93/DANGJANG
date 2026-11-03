@@ -230,8 +230,8 @@
 #app .cbtx img { width:10px !important; height:10px !important }
 #app .cbsep { border:0; align-self:center }
 #app .cbti small { font-size:10px; font-weight:700; color:#979797; line-height:normal; margin-top:4px; width:40px; text-align:center } #app .cbti small.g { color:#06BC51 }
-#app .cbslot { position:relative; width:40px; height:48px; padding:0; flex:none }
-#app .cbslot .bg { position:absolute; left:-2px; top:-2px; width:44px; height:52px }
+#app .cbslot { position:relative; width:38px; height:48px; padding:0; flex:none }
+#app .cbslot .bg { position:absolute; inset:0; width:100%; height:100% }
 #app .cbslot .pl { position:absolute; left:50%; top:calc(50% - .41px); transform:translate(-50%,-50%) }
 /* 탭 (563:20670): 350 · 위아래 16 · 활성 모양 112×41 */
 #app .cbsegw { padding:16px 20px 0 }

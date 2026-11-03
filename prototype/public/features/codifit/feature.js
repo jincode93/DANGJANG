@@ -357,8 +357,8 @@ function cbTourDraw() {
 }
 
 const AX = {
-  cbook() { go('cbList') },
-  cbNew() { cbStart({}); go('cbEdit') },
+  cbook() { need('로그인하고 내 옷으로 코디해 보세요', () => { closeOv(); go('cbList') }) },
+  cbNew() { if (!S.user) { AX.cbook(); return } cbStart({}); go('cbEdit') },
   cbOpen(id) { go('cbView', { id }) },
   cbEdit() { const b = cbList().find((q) => q.id === cur().p.id); cbStart(Object.assign(cbCopyOf(b), { id: b.id, edit: true })); go('cbEdit') },
   cbTab(c) { cbD().tab = c; render() },
@@ -431,7 +431,7 @@ DJ.feature({
     const B = 'https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/codifit/';
     return [
       DJ.isOn('basefit') ? null : ["홈에서 바로 추천", "내 옷과 실측이 가까운<br>랭킹 상품을 골라드려요", "비교할 내 옷을 바꾸면 상품도 바로 바뀌어요.<br>품절 사이즈는 빼고 보여 드려요.", 282, B + 'onboard3.webp'],
-      DJ.isOn('codibook') ? null : ["나만의 코디북", "옷장 옷으로 코디하고<br>친구에게 공유해요", "등록한 옷을 골라 한 장에 놓아 보세요.<br>사려는 상품도 같이 놓아 보면<br>가진 옷과 어울리는지 미리 알 수 있어요.", 282, B + 'onboard4.webp'],
+      DJ.isOn('codibook') ? null : ["나만의 코디북", "옷장 옷으로 코디하고<br>친구에게 공유해요", "등록한 옷을 골라 한 장에 놓아 보세요.<br>사려는 상품도 같이 놓아 보면<br>가진 옷과 어울리는지 미리 알 수 있어요.", 282, B + 'onboard4-v2.png'],
     ].filter(Boolean);
   },
   start() { if (!document.getElementById('cbFontsX')) document.head.insertAdjacentHTML('beforeend', '<link id="cbFontsX" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Caveat:wght@600&family=Gaegu:wght@700&family=Jua&display=swap">') }, // 템플릿 글꼴 (아티팩트 head에 있던 것)
