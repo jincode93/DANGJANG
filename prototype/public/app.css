@@ -216,14 +216,15 @@ button { cursor:pointer }
 .pd-pg { position:absolute; right:12px; bottom:12px; padding:5px 10px 5px 9px; border-radius:200px; background:rgba(0,0,0,.35); color:#fff; font-size:12px; line-height:1 }
 .pd-info { padding:20px 20px 24px; display:grid; gap:12px; line-height:1 }
 .pd-info .b { font-size:13px; font-weight:700 }
-.pd-info .n { font-size:16px }
+.pd-info .n { font-size:16px; font-weight:600; line-height:1.4 }
 .pd-info .pr { display:flex; align-items:flex-end; gap:6px; font-size:20px; font-weight:700 }
 .pd-info .pr em { font-style:normal; color:var(--sale) }
+.pd-info .pr, .pd-info .pr > * { letter-spacing:-.03em } /* 부모의 -.03em이 px로 굳어 상속되던 것 → 글자 크기별로 다시 계산 */
 .pd-info button.rt { justify-self:start; text-align:left }
 .pd-info s { font-size:13px; font-weight:400; color:var(--text-tertiary) }
 .pd-info .rt { font-size:12px; color:var(--text-tertiary) }
 .pd-gap { height:7px; background:var(--bg-subtle) }
-.pd-spec { display:grid; grid-template-columns:48px 1fr; gap:14px 24px; padding:20px; font-size:13px; line-height:1 }
+.pd-spec { display:grid; grid-template-columns:48px 1fr; gap:14px 24px; padding:20px; font-size:13px; line-height:1; font-weight:300 }
 .pd-spec dt { color:var(--text-tertiary) }
 .pd-detail { display:block; width:100% }
 .pd-detail.crop { height:460px; object-fit:cover }
@@ -306,7 +307,7 @@ button { cursor:pointer }
 .hit::after { content:""; position:absolute; left:50%; top:50%; width:max(100%, 44px); height:max(100%, 44px); transform:translate(-50%,-50%) }
 .dim:has(+ .pd-sheet) { background:rgba(0,0,0,.8) }
 .dim.still, .sheet.still { animation:none }
-.sheet.pd-sheet { padding:40px 20px 0; border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; letter-spacing:-.03em; max-height:min(600px, 92%); transition:transform .2s }
+#app .sheet.pd-sheet, .sheet.pd-sheet { padding:40px 20px 0; border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; letter-spacing:-.03em; max-height:min(600px, 92%); transition:transform .2s }
 .pd-grab { position:absolute; top:0; left:0; right:0; height:28px; display:flex; align-items:center; justify-content:center; touch-action:none; cursor:grab; z-index:2; background:#fff }
 .pd-grab::before { content:""; width:40px; height:4px; border-radius:200px; background:#D9D9D9 }
 .pd-sheet h3 { flex:none; font-size:20px; font-weight:600; line-height:1.3; margin-bottom:12px }
@@ -895,7 +896,7 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
 #app input:focus, #app textarea:focus { outline:none }
 #app :is(.tin, .field input, input[type="text"], input:not([type])):focus, #app .tin.fin:focus { border-color:var(--line) }
 #app .tin.fin.err:focus { border-color:var(--danger) }
-.pd-spec dd { font-weight:400 }
+.pd-spec dd { font-weight:300 }
 
 /* 내 옷장 (시안 bootcamp 461:6535 · 463:2530) */
 #app .ctabs { display:flex; gap:20px; padding:0 20px; border-bottom:1px solid var(--line) }
@@ -1075,3 +1076,4 @@ body { background:var(--pg); color:var(--pgInk); font-family:var(--font-sans); l
   #phoneWrap { order:3 }
   body.hasfeat #phoneWrap { height:calc(100dvh - 88px) }
 }
+#app .cart-go { display:flex; gap:8px; width:100%; margin-top:24px; padding:0 20px } #app .cart-go .btn { flex:1 }
