@@ -252,7 +252,6 @@ const PRESETS = {
   empty: () => PRESETS.nobase(),
   nobase: () => ({ user: { name: '준성' }, closet: [] }), // 처음 담은 잘 맞는 옷이 기준 옷이 되므로, 기준 옷 없는 회원 = 옷장 0벌
   full: () => ({ user: { name: '준성' }, closet: [
-    item({ img: 'base', sub: '긴팔 셔츠', pid: 'p2', brand: '무신사 스탠다드', name: '크롭 옥스포드 셔츠 [화이트]', cat: 'top', size: 'L', m: [74, 50, 58, 60], fit: 'good', base: true, src: '상품 링크' }),
     item({ img: 'hero', sub: '긴팔 셔츠', pid: 'p1', brand: '무신사 스탠다드', name: '[플러스] 릴렉스드 타입라이터 셔츠 [화이트]', cat: 'top', size: 'M', m: [72.5, 51, 58, 59.5], fit: 'good', src: 'DANGJANG 구매' }),
     item({ img: 'tee', sub: '반팔 티셔츠', pid: 'p7', brand: '무신사 스탠다드', name: '릴렉스 핏 크루 넥 티셔츠 2팩', cat: 'top', size: 'L', m: [71, 53, 58, 23], fit: 'good', src: '구매내역 캡처' }),
     item({ img: 'knit', sub: '긴팔 티셔츠', pid: 'p4', brand: '더니트컴퍼니', name: '파인 캐시미어 100 크루넥 10color', cat: 'top', size: 'L', m: [68, 54, 63, 58], fit: 'good', src: '상품 링크' }),
@@ -265,6 +264,7 @@ const PRESETS = {
     item({ img: 'jacket', sub: '점퍼/자켓', pid: 'p3', brand: '스파오', name: '[씬라이트] 후드 재킷_SPJPG4TC24', cat: 'outer', base: true, size: 'M', m: [70, 48, 58, 60], fit: 'good', src: 'DANGJANG 구매' }),
     item({ img: 'leather', sub: '점퍼/자켓', brand: '아워데이즈', name: '노마드 크롭 바이커 레더 자켓 [BLACK]', cat: 'outer', size: 'L', m: [66, 52, 62, 61], fit: 'good', src: '상품 링크' }),
     item({ img: 'suede', sub: '점퍼/자켓', brand: '데이', name: '스웨이드 바이커 패딩 자켓_BROWN', cat: 'outer', size: 'L', m: [64, 50, 60, 62], fit: 'good', src: '구매내역 캡처' }),
+    item({ img: 'base', sub: '긴팔 셔츠', pid: 'p2', brand: '무신사 스탠다드', name: '크롭 옥스포드 셔츠 [화이트]', cat: 'top', size: 'L', m: [74, 50, 58, 60], fit: 'good', base: true, src: '상품 링크' }), // 가장 최근에 기준 옷이 된 옷이 되게 맨 뒤에 둠 (#17 내 옷 기준 추천은 처음에 이 옷을 고름)
   ] }),
   many: () => { const f = PRESETS.full(); f.closet.push(
     item({ img: 'hero', sub: '긴팔 셔츠', brand: '미나브', name: '플루이드 셔츠 [네이비]', cat: 'top', size: 'L', m: [75, 53, 61, 61], fit: 'good', src: '상품 링크' }),
