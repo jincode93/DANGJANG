@@ -1,0 +1,326 @@
+/* 신기능 코디북 (#15 + #19 통합). 원본: 디자이너 통합안 아티팩트의 CSS 그대로
+   아티팩트 --line-ds(#E1E1E1)는 레포 --line과 같은 값이라 --line으로 */
+
+/* 내 옷장 배너 (아티팩트 완료본 .cbook) */
+#app .cbook { position:relative; display:block; width:100%; height:80px; background:var(--bg-subtle); overflow:hidden; text-align:left }
+#app .cbook b { position:absolute; left:20px; top:18px; display:flex; align-items:center; font-size:15px; font-weight:600; color:#000 }
+#app .cbook b svg { width:16px; height:16px }
+#app .cbook small { position:absolute; left:20px; top:46px; font-size:13px; font-weight:500; color:var(--text-tertiary) }
+#app .cbook img { position:absolute; object-fit:cover }
+
+/* '!' 말풍선 (아티팩트 완료본 .simtip. 다른 신기능 CSS와 겹치지 않게 이름만 cbsimtip) */
+.cbsimtip { position:absolute; right:16px; top:calc(100% + 8px); z-index:13; background:var(--g); color:#fff; font-size:12px; font-weight:500; line-height:1.5; padding:12px 36px 12px 12px; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12) }
+.cbsimtip::before { content:''; position:absolute; right:14px; top:-5px; width:10px; height:10px; background:var(--g); transform:rotate(45deg) }
+.cbsimtip button { position:absolute; right:4px; top:4px; width:24px; height:24px; color:#fff; display:flex; align-items:center; justify-content:center }
+.cbsimtip button svg { width:8px; height:8px }
+
+/* 아티팩트 완료본 버튼 값 (레포 완료본은 56px · 12 · 700). 이 기능의 시트 · 모달에서만 */
+#app :is(.cbf-shbtn, .cbmd .mb) .btn, #app .btn.fb.cb-b { height:55px; border-radius:8px; font-weight:600 }
+#app .cbf-shbtn .btn.line { box-shadow:inset 0 0 0 1px var(--line) }
+
+/* 코디북 (피그마 550:19017) */
+#app .cb-hdr { justify-content:space-between }
+#app .cb-hdr .l { display:flex; align-items:center; gap:4px; min-width:0 }
+#app .cb-hdr .l b { font-size:18px; font-weight:600; color:var(--text-primary) }
+#app .cbing { margin-left:4px; padding:3px 6px; border-radius:4px; background:var(--primary-subtle); color:var(--primary-text); font-size:11px; font-weight:600 }
+#app .cb-hdr .icons { gap:12px }
+#app .bar .cb-b { flex:1; border-radius:12px; background:var(--primary); color:#fff; font-weight:700 }
+#app .bar .cb-b:disabled { background:#C5C5C5 }
+#app .bar .cb-b1 { flex:none; width:80px; border-radius:12px; font-weight:700 }
+/* 판 */
+#app .cbb { position:relative; width:100%; aspect-ratio:358/440; overflow:hidden; container-type:inline-size; isolation:isolate } /* 판 안 z-index가 시트 · 코치마크 위로 새지 않게 */
+#app .cbs { position:absolute; inset:0 }
+#app .cbe { position:absolute; touch-action:none; user-select:none; line-height:1.15; white-space:nowrap }
+#app .cbe img, #app .cbe svg { display:block; width:100%; height:auto; pointer-events:none }
+#app .cbe.memo { font-weight:700 }
+#app .cbe.memo.paper { background:#fff; padding:.15em .5em; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,.12) }
+#app .cbe.sel::after { content:""; position:absolute; inset:-6px; border:1px solid #fff; border-radius:4px; box-shadow:0 0 0 1px rgba(0,0,0,.08); pointer-events:none }
+#app .cb-x, #app .cb-h { position:absolute; z-index:2; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.2); display:flex; align-items:center; justify-content:center; padding:0 }
+#app .cb-x { right:-16px; top:-16px } #app .cb-x svg { width:12px !important; height:12px !important; pointer-events:none }
+#app .cb-h { right:-16px; bottom:-16px; cursor:nwse-resize } #app .cb-h svg { pointer-events:none }
+#app .cb-lab { position:absolute; left:-6px; top:-6px; transform:translateY(-100%); padding:3px 6px; border-radius:4px; background:var(--primary); color:#fff; font-size:11px; font-weight:600; white-space:nowrap }
+#app .cb-ph { position:absolute; display:block; height:auto }
+#app .cb-ph-t { position:absolute; left:0; right:0; bottom:36px; text-align:center; font-size:12px; color:#B6AC95 }
+/* 판 옵션 */
+#app .cbrail { position:absolute; right:12px; top:28%; z-index:950; display:flex; flex-direction:column; gap:8px }
+#app .cbrail button { position:relative; width:36px; height:36px; display:flex; align-items:center; justify-content:center; filter:drop-shadow(0 0 3px rgba(0,0,0,.25)) }
+/* 펼침: 아이콘 크기 · 위치는 그대로, 화살표 방향 · 딤 · 글자만 더함 (피그마 550:17765) */
+#app .cbrail .lb { position:absolute; right:calc(100% + 8px); top:50%; transform:translateY(-50%); white-space:nowrap; text-align:right; color:#fff; font-size:12px; font-weight:600; letter-spacing:-.03em; text-shadow:0 0 6px rgba(0,0,0,.16) }
+#app .cbdim { position:absolute; right:0; top:0; bottom:0; width:50%; z-index:940; background:linear-gradient(to left, #121212, rgba(18,18,18,0)); opacity:.6 }
+#app .cbcol { display:block; width:26px !important; height:26px !important; border-radius:50%; border:2px solid #fff; background:conic-gradient(#F87171,#FBBF24,#34D399,#60A5FA,#A78BFA,#F87171) }
+#app .aa { color:#fff; font-size:18px; font-weight:500; letter-spacing:-.06em }
+#app .cbpal { position:absolute; left:0; right:0; bottom:0; z-index:950; padding:28px 16px 16px; display:flex; justify-content:center; gap:12px; background:linear-gradient(to top, rgba(18,18,18,.35), rgba(18,18,18,0)) }
+#app .cbpal button, #app .cbpal label { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; flex:none }
+#app .cbpal .on { outline:2px solid #fff; outline-offset:2px } #app .cbpal svg { width:16px !important; height:16px !important }
+#app .cbpal label, #app .cbcols label { background:conic-gradient(#F87171,#FBBF24,#34D399,#60A5FA,#A78BFA,#F87171); position:relative; overflow:hidden; cursor:pointer }
+#app .cbpal input, #app .cbcols input { position:absolute; inset:0; opacity:0; cursor:pointer }
+#app .cbpal .x { background:rgba(255,255,255,.35) }
+/* 판에 놓인 옷 */
+#app .cbtray { display:flex; gap:24px; align-items:stretch; padding:12px 20px; overflow-x:auto; scrollbar-width:none }
+#app .cbg { flex:none } #app .cbg > b { display:block; font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:10px }
+#app .cbg > div { display:flex; gap:10px }
+#app .cbsep { flex:none; border-left:1px dashed var(--line) }
+#app .cbti { position:relative; display:flex; flex-direction:column; align-items:center; width:40px }
+#app .cbti small { margin-top:4px; font-size:10px; font-weight:700; color:var(--text-tertiary); white-space:nowrap } #app .cbti small.g { color:var(--primary-text) }
+#app .cbt { width:40px; height:48px; border:1px solid var(--line); border-radius:4px; background:#fff; overflow:hidden; display:flex; align-items:center; justify-content:center; flex:none }
+#app .cbt img, #app .cbt svg { width:100%; height:100%; object-fit:contain }
+#app .cbt.add { border-style:dashed; color:var(--text-tertiary) } #app .cbt.add svg { width:16px !important; height:16px !important }
+#app .cbtx { position:absolute; left:28px; top:-4px; width:16px; height:16px; border-radius:50%; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; padding:0 }
+#app .cbtx svg { width:10px !important; height:10px !important }
+#app .cbgap { display:block; height:8px; background:var(--bg-subtle) }
+/* 스크롤하면 작은 판 + 놓인 옷이 위에 고정 */
+#app .cbfix { position:sticky; top:52px; height:0; z-index:9 }
+#app .cbfix .in { display:none; align-items:center; gap:4px; padding:8px 0 8px 20px; background:#fff; border-bottom:8px solid var(--bg-subtle) }
+#app .cbfix.on .in { display:flex }
+#app .cbfix .mini { flex:none; width:96px; border-radius:8px; overflow:hidden; padding:0 }
+#app .cbfix .cbtray { padding:0 20px 0 12px; min-width:0 }
+/* 탭 · 목록 */
+#app .cbseg { margin:16px 20px 0; display:flex; padding:4px; border-radius:12px; background:var(--bg-subtle) }
+#app .cbseg button { flex:1; height:41px; border-radius:10px; font-size:14px; font-weight:500; color:var(--text-tertiary) }
+#app .cbseg button.on { background:#fff; border:1px solid var(--primary); color:var(--primary-text); font-weight:700 }
+#app .cbsec { padding:20px 20px 0 }
+#app .cbh { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px }
+#app .cbh > b { display:flex; align-items:center; gap:2px; font-size:18px; font-weight:600; color:#000 }
+#app .cbh > span { font-size:13px; color:var(--text-primary) }
+#app .cbinfo { display:flex; padding:0 }
+#app .cbline { display:flex; gap:8px; overflow-x:auto; margin:0 -20px; padding:0 20px; scrollbar-width:none }
+#app .cbc { flex:none; width:82px; display:flex; flex-direction:column; gap:10px }
+#app .cbc .im { position:relative; width:82px; height:98px; border:1px solid var(--line); border-radius:8px; background:var(--bg-subtle); overflow:hidden; padding:0 }
+#app .cbc .im img { width:100%; height:100%; object-fit:cover } #app .cbc .im img.ct { object-fit:contain; padding:6px } #app .cbc .im svg.tpl { width:100%; height:100%; padding:8px }
+#app .cbc .im.on { border:2px solid var(--primary) }
+#app .cbc .ok { position:absolute; right:0; top:0; display:flex }
+#app .cbtags { display:flex; gap:4px; flex-wrap:wrap }
+#app .cbtags i { font-style:normal; padding:6px; border-radius:4px; background:var(--bg-subtle); color:var(--text-tertiary); font-size:9px; font-weight:600; line-height:1; white-space:nowrap }
+#app .cbtags i.g { background:rgba(6,188,81,.12); color:#27C45B }
+#app .cbno { font-size:13px; color:var(--text-tertiary); padding:8px 0 }
+/* 목록 */
+#app .cbgrid { display:grid; grid-template-columns:1fr 1fr; gap:24px 8px; padding:8px 20px 24px }
+#app .cbcard { text-align:left; display:block; padding:0 }
+#app .cbcard .cbb { border-radius:8px }
+#app .cbcard > b { display:block; margin-top:10px; font-size:15px; font-weight:700 }
+#app .cbcard > small { display:block; margin-top:4px; font-size:12px; color:var(--text-tertiary) }
+#app .cbnone { padding-top:170px; display:flex; flex-direction:column; align-items:center; text-align:center }
+#app .cbnone svg { width:56px; height:56px; padding:4px; border-radius:50%; background:var(--bg-subtle) }
+#app .cbnone b { margin-top:16px; font-size:19px; font-weight:700 }
+#app .cbnone small { margin-top:8px; font-size:13px; color:var(--text-tertiary); line-height:1.5 }
+/* 상세 */
+#app .cbv-t { display:flex; justify-content:space-between; align-items:center; padding:4px 20px 12px }
+#app .cbv-t > button:first-child { display:flex; align-items:center; gap:4px; font-size:18px; font-weight:700 }
+#app .cbv-t > button:first-child svg { width:18px !important; height:18px !important }
+#app .cbcopy { display:flex; align-items:center; gap:4px; padding:7px 12px; border-radius:16px; background:var(--bg-subtle); font-size:13px; color:var(--text-secondary) }
+#app .cbv-b { padding:0 20px } #app .cbv-b .cbb { border-radius:12px }
+#app .cbv-b + .cbsec { padding-top:28px }
+#app .cbrow { display:flex; gap:12px; align-items:center; padding:12px 0 }
+#app .cbt.big { width:64px; height:76px; border:0; background:var(--bg-subtle) }
+#app .cbrow > div { min-width:0; display:flex; flex-direction:column; gap:3px }
+#app .cbrow small { font-size:12px; color:var(--text-tertiary) }
+#app .cbrow .nm, #app .cbrc .nm { font-size:13.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+#app :is(.cbrow, .cbrc, .cbop) .pr em { font-style:normal; color:var(--discount); font-weight:700 } #app :is(.cbrow, .cbrc, .cbop) .pr b { font-weight:700 } /* 완료본 상세 .pr에 번지지 않게 범위를 좁힘 */
+#app .cbln { display:block; height:1px; background:var(--line) }
+#app .cbbasis { display:flex; align-items:center; gap:2px; font-size:12px; color:var(--text-tertiary) } #app .cbbasis svg { width:16px; height:16px }
+#app .cbpills { display:flex; gap:6px }
+#app .cbpills button { height:34px; padding:0 12px; border-radius:8px; border:1px solid var(--line); font-size:13px; font-weight:600 }
+#app .cbpills button.on { background:var(--primary); border-color:var(--primary); color:#fff }
+#app .cbrecs { display:flex; gap:8px; overflow-x:auto; padding:16px 20px 0; scrollbar-width:none }
+#app .cbrc { flex:none; width:140px; text-align:left; display:flex; flex-direction:column; gap:4px; padding:0 }
+#app .cbrc .im { width:140px; height:168px; border-radius:6px; overflow:hidden; background:var(--bg-subtle); margin-bottom:6px } #app .cbrc .im img { width:100%; height:100%; object-fit:cover }
+#app .cbrc small { font-size:12px; color:var(--text-tertiary) }
+#app .cbrc .nm { white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; line-height:1.4 }
+/* 시트 */
+#app .cbst { font-size:19px; font-weight:700; margin-top:8px }
+#app .cbss { font-size:13px; color:var(--text-tertiary); margin-top:6px }
+#app .cbsl { font-size:14px; font-weight:600; margin:18px 0 10px }
+#app .cbprev { margin-top:16px; height:64px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700 }
+#app .cbcols { display:flex; align-items:center; gap:12px }
+#app .cbcols > button, #app .cbcols > label { width:26px; height:26px; border-radius:50%; box-shadow:inset 0 0 0 1px var(--line) }
+#app .cbcols .on { outline:2px solid var(--primary); outline-offset:2px }
+#app .cbcols .cbpaper { margin-left:auto; width:24px; height:24px; border-radius:4px; box-shadow:none; border:1.5px solid #121212; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center }
+#app .cbcols .cbpaper.on { background:#121212; color:#fff; outline:0 }
+#app .cbin { margin-top:16px; width:100% }
+#app .cbstks { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:16px }
+#app .cbstks button { aspect-ratio:1; border-radius:10px; background:var(--bg-subtle); display:flex; align-items:center; justify-content:center; padding:10px }
+#app .cbstks svg { width:100%; height:100% }
+#app .cbtpls { display:grid; grid-template-columns:1fr 1fr; gap:16px 10px; margin-top:16px }
+#app .cbtpls button { text-align:left; padding:0 }
+#app .cbtpls .cbb { border-radius:8px; box-shadow:inset 0 0 0 1px var(--line) }
+#app .cbtpls b { display:block; margin-top:8px; font-size:14px; font-weight:700 } #app .cbtpls small { font-size:12px; color:var(--text-tertiary) }
+#app .cbopt .cbrow { padding-top:16px }
+#app .cbszs { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none }
+#app .cbszs button { flex:none; min-width:72px; padding:8px 10px; border:1px solid var(--line); border-radius:8px; text-align:left; display:flex; flex-direction:column; gap:4px }
+#app .cbszs b { display:flex; justify-content:space-between; gap:6px; font-size:15px; font-weight:700 } #app .cbszs b em { font-style:normal; font-size:11px; color:var(--primary-text) }
+#app .cbszs small { font-size:12px; color:var(--text-secondary); white-space:nowrap }
+#app .cbszs button.on { border-color:var(--primary); background:var(--primary-subtle) }
+#app .cbszs button:disabled { background:var(--bg-subtle); color:var(--text-tertiary) } #app .cbszs button:disabled * { color:var(--text-tertiary) }
+#app .cbqty { margin:14px 0 4px; padding:12px 16px; border-radius:8px; background:var(--bg-subtle); display:flex; justify-content:space-between; align-items:center }
+#app .cbqty b { font-size:14px } #app .cbqty span { display:flex; align-items:center; gap:10px }
+#app .cbqty i { font-style:normal; width:40px; height:32px; border-radius:6px; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:14px }
+#app .cbqty button { display:flex } #app .cbqty svg { width:18px !important; height:18px !important }
+#app .cbtot { display:flex; justify-content:space-between; margin:16px 0 14px; padding-top:16px; border-top:1px solid var(--line); font-size:16px }
+/* '!' 말풍선: 아이콘 바로 아래 (홈 '랭킹 상품 기준'과 같은 .cbsimtip) */
+#app .cbinfow { position:relative; display:inline-flex; align-items:center }
+#app .cbinfow .cbsimtip { width:max-content; max-width:300px; text-align:left; white-space:normal; right:-4px }
+#app .cbinfow .cbsimtip.cbtipe { right:auto; left:-14px } #app .cbinfow .cbsimtip.cbtipe::before { right:auto; left:18px }
+/* 코치마크 (레포 #15 코디북과 같은 모양) */
+.cbtour { position:absolute; inset:0; z-index:85 }
+.cbtdim { position:absolute; inset:0; background:rgba(0,0,0,.62) }
+.cbtspot { position:absolute; border-radius:12px; box-shadow:0 0 0 2px var(--primary); pointer-events:none }
+.cbtbub { position:absolute; left:16px; right:16px; background:#fff; border-radius:16px; padding:14px 16px 12px; box-shadow:0 10px 30px rgba(0,0,0,.28) }
+.cbtbub .th { display:flex; justify-content:space-between; align-items:center }
+.cbtbub .tc { font-size:12px; font-weight:800; color:#fff; background:var(--primary); border-radius:10px; padding:2px 9px }
+.cbtbub .tskip { font-size:13px; color:var(--sub); padding:6px 4px }
+.cbtbub b { display:block; font-size:17px; font-weight:800; margin-top:8px; letter-spacing:-.02em }
+.cbtbub p { font-size:14px; color:var(--ink2); line-height:1.5; margin-top:4px }
+.cbtbub .tf { display:flex; justify-content:space-between; align-items:center; margin-top:12px }
+.cbtbub .tdots i { display:inline-block; width:6px; height:6px; border-radius:3px; background:#D9D9D9; margin-right:5px }
+.cbtbub .tdots i.on { background:var(--primary); width:16px }
+.cbtbub .tn { height:40px; padding:0 22px; border-radius:10px; background:var(--ink); color:#fff; font-weight:700; font-size:14.5px }
+.cbtbub .tar { position:absolute; width:16px; height:16px; background:#fff; transform:rotate(45deg) }
+/* 코디 공유하기 (레포 #19 맞춰 보기 공유와 같은 모양) */
+.cbf-vhead { padding:4px 20px 10px } .cbf-vhead b { font-size:20px; font-weight:800; letter-spacing:-.03em }
+.cbf-seg2 { display:flex; gap:6px; margin-top:12px } .cbf-seg2 button { flex:1; height:36px; border-radius:18px; border:1px solid var(--line); font-size:13px; font-weight:700 } .cbf-seg2 button.on { background:var(--ink); color:#fff; border-color:var(--ink) }
+.cbf-shot { margin:12px auto 0; width:208px; aspect-ratio:4 / 5; border-radius:12px; overflow:hidden; background:var(--gray); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.12) } .cbf-shot.st { width:160px; aspect-ratio:9 / 16 }
+.cbf-shot img { width:100%; height:100%; object-fit:cover; display:block } .cbf-shot span { font-size:12.5px; color:var(--sub) }
+.cbf-shnote { margin-top:12px; padding:10px 12px; border-radius:10px; background:var(--gray); font-size:12px; line-height:1.5; color:var(--ink2) } .cbf-shnote b { display:block; font-size:12.5px; color:var(--ink); margin-bottom:2px }
+.cbf-shps { margin-top:10px } .cbf-shps small { font-size:12px; color:var(--sub) } .cbf-shps > div { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin-top:6px }
+.cbf-shps span { flex:none; width:84px; display:flex; flex-direction:column; gap:1px } .cbf-shps img { width:84px; height:100px; object-fit:cover; border-radius:8px; background:var(--gray) } .cbf-shps b { font-size:11px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .cbf-shps em { font-style:normal; font-size:11.5px; font-weight:800 }
+.cbf-shsv { display:flex; align-items:center; gap:8px; margin-top:10px; padding:8px 10px 8px 12px; border-radius:10px; background:var(--fitw); font-size:12.5px; font-weight:600 } .cbf-shsv span { flex:1 } .cbf-shsv button { height:28px; padding:0 12px; border-radius:14px; background:var(--ink); color:#fff; font-size:12px; font-weight:700 }
+.cbf-shbtn { display:flex; gap:8px; margin-top:14px } .cbf-shbtn .btn { flex:1 } .cbf-shbtn .btn[disabled] { opacity:.4 }
+.cbf-shview { display:block; width:100%; margin-top:10px; height:36px; font-size:13px; font-weight:700; color:var(--sub) }
+.cbf-shby { display:block; font-size:12px; color:var(--sub); margin-bottom:2px }
+.cbf-vlist { padding:0 20px; display:grid; gap:8px }
+.cbf-vrow { display:flex; align-items:center; gap:12px; padding:10px 12px; border:1px solid #EBEBEB; border-radius:12px; background:var(--bg); text-align:left; width:100% }
+.cbf-vrow .th { width:48px; height:56px; border-radius:8px; background:var(--gray); display:flex; align-items:center; justify-content:center; overflow:hidden; flex:none } .cbf-vrow .th img { max-width:44px; max-height:52px; object-fit:contain }
+.cbf-vrow .tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px } .cbf-vrow small { font-size:11.5px; color:var(--sub) }
+.cbf-vrow b { font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap } .cbf-vrow .tx > span { font-size:12.5px; color:var(--ink2) } .cbf-vrow .go { color:var(--text-tertiary); font-size:20px }
+/* ── 피그마 수치 그대로 (bootcamp 코디북: 563:20603 편집 · 563:20312 상세 · 550:19931/563:20483 옵션 선택 · 550:18057 배경색 · 550:18850/18810 목록) ── */
+#app .fi { display:block; flex:none; max-width:none }
+#app .cb-hdr { height:48px; padding:0 20px; gap:12px }
+#app .cb-hdr .l { gap:4px } #app .cb-hdr .l b { font-size:18px; font-weight:600; color:#121212; line-height:normal }
+#app .cb-hdr .icons { gap:12px } #app .cb-hdr button { display:flex; padding:0 }
+#app .cb-back img { transform:rotate(90deg) scaleY(-1) }
+#app .cbing { margin:0; padding:6px; border-radius:4px; background:#F1FEF5; color:#06BC51; font-size:11px; font-weight:600; letter-spacing:-.33px; line-height:1 }
+/* 하단 버튼 */
+#app .bar:has(.cb-b) { height:92px; padding:16px 20px 0; gap:6px; border-top:0 }
+#app .bar .cb-b { flex:1; height:56px; border-radius:12px; background:#06BC51; color:#fff; font-size:16px; font-weight:700; letter-spacing:-.48px; line-height:1 }
+#app .bar .cb-b.ed { background:#27C45B } #app .bar .cb-b:disabled { background:#C5C5C5 }
+#app .bar .cb-b1 { flex:none; width:80px; height:56px; border:1px solid #E1E1E1; border-radius:12px; background:#fff; color:#121212; font-size:16px; font-weight:700; letter-spacing:-.48px; line-height:1 }
+/* 판 위 선택 (563:20864) */
+#app .cbe.sel::after { inset:0; border:1px solid #fff; border-radius:12px; box-shadow:none }
+#app .cb-x, #app .cb-h { width:20px; height:20px; border-radius:200px; background:#fff; box-shadow:none }
+#app .cb-x { right:-8px; top:-7px } #app .cb-h { right:-8px; bottom:-7px }
+#app .cb-x img, #app .cb-h img { width:auto !important; height:auto !important; pointer-events:none }
+#app .cb-lab { left:1px; top:1px; transform:none; padding:7px 8px; border-radius:12px 0 0 0; background:#06BC51; color:#fff; font-size:11px; font-weight:600; letter-spacing:-.33px; line-height:1 }
+/* 판 옵션 (563:20617 · 550:18018): 오른쪽 8 · 위 134 · 간격 8 · 36 아이콘 */
+#app .cbrail { right:8px; top:134px; gap:8px }
+#app .cbrail button { width:36px; height:36px; filter:none; padding:0 }
+#app .cbrail .aa { color:#fff; font-size:18px; font-weight:500; letter-spacing:-1.08px; line-height:normal; text-shadow:0 0 6px rgba(0,0,0,.16) }
+#app .cbrail .lb { width:53px; font-size:12px; font-weight:600; letter-spacing:-.36px; line-height:normal; text-shadow:0 0 6px rgba(0,0,0,.16) }
+#app .cbdim { width:195px; background:linear-gradient(to left, #121212, rgba(18,18,18,0)); opacity:.6 }
+/* 배경색 (550:18303): 아래 흰 딤 · 위 427 · 간격 16 */
+#app .cbpalbg { position:absolute; left:0; right:0; bottom:0; height:100px; z-index:949; background:linear-gradient(to top, rgb(255 255 255 / 35%), rgb(237 237 237 / 0%)) }
+#app .cbpal { left:50%; right:auto; bottom:auto; top:427px; transform:translateX(-50%); padding:0; gap:16px; align-items:center; background:none }
+#app .cbpal .sw { position:relative; width:26px; height:26px; border-radius:0; outline:0; padding:0; flex:none }
+#app .cbpal .sw svg { display:block; width:26px !important; height:26px !important }
+#app .cbpal .sw.on { width:32px; height:32px } #app .cbpal .sw.on svg { position:absolute; inset:-2px; width:36px !important; height:36px !important }
+#app .cbpal .wheel { width:26px; height:26px; border-radius:100px; outline:0; background:radial-gradient(circle closest-side, #fff 4%, rgba(255,255,255,.66) 41.3%, rgba(255,255,255,.33) 73.6%, rgba(255,255,255,0) 96%), conic-gradient(from 90deg, #FF0000, #FD0080 10%, #FB00FF 20%, #7E51FF 30%, #00A1FF 40%, #22D080 50%, #44FF00 60%, #A2FB00 70%, #FFF700 80%, #FF7C00 90%, #FF0000) }
+#app .cbpal .x { width:26px; height:26px; border-radius:200px; background:rgb(132 132 132 / 30%); padding:0; display:flex; align-items:center; justify-content:center }
+/* 판에 놓인 옷 (563:20645) */
+#app .cbt { border:1px solid #E1E1E1; border-radius:4px } #app .cbt.on { border-color:#06BC51 }
+#app .cbtx { width:16px; height:16px; border-radius:200px; border:1px solid #E1E1E1 }
+#app .cbtx img { width:10px !important; height:10px !important }
+#app .cbsep { border:0; align-self:center }
+#app .cbti small { font-size:10px; font-weight:700; color:#979797; line-height:normal; margin-top:4px; width:40px; text-align:center } #app .cbti small.g { color:#06BC51 }
+#app .cbslot { position:relative; width:40px; height:48px; padding:0; flex:none }
+#app .cbslot .bg { position:absolute; left:-2px; top:-2px; width:44px; height:52px }
+#app .cbslot .pl { position:absolute; left:50%; top:calc(50% - .41px); transform:translate(-50%,-50%) }
+/* 탭 (563:20670): 350 · 위아래 16 · 활성 모양 112×41 */
+#app .cbsegw { padding:16px 20px 0 }
+#app .cbseg { position:relative; width:350px; margin:0; padding:16px 0; border-radius:12px; background:#F6F6F6; gap:0 }
+#app .cbseg .shape { position:absolute; top:4px; left:4px } #app .cbseg .shape.s1 { left:119px } #app .cbseg .shape.s2 { left:234px }
+#app .cbseg button { position:relative; flex:none; width:117px; height:auto; padding:0; border:0 !important; border-radius:0; background:none !important; font-size:14px; font-weight:500; color:#979797; line-height:normal; text-align:center }
+#app .cbseg button:last-child { width:116px } #app .cbseg button.on { font-weight:700; color:#06BC51 }
+/* 목록 줄 (563:20686) */
+#app .cbsec { padding:20px 20px 0 } #app .cbh { margin-bottom:12px }
+#app .cbh > b { gap:2px; font-size:18px; font-weight:600; color:#000; line-height:normal } #app .cbh > span { font-size:13px; font-weight:400; color:#121212 }
+#app .cbc { position:relative; gap:10px }
+#app .cbc .im { border:1px solid #E1E1E1; border-radius:8px } #app .cbc .im.on { border:2px solid #06BC51 }
+#app .cbc .ok { position:absolute; top:0; right:0 } #app .cbc.mine .ok { top:2px; right:2px }
+#app .cbtags { gap:4px } #app .cbtags i { padding:6px; border-radius:4px; font-size:9px; font-weight:600; letter-spacing:-.27px; line-height:1 }
+#app .cbtags i.g { background:rgba(6,188,81,.12); color:#27C45B }
+#app .cbinfo img { width:20px; height:20px }
+/* 목록 화면 (550:18850 · 550:18810) */
+#app .cbgrid { grid-template-columns:171px 171px; gap:8px; padding:12px 20px 28px }
+#app .cbcard { display:flex; flex-direction:column; gap:10px; padding-bottom:8px }
+#app .cbcard .tx { display:flex; flex-direction:column; gap:6px; min-width:0 }
+#app .cbcard .tx b { margin:0; font-size:16px; font-weight:700; color:#000; line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+#app .cbcard .tx small { margin:0; display:flex; align-items:center; gap:4px; font-size:13px; font-weight:500; letter-spacing:-.39px; color:#979797; line-height:1 }
+#app .cbnone { min-height:calc(100% - 48px); padding:0 0 160px; justify-content:center; gap:12px }
+#app .cbnone img.fi { width:100px; height:100px; padding:0; border-radius:0; background:none }
+#app .cbnone .tx { display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 0 }
+#app .cbnone b { margin:0; font-size:26px; font-weight:700; letter-spacing:-.78px; color:#121212; line-height:1 }
+#app .cbnone small { margin:0; font-size:14px; font-weight:400; letter-spacing:-.42px; color:#555; line-height:1.7 }
+/* 상세 (563:20312) */
+#app .cbv-t { padding:10px 20px }
+#app .cbv-t > button:first-child { gap:4px; font-size:18px; font-weight:600; color:#121212 } #app .cbv-t > button:first-child b { font-weight:600; line-height:normal }
+#app .cbcopy { gap:6px; padding:8px 12px; border-radius:200px; background:#F6F6F6; font-size:13px; font-weight:600; color:#777; line-height:normal }
+#app .cbv-b .cbb { border-radius:12px }
+#app .cbused { padding:28px 20px 16px } #app .cbused .cbh { margin-bottom:16px }
+#app .cbused .cbrow { align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid #E1E1E1 }
+#app .cbused .cbrow:first-child { padding-top:0 } #app .cbused .cbrow:last-child { padding-bottom:0; border-bottom:0 }
+#app .cbrow .th, #app .cbop .th { width:70px; height:84px; flex:none; border-radius:8px; overflow:hidden; background:#F6F6F6; display:flex; align-items:center; justify-content:center }
+#app .cbrow .th img, #app .cbop .th img { width:100%; height:100%; object-fit:cover } #app .cbrow .th svg { width:100%; height:100% }
+#app .cbused .cbrow > div { flex:1; gap:0 }
+#app .cbused .nm { font-size:13px; font-weight:400; line-height:1.5; color:#000 }
+#app .cbused .pr { display:flex; gap:4px; padding:4px 0 8px; font-size:14px; font-weight:600; line-height:normal }
+#app .cbused .pr em, #app .cbop .pr em, #app .cbrc .pr em { color:#D71A1A; font-weight:inherit }
+#app .cbused .pr b, #app .cbop .pr b { font-weight:inherit; color:#000 }
+#app .cbused .cbtags.mine { padding-top:6px }
+#app .cbused .cbtags i, #app .cbrc .cbtags i { display:inline-flex; align-items:center; gap:4px; font-size:11px; letter-spacing:-.33px; background:#F6F6F6; color:#979797 }
+#app .cbused .cbtags i.g, #app .cbrc .cbtags i.g { background:#F1FEF5; color:#06BC51 }
+#app .cbmatch { padding:28px 20px 0 } #app .cbmatch .cbh { margin-bottom:12px }
+#app .cbbasis { gap:0; font-size:12px; font-weight:500; color:#979797; line-height:normal }
+#app .cbpills { gap:8px; padding-bottom:8px }
+#app .cbpills button { height:auto; padding:12px; border-radius:8px; border:1px solid #E1E1E1; font-size:13px; font-weight:500; color:#121212; line-height:1 }
+#app .cbpills button.on { border:0; background:#06BC51; color:#fff; font-weight:600 }
+#app .cbrecs { gap:8px; padding:12px 20px 16px }
+#app .cbrc { width:140px; gap:10px }
+#app .cbrc .im { width:140px; height:168px; border-radius:8px; margin:0 }
+#app .cbrc .tx { display:flex; flex-direction:column }
+#app .cbrc small { font-size:12px; font-weight:500; color:#979797; line-height:normal }
+#app .cbrc .nm { height:39px; margin:4px 0 6px; font-size:13px; font-weight:500; line-height:1.5; color:#000 }
+#app .cbrc .pr { display:flex; align-items:center; gap:4px; font-size:14px; font-weight:700; line-height:normal } #app .cbrc .pr b { font-weight:700; color:#000 } #app .cbrc .pr b small { font-size:13px; font-weight:700; color:#000 }
+#app .cbrc .cbtags { gap:6px; padding-top:8px }
+/* 옵션 선택 시트 (550:19931 · 563:20483) */
+#app .dim:has(+ .sheet.cbsh) { background:rgba(0,0,0,.8) }
+#app .sheet.cbsh { display:flex; flex-direction:column; gap:12px; padding:40px 20px 0; border-radius:20px 20px 0 0; max-height:700px; overflow-y:auto }
+#app .sheet.cbsh > * { flex-shrink:0 } /* 내용이 길면 줄어들어 글자가 잘리지 않게 스크롤 */
+#app .cbgrab { position:absolute; left:0; right:0; top:0; padding:12px 0; background:#fff; display:flex; justify-content:center }
+#app .cbgrab i { width:40px; height:4px; border-radius:200px; background:#D9D9D9 }
+#app .cbot { display:flex; flex-direction:column; gap:8px } #app .cbot b { font-size:20px; font-weight:600; color:#000; line-height:normal } #app .cbot span { font-size:14px; font-weight:500; color:#979797; line-height:1.5 }
+#app .cbog { display:flex; flex-direction:column; gap:12px }
+#app .cbop { display:flex; gap:12px; align-items:flex-start } #app .cbop > div { flex:1; min-width:0; display:flex; flex-direction:column }
+#app .cbop small { padding-bottom:4px; font-size:12px; font-weight:500; color:#979797; line-height:normal }
+#app .cbop .nm { font-size:13px; font-weight:400; line-height:1.5; color:#000; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+#app .cbop .pr { display:flex; gap:4px; padding:4px 0 8px; font-size:15px; font-weight:700; line-height:normal }
+#app .cbob { display:flex; flex-direction:column; gap:16px; padding:8px 0 16px; border-bottom:1px solid #E1E1E1 }
+#app .cbsz { display:flex; flex-direction:column; gap:10px } #app .cbsz > b { font-size:14px; font-weight:600; color:#000; line-height:normal }
+#app .cbszs { gap:6px }
+#app .cbszs button { min-width:72px; padding:10px 12px; gap:8px; border:1px solid #E1E1E1; border-radius:12px; background:#fff }
+#app .cbszs .k { display:flex; justify-content:space-between; align-items:center; width:100% }
+#app .cbszs .k b { font-size:16px; font-weight:600; letter-spacing:-.48px; color:#121212; line-height:1 } #app .cbszs .k em { font-style:normal; font-size:12px; font-weight:600; letter-spacing:-.36px; color:#06BC51; line-height:1 }
+#app .cbszs small { font-size:13px; font-weight:400; letter-spacing:-.39px; color:#121212; line-height:1 }
+#app .cbszs button.on { background:#F1FEF5; border-color:#06BC51 }
+#app .cbszs button.out { border:0; background:#F6F6F6 } #app .cbszs button.out .k b, #app .cbszs button.out small { color:#979797 }
+#app .cbqty { margin:0; padding:14px 12px; border-radius:12px; background:#F6F6F6 }
+#app .cbqty > b { font-size:14px; font-weight:600; color:#000; line-height:normal } #app .cbqty span { gap:8px }
+#app .cbqty i { width:auto; min-width:38px; height:auto; padding:6px; border-radius:4px; border:1px solid #E1E1E1; font-size:13px; font-weight:500; color:#000; line-height:normal }
+#app .cbqty button { padding:0 } #app .cbqty img { width:20px !important; height:20px !important; transform:scaleY(-1) }
+#app .cbofoot { position:sticky; bottom:0; z-index:2; display:flex; flex-direction:column; gap:20px; margin:0 -20px; padding:0 20px 20px; background:#fff } /* 총액 · 버튼은 흰 배경과 함께 아래 고정 */
+#app .cbofoot .cbtot { margin:0; padding:8px 0 0; border:0; font-size:16px; font-weight:700; letter-spacing:-.48px; line-height:1; color:#000 }
+#app .cbofoot .cb-b { width:100%; height:56px; border-radius:12px; background:#06BC51; color:#fff; font-size:16px; font-weight:700; letter-spacing:-.48px; line-height:1 } #app .cbofoot .cb-b:disabled { background:#C5C5C5 }
+/* 빈 판 안내 글 (523:10225): 14 · Medium · 검정 30% */
+#app .cb-ph-t { bottom:auto; top:426px; font-size:14px; font-weight:500; color:#000; opacity:.3; line-height:normal }
+#app .cbfix { top:48px } /* 헤더 높이 48에 맞춰 위 여백 없앰 */
+/* 탭 누르는 영역: 위아래 16 여백을 버튼 안으로 옮겨 탭 높이 49 전체를 누를 수 있게 (보이는 모양은 그대로) */
+#app .cbseg { padding:0 } #app .cbseg button { padding:16px 0 }
+
