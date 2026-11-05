@@ -1,6 +1,6 @@
 // 무신사 랭킹 상품(2026-10-29) 사진 주소. 시연용. 사진 파일은 레포에 두지 않고 우리 서버 /api/img가 무신사에서 받아 중계한다
 // 상품 번호는 주소 안의 숫자. 썸네일 · 상세 이미지 · 옷장용 바닥컷(디자이너가 고른 무신사 상품 사진)
-const msImg = (u) => '/api/img?url=' + encodeURIComponent(u);
+const msImg = (u) => u.includes('vercel-storage.com') ? u : '/api/img?url=' + encodeURIComponent(u); // Blob 사진은 중계 없이 바로
 const MSIMG = {
 "p16": "https://image.msscdn.net/images/goods_img/20260825/7159262/7159262_17900393960157_500.jpg",
 "p1": "https://image.msscdn.net/images/goods_img/20260121/5922020/5922020_17847044328947_500.jpg",
@@ -62,7 +62,7 @@ const MSIMG = {
 "r45": "https://image.msscdn.net/images/goods_img/20261013/7498102/7498102_17923980794645_500.jpg",
 "r46": "https://image.msscdn.net/images/goods_img/20260731/6966040/6966040_17881497214248_500.jpg",
 "r47": "https://image.msscdn.net/images/goods_img/20260706/6788300/6788300_17853929939133_500.png",
-"r48": "https://image.msscdn.net/images/goods_img/20260921/7383404/7383404_17926368798548_500.jpg",
+"r48": "https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/ms/r48.jpg", // 무신사에서 사진이 지워져(404) 아티팩트 사진을 Blob에 둠
 "r49": "https://image.msscdn.net/images/goods_img/20260824/7148345/7148345_17929774857434_500.jpg",
 "r50": "https://image.msscdn.net/images/goods_img/20260826/7173386/7173386_17925648315413_500.jpg",
 "r51": "https://image.msscdn.net/images/prd_img/20260901/7213368/detail_7213368_17896091851823_500.jpg",

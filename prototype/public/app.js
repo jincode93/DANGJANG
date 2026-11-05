@@ -1,4 +1,4 @@
-const IMG0 = {"hero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/hero.jpg","base":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/base.jpg","jacket":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/jacket.jpg","slacks":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/slacks.jpg","denim":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/denim.jpg","knit":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/knit.jpg","tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee.jpg","pdHero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdHero.jpg","pdDetail":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdDetail.jpg","ltee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/ltee.jpg","puffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/puffer.jpg","leather":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/leather.jpg","suede":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/suede.jpg","lpuffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/lpuffer.jpg","tee2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee2.jpg","blackp":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/blackp.jpg","wide":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/wide.jpg","m1":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m1.jpg","m2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m2.jpg","oxford":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/oxford.jpg","dshirt":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/dshirt.jpg"};
+const IMG0 = {"hero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/hero.jpg","base":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/base.jpg","jacket":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/jacket.jpg","slacks":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/slacks.jpg","denim":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/denim.jpg","knit":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/knit.jpg","tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee.jpg","pdHero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdHero.jpg","pdDetail":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdDetail.jpg","pdTee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/pdTee.png","ltee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/ltee.jpg","puffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/puffer.jpg","leather":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/leather.jpg","suede":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/suede.jpg","lpuffer":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/lpuffer.jpg","tee2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/tee2.jpg","blackp":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/blackp.jpg","wide":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/wide.jpg","m1":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m1.jpg","m2":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/m2.jpg","oxford":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/oxford.jpg","dshirt":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/img/dshirt.jpg"};
 const IMG = new Proxy(IMG0, { get: (t, k) => typeof k === 'string' && /^(data:|blob:|https?:|\/api\/)/.test(k) ? k : t[k] });
 // 서버가 붙은 주소(일반 웹)에서만 켜짐. 아티팩트 안에서는 꺼진 채로 예전 흐름
 const CUT = {"hero":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/hero.png","base":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/base.png","jacket":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/jacket.png","slacks":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks.png","denim":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim.png","knit":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/knit.png","tee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/tee.png","leather":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/leather.png","suede":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/suede.png","ltee":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/ltee.png","denim_k":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim_k.png","denim_i":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/denim_i.png","slacks_b":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks_b.png","slacks_n":"https://twzcrq9rwh1icyxq.public.blob.vercel-storage.com/cut/slacks_n.png"};
@@ -496,7 +496,7 @@ SCR.home = (p) => {
 
 /* ── 카테고리 (1뎁스 → 2뎁스) ── */
 SCR.searchOld = () => ({ node: '카테고리 · 상의 · 하의 · 아우터 → 2뎁스', navOn: 'search', body: `
-  <div class="hdr"><span style="font-size:20px;font-weight:700">카테고리</span><span class="icons"><button data-a="findGo" aria-label="검색">${I.search}</button>${cartBtn()}</span></div>
+  <div class="hdr"><span class="t">카테고리</span><span class="icons"><button data-a="findGo" aria-label="검색">${I.search}</button>${cartBtn()}</span></div>
   ${CATK.map((c) => `<div class="csec"><div class="chead"><b>${CAT[c]}</b><button data-a="catGo" data-x="${c}|전체">전체 보기${I.chev}</button></div>
     <div class="cgrid">${SUB[c].map((x) => `<button data-a="catGo" data-x="${c}|${x}">${x}</button>`).join('')}</div></div>`).join('')}
   <div style="height:24px"></div>` });
@@ -521,7 +521,7 @@ SCR.search = (p) => {
     : `<div class="tabs ctabs">${CATK.map((k) => `<button class="${k === c ? 'on' : ''}" data-a="catC" data-x="${k}">${CAT[k]}</button>`).join('')}</div>
        <div class="chips">${subs.map((x) => `<button class="chip ${x === sub ? 'on' : ''}" data-a="catS" data-x="${x}">${x}</button>`).join('')}</div>`;
   return { node: `카테고리 · ${CAT[c]} > ${sub}`, navOn: 'search', body: `
-  <div class="hdr"><span style="font-size:20px;font-weight:700">카테고리</span><span class="icons"><button data-a="findGo" aria-label="검색">${I.search}</button>${cartBtn()}</span></div>
+  <div class="hdr"><span class="t">카테고리</span><span class="icons"><button data-a="findGo" aria-label="검색">${I.search}</button>${cartBtn()}</span></div>
   ${top}
   <div class="lhead"><span>상품 ${list.length}개</span>${sortBtn(p)}</div>
   ${list.length ? `<div class="grid2" style="padding-bottom:24px">${list.map(card).join('')}</div>` : `<div class="rempty">아직 ${sub} 상품이 없어요</div>`}` };
@@ -758,7 +758,7 @@ SCR.detail = (pp) => {
     cmp = `<div class="pd-txt"><div class="pd-head">${view} 사이즈는 ${((w) => w === '비슷해요' ? '내 기준 옷과 <em class="eq">비슷해요</em>' : w === '부위별로 달라요' ? `내 기준 옷과 <em>${w}</em>` : `내 기준 옷보다 <em>${w}</em>`)(fitWord(p, base, view))}</div>
       <p class="pd-sum">${s.slice(cut + 3)}.</p>
       <div class="pd-cnt">${[['비슷해요', gd.filter((v) => v != null && fitOf(v) === 'eq').length, 'eq'], ['넉넉해요', gd.filter((v) => v != null && fitOf(v) === 'big').length, ''], ['부족해요', gd.filter((v) => v != null && fitOf(v) === 'small').length, 'lack']].map(([l, n, c]) => `<span class="${c}"><b>${n}<small>곳</small></b>${l}</span>`).join('')}</div></div>
-      <div class="pd-stage">${fig}<div class="pd-legend"><span><i class="dash"></i>내 기준 옷 · ${base.name} ${base.size}</span><span><i class="solid"></i>이 상품 ${view}</span></div></div>
+      <div class="pd-stage">${fig}<div class="pd-legend"><span><i class="dash"></i>내 기준 옷</span><span><i class="solid"></i>이 상품 ${view}</span></div></div>
       ${tblFor([['기준 옷', gb], [view, gm, 'hl'], ['차이', gd, '', (v) => v == null ? '<td>–</td>' : `<td class="${fitOf(v)}">${v === 0 ? '같음' : sgn(v)}</td>`]])}`;
   } else if (p.sizes) cmp = tblFor(keys.map((k) => [k, gsz(k)]));
   const out = sel && p.out.includes(sel);
@@ -925,7 +925,7 @@ SCR.review = (pp) => {
 };
 SCR.cart = () => ({ node: '② 장바구니', bar: S.cart.length ? `<button class="btn" data-a="cartOrder">${won(S.cart.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0))}원 주문하기</button>` : '', body: `${hdrBack('장바구니')}${S.cart.length ? slot('cart.top') : ''}
   ${S.cart.length ? S.cart.map((c, i) => { const p = PB[c.pid]; return `<div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)"><div class="img" style="width:76px;height:92px;border-radius:6px;flex:none"><img src="${IMG[p.img]}"></div><div style="flex:1;min-width:0"><div class="br">${p.brand}</div><div class="nm">${p.name}</div><div style="font-size:13px;color:var(--sub);margin-top:3px">${c.color ? c.color + ' / ' : '사이즈 '}${c.size} · ${c.qty || 1}개</div><div class="price" style="margin-top:6px">${won(sale(p) * (c.qty || 1))}원</div></div><button data-a="cartDel" data-x="${i}" style="align-self:flex-start;color:var(--sub)">${I.close}</button></div>` }).join('')
-    : `<div class="empty"><div class="big">${I.bag}</div><h4>장바구니가 비어 있어요</h4><p>마음에 드는 옷을 담아 보세요</p></div>`}
+    : `<div class="empty"><div class="big">${I.bag}</div><h4>장바구니가 비어 있어요</h4><p>마음에 드는 옷을 담아 보세요</p><div class="cart-go"><button class="btn" data-a="tab" data-x="home">홈으로 가기</button><button class="btn line" data-a="cartRank">랭킹 보러 가기</button></div></div>`}
   ${S.cart.length && !S.user ? '<div class="p" style="font-size:12.5px;color:var(--sub)">비회원 장바구니는 이 기기에만 저장돼요. 가입하면 계정으로 합쳐져요</div>' : ''}` });
 SCR.order = (pp) => {
   const its = pp.items, total = its.reduce((a, c) => a + sale(PB[c.pid]) * (c.qty || 1), 0), cp = S.coupons.find((c) => !c.used), off = cp ? Math.round(total * 0.1 / 100) * 100 : 0;
@@ -960,9 +960,9 @@ SCR.fit = (pp) => {
 /* 옷장 (E) */
 const HOOK = '<svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#8C8880" stroke-width="1.8" stroke-linecap="round"><path d="M13 9.5a3 3 0 1 0-3-3"/><path d="M13 9.5V12L3 20.5h20L13 12"/></svg>';
 SCR.closet = (pp = {}) => {
-  if (!S.user) return { node: '⑤ 내 옷장 · 로그인? → 아니오', navOn: 'closet', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>로그인하고 내 옷장 만들기</h4><p>가진 옷을 등록하면 새 옷과 겹쳐서 비교해 드려요</p><button class="btn" style="margin-top:22px" data-a="closetLogin">로그인하기</button></div>` };
+  if (!S.user) return { node: '⑤ 내 옷장 · 로그인? → 아니오', navOn: 'closet', body: `<div class="hdr"><span class="t">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>로그인하고 내 옷장 만들기</h4><p>가진 옷을 등록하면 새 옷과 겹쳐서 비교해 드려요</p><button class="btn" style="margin-top:22px" data-a="closetLogin">로그인하기</button></div>` };
   const waitReg = S.pending.length;
-  if (!S.closet.length && !waitReg) return { node: '⑤ 내 옷장 · 옷이 있나? → 아니오 · 빈 옷장', navOn: 'closet', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>첫 옷을 등록해 보세요</h4><p>지금 제일 잘 맞는 옷 한 벌이면 충분해요.<br>첫 등록하면 10% 쿠폰을 드려요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="|closet">첫 옷 등록하기</button></div>` };
+  if (!S.closet.length && !waitReg) return { node: '⑤ 내 옷장 · 옷이 있나? → 아니오 · 빈 옷장', navOn: 'closet', body: `<div class="hdr"><span class="t">내 옷장</span></div><div class="empty"><div class="big">${I.hanger}</div><h4>첫 옷을 등록해 보세요</h4><p>지금 제일 잘 맞는 옷 한 벌이면 충분해요.<br>첫 등록하면 10% 쿠폰을 드려요</p><button class="btn" style="margin-top:22px" data-a="reg" data-x="|closet">첫 옷 등록하기</button></div>` };
   const t = pp.t || (CATS.find((c) => ofCat(c.k).length) || CATS[0]).k, all = ofCat(t), subs = CM[t].subs.filter((x) => all.some((c) => c.sub === x));
   const sv = subs.includes(pp.s) ? pp.s : '', mine = sv ? all.filter((c) => c.sub === sv) : all, cb = sv ? baseOf({ cat: t, sub: sv }) : baseOf(t);
   const b0 = mine.find((c) => c.base && c.fit === 'good'); // 기준 옷을 선반 가운데에 걸어 양옆이 보이게. '전체'에선 세부 종류마다 기준 옷이 있어 첫 기준 옷만 가운데
@@ -1121,10 +1121,10 @@ SCR.regDone = (pp) => ({ node: '④ 옷 등록 · 옷장에 담기 완료 → �
 
 /* 마이 (H) */
 SCR.my = () => {
-  if (!S.user) return { node: '⑥ 마이 · 로그인? → 아니오 · 로그인 · 가입 버튼', navOn: 'my', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">마이</span>${cartBtn()}</div>
+  if (!S.user) return { node: '⑥ 마이 · 로그인? → 아니오 · 로그인 · 가입 버튼', navOn: 'my', body: `<div class="hdr"><span class="t">마이</span>${cartBtn()}</div>
     <div style="margin:10px 16px 0;border-radius:12px;background:var(--gray);padding:22px 18px"><div style="font-size:18px;font-weight:800;letter-spacing:-.02em">로그인하고 내 옷장 만들기</div><div style="font-size:13.5px;color:var(--ink2);margin-top:4px">가입하면 10% 쿠폰을 드려요</div><button class="btn" style="margin-top:16px;height:48px" data-a="myLogin">로그인 · 가입</button></div>
     <div class="list" style="margin-top:14px"><button class="li">고객센터${I.chev}</button><button class="li">공지사항${I.chev}</button></div>` };
-  return { node: '⑥ 마이 · 주문 내역 · 쿠폰함 · 계정', navOn: 'my', body: `<div class="hdr"><span style="font-size:22px;font-weight:800;letter-spacing:-.03em">마이</span><span class="icons">${cartBtn()}</span></div>
+  return { node: '⑥ 마이 · 주문 내역 · 쿠폰함 · 계정', navOn: 'my', body: `<div class="hdr"><span class="t">마이</span><span class="icons">${cartBtn()}</span></div>
     <div class="pad" style="padding-top:6px"><div style="font-size:21px;font-weight:800;letter-spacing:-.02em">${S.user.name}님</div><div style="font-size:13px;color:var(--sub);margin-top:2px">카카오 계정으로 로그인</div></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);margin:18px 16px 0;border:1px solid var(--line);border-radius:10px">${[['closet', '내 옷장', S.closet.length + '벌'], ['coupons', '쿠폰', S.coupons.filter((c) => !c.used).length + '장'], ['orders', '주문', S.orders.length + '건']].map(([s, t, v], i) => `<button data-a="${s === 'closet' ? 'tab' : 'go'}" data-x="${s}" style="padding:14px 0;${i ? 'border-left:1px solid var(--line)' : ''}"><div style="font-size:12.5px;color:var(--sub)">${t}</div><div class="num" style="font-size:18px;font-weight:800;margin-top:2px">${v}</div></button>`).join('')}</div>
     <div class="list" style="margin-top:14px"><button class="li" data-a="go" data-x="orders">주문 내역 · 반품 · 교환${I.chev}</button><button class="li" data-a="go" data-x="coupons">쿠폰함${I.chev}</button><button class="li" data-a="go" data-x="notis">알림${I.chev}</button>${slot('my.menu')}<button class="li" data-a="logout">로그아웃${I.chev}</button><button class="li" data-a="go" data-x="leave" style="color:var(--sub)">탈퇴하기${I.chev}</button></div>` };
@@ -1382,16 +1382,17 @@ function saveFit(c, good) {
   if (!baseOf(c)) { c.base = true; return `${GN(c)} 기준 옷으로 정했어요 · 옷 상세 정보에서 바꿀 수 있어요` }
   return '잘 맞는 옷으로 저장했어요';
 }
+const oneColor = (p) => p.colors && p.colors.length > 1 ? null : (p.colors?.[0] || '단일 색상'); // 색상 1개 이하면 컬러 단계 숨김
 function optSheet(patch) {
   const o = S.ov, p = PB[o.pid], j = judge(p), base = j.n === 5 && !cur().p.nob ? j.base : null;
   const dd = (key, label, rows) => `<div class="pd-dd ${o.open === key ? 'open' : ''}"><button class="hd" data-a="optOpen" data-x="${key}" aria-expanded="${o.open === key}"><span>${key === 'color' && o.color ? o.color:label}</span>${I.down}</button>${o.open === key ? `<ul>${rows}</ul>` : ''}</div>`;
-  const colors = (p.colors || ['단일 색상']).map((c) => `<li><button data-a="optColor" data-x="${c}"><b>${c}</b></button></li>`).join('');
+  const one = oneColor(p), colors = (p.colors || ['단일 색상']).map((c) => `<li><button data-a="optColor" data-x="${c}"><b>${c}</b></button></li>`).join('');
   const sizes = sizeKeys(p).map((k) => { const out = p.out.includes(k), w = !out && base && p.sizes ? fitWord(p, base, k) : '';
     return `<li><button data-a="optSize" data-x="${k}" ${out ? 'disabled' : ''}><b>${k}</b>${out ? '<span>품절</span>' : w ? `<span>${w}</span>` : ''}${!out && base && k === j.rec ? '<em class="rec">추천</em>' : ''}</button></li>`; }).join('');
   const n = o.items.reduce((a, it) => a + it.qty, 0);
   o.html = `<button class="pd-grab" aria-label="닫기"></button><h3>옵션 선택</h3>
-    <div class="pd-opts">${dd('color', '컬러', colors)}${dd('size', '사이즈', sizes)}
-    ${o.items.length ? `<div class="pd-items">${o.items.map((it, i) => `<div class="pd-item"><b>${it.color} / ${it.size}</b><button class="x hit" data-a="optDel" data-x="${i}" aria-label="${it.color} ${it.size} 빼기">${I.close}</button>
+    <div class="pd-opts">${one ? '' : dd('color', '컬러', colors)}${dd('size', '사이즈', sizes)}
+    ${o.items.length ? `<div class="pd-items">${o.items.map((it, i) => `<div class="pd-item"><b>${one ? it.size : `${it.color} / ${it.size}`}</b><button class="x hit" data-a="optDel" data-x="${i}" aria-label="${it.color} ${it.size} 빼기">${I.close}</button>
       <div class="pd-qty"><button class="hit" data-a="optQty" data-x="${i}|-1" aria-label="수량 줄이기" ${it.qty <= 1 ? 'disabled' : ''}>${I.minus}</button><span class="num">${it.qty}</span><button class="hit" data-a="optQty" data-x="${i}|1" aria-label="수량 늘리기">${I.plus}</button></div><span class="pr num">${won(sale(p) * it.qty)}원</span></div>`).join('')}</div>` : ''}</div>
     <div class="pd-sf">${n ? `<div class="pd-total num"><span>총 ${n}개</span><span>${won(sale(p) * n)}원</span></div>` : ''}<div class="pd-two"><button class="btn pd-cta line" data-a="optGo" data-x="cart">장바구니</button><button class="btn pd-cta" data-a="optGo" data-x="buy">구매하기</button></div></div>`;
   if (patch) { const sh = app.querySelector('.sheet'); if (sh) { sh.innerHTML = o.html; const od = sh.querySelector('.pd-dd.open'); if (od) od.scrollIntoView({ block: 'nearest' }); } }
@@ -1449,6 +1450,7 @@ const A = {
   dbuy(mode) { const pp = cur().p; buyFlow(pp.id, pp.sel, mode) },
   restock(k) { toast(`${k} 사이즈 재입고되면 알려 드릴게요`); render() },
   cartDel(i) { S.cart.splice(+i, 1); render() },
+  cartRank() { A.tab('home'); A.homeTab('랭킹') },
   cartOrder() { need('로그인하면 주문하고, 산 옷이 옷장에 담겨요', () => { closeOv(); go('order', { items: S.cart.map((c) => ({ ...c })) }) }) },
   pay() {
     if (S.failNext) { S.failNext = false; finishLoading(() => go('payfail'), '결제하는 중', '③ 구매 · 결제 성공?', 1000); return }
@@ -1649,16 +1651,17 @@ const A = {
   joinedGo() { nav = nav.filter((e) => !['terms', 'joined'].includes(e.s)); if (!nav.length) nav = [{ s: 'home', p: {} }]; render(true); afterLogin() },
   buyOpen() {
     const pp = cur().p; sheet('');
-    Object.assign(S.ov, { k: 'sheet pd-sheet', node: '② 상품 상세 · 구매하기 → 옵션(컬러 · 사이즈) 선택', pid: pp.id, open: 'color', color:null, items: [] });
+    const cs = PB[pp.id].colors || ['단일 색상'], one = cs.length === 1 ? cs[0] : null; // 색이 하나면 자동 선택
+    Object.assign(S.ov, { k: 'sheet pd-sheet', node: '② 상품 상세 · 구매하기 → 옵션(컬러 · 사이즈) 선택', pid: pp.id, open: one ? 'size' : 'color', color: one, items: [] });
     optSheet(); render();
   },
   optOpen(k) { const o = S.ov; o.open = o.open === k ? null : (k === 'size' && !o.color ? 'color' : k); optSheet(true) },
   optColor(c) { Object.assign(S.ov, { color:c, open: 'size' }); optSheet(true) },
-  optSize(k) { const o = S.ov, ex = o.items.find((it) => it.color === o.color && it.size === k); if (ex) ex.qty++; else o.items.push({ color:o.color, size: k, qty: 1 }); Object.assign(o, { color:null, open: null }); optSheet(true) },
+  optSize(k) { const o = S.ov, ex = o.items.find((it) => it.color === o.color && it.size === k); if (ex) ex.qty++; else o.items.push({ color:o.color, size: k, qty: 1 }); const cs = PB[o.pid].colors || ['단일 색상']; Object.assign(o, cs.length === 1 ? { open: null } : { color:null, open: null }); optSheet(true) },
   optQty(x) { const [i, d] = x.split('|').map(Number), it = S.ov.items[i]; it.qty = Math.max(1, it.qty + d); optSheet(true) },
   optDel(i) { S.ov.items.splice(+i, 1); optSheet(true) },
   optGo(mode) {
-    const o = S.ov; if (!o.items.length) { toast('컬러와 사이즈를 선택해 주세요'); render(); return }
+    const o = S.ov; if (!o.items.length) { toast(oneColor(PB[o.pid]) ? '사이즈를 선택해 주세요' : '컬러와 사이즈를 선택해 주세요'); render(); return }
     const items = o.items.map((it) => ({ pid: o.pid, ...it })); cur().p.sel = items[items.length - 1].size; closeOv(); buyFlow(items, mode);
   },
   cmpToggle() { saveY(); cur().p.nob = !cur().p.nob; render() },
