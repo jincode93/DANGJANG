@@ -1,7 +1,7 @@
 /* 신기능 #17 내 옷 기준 추천. 홈 섹션 스타일은 완료본 app.css에서 그대로 옮김 */
 .pcard { width:140px }
 .pcard .img { height:168px }
-.pfit { margin-top:6px; font-size:12px; font-weight:600; color:var(--g); line-height:1.35 }
+.pfit { margin-top:6px; font-size:12px; font-weight:600; color:var(--fit); line-height:1.35 }
 .pfit b { font-weight:700 }
 .pfit span { display:block; margin-top:2px; font-size:11.5px; font-weight:500; color:var(--mut) }
 /* 홈 · 기준 옷 드롭다운과 상품 줄 */
@@ -35,7 +35,8 @@
 .card .szchip { margin-top:8px }
 .card .pfit { margin-top:10px; font-size:12px; line-height:1 }
 .pmore { height:auto; aspect-ratio:auto; align-self:flex-start; min-height:168px }
-#app .pfit { color:var(--primary-text); font-weight:600 }
+#app .pfit { color:var(--fit); font-weight:600 } /* 판정 색은 fit-match (디자인 시스템: 브랜드 primary를 판정에 쓰지 않음) */
+.simbox.one { cursor:default } /* 기준 옷 1벌: 고를 것이 없어 화살표 없음 (제안서 가안) */
 /* 랭킹 · 기준 옷 칩과 시트 (원본: 주리 데모) */
 .rsel { display:flex; align-items:center; gap:8px; padding:0 20px 14px }
 .fchip { flex:none; display:flex; align-items:center; gap:4px; height:36px; padding:0 12px; border-radius:18px; border:1px solid var(--ln); background:#fff; font-size:13.5px; font-weight:500; color:var(--ink); white-space:nowrap }
