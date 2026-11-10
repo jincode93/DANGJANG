@@ -85,6 +85,7 @@ flowchart TD
 | 보고 싶은 것 | 위치 |
 |---|---|
 | 무엇을 왜 만드나 (문제, 타깃, 지표) | `docs/prd.md` |
+| 서비스 IA (화면 구조) | `docs/ia.html` |
 | 정책 · 용어 · 아직 정하지 않은 것 | `docs/policy/`, `docs/glossary.md`, `docs/open-questions.md` |
 | 신기능 제안서와 양식 | `docs/proposals/` |
 | 데모 코드와 신기능 토글 | `prototype/` (`public/features/`가 토글) |

@@ -16,6 +16,7 @@ git·gh 명령은 Claude가 대신 실행한다. 사용자에게는 무엇을 �
 3. 커밋하고 푸시한다. 강제 푸시는 하지 않는다.
 4. PR 설명은 `.github/pull_request_template.md` 양식을 채운다.
 5. 화면(`prototype/`) PR이면 vercel[bot] 미리보기 주소를 기다려 PR 설명과 사용자 답에 적는다. 신기능이면 `?f=기능id`를 붙인다.
+6. 신기능 프로토타입 PR(`prototype/public/features/`를 고침)이면 `docs/ia.html`의 FEATS와 COLS에 그 기능을 더했는지 본다. 빠졌으면 더해서 같은 PR에 넣는다. 기능을 지우는 PR이면 IA에서도 뺀다.
 
 ## 다른 사람의 PR을 볼 때
 
