@@ -22,6 +22,6 @@
 ## 화면을 고칠 때
 
 - `design-system/README.md`를 먼저 읽는다. 색·간격·글꼴·모서리·그림자는 토큰(`var(--…)`)만 쓰고 값을 직접 쓰지 않는다. 있는 컴포넌트(`.dj-*`)를 먼저 쓰고, 아이콘은 `design-system/icons/`만 쓴다. 디자인 시스템과 정책의 문구가 다르면 정책이 기준이고, 다른 점을 사용자에게 알린다.
-- 신기능은 `prototype/public/features/기능/` 폴더와 `prototype/public/index.html`의 그 기능 한 줄만 고친다. 완료본(`app.js`, `app.css`)은 고치지 않는다. 끼울 자리가 더 필요하면 완료본에 자리만 여는 PR을 따로 올린다. 쓰는 법은 `prototype/public/features.js` 맨 위.
+- 신기능은 `prototype/public/features/기능/` 폴더, `prototype/public/index.html`의 그 기능 한 줄, `docs/ia.html`의 그 기능 자리만 고친다. 기능을 더하거나 빼면 `docs/ia.html`의 FEATS · COLS도 같이 고친다. 완료본(`app.js`, `app.css`)은 고치지 않는다. 끼울 자리가 더 필요하면 완료본에 자리만 여는 PR을 따로 올린다. 쓰는 법은 `prototype/public/features.js` 맨 위.
 - PR 전에 로컬 미리보기로 확인한다. 미리보기 도구로 `.claude/launch.json`의 `dangjang-demo`를 띄운다(`node prototype/dev.mjs`, 기본 http://127.0.0.1:8792, 쓰는 중이면 빈 포트). 아티팩트에서 따로 고쳐 옮기지 않는다. 신기능은 주소에 `?f=기능id`(features.js의 `DJ.feature({ id })`)를 붙여 켠 채로 본다.
 - PR을 올리면 미리보기 링크를 알린다. PR이 열리면 vercel[bot] 댓글에 미리보기 주소가 생긴다(1~2분). 신기능이면 `?f=기능id`를 붙여 PR 설명 "미리보기"와 사용자 답에 적는다. 미리보기는 로그인 없이 누구나, 폰에서도 열린다.
