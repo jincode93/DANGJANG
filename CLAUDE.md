@@ -32,6 +32,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목). 결�
 | 화면 디자인 규칙 | `design-system/README.md` |
 | 신기능 제안 양식과 평가 기준 | `docs/proposals/README.md`, `docs/eval/proposal-rubric.md` |
 | 제안서를 화면 캡처로 풀어 쓴 설명본 | `docs/explainers/<기능 ID>.html` (기능 ID는 데모 `?f=` 값. GitHub Pages로 공개) |
+| 서비스 화면 구조 (IA) | `docs/ia.html`. 화면은 파일 안 FEATS · COLS에 적음. GitHub Pages로 공개 |
 | 사람이 읽는 참여 안내 | `CONTRIBUTING.md` |
 
 ## 협업 규칙 (git과 PR)
@@ -44,7 +45,7 @@ KAI10 이커머스1팀 팀 프로젝트. 최종 발표는 2026-11-05(목). 결�
 - **요청이 무엇인지 먼저 가른다.**
   - 지금 있는 정책·용어가 틀렸거나 헷갈린다 → `docs/policy/`, `docs/glossary.md`의 해당 부분을 고친다.
   - 새 기능이다(지금 정책 ID에 없는 기능, 화면, 흐름) → **`docs/proposals/기능이름.md` 한 파일만 만든다.** 정책, 용어집, PRD는 고치지 않는다. 합의되면 관리자가 정책으로 옮긴다.
-  - 신기능의 프로토타입을 만든다 → **`prototype/public/features/기능/` 폴더와 `prototype/public/index.html`의 그 기능 한 줄만 고친다.** 완료본(`app.js`, `app.css`)은 고치지 않는다.
+  - 신기능의 프로토타입을 만든다 → **`prototype/public/features/기능/` 폴더, `prototype/public/index.html`의 그 기능 한 줄, `docs/ia.html`의 그 기능 자리만 고친다.** 완료본(`app.js`, `app.css`)은 고치지 않는다. IA 고치는 법은 `docs/ia.html`의 FEATS 위 주석.
   - 완료본(데모) 화면을 고친다 → `prototype/public/`의 해당 파일을 고친다.
   - 어느 쪽인지 애매하면 고치기 전에 사용자에게 묻는다.
 - **"커밋하고 푸시해줘"는 PR을 여는 것까지를 뜻한다.**

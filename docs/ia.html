@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>당장 IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>
+/* 레이아웃: 맨 위 개요(앱 → 1뎁스 5개), 그 아래 1뎁스마다 한 판. 판 안은 왼쪽→오른쪽 트리이고 뎁스가 곧 열이라 같은 색이 세로로 줄을 맞춤 */
+:root{
+  --bg:#F4F6F4; --surface:#FFFFFF; --fg:#141A16; --mut:#66726A; --line:#C9D3CC; --soft:#E8EDE9;
+  --d0:#141A16; --d0t:#FFFFFF;
+  --d1:#27C45B; --d1t:#05200E;
+  --d2:#E6EFFF; --d2s:#3D7BEA; --d2t:#102A57;
+  --d3:#FFF2D9; --d3s:#E39B12; --d3t:#4A3104;
+  --d4:#F2EAFF; --d4s:#8B5CF6; --d4t:#33175F;
+  --d5:#EEF0EF; --d5s:#8D9690; --d5t:#2E3531;
+  --new:#D6336C;
+  --sans:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1210; --surface:#151A17; --fg:#E7ECE8; --mut:#93A098; --line:#35403A; --soft:#1E2521;
+  --d0:#E7ECE8; --d0t:#0E1210; --d1:#27C45B; --d1t:#03160A;
+  --d2:#172848; --d2s:#6EA0FF; --d2t:#D6E4FF;
+  --d3:#36280B; --d3s:#F2B43C; --d3t:#FBE7BE;
+  --d4:#28194A; --d4s:#A988FF; --d4t:#E6DBFF;
+  --d5:#222926; --d5s:#7D8882; --d5t:#C9D1CC;
+  --new:#FF7BA8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1210; --surface:#151A17; --fg:#E7ECE8; --mut:#93A098; --line:#35403A; --soft:#1E2521;
+  --d0:#E7ECE8; --d0t:#0E1210; --d1:#27C45B; --d1t:#03160A;
+  --d2:#172848; --d2s:#6EA0FF; --d2t:#D6E4FF;
+  --d3:#36280B; --d3s:#F2B43C; --d3t:#FBE7BE;
+  --d4:#28194A; --d4s:#A988FF; --d4t:#E6DBFF;
+  --d5:#222926; --d5s:#7D8882; --d5t:#C9D1CC;
+  --new:#FF7BA8; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--d2s);outline-offset:2px}
+
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--mut);text-transform:uppercase}
+h1{font-size:30px;font-weight:700;letter-spacing:-.025em;margin:0;text-wrap:balance}
+.sub{color:var(--mut);margin:0;max-width:68ch}
+
+/* 개요 */
+.ov{background:var(--surface);border:1px solid var(--soft);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:0}
+.ov .app{background:var(--d0);color:var(--d0t);border-radius:10px;padding:9px 16px;text-align:center}
+.ov .app strong{display:block;font-size:15px}
+.ov .app small{font-size:11.5px;opacity:.75}
+.ov .stem{width:1.5px;height:16px;background:var(--line)}
+.ov .row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;width:100%;border-top:1.5px solid var(--line);padding-top:16px;position:relative}
+.ov .sec{position:relative;text-align:left;border-radius:10px;padding:10px 12px;cursor:pointer;border:0;background:var(--d1);color:var(--d1t);display:flex;flex-direction:column;gap:2px;min-width:0}
+.ov .sec::before{content:"";position:absolute;left:50%;top:-16px;width:1.5px;height:16px;background:var(--line)}
+.ov .sec.common{background:var(--surface);color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--d1)}
+.ov .sec strong{font-size:15px}
+.ov .sec small{font-size:11.5px;opacity:.8;font-variant-numeric:tabular-nums}
+.ov .sec:hover{filter:brightness(1.04)}
+
+/* 도구 줄 */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;padding-block:10px;border-bottom:1px solid var(--soft)}
+.legend{display:flex;flex-wrap:wrap;gap:5px}
+.lg{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px}
+.lg i{font-style:normal;font-family:var(--mono);font-size:10.5px;font-weight:500;opacity:.7}
+.l0{background:var(--d0);color:var(--d0t)} .l1{background:var(--d1);color:var(--d1t)}
+.l2{background:var(--d2);color:var(--d2t);box-shadow:inset 3px 0 var(--d2s)} .l3{background:var(--d3);color:var(--d3t);box-shadow:inset 3px 0 var(--d3s)}
+.l4{background:var(--d4);color:var(--d4t);box-shadow:inset 3px 0 var(--d4s)} .l5{background:var(--d5);color:var(--d5t);box-shadow:inset 3px 0 var(--d5s)}
+.tools{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:12px;color:var(--mut)}
+.mk{display:inline-flex;align-items:center;gap:5px}
+.mk .st{width:18px;height:11px;border:1.5px dashed var(--mut);border-radius:3px}
+.sw{display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px 4px 6px;font-size:12px;font-weight:600;color:var(--fg)}
+.sw .k{width:26px;height:15px;border-radius:999px;background:var(--line);position:relative;transition:background .15s}
+.sw .k::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--surface);transition:transform .15s}
+.sw[aria-pressed="true"] .k{background:var(--d1)}
+.sw[aria-pressed="true"] .k::after{transform:translateX(11px)}
+
+.feats{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.feats .fl{font-size:12px;color:var(--mut);margin-right:2px}
+.fb{display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1.5px dashed var(--line);background:var(--surface);border-radius:999px;padding:4px 11px 4px 8px;font-size:12px;font-weight:600;color:var(--mut)}
+.fb .no{font-family:var(--mono);font-size:11px;font-weight:500}
+.fb .c{font-family:var(--mono);font-size:10.5px;font-weight:400;opacity:.7}
+.fb[aria-pressed="true"]{border-color:var(--new);color:var(--new);background:color-mix(in srgb,var(--new) 9%,var(--surface))}
+.fb.all{border-style:solid}
+.tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.03em;padding:0 4px;border-radius:4px;border:1px solid currentColor;line-height:15px;white-space:nowrap;opacity:.75}
+.tag.new{color:var(--new);opacity:1;border-style:dashed}
+
+/* 판 */
+.panel{background:var(--surface);border:1px solid var(--soft);border-radius:14px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;scroll-margin-top:72px}
+.ph{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.ph h2{margin:0;font-size:19px;letter-spacing:-.02em}
+.ph p{margin:0;color:var(--mut);font-size:13px}
+.ph .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--mut);font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;margin-inline:-4px;padding:2px 4px 6px}
+.heads,.canvas{position:relative}
+.heads{height:20px;margin-bottom:8px}
+.heads span{position:absolute;top:0;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--mut);display:flex;align-items:center;gap:5px}
+.heads span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+svg.lines{position:absolute;inset:0;overflow:visible;pointer-events:none}
+svg.lines path{fill:none;stroke:var(--line);stroke-width:1.5}
+svg.lines path.f{stroke:var(--new);stroke-dasharray:4 3;opacity:.7}
+.n{position:absolute;box-sizing:border-box;border-radius:8px;padding:6px 9px 6px 10px;display:flex;flex-direction:column;justify-content:center;gap:1px;border-left:3px solid transparent;overflow:hidden}
+.n .t{display:flex;align-items:center;gap:5px;font-weight:600;font-size:12.5px;line-height:1.3;min-width:0}
+.n .t b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.n .d{font-size:11px;opacity:.75;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.n1{background:var(--d1);color:var(--d1t);border-left:0}
+.n1.common{background:var(--surface);color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--d1)}
+.n1 .t b{font-size:14px;font-weight:700}
+.n2{background:var(--d2);border-left-color:var(--d2s);color:var(--d2t)}
+.n3{background:var(--d3);border-left-color:var(--d3s);color:var(--d3t)}
+.n4{background:var(--d4);border-left-color:var(--d4s);color:var(--d4t)}
+.n5{background:var(--d5);border-left-color:var(--d5s);color:var(--d5t)}
+.n.state{background:var(--surface);color:var(--fg);border:1.5px dashed var(--line);border-left:3px solid}
+.n2.state{border-left-color:var(--d2s)} .n3.state{border-left-color:var(--d3s)} .n4.state{border-left-color:var(--d4s)} .n5.state{border-left-color:var(--d5s)}
+.n.feat{box-shadow:inset 0 0 0 1.5px var(--new)}
+.n.feat.state{box-shadow:none;border-color:var(--new)}
+.nodesc .n .d{display:none}
+
+.miss{border:1.5px dashed var(--new);background:color-mix(in srgb,var(--new) 8%,var(--surface));color:var(--fg);border-radius:12px;padding:12px 14px;font-size:13px;display:flex;flex-direction:column;gap:3px}
+.miss b{color:var(--new)}
+.miss code{font-family:var(--mono);font-size:12px}
+.export .miss{display:none}
+footer{color:var(--mut);font-size:12px;max-width:72ch;display:flex;flex-direction:column;gap:4px}
+footer b{color:var(--fg);font-weight:600}
+/* 기획서용 이미지 (#export-home): 홈 판만, 밝은 화면, #17 켬 */
+.export{padding-block:36px 40px}
+.export .wrap{max-width:940px}
+.export .bar{position:static;border:0;padding:0;background:none;backdrop-filter:none}
+.export .feats,.export #swDesc,.export .lg.l5{display:none}
+.mk.exp{display:none} .export .mk.exp{display:inline-flex}
+.heads span,.eyebrow,.ph .cnt{font-family:var(--sans)}
+.export .panel:not(#sec0),.export footer{display:none}
+.export .ov .sec:not([data-i="0"]){opacity:.32}
+.export .ov .sec[data-i="0"]{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--d1)}
+@media (max-width:760px){.ov .row{grid-template-columns:repeat(2,1fr)} .ov .sec::before{display:none} .ov .row{border-top:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Information Architecture · 2026.11.03</span>
+    <h1>당장 서비스 IA</h1>
+    <p class="sub">dangjang-prototype.vercel.app 통합 데모의 화면을 하단 탭 4개와 여러 탭에서 들어오는 공통 화면으로 나눴어요. 왼쪽에서 오른쪽으로 갈수록 깊은 화면이고, 같은 뎁스는 같은 색 같은 열에 놓여요.</p>
+  </header>
+
+  <section class="ov" aria-label="전체 구조">
+    <div class="app"><strong>당장 앱</strong><small id="obTxt">스플래시 → 처음 실행이면 온보딩 → 홈</small></div>
+    <div class="stem"></div>
+    <div class="row" id="ov"></div>
+  </section>
+
+  <div class="miss" id="miss" hidden></div>
+
+  <div class="bar">
+    <div class="legend" id="legend"></div>
+    <div class="tools">
+      <span class="mk"><span class="st"></span>상태 · 분기</span>
+      <span class="mk"><span class="tag">시트</span>바텀시트 · 팝업</span>
+      <span class="mk exp"><span class="tag new">#17</span>내 옷 기준 추천으로 새로 붙는 화면</span>
+      <button class="sw" id="swDesc" aria-pressed="true"><span class="k"></span>설명</button>
+    </div>
+    <div class="feats"><span class="fl">결정 전 신기능 켜기</span><span id="feats" style="display:contents"></span></div>
+  </div>
+
+  <div id="panels" style="display:flex;flex-direction:column;gap:16px"></div>
+
+  <footer>
+    <span><b>결정 전 신기능</b>은 처음에 모두 꺼져 있어요. 위에서 하나씩 켜면 그 기능이 들어가는 자리에 분홍 점선 상자로 붙어요. 데모의 신기능 패널과 같은 방식이에요.</span>
+    <span>상품 상세 · 장바구니 · 검색 · 알림은 하단 탭 어디서든 열려서 공통 화면에 한 번만 그렸어요. 뎁스는 그 화면에 닿기까지 몇 번 들어가는지를 셌어요. 상자에 마우스를 올리면 데모 화면 키와 전체 설명이 보여요.</span>
+  </footer>
+</div>
+
+<script>
+// s: 상태(분기)  sh: 시트·팝업  f: 결정 전 신기능 (아래 FEATS의 id, 여러 개면 띄어 씀)  k: 데모 화면 키
+const N = (t, o = {}, c) => ({ t, ...o, c });
+const COLS = [
+  N('홈', { k: 'home', d: '상단 탭 5개 · 검색 · 알림 · 장바구니' }, [
+    N('추천 탭', {}, [
+      N('비회원 · 기준 옷 없음', { s: 1 }, [
+        N('옷장 유도 팝업', { sh: 1, d: '옷 1벌 담으면 10% 쿠폰 · 하루 한 번' }),
+        N('옷 등록 카드', { d: '배너 아래 → 내 옷장 · 옷 등록' }),
+      ]),
+      N('기준 옷 있음', { s: 1 }),
+      N('인기 상품'),
+      N('내 옷 기준 추천', { f: '#17', d: '추천 사이즈가 비슷해요인 상품만' }),
+    ]),
+    N('랭킹 탭', {}, [
+      N('카테고리 칩'), N('기간 칩', { d: '실시간 · 일간 · 주간' }),
+      N('기준 옷 필터', { f: '#17' }, [N('기준 옷 고르기', { sh: 1, f: '#17' })]),
+    ]),
+    N('세일 탭', { d: '오늘만 특가 · 타임 특가 · 할인 상품' }),
+    N('기획전 탭', { d: '기획전 배너 → 상품 모음' }),
+    N('이벤트 탭', { d: '쿠폰 · 무료 배송 · 리뷰 적립' }),
+  ]),
+  N('카테고리', { k: 'search', d: '상의 · 하의 · 아우터' }, [
+    N('상의', {}, [N('세부 종류 5개', { d: '긴팔 셔츠 · 긴팔 티 · 반팔 셔츠 · 반팔 티 · 후드티' }, [N('상품 목록', { k: 'clist' }, [N('정렬', { sh: 1 })])])]),
+    N('하의', {}, [N('세부 종류 4개', { d: '긴바지 · 반바지 · 긴치마 · 짧은 치마' }, [N('상품 목록', { k: 'clist' }, [N('정렬', { sh: 1 })])])]),
+    N('아우터', {}, [N('세부 종류 6개', { d: '가디건 · 점퍼/자켓 · 숏코트 · 롱코트 · 숏패딩 · 롱패딩' }, [N('상품 목록', { k: 'clist' }, [N('정렬', { sh: 1 })])])]),
+  ]),
+  N('내 옷장', { k: 'closet', d: '사이즈 비교의 기준이 되는 내 옷' }, [
+    N('비로그인', { s: 1, d: '로그인 유도' }),
+    N('빈 옷장', { s: 1, d: '옷 등록 유도' }),
+    N('상단 배너', { f: '#15 #19 codifit', d: '코디북 · 맞춰 보기 입구' }),
+    N('종류 탭', { d: '상의 · 하의 · 아우터' }, [
+      N('세부 종류 칩', {}, [N('기준 옷 보기 · 정하기', { d: '세부 종류마다 한 벌' })]),
+      N('잘 맞는 옷 선반', {}, [
+        N('옷 상세 정보', { k: 'item' }, [
+          N('기준 옷 바꾸기'),
+          N('정보 수정', { k: 'edit', d: '사진 · 이름 · 종류 · 사이즈 · 치수' }),
+          N('핏 알려 주기', { k: 'fit', d: '안 맞으면 옷장에서 뺌' }),
+          N('삭제'),
+        ]),
+      ]),
+    ]),
+    N('등록 대기 목록', { k: 'regFit', d: '주문한 옷이 자동으로 들어옴' }, [N('옷장에 담기', { d: '잘 맞는 옷만' })]),
+    N('옷 등록', { k: 'regType', d: '방법 5가지 중 고르기' }, [
+      N('구매내역 캡처', { k: 'regCapture' }, [
+        N('캡처 고르기'), N('옷 하나만 자르기', { k: 'regCrop' }),
+        N('같은 상품 찾기', { d: '글자 읽기 → 실측표 불러오기' }),
+        N('사진첩 권한 거부', { k: 'permDenied', s: 1 }),
+      ]),
+      N('상품 링크', { k: 'regLink' }, [
+        N('링크 붙여넣기', { d: '주소가 잘못되면 다시 입력' }),
+        N('페이지 읽는 중', { k: 'loading', s: 1 }),
+        N('제휴 브랜드', { s: 1, d: '사진 · 공개 실측 자동 입력' }),
+        N('제휴 아님', { s: 1, d: '사이즈표 붙여넣기 · 사진으로 재기 · 직접 입력' }),
+      ]),
+      N('사진 촬영', { k: 'regCamera' }, [N('A4 가이드 촬영', { d: '보정 → 옷 분리 → 치수' }), N('카메라 권한 거부', { k: 'permDenied', s: 1 })]),
+      N('자사몰 구매 내역', { d: '당장에서 산 옷 불러오기' }),
+      N('수치 직접 입력'),
+      N('치수 확인', { k: 'regMeasure', d: '모든 방법이 모이는 곳 · 기준 옷 여부' }),
+      N('담기 완료', { k: 'regDone', d: '시작한 화면으로 돌아감' }),
+    ]),
+    N('내 코디북', { f: '#15', k: 'bookList', d: '모아보기 · 선택해서 삭제' }, [
+      N('코디 판 만들기', { f: '#15', k: 'book' }),
+      N('코디 보기', { f: '#15', k: 'bookView', d: '이미지 저장 · 수정 · 비슷한 핏 찾기' }, [N('공유하기', { sh: 1, f: '#15', d: '이미지 저장 · 링크 복사' })]),
+    ]),
+    N('코디북 (통합)', { f: 'codifit', k: 'cbList', d: '코디 목록 · 코디 등록하기' }, [
+      N('코디 만들기', { f: 'codifit', k: 'cbEdit', d: '내 옷 · 장바구니 · 추천 상품을 한 판에' }, [
+        N('텍스트 · 스티커 · 템플릿', { sh: 1, f: 'codifit' }),
+      ]),
+      N('코디 보기', { f: 'codifit', k: 'cbView', d: '수정 · 복사 · 상품 더하기' }, [
+        N('공유하기', { sh: 1, f: 'codifit', d: '이미지 저장 · 공유 화면 보기' }),
+        N('옵션 선택', { sh: 1, f: 'codifit', d: '추천 상품 → 장바구니 담기' }),
+        N('주문하기', { f: 'codifit', d: '장바구니 상품 → 주문 · 결제' }),
+      ]),
+      N('공유 링크로 받은 화면', { f: 'codifit', k: 'cbShared' }),
+    ]),
+  ]),
+  N('마이', { k: 'my', d: '주문 · 쿠폰 · 계정' }, [
+    N('비로그인', { s: 1, d: '로그인 · 가입 버튼' }),
+    N('주문 내역', { k: 'orders' }, [
+      N('주문 상세', { f: '#20' }),
+      N('구매 확정', {}, [N('내 옷장에 담기', {}, [N('핏 알려 주기', { k: 'fit' })])]),
+      N('반품 · 교환'),
+      N('반품 신청', { f: '#20' }, [N('사유 고르기', { f: '#20' }), N('수거 · 환불 확인', { f: '#20' }), N('신청 완료', { f: '#20' })]),
+      N('교환 신청', { f: '#20' }, [N('옵션 고르기', { f: '#20' }), N('신청 완료', { f: '#20' })]),
+    ]),
+    N('쿠폰함', { k: 'coupons' }),
+    N('메뉴 입구', { f: '#15 #19', d: '코디북 · 저장한 코디' }),
+    N('계정', {}, [N('로그아웃'), N('탈퇴 확인', { k: 'leave', d: '계정 · 옷장 데이터 삭제' })]),
+  ]),
+  N('공통 화면', { common: 1, d: '여러 탭에서 들어오는 화면' }, [
+    N('검색', { k: 'find', d: '최근 검색어 · 인기 검색어' }, [N('검색 결과', { k: 'result' }, [N('정렬', { sh: 1 })])]),
+    N('상품 상세', { k: 'detail', d: '홈 · 상품 목록 · 검색 결과에서 진입' }, [
+      N('정보'),
+      N('사이즈', {}, [
+        N('비교할 옷 고르기', { sh: 1, d: '내 옷 목록에서 선택' }),
+        N('반품 기록 추천 사이즈', { f: '#20' }),
+        N('품절 안내', { s: 1 }),
+      ]),
+      N('스냅 · 후기', {}, [N('전체 후기', { k: 'reviews', d: '구매 사이즈 · 평소 사이즈로 거르기' }, [N('후기 상세', { k: 'review' })])]),
+      N('문의'),
+      N('추천'),
+      N('구매하기', {}, [N('옵션 선택', { sh: 1, d: '컬러 · 사이즈 → 장바구니 · 바로 구매' })]),
+    ]),
+    N('장바구니', { k: 'cart' }, [
+      N('주문 · 결제', { k: 'order', d: '고른 사이즈 · 쿠폰 적용' }, [
+        N('결제 실패 안내', { k: 'payfail', s: 1 }),
+        N('주문 완료', { k: 'ordered' }, [
+          N('알림 권한 요청', { sh: 1, d: '처음 한 번' }),
+          N('대기 목록 자동 추가', { d: '내 옷장 · 등록 대기 목록으로' }),
+        ]),
+      ]),
+      N('내 옷이랑 맞춰 보기', { f: '#19', k: 'codyMake', d: '장바구니 상품을 내 옷과 놓아 보기' }, [
+        N('옵션 확인', { sh: 1, f: '#19', d: '장바구니 담기 · 주문하기' }),
+        N('저장한 코디', { f: '#19', k: 'cody' }, [N('코디 상세', { f: '#19', k: 'codyView', d: '수정 · 어울리는 상품 · 이름 · 복사 · 삭제' })]),
+        N('공유 링크로 받은 화면', { f: '#19', k: 'codyShared' }),
+      ]),
+    ]),
+    N('알림 목록', { k: 'notis' }, [N('배송 알림', {}, [N('구매 확정 · 핏 알려 주기', { k: 'fit' })])]),
+    N('로그인 게이트', {}, [
+      N('약관 · 개인정보 동의', { k: 'terms', d: '옷 치수 제공은 선택' }),
+      N('가입 완료', { k: 'joined', d: '비회원 때 담은 것 합치기' }),
+    ]),
+  ]),
+];
+
+/* 신기능을 IA에 더하는 법 (신기능 프로토타입 PR에서 같이 고친다)
+   1. FEATS에 한 줄: id는 화면 상자 태그(이슈 번호 '#NN', 번호가 겹치면 데모 id), demo는 데모 features/ 폴더 이름(= ?f= 값),
+      ob는 온보딩에 장을 더하면 그 장 제목들
+   2. COLS에서 그 기능이 붙는 자리에 N('화면 이름', { f: '<id>', k: '<데모 화면 키>' })를 넣는다. 기존 화면에 입구만 생기면 그 상자의 f에 id를 더한다
+   데모(main)에 있는데 FEATS에 없는 기능은 페이지 위에 경고로 뜬다 */
+const FEATS = [
+  { id: '#15', demo: 'codibook', t: '코디북', ob: ['나만의 코디북'] },
+  { id: '#17', demo: 'basefit', t: '내 옷 기준 추천', ob: ['홈에서 바로 추천'] },
+  { id: '#19', demo: 'fitwith', t: '내 옷이랑 맞춰 보기' },
+  { id: '#20', demo: 'retsig', t: '반품 · 교환 실패 사유 활용' },
+  { id: 'codifit', demo: 'codifit', t: '코디북 (맞춰 보기 통합)', ob: ['홈에서 바로 추천', '나만의 코디북'] },
+];
+const DEMO_INDEX = 'https://raw.githubusercontent.com/jincode93/DANGJANG/main/prototype/public/index.html';
+const DEP = ['앱', '하단 탭', '1차 화면', '2차 화면', '3차 화면', '4차 화면'];
+const W = 186, GAP = 38, VG = 8;
+const opt = { desc: true, feats: [] };
+try { const o = JSON.parse(localStorage.getItem('ia-opt2') || '{}'); Object.assign(opt, o) } catch (e) {}
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const onIds = (n) => n.f ? n.f.split(' ').filter((x) => opt.feats.includes(x)) : [];
+// 신기능 상자는 켠 기능이 하나라도 있으면 남기고, 태그에는 켠 번호만 남김
+const prune = (n) => { if (n.f && !onIds(n).length) return null; return { ...n, f: n.f && onIds(n).join(' '), c: n.c && n.c.map(prune).filter(Boolean) } };
+const save = () => { try { localStorage.setItem('ia-opt2', JSON.stringify(opt)) } catch (e) {} };
+const walk = (n, fn, dep = 1) => { fn(n, dep); (n.c || []).forEach((x) => walk(x, fn, dep + 1)) };
+
+function layout(root) {
+  const H = opt.desc ? 46 : 32, out = [], links = [];
+  let row = 0, maxDep = 1;
+  (function place(n, dep) {
+    maxDep = Math.max(maxDep, dep);
+    const x = (dep - 1) * (W + GAP);
+    let y;
+    if (n.c && n.c.length) {
+      const kids = n.c.map((c) => place(c, dep + 1));
+      y = (kids[0].y + kids[kids.length - 1].y) / 2;
+      kids.forEach((k) => links.push({ x1: x + W, y1: y + H / 2, x2: k.x, y2: k.y + H / 2, f: !!k.n.f }));
+    } else { y = row * (H + VG); row++ }
+    const r = { n, dep, x, y }; out.push(r); return r;
+  })(root, 1);
+  return { out, links, H, w: maxDep * W + (maxDep - 1) * GAP, h: row * (H + VG) - VG, maxDep };
+}
+
+function nodeHtml({ n, dep, x, y }, H) {
+  const cls = dep === 1 ? `n n1${n.common ? ' common' : ''}` : `n n${Math.min(dep, 5)}${n.s ? ' state' : ''}${n.f ? ' feat' : ''}`;
+  const tip = [n.t, n.d, n.k && `화면 키 ${n.k}`, n.s && '상태 · 분기', n.sh && '바텀시트 · 팝업', n.f && `결정 전 신기능 ${n.f}`].filter(Boolean).join('\n');
+  return `<div class="${cls}" style="left:${x}px;top:${y}px;width:${W}px;height:${H}px" title="${esc(tip)}"><span class="t"><b>${esc(n.t)}</b>${n.sh ? '<span class="tag">시트</span>' : ''}${n.f ? `<span class="tag new">${n.f}</span>` : ''}</span>${n.d ? `<span class="d">${esc(n.d)}</span>` : ''}</div>`;
+}
+
+function render() {
+  document.body.classList.toggle('nodesc', !opt.desc);
+  const tot = [1, 0, 0, 0, 0, 0];
+  const trees = COLS.map(prune);
+  document.getElementById('panels').innerHTML = trees.map((t, i) => {
+    let screens = 0, feats = 0;
+    walk(t, (n, d) => { tot[Math.min(d, 5)] += d === 1 && t.common ? 0 : 1; if (d > 1) screens++; if (n.f) feats++ });
+    const L = layout(t);
+    const heads = Array.from({ length: L.maxDep }, (_, d) => `<span style="left:${d * (W + GAP)}px;--c:var(--${d ? 'd' + (d + 1) + 's' : 'd1'})">D${d + 1} ${DEP[d + 1]}</span>`).join('');
+    const path = (l) => { const mx = l.x1 + GAP / 2; return `<path class="${l.f ? 'f' : ''}" d="M${l.x1} ${l.y1}H${mx}V${l.y2}H${l.x2}"/>` };
+    return `<section class="panel" id="sec${i}">
+      <div class="ph"><h2>${esc(t.t)}</h2><p>${esc(t.d)}</p><span class="cnt">화면 ${screens}${feats ? ` · 신기능 ${feats}` : ''}</span></div>
+      <div class="scroll"><div class="heads" style="width:${L.w}px">${heads}</div>
+      <div class="canvas" style="width:${L.w}px;height:${L.h}px"><svg class="lines" width="${L.w}" height="${L.h}">${L.links.map(path).join('')}</svg>${L.out.map((r) => nodeHtml(r, L.H)).join('')}</div></div>
+    </section>`;
+  }).join('');
+  document.getElementById('ov').innerHTML = trees.map((t, i) => {
+    let s = 0, f = 0; walk(t, (n, d) => { if (d > 1) s++; if (n.f) f++ });
+    return `<button class="sec${t.common ? ' common' : ''}" data-i="${i}"><strong>${esc(t.t)}</strong><small>화면 ${s}${f ? ` · 신기능 ${f}` : ''}</small></button>`;
+  }).join('');
+  document.getElementById('legend').innerHTML = DEP.map((t, i) => `<span class="lg l${i}"><i>D${i}</i>${t}</span>`).join('');
+  const cnt = (id) => { let k = 0; COLS.forEach((t) => walk(t, (n) => { if (n.f && n.f.split(' ').includes(id)) k++ })); return k };
+  const all = opt.feats.length === FEATS.length;
+  document.getElementById('feats').innerHTML = FEATS.map((f) => `<button class="fb" data-f="${f.id}" aria-pressed="${opt.feats.includes(f.id)}"><span class="no">${f.id}</span>${esc(f.t)}<span class="c">+${cnt(f.id)}</span></button>`).join('')
+    + `<button class="fb all" data-f="all" aria-pressed="${all}">${all ? '모두 끄기' : '모두 켜기'}</button>`;
+  const ob = [...new Set(FEATS.filter((f) => f.ob && opt.feats.includes(f.id)).flatMap((f) => f.ob))]; // 같은 장은 한 번만 (데모도 겹치면 뺌)
+  document.getElementById('obTxt').textContent = `스플래시 → 처음 실행이면 온보딩 ${2 + ob.length}장${ob.length ? ` (+ ${ob.join(' · ')})` : ''} → 홈`;
+}
+document.getElementById('feats').addEventListener('click', (e) => {
+  const b = e.target.closest('.fb'); if (!b) return;
+  const id = b.dataset.f;
+  if (id === 'all') opt.feats = opt.feats.length === FEATS.length ? [] : FEATS.map((f) => f.id);
+  else opt.feats = opt.feats.includes(id) ? opt.feats.filter((x) => x !== id) : FEATS.map((f) => f.id).filter((x) => x === id || opt.feats.includes(x));
+  save(); render();
+});
+
+document.getElementById('ov').addEventListener('click', (e) => {
+  const b = e.target.closest('.sec'); if (b) document.getElementById('sec' + b.dataset.i).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+const EXPORT = location.hash === '#export-home';
+if (EXPORT) {
+  document.documentElement.dataset.theme = 'light';
+  document.body.classList.add('export');
+  Object.assign(opt, { desc: true, feats: ['#17'] });
+  document.querySelector('.eyebrow').textContent = '당장 IA · 홈 · 통합 데모 기준';
+  document.querySelector('h1').textContent = '홈 IA (내 옷 기준 추천 #17 포함)';
+  document.querySelector('.sub').textContent = '전체 IA 중 홈 부분이에요. 분홍 점선 상자가 #17 내 옷 기준 추천으로 새로 붙는 화면이고, 나머지는 지금 데모에 있는 화면이에요.';
+}
+{
+  const b = document.getElementById('swDesc'); b.setAttribute('aria-pressed', opt.desc);
+  b.addEventListener('click', () => { opt.desc = !opt.desc; b.setAttribute('aria-pressed', opt.desc); save(); render() });
+}
+render();
+
+// 안전망: 데모(main)의 신기능 목록과 FEATS를 비교해 빠진 것을 알림. 못 읽으면 조용히 넘어감
+async function checkDemo(src = DEMO_INDEX) {
+  try {
+    const html = await (await fetch(src, { cache: 'no-store' })).text();
+    const demo = [...new Set([...html.matchAll(/features\/([\w-]+)\/feature\.js/g)].map((m) => m[1]))];
+    if (!demo.length) return;
+    const known = FEATS.map((f) => f.demo);
+    const add = demo.filter((d) => !known.includes(d)), gone = FEATS.filter((f) => !demo.includes(f.demo));
+    const box = document.getElementById('miss');
+    box.innerHTML = [
+      add.length && `<span><b>IA에 아직 안 그린 신기능</b> · 데모에 있어요: ${add.map((d) => `<code>${esc(d)}</code>`).join(', ')}. 이 파일의 FEATS와 COLS에 더해 주세요.</span>`,
+      gone.length && `<span><b>데모에서 빠진 신기능</b> · IA에만 남아 있어요: ${gone.map((f) => `<code>${esc(f.id)}</code> ${esc(f.t)}`).join(', ')}</span>`,
+    ].filter(Boolean).join('');
+    box.hidden = !box.innerHTML;
+  } catch (e) {}
+}
+checkDemo();
+</script>
+
+</body>
+</html>
